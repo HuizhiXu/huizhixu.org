@@ -10,7 +10,7 @@ theme = "github-style"
 #   url = "https://huizhixu.org"
   lastmod = true
   userStatusEmoji = "😀"
-  favicon = "/images/ljz.png"
+  favicon = "/images/poirot.png"
   location = "China"
   enableGitalk = true
 
@@ -30,3 +30,5 @@ theme = "github-style"
 
 [frontmatter]
   lastmod = ["lastmod", ":fileModTime", ":default"]
+
+ publishDir = "docs"
