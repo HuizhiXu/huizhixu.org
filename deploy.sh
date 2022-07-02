@@ -1,6 +1,5 @@
-#!/bin/sh
+#! /bin/bash
 
-# 任一步骤执行失败都会终止整个部署过程
 set -eux
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
