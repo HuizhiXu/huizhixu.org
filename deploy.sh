@@ -1,28 +1,25 @@
 #!/bin/sh
 
-if [ "`git status -s`" ]
-then
-    echo "The working directory is dirty. Please commit any pending changes."
-    exit 1;
+# 任一步骤执行失败都会终止整个部署过程
+set -e
+
+printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
+
+# 构建静态内容
+hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
+
+# 切换到 Public 文件夹
+cd public
+
+# 添加更改到 git
+git add .
+
+# 提交更改
+msg="rebuilding site $(date)"
+if [ -n "$*" ]; then
+msg="$*"
 fi
+git commit -m "$msg"
 
-echo "Deleting old publication"
-rm -rf public
-mkdir public
-git worktree prune
-rm -rf .git/worktrees/public/
-
-echo "Checking out gh-pages branch into public"
-git worktree add -B gh-pages public origin/gh-pages
-
-echo "Removing existing files"
-rm -rf public/*
-
-echo "Generating site"
-env HUGO_ENV="production" hugo -t github-style
-
-echo "Updating gh-pages branch"
-cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
-
-#echo "Pushing to github"
-#git push --all
+# 推送到远程仓库
+git push origin master
