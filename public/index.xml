@@ -6,7 +6,16 @@
     <description>Recent content on HuizhiXu 的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 Jul 2022 11:48:05 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jul 2022 14:07:58 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test_again</title>
+      <link>https://huizhixu.github.io/post/test_again/</link>
+      <pubDate>Sat, 02 Jul 2022 14:07:58 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/test_again/</guid>
+      <description>long summer</description>
+    </item>
+    
     <item>
       <title>Still_test</title>
       <link>https://huizhixu.github.io/post/still_test/</link>
