@@ -12,20 +12,20 @@ theme = "github-style"
   userStatusEmoji = "😀"
   favicon = "/images/poirot.png"
   location = "China"
-  enableGitalk = true
+#   enableGitalk = true
 
-  [params.gitalk]
-    clientID = "Your client ID"
-    clientSecret = "Your client secret"
-    repo = "repo"
-    owner = "Huizhi"
-    admin = "Huizhi"
-    id = "location.pathname"
-    labels = "gitalk"
-    perPage = 15
-    pagerDirection = "last"
-    createIssueManually = true
-    distractionFreeMode = false
+#   [params.gitalk]
+#     clientID = "Your client ID"
+#     clientSecret = "Your client secret"
+#     repo = "repo"
+#     owner = "Huizhi"
+#     admin = "Huizhi"
+#     id = "location.pathname"
+#     labels = "gitalk"
+#     perPage = 15
+#     pagerDirection = "last"
+#     createIssueManually = true
+#     distractionFreeMode = false
 
 
 [frontmatter]
