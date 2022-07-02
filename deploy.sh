@@ -1,25 +1,33 @@
 #!/bin/sh
 
 # 任一步骤执行失败都会终止整个部署过程
-set -e
+set -eux
 
-printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
+echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-# 构建静态内容
-hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
+msg="rebuilding site `date`"
+if [ $# -eq 1  ]
+    then msg="$1"
+fi
 
-# 切换到 Public 文件夹
+# Build the project.
+hugo -t github-style # if using a theme, replace by `hugo -t <yourtheme>`
+
+# Go To Public folder
 cd public
 
-# 添加更改到 git
+# Add changes to git.
 git add .
 
-# 提交更改
-msg="rebuilding site $(date)"
-if [ -n "$*" ]; then
-msg="$*"
-fi
+# Commit changes.
 git commit -m "$msg"
 
-# 推送到远程仓库
+# Push source and build repos.
+git push origin master
+
+# Come Back
+cd ..
+
+git add .
+git commit -m "$msg"
 git push origin master
