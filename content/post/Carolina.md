@@ -2,6 +2,7 @@
 title: "Test"
 date: 2022-07-02T11:34:34+08:00
 draft: False
+pin: true
 ---
 
 Oh Carolina creeks
