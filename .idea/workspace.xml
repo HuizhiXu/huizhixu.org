@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cee66767-d3f1-428b-bdcc-fd0a1237e0fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/content/post/20220719Thomas拍的烂尾楼.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20220719Thomas拍的烂尾楼.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/post/20221024如何在程序中起名.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20221024如何在程序中起名.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/config.template.toml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/config.template.toml" afterDir="false" />
@@ -65,7 +65,7 @@
       <workItem from="1657976377645" duration="1128000" />
       <workItem from="1659432335280" duration="2743000" />
       <workItem from="1661502488773" duration="1365000" />
-      <workItem from="1670649833061" duration="2711000" />
+      <workItem from="1670649833061" duration="2941000" />
     </task>
     <servers />
   </component>
