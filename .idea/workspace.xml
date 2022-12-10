@@ -6,24 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cee66767-d3f1-428b-bdcc-fd0a1237e0fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/20220719Thomas拍的烂尾楼.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20220719Thomas拍的烂尾楼.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/20220802用HanLP分词时如何自定义词典.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20220802用HanLP分词时如何自定义词典.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/content/post/20221024如何在程序中起名.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20221024如何在程序中起名.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/Carolina.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/first-post.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20220629今日上海.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/still_test.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/categories/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/categories/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/20220719thomas拍的烂尾楼/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/post/20220719thomas拍的烂尾楼/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/20220802用hanlp分词时如何自定义词典/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/post/20220802用hanlp分词时如何自定义词典/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/20221024如何在程序中起名/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/post/20221024如何在程序中起名/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/post/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/post/index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/still_test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/post/still_test/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/post/test_again/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/tags/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/config.template.toml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/config.template.toml" afterDir="false" />
@@ -82,7 +65,7 @@
       <workItem from="1657976377645" duration="1128000" />
       <workItem from="1659432335280" duration="2743000" />
       <workItem from="1661502488773" duration="1365000" />
-      <workItem from="1670649833061" duration="6484000" />
+      <workItem from="1670649833061" duration="7614000" />
     </task>
     <servers />
   </component>
