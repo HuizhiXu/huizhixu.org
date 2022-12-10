@@ -28,7 +28,7 @@ data, state, amount, value, manager, engine, object, entity, and instance. Pytho
     </item>
     
     <item>
-      <title>20220802用HanLP分词时如何自定义词典</title>
+      <title>2022-08-02 用HanLP分词时如何自定义词典</title>
       <link>https://huizhixu.github.io/post/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
       <pubDate>Tue, 02 Aug 2022 17:51:00 +0800</pubDate>
       
@@ -46,16 +46,16 @@ tok.dict_force = None tok.dict_combine = {&amp;#39;单晶硅&amp;#39;} sentence 
     </item>
     
     <item>
-      <title>20220719Thomas拍的烂尾楼</title>
+      <title>2022-07-19 Thomas拍的烂尾楼</title>
       <link>https://huizhixu.github.io/post/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/</link>
-      <pubDate>Tue, 19 Jul 2022 17:50:22 +0800</pubDate>
+      <pubDate>Tue, 19 Jul 2022 19:50:22 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/post/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/</guid>
       <description>我很喜欢的摄影家Thomas最近发了一组照片&lt;a href=&#34;https://mp.weixin.qq.com/s/0fXR0oElN94qWOQdw3L6oQ&#34;&gt;《烂尾楼里面的微光》&lt;/a&gt;，拍的是西安的两幢烂尾楼，这两幢楼都烂尾好几年了，没有人管。可能是迫于生存压力，某些业主在没通水电的情况下依然住进去了。</description>
     </item>
     
     <item>
-      <title>新现实是活在当下</title>
+      <title>2022-07-07 新现实是活在当下</title>
       <link>https://huizhixu.github.io/post/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/</link>
       <pubDate>Thu, 07 Jul 2022 14:07:58 +0800</pubDate>
       
@@ -73,26 +73,29 @@ tok.dict_force = None tok.dict_combine = {&amp;#39;单晶硅&amp;#39;} sentence 
     </item>
     
     <item>
-      <title>Test</title>
+      <title>2022-07-02 Test</title>
       <link>https://huizhixu.github.io/post/carolina/</link>
       <pubDate>Sat, 02 Jul 2022 11:34:34 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/post/carolina/</guid>
-      <description>Oh Carolina creeks Running through my veins Lost I was born Lonesome I came Lonesome I&amp;rsquo;ll alwasys stary Carolina knows Why for years I roam Free as these birds Light as whispers</description>
+      <description>Oh Carolina creeks
+Running through my veins
+Lost I was born
+Lonesome I came
+Lonesome I&amp;rsquo;ll alwasys stary
+Carolina knows
+Why for years I roam
+Free as these birds
+Light as whispers</description>
     </item>
     
     <item>
-      <title>First Post</title>
+      <title>2022-06-29 First Post</title>
       <link>https://huizhixu.github.io/post/first-post/</link>
       <pubDate>Wed, 29 Jun 2022 19:22:05 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/post/first-post/</guid>
-      <description>今日上海
-高温黄色警报
-雷电黄色警报
-暴雨蓝色警报
-大风黄色警报
-冰雹黄色警报
+      <description>今日上海 高温黄色警报 雷电黄色警报 暴雨蓝色警报 大风黄色警报 冰雹黄色警报
 但是今日出现了彩虹</description>
     </item>
     
