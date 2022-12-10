@@ -154,7 +154,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">4</span>
+              <span class="Counter">6</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -406,7 +406,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">4</span>
+      <span class="Counter ">6</span>
     </a>
   </nav>
 </div>
@@ -420,6 +420,67 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://huizhixu.github.io/post/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/">20220802用HanLP分词时如何自定义词典</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                hanlp分词时自定义词典 用hanlp的效果比较好的粗粒度分词模型COARSE_ELECTRA_SMALL_ZH进行分析
+碰到一个这样的句子：
+&lsquo;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&rsquo;
+import hanlp tok = hanlp.load(hanlp.pretrained.tok.COARSE_ELECTRA_SMALL_ZH) sentence = &#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&#39; sen_list = tok(sentence) print(sen_list) [&#39;公司&#39;, &#39;产品&#39;, &#39;品质&#39;, &#39;持续&#39;, &#39;提升&#39;, &#39;，&#39;, &#39;单晶&#39;, &#39;硅&#39;, &#39;片&#39;, &#39;用&#39;, &#39;料&#39;, &#39;比例&#39;, &#39;大幅&#39;, &#39;高于&#39;, &#39;行业&#39;, &#39;平均&#39;, &#39;，&#39;, &#39;单晶&#39;, &#39;硅&#39;, &#39;料&#39;, &#39;价格&#39;, &#39;上涨&#39;, &#39;。&#39;] 可以看出来，这里“单晶硅片”，“单晶硅料”， 被分为了“单晶”“硅”“料”和“单晶”“硅”“片”。
+如果我们想要把“单晶硅”分出来。可以设置自定义词典。tok下面有两个参数：dict_force和dict_combine，通过设置这两个参数就可以达到自定义词典的效果。
+dict_force和dict_combine有什么区别：
+dict_force是强制模式，强制模式的优先级高于统计模型。如果强制模式用于所有文本，会对其他句子进行干扰，所以强制模式一般不用于所有文本，但是可以针对某个特定句子打补丁。
+dict_combine是合并模式，合并模式的优先级低于统计模型。就是说句子先用统计模型分词，然后在这个分词的基础上，再进行最长匹配并合并。
+先看一下dict_combine的例子：
+tok.dict_force = None tok.dict_combine = {&#39;单晶硅&#39;} sentence = &#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&#39; [&#39;公司&#39;, &#39;产品&#39;, &#39;品质&#39;, &#39;持续&#39;, &#39;提升&#39;, &#39;，&#39;, &#39;单晶硅&#39;, &#39;片&#39;, &#39;用&#39;, &#39;料&#39;, &#39;比例&#39;, &#39;大幅&#39;, &#39;高于&#39;, &#39;行业&#39;, &#39;平均&#39;, &#39;，&#39;, &#39;单晶硅&#39;, &#39;料&#39;, &#39;价格&#39;, &#39;上涨&#39;, &#39;。&#39;] 我们一般会用dict_combine，这样就把“单晶硅”分出来了。
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 02 Aug 2022 17:51:00 &#43;0800" class="no-wrap"
+                title=" Tue, 02 Aug 2022 17:51:00 &#43;0800">
+                Tue, 02 Aug 2022 17:51:00 &#43;0800
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://huizhixu.github.io/post/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/">20220719Thomas拍的烂尾楼</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                我很喜欢的摄影家Thomas最近发了一组照片<a href="https://mp.weixin.qq.com/s/0fXR0oElN94qWOQdw3L6oQ">《烂尾楼里面的微光》</a>，拍的是西安的两幢烂尾楼，这两幢楼都烂尾好几年了，没有人管。可能是迫于生存压力，某些业主在没通水电的情况下依然住进去了。
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 02 Aug 2022 17:50:22 &#43;0800" class="no-wrap"
+                title=" Tue, 02 Aug 2022 17:50:22 &#43;0800">
+                Tue, 02 Aug 2022 17:50:22 &#43;0800
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
