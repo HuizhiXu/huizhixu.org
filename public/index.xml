@@ -8,6 +8,26 @@
     <language>zh-cn</language>
     <lastBuildDate>Tue, 02 Aug 2022 17:51:00 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>2022-10-24 如何在程序中起名</title>
+      <link>https://huizhixu.github.io/post/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
+      <pubDate>Tue, 02 Aug 2022 17:51:00 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
+      <description>如何在程序中起名 最近检查以前写的代码发现，我给不同的功能函数或者变量起的名不是很精确。
+比如数据处理这个阶段，就很容易取data_process， get_data, process_data, data_preprocess，deal_with_data这些名字。再比如很多类的主入口，我经常会写run()、xx_dirver()等等。
+想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的get_data。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
+今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这（https://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/）。我跟着这篇文章反省了一下，有时候为了区分很多种情，我就会用下划线连接好几个单词，我自己是觉得很容易读，应该满足readability，但是有的单词很长，所以总体长度也很长，不是很pythonic。
+作者给了几个建议：
+不要容易看出类型的名字后面加上类型，例如name就不要叫namstring。 写复数，不要用单数加collection。例如holidays比holiday_list好些。 我这个问题还挺严重的，因为我很喜欢写xx_list，yy_dict等。
+在写func的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如merge(table_cells)比merge_table_cells(x)要好。 要精确，不需要把每一个细节都写出。例如recentlyUpdatedAnnualSalesBid这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。 变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。 例如类名有data，已经表明了这个类是和数据相关。那么方法可以直接写process，不需要写data_process。
+变量名不要包含无意义的单词。 有以下这些：
+data, state, amount, value, manager, engine, object, entity, and instance. Python里面用类型注释很容易避免这些问题，就算用results，不用results_list也可以很快看出results是一个list，有时候是list of list。
+第二篇文章是这个《起名的那些事儿》 https://journal.stuffwithstuff.com/2009/06/05/naming-things-in-code/
+对于起名他给的建议是：
+对于类名，接口名： 用名词，不用形容词 不要用manager或者helper这种词 精确表示 Bad: IncomingMessageQueue CharacterArray SpatialOrganizer Good: Mailbox String Map 对于方法名： 要简短， 也不能太简短 Bad: list.GetNumberOfItems(); Good: list.Count(); Bad: list.Verify(); Good: list.ContainsNull(); 表示动作的话用动词 返回布尔值用问句的形式 Bad: list.Empty(); Good: list.IsEmpty(); list.Contains(item); 返回一个不改变状态的值用名词。 Bad: list.GetCount(); Good: list.Count(); 不要重复 Bad: list.</description>
+    </item>
+    
+    <item>
       <title>20220802用HanLP分词时如何自定义词典</title>
       <link>https://huizhixu.github.io/post/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
       <pubDate>Tue, 02 Aug 2022 17:51:00 +0800</pubDate>
