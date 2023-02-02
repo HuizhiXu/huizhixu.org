@@ -1,7 +1,7 @@
 ---
 title: "20230131如何用HuggingFace对不均衡类别进行分类"  
 date: 2023-01-31T19:31:50+08:00  
-draft: true  
+draft: false  
 pin: true  
 summary: "如果用Trainer这个API，只要更新compute_loss方法就可以，如果是用pytorch写的训练代码或者用了huggingface accelerate模型，那么要更新自己模型的forward函数。"  
 ---
