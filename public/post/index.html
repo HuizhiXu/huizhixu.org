@@ -61,67 +61,103 @@
 
 <body>
   <div style="position: relative">
-  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
-    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://huizhixu.github.io/">
-        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
-          <path fill-rule="evenodd"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="Header-item d-md-none">
-      <button class="Header-link btn-link js-details-target" type="button"
-        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
-          <path fill-rule="evenodd"
-            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
-          </path>
-        </svg>
-      </button>
-    </div>
-    <div style="display: none;" id="header-search"
-      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
-      <div
-        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
-        <div class="position-relative">
-          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
-            autocomplete="off">
-            <label
-              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
-              <input type="text"
-                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
-                name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
-            </label>
-          </form>
+    <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+        <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+            <a class="Header-link" href="https://huizhixu.github.io/">
+                <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
         </div>
-      </div>
-    </div>
+        <div class="Header-item d-md-none">
+            <button class="Header-link btn-link js-details-target" type="button"
+                    onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+                <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+                    <path fill-rule="evenodd"
+                          d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div style="display: none;" id="header-search"
+             class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+            <div
+                    class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+                <div class="position-relative">
+                    <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+                          autocomplete="off">
+                        <label
+                                class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+                            <input type="text"
+                                   class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                                   name="q" value="" placeholder="Search" autocomplete="off">
+                            <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://huizhixu.github.io/">
-        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
-          width="32">
-          <path fill-rule="evenodd"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="Header-item" style="margin-right: 0;">
-      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
-        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
-          version="1.1" width="16" height="16">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
-          </path>
-        </svg>
-      </a>
-    </div>
-  </header>
+        <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+            <a class="Header-link " href="https://huizhixu.github.io/">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                     width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item" style="margin-right: 0;">
+            <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+                <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+                     version="1.1" width="16" height="16">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </header>
 </div>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   
 <div class="application-main">
   <main>
@@ -154,7 +190,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">11</span>
+              <span class="Counter">12</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -406,7 +442,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">11</span>
+      <span class="Counter ">12</span>
     </a>
   </nav>
 </div>
@@ -425,7 +461,37 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://huizhixu.github.io/post/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/">20230131如何用HuggingFace对不均衡类别进行分类</a>
+                <a href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">2023-02-09 如何理解自注意力机制</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                如何理解自注意力机制 理解输入与输出 输入有可能是一个vector，有可能是多个vector 输出： 一个序列对应一个label。the whole sequence has a label 例子：在情感分析里面，This is good对应的输入是多个vector，输出为positive，是一个vector。 一个vector对应一个label。一个序列对应多个label。 例子：在词性标注里面，This is good对应的输入是多个vector，输出为 代词，动词，形容词。 模型决定Label的个数。seq2seq任务 例子：在机器翻译里面，This is good对应的输入是3个vector，中文翻译是”不错“，输出为2个vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决sequence labeling的问题：用fully connected network对每一个input vector进行作用 弊端： 用fully connected network来输出，假设对I saw a saw做词性标注。对于FC层来说，两个saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个fc层，都对所有的输入作用。或者给他一个window，作用于相邻的几个input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个sequence，但是不想把sequence所有的数据都包括在里面，就有了self-attention。
+Self-attention 如果要考虑上下文的信息，输入可以扔进self-attention之后，生成vector with context，然后丢进FC层，然后再过一次self-attention，然后再丢进FC层。
+可以这样理解，self-attention获得上下文信息，FC层专注于局部信息，交替使用。
+运作原理： 输入：是一串vector，可以是整个network的输入，也可以是FC层的输出，这里用a表示。 输出：一串vector，这里用b表示。每一个b都对所有a作用。（这个图乍一看很像上面的FC，但其实不一样） 如何产生$b^1$这个向量： 第一步：找出sequence里面跟$a^1$相关的其他向量。（FC层会把sequence所有的向量都包括进来，这里只包括相关的向量，这就是不同点。）这个机制叫做自注意机制。
+每一个向量跟$a^1$相关联的程度，我们用数值$\alpha$来表示。 Self-attention的module怎么决定两个向量的关联性呢？ 内积：dot product （方法原理在文章最后面） 相加：additive（方法原理在文章最后面） 这里的做法是：分别计算 $a^1$ 与 $a^2$， $a^3$，$a^4$ 的关联性 把$a^1$乘以$W^q$，得到$q^1$ ，$q^1$就是query，搜寻。 把$a^2$乘以$W^k$，得到$k^2$，$k^2$就是key，键。把$a^3$乘以$W^k$，得到$k^3$，把$a^4$乘以$W^k$，得到$k^4$。 那么$\alpha_{1,2} =q^1\cdot k^2$，关联性就算出来了。$\alpha_{1,2}$也叫attention score。 同理可以算出$\alpha_{1,3}，$$\alpha_{1,4}$。 一般我们也会算$q^1$和$k^1$的关联性，也就是$\alpha_{1,1}$。 第二步：对$\alpha_{1,1}$，$\alpha_{1,2}$，$\alpha_{1,3}$，$\alpha_{1,4}$进行softmax操作，得到$\alpha \prime$。
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 09 Feb 2023 08:31:50 &#43;0800" class="no-wrap"
+                title=" Thu, 09 Feb 2023 08:31:50 &#43;0800">
+                Thu, 09 Feb 2023 08:31:50 &#43;0800
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://huizhixu.github.io/post/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/">2023-01-31 如何用HuggingFace对不均衡类别进行分类</a>
               </h3>
             </div>
 
@@ -483,7 +549,21 @@
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。
+                如何在程序中起名 最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
+想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
+今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
+作者给了几个建议：
+不要容易看出类型的名字后面加上类型，例如 name 就不要叫 namestring。
+写复数，不要用单数加 collection。例如 holidays 比 holiday_list 好些。
+我这个问题还挺严重的，因为我很喜欢写 xx_list，yy_dict 等。
+在写 func 的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如 merge(table_cells) 比 merge_table_cells(x) 要好。
+要精确，不需要把每一个细节都写出。例如 recentlyUpdatedAnnualSalesBid 这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。
+变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。
+例如类名有 data，已经表明了这个类是和数据相关。那么方法可以直接写 process，不需要写 data_process。
+变量名不要包含无意义的单词。 这些单词包括：
+data, state, amount, value, manager, engine, object, entity, and instance. Python 里面用类型注释很容易避免这些问题，就算用 results，不用 results_list 也可以很快看出 results 是一个 list，有时候是 list of list。
+第二篇文章是这个《起名的那些事儿》，链接在这儿 。
+对于起名他给的建议是：
               </div>
             </div>
 
@@ -650,32 +730,6 @@
               <relative-time datetime=" Fri, 18 Feb 2022 20:07:58 &#43;0800" class="no-wrap"
                 title=" Fri, 18 Feb 2022 20:07:58 &#43;0800">
                 Fri, 18 Feb 2022 20:07:58 &#43;0800
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://huizhixu.github.io/post/20220110%E5%BC%80%E5%A7%8B%E5%AF%B9%E6%8B%8D%E7%85%A7%E4%BA%A7%E7%94%9F%E5%85%B4%E8%B6%A3/">2022-01-10 开始对拍照产生兴趣</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                从12月底，就开始对摄影产生了一点兴趣。这种兴趣的由来，其实是有迹可循的。来上海四个月，每个礼拜出门都是去商场吃饭，然后逛逛。时间久了，就觉得周末的生活很乏味，开始讨厌起逛商场来。
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 10 Jan 2022 20:07:58 &#43;0800" class="no-wrap"
-                title=" Mon, 10 Jan 2022 20:07:58 &#43;0800">
-                Mon, 10 Jan 2022 20:07:58 &#43;0800
               </relative-time>
             </div>
           </div>

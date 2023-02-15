@@ -1,5 +1,5 @@
 ---
-title: "20230131如何用HuggingFace对不均衡类别进行分类"  
+title: "2023-01-31 如何用HuggingFace对不均衡类别进行分类"  
 date: 2023-01-31T19:31:50+08:00  
 draft: false  
 pin: true  

@@ -62,67 +62,103 @@
 
 <body>
   <div style="position: relative">
-  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
-    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://huizhixu.github.io/">
-        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
-          <path fill-rule="evenodd"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="Header-item d-md-none">
-      <button class="Header-link btn-link js-details-target" type="button"
-        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
-          <path fill-rule="evenodd"
-            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
-          </path>
-        </svg>
-      </button>
-    </div>
-    <div style="display: none;" id="header-search"
-      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
-      <div
-        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
-        <div class="position-relative">
-          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
-            autocomplete="off">
-            <label
-              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
-              <input type="text"
-                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
-                name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
-            </label>
-          </form>
+    <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+        <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+            <a class="Header-link" href="https://huizhixu.github.io/">
+                <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
         </div>
-      </div>
-    </div>
+        <div class="Header-item d-md-none">
+            <button class="Header-link btn-link js-details-target" type="button"
+                    onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+                <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+                    <path fill-rule="evenodd"
+                          d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div style="display: none;" id="header-search"
+             class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+            <div
+                    class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+                <div class="position-relative">
+                    <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+                          autocomplete="off">
+                        <label
+                                class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+                            <input type="text"
+                                   class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                                   name="q" value="" placeholder="Search" autocomplete="off">
+                            <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://huizhixu.github.io/">
-        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
-          width="32">
-          <path fill-rule="evenodd"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="Header-item" style="margin-right: 0;">
-      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
-        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
-          version="1.1" width="16" height="16">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
-          </path>
-        </svg>
-      </a>
-    </div>
-  </header>
+        <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+            <a class="Header-link " href="https://huizhixu.github.io/">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                     width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item" style="margin-right: 0;">
+            <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+                <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+                     version="1.1" width="16" height="16">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </header>
 </div>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   
 <div class="application-main">
   <main>
@@ -155,7 +191,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">11</span>
+              <span class="Counter">12</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -407,7 +443,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">11</span>
+      <span class="Counter ">12</span>
     </a>
   </nav>
 </div>
@@ -441,8 +477,40 @@
                       d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
                     </path>
                   </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
+                    <span class="repo" title="2023-02-09 如何理解自注意力机制">2023-02-09 如何理解自注意力机制</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  如何理解自注意力机制 理解输入与输出 输入有可能是一个vector，有可能是多个vector 输出： 一个序列对应一个label。the whole sequence has a label 例子：在情感分析里面，This is good对应的输入是多个vector，输出为positive，是一个vector。 一个vector对应一个label。一个序列对应多个label。 例子：在词性标注里面，This is good对应的输入是多个vector，输出为 代词，动词，形容词。 模型决定Label的个数。seq2seq任务 例子：在机器翻译里面，This is good对应的输入是3个vector，中文翻译是”不错“，输出为2个vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决sequence labeling的问题：用fully connected network对每一个input vector进行作用 弊端： 用fully connected network来输出，假设对I saw a saw做词性标注。对于FC层来说，两个saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个fc层，都对所有的输入作用。或者给他一个window，作用于相邻的几个input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个sequence，但是不想把sequence所有的数据都包括在里面，就有了self-attention。
+Self-attention 如果要考虑上下文的信息，输入可以扔进self-attention之后，生成vector with context，然后丢进FC层，然后再过一次self-attention，然后再丢进FC层。
+可以这样理解，self-attention获得上下文信息，FC层专注于局部信息，交替使用。
+运作原理： 输入：是一串vector，可以是整个network的输入，也可以是FC层的输出，这里用a表示。 输出：一串vector，这里用b表示。每一个b都对所有a作用。（这个图乍一看很像上面的FC，但其实不一样） 如何产生$b^1$这个向量： 第一步：找出sequence里面跟$a^1$相关的其他向量。（FC层会把sequence所有的向量都包括进来，这里只包括相关的向量，这就是不同点。）这个机制叫做自注意机制。
+每一个向量跟$a^1$相关联的程度，我们用数值$\alpha$来表示。 Self-attention的module怎么决定两个向量的关联性呢？ 内积：dot product （方法原理在文章最后面） 相加：additive（方法原理在文章最后面） 这里的做法是：分别计算 $a^1$ 与 $a^2$， $a^3$，$a^4$ 的关联性 把$a^1$乘以$W^q$，得到$q^1$ ，$q^1$就是query，搜寻。 把$a^2$乘以$W^k$，得到$k^2$，$k^2$就是key，键。把$a^3$乘以$W^k$，得到$k^3$，把$a^4$乘以$W^k$，得到$k^4$。 那么$\alpha_{1,2} =q^1\cdot k^2$，关联性就算出来了。$\alpha_{1,2}$也叫attention score。 同理可以算出$\alpha_{1,3}，$$\alpha_{1,4}$。 一般我们也会算$q^1$和$k^1$的关联性，也就是$\alpha_{1,1}$。 第二步：对$\alpha_{1,1}$，$\alpha_{1,2}$，$\alpha_{1,3}$，$\alpha_{1,4}$进行softmax操作，得到$\alpha \prime$。
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
                   <a class="text-bold flex-auto min-width-0" href="https://huizhixu.github.io/post/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/">
-                    <span class="repo" title="20230131如何用HuggingFace对不均衡类别进行分类">20230131如何用HuggingFace对不均衡类别进行分类</span>
+                    <span class="repo" title="2023-01-31 如何用HuggingFace对不均衡类别进行分类">2023-01-31 如何用HuggingFace对不均衡类别进行分类</span>
                   </a>
                 </div>
 
@@ -521,7 +589,13 @@
     
     <div class="mt-4 position-relative" id="contributions" data='[
 {
-  "title": "20230131%e5%a6%82%e4%bd%95%e7%94%a8HuggingFace%e5%af%b9%e4%b8%8d%e5%9d%87%e8%a1%a1%e7%b1%bb%e5%88%ab%e8%bf%9b%e8%a1%8c%e5%88%86%e7%b1%bb",
+  "title": "2023-02-09%20%e5%a6%82%e4%bd%95%e7%90%86%e8%a7%a3%e8%87%aa%e6%b3%a8%e6%84%8f%e5%8a%9b%e6%9c%ba%e5%88%b6",
+  "link": "https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/",
+  "publishDate": "2023-02-09%2008:31:50"
+},
+
+{
+  "title": "2023-01-31%20%e5%a6%82%e4%bd%95%e7%94%a8HuggingFace%e5%af%b9%e4%b8%8d%e5%9d%87%e8%a1%a1%e7%b1%bb%e5%88%ab%e8%bf%9b%e8%a1%8c%e5%88%86%e7%b1%bb",
   "link": "https://huizhixu.github.io/post/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/",
   "publishDate": "2023-01-31%2019:31:50"
 },

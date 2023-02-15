@@ -18,7 +18,21 @@
 
     
     <meta name="description"
-  content="最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。" />
+  content="如何在程序中起名 最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
+想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
+今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
+作者给了几个建议：
+不要容易看出类型的名字后面加上类型，例如 name 就不要叫 namestring。
+写复数，不要用单数加 collection。例如 holidays 比 holiday_list 好些。
+我这个问题还挺严重的，因为我很喜欢写 xx_list，yy_dict 等。
+在写 func 的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如 merge(table_cells) 比 merge_table_cells(x) 要好。
+要精确，不需要把每一个细节都写出。例如 recentlyUpdatedAnnualSalesBid 这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。
+变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。
+例如类名有 data，已经表明了这个类是和数据相关。那么方法可以直接写 process，不需要写 data_process。
+变量名不要包含无意义的单词。 这些单词包括：
+data, state, amount, value, manager, engine, object, entity, and instance. Python 里面用类型注释很容易避免这些问题，就算用 results，不用 results_list 也可以很快看出 results 是一个 list，有时候是 list of list。
+第二篇文章是这个《起名的那些事儿》，链接在这儿 。
+对于起名他给的建议是：" />
 <meta name="keywords"
   content='' />
 <meta name="robots" content="noodp" />
@@ -28,7 +42,21 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="2022-10-24 如何在程序中起名 - HuizhiXu 的个人博客" />
 <meta name="twitter:description"
-  content="最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。" />
+  content="如何在程序中起名 最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
+想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
+今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
+作者给了几个建议：
+不要容易看出类型的名字后面加上类型，例如 name 就不要叫 namestring。
+写复数，不要用单数加 collection。例如 holidays 比 holiday_list 好些。
+我这个问题还挺严重的，因为我很喜欢写 xx_list，yy_dict 等。
+在写 func 的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如 merge(table_cells) 比 merge_table_cells(x) 要好。
+要精确，不需要把每一个细节都写出。例如 recentlyUpdatedAnnualSalesBid 这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。
+变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。
+例如类名有 data，已经表明了这个类是和数据相关。那么方法可以直接写 process，不需要写 data_process。
+变量名不要包含无意义的单词。 这些单词包括：
+data, state, amount, value, manager, engine, object, entity, and instance. Python 里面用类型注释很容易避免这些问题，就算用 results，不用 results_list 也可以很快看出 results 是一个 list，有时候是 list of list。
+第二篇文章是这个《起名的那些事儿》，链接在这儿 。
+对于起名他给的建议是：" />
 <meta name="twitter:site" content="https://huizhixu.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -38,7 +66,21 @@
 <meta property="og:type" content="article" />
 <meta property="og:title" content="2022-10-24 如何在程序中起名 - HuizhiXu 的个人博客">
 <meta property="og:description"
-  content="最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。" />
+  content="如何在程序中起名 最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
+想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
+今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
+作者给了几个建议：
+不要容易看出类型的名字后面加上类型，例如 name 就不要叫 namestring。
+写复数，不要用单数加 collection。例如 holidays 比 holiday_list 好些。
+我这个问题还挺严重的，因为我很喜欢写 xx_list，yy_dict 等。
+在写 func 的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如 merge(table_cells) 比 merge_table_cells(x) 要好。
+要精确，不需要把每一个细节都写出。例如 recentlyUpdatedAnnualSalesBid 这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。
+变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。
+例如类名有 data，已经表明了这个类是和数据相关。那么方法可以直接写 process，不需要写 data_process。
+变量名不要包含无意义的单词。 这些单词包括：
+data, state, amount, value, manager, engine, object, entity, and instance. Python 里面用类型注释很容易避免这些问题，就算用 results，不用 results_list 也可以很快看出 results 是一个 list，有时候是 list of list。
+第二篇文章是这个《起名的那些事儿》，链接在这儿 。
+对于起名他给的建议是：" />
 <meta property="og:url" content="https://huizhixu.github.io/post/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/" />
 <meta property="og:site_name" content="2022-10-24 如何在程序中起名" />
 <meta property="og:image"
@@ -61,67 +103,103 @@
 
 <body>
   <div style="position: relative">
-  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
-    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-      <a class="Header-link" href="https://huizhixu.github.io/">
-        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
-          <path fill-rule="evenodd"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="Header-item d-md-none">
-      <button class="Header-link btn-link js-details-target" type="button"
-        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
-          <path fill-rule="evenodd"
-            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
-          </path>
-        </svg>
-      </button>
-    </div>
-    <div style="display: none;" id="header-search"
-      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
-      <div
-        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
-        <div class="position-relative">
-          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
-            autocomplete="off">
-            <label
-              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
-              <input type="text"
-                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
-                name="q" value="" placeholder="Search" autocomplete="off">
-              <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
-            </label>
-          </form>
+    <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+        <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+            <a class="Header-link" href="https://huizhixu.github.io/">
+                <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
         </div>
-      </div>
-    </div>
+        <div class="Header-item d-md-none">
+            <button class="Header-link btn-link js-details-target" type="button"
+                    onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+                <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+                    <path fill-rule="evenodd"
+                          d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div style="display: none;" id="header-search"
+             class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+            <div
+                    class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+                <div class="position-relative">
+                    <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+                          autocomplete="off">
+                        <label
+                                class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+                            <input type="text"
+                                   class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                                   name="q" value="" placeholder="Search" autocomplete="off">
+                            <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-      <a class="Header-link " href="https://huizhixu.github.io/">
-        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
-          width="32">
-          <path fill-rule="evenodd"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-          </path>
-        </svg>
-      </a>
-    </div>
-    <div class="Header-item" style="margin-right: 0;">
-      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
-        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
-          version="1.1" width="16" height="16">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
-          </path>
-        </svg>
-      </a>
-    </div>
-  </header>
+        <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+            <a class="Header-link " href="https://huizhixu.github.io/">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                     width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item" style="margin-right: 0;">
+            <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+                <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+                     version="1.1" width="16" height="16">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </header>
 </div>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   
 <div>
   <main>
@@ -150,9 +228,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 10 Dec 2022 19:11:38 &#43;0800"
+                  Modified <relative-time datetime="Thu, 02 Feb 2023 10:10:37 &#43;0800"
                     class="no-wrap">
-                    Sat, 10 Dec 2022 19:11:38 &#43;0800</relative-time>
+                    Thu, 02 Feb 2023 10:10:37 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -182,7 +260,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      1096 Words
+                      1032 Words
                     
 
                   </div>
@@ -195,9 +273,10 @@
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="如何在程序中起名">如何在程序中起名</h1>
-<p>比如数据处理这个阶段，就很容易取 <code>data_process</code>， <code>get_data</code>，<code>process_data</code>，<code>data_preprocess</code>，<code>deal_with_data</code> 这些名字。再比如很多类的主入口，我经常会写 <code>run()</code>、<code>xx_driver()</code> 等等。</p>
+<p>最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 <code>data_process</code>， <code>get_data</code>，<code>process_data</code>，<code>data_preprocess</code>，<code>deal_with_data</code> 这些名字。再比如很多类的主入口，我经常会写 <code>run()</code>、<code>xx_driver()</code> 等等。</p>
 <p>想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 <code>get_data</code> 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。</p>
-<p>今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这（<a href="https://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/">https://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/</a> ) 。我跟着这篇文章反省了一下，有时候为了区分很多种情，我就会用下划线连接好几个单词，我自己是觉得很容易读，应该满足 readability，但是有的单词很长，所以总体长度也很长，不是很 pythonic。</p>
+<p>今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在<a href="https://journal.stuffwithstuff.com/2016/06/16/long-names-are-long/">这</a> 。
+我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。</p>
 <p>作者给了几个建议：</p>
 <ol>
 <li>
@@ -218,22 +297,26 @@
 </li>
 </ol>
 <p>例如类名有 <code>data</code>，已经表明了这个类是和数据相关。那么方法可以直接写 <code>process</code>，不需要写 <code>data_process</code>。</p>
-<ol>
+<ol start="6">
 <li>变量名不要包含无意义的单词。</li>
 </ol>
-<p>有以下这些：</p>
+<p>这些单词包括：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data, state, amount, value, manager, engine, object, entity, <span style="color:#f92672">and</span> instance<span style="color:#f92672">.</span>
 </span></span></code></pre></div><p>Python 里面用类型注释很容易避免这些问题，就算用 <code>results</code>，不用 <code>results_list</code> 也可以很快看出 <code>results</code> 是一个 <code>list</code>，有时候是 <code>list of list</code>。</p>
-<p>第二篇文章是这个《起名的那些事儿》，链接在这儿  <a href="https://journal.stuffwithstuff.com/2009/06/05/naming-things-in-code/">https://journal.stuffwithstuff.com/2009/06/05/naming-things-in-code/</a> 。</p>
+<p>第二篇文章是这个《起名的那些事儿》，链接在<a href="https://journal.stuffwithstuff.com/2009/06/05/naming-things-in-code/">这儿</a> 。</p>
 <p>对于起名他给的建议是：</p>
 <ol>
-<li>
-<p>对于类名，接口名：</p>
-<ol>
-<li>用名词，不用形容词</li>
-<li>不要用manager或者helper这种词</li>
-<li>精确表示</li>
+<li>对于类名、接口名：</li>
 </ol>
+<ul>
+<li>
+<p>用名词，不用形容词。</p>
+</li>
+<li>
+<p>不要用manager或者helper这种词。</p>
+</li>
+<li>
+<p>精确表示。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Bad:  IncomingMessageQueue
 </span></span><span style="display:flex;"><span>      CharacterArray
 </span></span><span style="display:flex;"><span>      SpatialOrganizer
@@ -241,54 +324,51 @@
 </span></span><span style="display:flex;"><span>      String
 </span></span><span style="display:flex;"><span>      Map
 </span></span></code></pre></div></li>
-<li>
-<p>对于方法名：</p>
-</li>
+</ul>
+<ol start="2">
+<li>对于方法名：</li>
 </ol>
 <ul>
 <li>
-<p>要简短， 也不能太简短</p>
+<p>要简短， 也不能太简短。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Bad:  list<span style="color:#f92672">.</span>GetNumberOfItems();
 </span></span><span style="display:flex;"><span>Good: list<span style="color:#f92672">.</span>Count();
 </span></span><span style="display:flex;"><span>Bad:  list<span style="color:#f92672">.</span>Verify();
 </span></span><span style="display:flex;"><span>Good: list<span style="color:#f92672">.</span>ContainsNull();
-</span></span></code></pre></div><ul>
+</span></span></code></pre></div></li>
+</ul>
+<ol start="3">
 <li>
-<p>表示动作的话用动词</p>
-</li>
-<li>
-<p>返回布尔值用问句的形式</p>
-<pre><code>```python
-Bad:  list.Empty();
-Good: list.IsEmpty();
-      list.Contains(item);
-```
+<p>表示动作的话用动词，返回布尔值用问句的形式。</p>
+<pre><code>  ```python
+  Bad:  list.Empty();
+  Good: list.IsEmpty();
+        list.Contains(item);
+  ```
 </code></pre>
 </li>
 <li>
 <p>返回一个不改变状态的值用名词。</p>
-<pre><code>```python
-Bad:  list.GetCount();
-Good: list.Count();
-```
+<pre><code>  ```python
+  Bad:  list.GetCount();
+  Good: list.Count();
+  ```
 </code></pre>
 </li>
 <li>
-<p>不要重复</p>
-<pre><code>```python
-Bad:  list.AddItem(item);
-      handler.ReceiveMessage(msg);
-Good: list.Add(item);
-      handler.Receive(msg);
-```
+<p>不要重复。</p>
+<pre><code>  ```python
+  Bad:  list.AddItem(item);
+        handler.ReceiveMessage(msg);
+  Good: list.Add(item);
+        handler.Receive(msg);
+  ```
 </code></pre>
 </li>
 <li>
-<p>不要使用and 或者or ，如果有多种情况，可以写几个方法或者用一个类来封装。</p>
+<p>不要使用 and 或者 or ，如果有多种情况，可以写几个方法或者用一个类来封装。</p>
 </li>
-</ul>
-</li>
-</ul>
+</ol>
 <p>这两篇文章的建议都非常好。但是也不可能看了就能照着所有的建议做好，还是需要不断地改以前的代码，多去思考该怎么写。</p>
 </article>
               </div>
