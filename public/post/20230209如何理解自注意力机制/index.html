@@ -186,9 +186,9 @@ code.has-jax {
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:40:15 &#43;0800"
+                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:43:54 &#43;0800"
                     class="no-wrap">
-                    Wed, 15 Feb 2023 16:40:15 &#43;0800</relative-time>
+                    Wed, 15 Feb 2023 16:43:54 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -273,7 +273,7 @@ code.has-jax {
 <li>输入：是一串 vector，可以是整个 network 的输入，也可以是 FC 层的输出，这里用 $a$ 表示。</li>
 <li>输出：一串 vector，这里用  $b$ 表示。每一个 $b$  都对所有 $a$ 作用。（这个图乍一看很像上面的 FC，但其实不一样）</li>
 </ul>
-<p><img src="/img/20230209/Untitled.png" alt="Untitled"></p>
+<p><img src="/img/20230209/0.png" alt="Untitled"></p>
 <p>问题就变成了，输入是 $a$ 时，如何计算 $b$？用 $b^1$来说明，具体分三步。</p>
 <ul>
 <li>如何产生 $b^1$ 这个向量：
@@ -295,7 +295,7 @@ code.has-jax {
 <li>同理可以算出 $\alpha_{1,3}，$$\alpha_{1,4}$。</li>
 <li>一般我们也会算 $q^1$ 和 $k^1$ 的关联性，也就是 $\alpha_{1,1}$。</li>
 </ul>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.24.42.png" alt="截屏2023-02-08 17.24.42.png"></p>
+<p><img src="/img/20230209/1.png" alt="截屏2023-02-08 17.24.42.png"></p>
 </li>
 <li>
 <p>第二步：对 $\alpha_{1,1}$，$\alpha_{1,2}$，$\alpha_{1,3}$，$\alpha_{1,4}$进行Softmax 操作，得到$\alpha^\prime$。</p>
@@ -318,7 +318,7 @@ $$</p>
 <p>也就是说，谁的 attention score 越大，谁的 v 就会 dominate 抽出来的结果。</p>
 </li>
 </ul>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.59.23.png" alt="截屏2023-02-08 17.59.23.png"></p>
+<p><img src="/img/20230209/2.png" alt="截屏2023-02-08 17.59.23.png"></p>
 </li>
 </ul>
 </li>
@@ -330,7 +330,7 @@ $$</p>
 <p>矩阵$I$乘以$Wq$，得到矩阵$Q$，$Q$的4列就是$q^1$到$q^4$。</p>
 <p>同样，输入矩阵I乘以$W^k$，得到矩阵$K$，$K$的4列就是$k^1$到$k^4$。</p>
 <p>输入$I$乘上三个不同的矩阵，就得到了$QKV$。</p>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_10.29.47.png" alt="截屏2023-02-09 10.29.47.png"></p>
+<p><img src="/img/20230209/3.png" alt="截屏2023-02-09 10.29.47.png"></p>
 <ol>
 <li>
 <p>每一个 $q$ 会和每一个 $k$ 计算内积，得到 attention score。</p>
@@ -366,7 +366,7 @@ $$</p>
 <p>$$
 A = K^T \sdot Q
 $$</p>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.09.24.png" alt="截屏2023-02-09 17.09.24.png"></p>
+<p><img src="/img/20230209/4.png" alt="截屏2023-02-09 17.09.24.png"></p>
 </li>
 </ol>
 </li>
@@ -382,9 +382,9 @@ $$</p>
 </ul>
 </li>
 </ol>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.18.40.png" alt="截屏2023-02-09 17.18.40.png"></p>
+<p><img src="/img/20230209/5.png" alt="截屏2023-02-09 17.18.40.png"></p>
 <p>总结：先产生QKV，根据Q找出相关的位置，再对V做weighted sum。</p>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.22.53.png" alt="截屏2023-02-09 17.22.53.png"></p>
+<p><img src="/img/20230209/6.png" alt="截屏2023-02-09 17.22.53.png"></p>
 <h1 id="怎么得到wqwk和wv">怎么得到$W^q$、$W^k$和$W^v$</h1>
 <p>初始化一个矩阵，通过training data 在训练过程中更新。</p>
 <h1 id="自注意模块计算两个向量的关联性">自注意模块计算两个向量的关联性</h1>
@@ -395,7 +395,7 @@ $$</p>
 $$</p>
 <h2 id="相加方法"><strong>相加方法</strong></h2>
 <p>左边的向量乘以 $W^q$ 矩阵，右边的向量乘以 $W^k$ 矩阵，得到 $q$ 和 $k$ 这两个向量。然后相加丢到tanh，再乘以 $W$，得到 $\alpha$。</p>
-<p><img src="/img/20230209/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.01.34.png" alt="截屏2023-02-08 17.01.34.png"></p>
+<p><img src="/img/20230209/7.png" alt="截屏2023-02-08 17.01.34.png"></p>
 <h1 id="参考">参考：</h1>
 <p>李宏毅老师的讲课视频</p>
 <p><a href="https://www.bilibili.com/video/BV1v3411r78R?p=2&amp;vd_source=bbd38c44460fafa204a3540d4f8a2657">11.【李宏毅机器学习2021】自注意力机制 (Self-attention) (下)_哔哩哔哩_bilibili</a></p>
