@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
-    <title>2023-02-09 如何理解自注意力机制 - HuizhiXu 的个人博客</title>
+    <title> - HuizhiXu 的个人博客</title>
     
     <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
     
@@ -18,7 +18,8 @@
 
     
     <meta name="description"
-  content="Attention is all you need." />
+  content="如何理解自注意力机制 Status: Not started
+理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。" />
 <meta name="keywords"
   content='' />
 <meta name="robots" content="noodp" />
@@ -26,9 +27,10 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="2023-02-09 如何理解自注意力机制 - HuizhiXu 的个人博客" />
+<meta name="twitter:title" content=" - HuizhiXu 的个人博客" />
 <meta name="twitter:description"
-  content="Attention is all you need." />
+  content="如何理解自注意力机制 Status: Not started
+理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。" />
 <meta name="twitter:site" content="https://huizhixu.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -36,17 +38,16 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="2023-02-09 如何理解自注意力机制 - HuizhiXu 的个人博客">
+<meta property="og:title" content=" - HuizhiXu 的个人博客">
 <meta property="og:description"
-  content="Attention is all you need." />
+  content="如何理解自注意力机制 Status: Not started
+理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。" />
 <meta property="og:url" content="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" />
-<meta property="og:site_name" content="2023-02-09 如何理解自注意力机制" />
+<meta property="og:site_name" content="" />
 <meta property="og:image"
   content="https://huizhixu.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
-
-<meta property="article:published_time" content="2023-02-09 08:31:50 &#43;0800 CST" />
 
 
 
@@ -177,18 +178,18 @@ code.has-jax {
                   <span class="author">
                     <a href="https://huizhixu.github.io/">Huizhi</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">2023-02-09 如何理解自注意力机制</a></strong>
+                      href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Thu, 09 Feb 2023 08:31:50 &#43;0800"
+                  Created <relative-time datetime="Mon, 01 Jan 0001 00:00:00 &#43;0000"
                     class="no-wrap">
-                    Thu, 09 Feb 2023 08:31:50 &#43;0800</relative-time>
+                    Mon, 01 Jan 0001 00:00:00 &#43;0000</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 15 Feb 2023 14:16:48 &#43;0800"
+                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:34:30 &#43;0800"
                     class="no-wrap">
-                    Wed, 15 Feb 2023 14:16:48 &#43;0800</relative-time>
+                    Wed, 15 Feb 2023 16:34:30 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -218,7 +219,7 @@ code.has-jax {
                         </div>
                       </div>
                     </details-menu>
-                      3115 Words
+                      2361 Words
                     
 
                   </div>
@@ -231,24 +232,25 @@ code.has-jax {
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="如何理解自注意力机制">如何理解自注意力机制</h1>
+<p>Status: Not started</p>
 <h1 id="理解输入与输出">理解输入与输出</h1>
 <ul>
-<li>输入有可能是一个vector，有可能是多个vector</li>
+<li>输入有可能是一个 vector，有可能是多个 vector</li>
 <li>输出：
 <ul>
-<li>一个序列对应一个label。the whole sequence has a label
+<li>一个序列对应一个 label。the whole sequence has a label
 <ul>
-<li>例子：在情感分析里面，This is good对应的输入是多个vector，输出为positive，是一个vector。</li>
+<li>例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。</li>
 </ul>
 </li>
-<li>一个vector对应一个label。一个序列对应多个label。
+<li>一个 vector 对应一个 label。一个序列对应多个 label。
 <ul>
-<li>例子：在词性标注里面，This is good对应的输入是多个vector，输出为 代词，动词，形容词。</li>
+<li>例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。</li>
 </ul>
 </li>
-<li>模型决定Label的个数。seq2seq任务
+<li>模型决定 label 的个数。seq2seq 任务
 <ul>
-<li>例子：在机器翻译里面，This is good对应的输入是3个vector，中文翻译是”不错“，输出为2个vector。</li>
+<li>例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。</li>
 </ul>
 </li>
 </ul>
@@ -257,90 +259,90 @@ code.has-jax {
 <h1 id="一个vector对应一个label的情况即输入和输出一样多也叫做sequence-labeling">一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling</h1>
 <ul>
 <li>例子： I saw a saw</li>
-<li>如何解决sequence labeling的问题：用fully connected network对每一个input vector进行作用</li>
+<li>如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用</li>
 <li>弊端：
 <ul>
-<li>用fully connected network来输出，假设对I saw a saw做词性标注。对于FC层来说，两个saw没有什么不同，但是他们实际上一个是动词，一个是名词。</li>
+<li>用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。</li>
 </ul>
 </li>
-<li>解决思路：考虑更多的上下文。每一个fc层，都对所有的输入作用。或者给他一个window，作用于相邻的几个input vector。但是作用还是有限，计算也很复杂。</li>
+<li>解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。</li>
 </ul>
-<p>我们想考虑整个sequence，但是不想把sequence所有的数据都包括在里面，就有了self-attention。</p>
+<p>我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。</p>
 <h1 id="self-attention">Self-attention</h1>
-<p>如果要考虑上下文的信息，输入可以扔进self-attention之后，生成vector with context，然后丢进FC层，然后再过一次self-attention，然后再丢进FC层。</p>
-<p>可以这样理解，self-attention获得上下文信息，FC层专注于局部信息，交替使用。</p>
+<p>如果要考虑上下文的信息，输入可以扔进 self-attention 之后，生成 vector with context，然后丢进FC层，然后再过一次 self-attention，然后再丢进 FC 层。</p>
+<p>可以这样理解，self-attention 获得上下文信息，FC 层专注于局部信息，交替使用。</p>
 <h2 id="运作原理">运作原理：</h2>
 <ul>
-<li>输入：是一串vector，可以是整个network的输入，也可以是FC层的输出，这里用a表示。</li>
-<li>输出：一串vector，这里用b表示。每一个b都对所有a作用。（这个图乍一看很像上面的FC，但其实不一样）</li>
+<li>输入：是一串 vector，可以是整个 network 的输入，也可以是 FC 层的输出，这里用 $a$ 表示。</li>
+<li>输出：一串 vector，这里用  $b$ 表示。每一个 $b$  都对所有 $a$ 作用。（这个图乍一看很像上面的 FC，但其实不一样）</li>
 </ul>
-<p><img src="/20230209/20230209_1.png" alt="输入和输出"></p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/Untitled.png" alt="Untitled"></p>
+<p>问题就变成了，输入是 $a$ 时，如何计算 $b$？用 $b^1$来说明，具体分三步。</p>
 <ul>
-<li>如何产生$b^1$这个向量：
+<li>如何产生 $b^1$ 这个向量：
 <ul>
 <li>
-<p>第一步：找出sequence里面跟$a^1$相关的其他向量。（FC层会把sequence所有的向量都包括进来，这里只包括相关的向量，这就是不同点。）这个机制叫做自注意机制。</p>
+<p>第一步：找出 sequence 里面跟 $a^1$ 相关的其他向量。（FC 层会把 sequence 所有的向量都包括进来，这里只包括相关的向量，这就是不同点。）这个机制叫做自注意机制。</p>
 <ul>
-<li>每一个向量跟$a^1$相关联的程度，我们用数值$\alpha$来表示。</li>
-<li>Self-attention的module怎么决定两个向量的关联性呢？
+<li>每一个向量跟 $a^1$ 相关联的程度，我们用数值 $\alpha$ 来表示。</li>
+<li>Self-attention 的 module 怎么决定两个向量的关联性呢？
 <ul>
 <li>内积：dot product （方法原理在文章最后面）</li>
 <li>相加：additive（方法原理在文章最后面）</li>
 </ul>
 </li>
 <li>这里的做法是：分别计算 $a^1$ 与 $a^2$， $a^3$，$a^4$ 的关联性</li>
-<li>把$a^1$乘以$W^q$，得到$q^1$ ，$q^1$就是query，搜寻。</li>
-<li>把$a^2$乘以$W^k$，得到$k^2$，$k^2$就是key，键。把$a^3$乘以$W^k$，得到$k^3$，把$a^4$乘以$W^k$，得到$k^4$。</li>
-<li>那么$\alpha_{1,2} =q^1\cdot k^2$，关联性就算出来了。$\alpha_{1,2}$也叫attention score。</li>
-<li>同理可以算出$\alpha_{1,3}，$$\alpha_{1,4}$。</li>
-<li>一般我们也会算$q^1$和$k^1$的关联性，也就是$\alpha_{1,1}$。</li>
+<li>把 $a^1$ 乘以 $W^q$，得到 $q^1$ ，$q^1$ 就是 query——搜寻。</li>
+<li>把 $a^2$ 乘以 $W^k$，得到 $k^2$，$k^2$ 就是 key——键。把 $a^3$ 乘以 $W^k$，得到 $k^3$，把 $a^4$ 乘以 $W^k$，得到 $k^4$。</li>
+<li>那么 $\alpha_{1,2} =q^1\cdot k^2$，关联性就算出来了。$\alpha_{1,2}$ 也叫 attention score。</li>
+<li>同理可以算出 $\alpha_{1,3}，$$\alpha_{1,4}$。</li>
+<li>一般我们也会算 $q^1$ 和 $k^1$ 的关联性，也就是 $\alpha_{1,1}$。</li>
 </ul>
-<p><img src="/20230209/20230209_3.png" alt="attention结构"></p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.24.42.png" alt="截屏2023-02-08 17.24.42.png"></p>
 </li>
 <li>
-<p>第二步：对$\alpha_{1,1}$，$\alpha_{1,2}$，$\alpha_{1,3}$，$\alpha_{1,4}$进行softmax操作，得到$\alpha \prime$。</p>
+<p>第二步：对 $\alpha_{1,1}$，$\alpha_{1,2}$，$\alpha_{1,3}$，$\alpha_{1,4}$进行Softmax 操作，得到$\alpha^\prime$。</p>
 <ul>
-<li>为什么要用softmax：softmax最常见，这里也可以用其他函数，可以用relu等。（这一步没懂）</li>
+<li>为什么要用 Softmax：Softmax 最常见，这里也可以用其他函数，可以用 relu 等。</li>
 </ul>
 </li>
 <li>
-<p>第三步：根据$\alpha\prime$，在sequence里面抽取重要的信息。</p>
+<p>第三步：根据$\alpha^\prime$，在 sequence 里面抽取重要的信息。</p>
 <ul>
-<li>做法：将$a^1$，$a^2$，$a^3$，$a^4$分别乘以$W^v$，得到$v^1，$$v^2，$$v^3$，$v^4$。  （其实这里$v^1，v^2，v^3，v^4$就是$a^1，a^2，a^3，a^4$自己的等价表示）</li>
-<li>将$v^1$到$v^4$都乘以分别的$\alpha \prime$， 然后再相加。</li>
+<li>做法：将 $a^1$，$a^2$，$a^3$，$a^4$ 分别乘以 $W^v$，得到 $v^1，$$v^2，$$v^3$，$v^4$。  （其实这里$v^1，v^2，v^3，v^4$就是$a^1，a^2，a^3，a^4$自己本身的等价表示）</li>
+<li>将 $v^1$ 到 $v^4$ 都乘以分别的 $\alpha^\prime$， 然后再相加。</li>
 </ul>
 <p>$$
 b^1  = \sum_i \alpha\prime_{1,i} v^i
 $$</p>
 <ul>
 <li>
-<p>如果$a^1$和$a^2$的关联性很强，$\alpha\prime_{1,2}$的值很大，那么经过weighted sum得到的$b^1$的值就可能会接近$v^2$。</p>
-<p>也就是说，谁的attention score越大，谁的v就会dominate抽出来的结果。（这里也没有看懂~~~）</p>
+<p>如果 $a^1$ 和 $a^2$ 的关联性很强，$\alpha^\prime_{1,2}$ 的值很大，那么经过 weighted sum 得到的 $b^1$ 的值就可能会接近 $v^2$。</p>
+<p>也就是说，谁的 attention score 越大，谁的 v 就会 dominate 抽出来的结果。</p>
 </li>
 </ul>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.59.23.png" alt="截屏2023-02-08 17.59.23.png"></p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.59.23.png" alt="截屏2023-02-08 17.59.23.png"></p>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="heading"></h1>
-<h1 id="qkv从矩阵的角度看self-attention">QKV（从矩阵的角度看self-attention）</h1>
+<h1 id="qkv从矩阵的角度看self-attention">$QKV$（从矩阵的角度看self-attention）</h1>
 <ol>
-<li>把a^1到a^4看成是矩阵I的列，q^1到q^4是矩阵Q的列，那么可以转化成矩阵间的运算。</li>
+<li>把 $a^1$ 到 $a^4$ 看成是矩阵 $I$ 的列，$q^1$ 到 $q^4$ 是矩阵 $Q$ 的列，那么可以转化成矩阵间的运算。</li>
 </ol>
-<p>矩阵I乘以Wq，得到矩阵Q，Q的4列就是q1到q4。</p>
-<p>同样，输入矩阵I乘以Wk，得到矩阵K，K的4列就是k1到k4。</p>
-<p>输入I乘上三个不同的矩阵，就得到了QKV。</p>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_10.29.47.png" alt="截屏2023-02-09 10.29.47.png"></p>
+<p>矩阵$I$乘以$Wq$，得到矩阵$Q$，$Q$的4列就是$q^1$到$q^4$。</p>
+<p>同样，输入矩阵I乘以$W^k$，得到矩阵$K$，$K$的4列就是$k^1$到$k^4$。</p>
+<p>输入$I$乘上三个不同的矩阵，就得到了$QKV$。</p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_10.29.47.png" alt="截屏2023-02-09 10.29.47.png"></p>
 <ol>
 <li>
-<p>每一个q会和每一个k计算内积，得到attention score。</p>
+<p>每一个 $q$ 会和每一个 $k$ 计算内积，得到 attention score。</p>
 <ol>
 <li>
 <p>矩阵和向量相乘：</p>
 <ol>
-<li>矩阵K和q^1内积，得到a^1和其他输入的相关性。</li>
-<li>矩阵K和q^2内积，得到a^2和其他输入的相关性。</li>
+<li>矩阵 $K$ 和 $q^1$ 内积，得到 $a^1$ 和其他输入的相关性。</li>
+<li>矩阵 $K$ 和 $q^2$ 内积，得到 $a^2$ 和其他输入的相关性。</li>
 <li>合起来，就是</li>
 </ol>
 <p>$$
@@ -367,100 +369,36 @@ $$</p>
 <p>$$
 A = K^T \sdot Q
 $$</p>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.09.24.png" alt="截屏2023-02-09 17.09.24.png"></p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.09.24.png" alt="截屏2023-02-09 17.09.24.png"></p>
 </li>
 </ol>
 </li>
 <li>
-<p>对$A$做softmax，得到$A^\prime$c</p>
+<p>对 $A$ 做Softmax，得到 $A^\prime$</p>
 </li>
 <li>
-<p>V乘以A‘得到B</p>
+<p>$V$乘以$A^\prime$得到B</p>
 <ul>
-<li>v1乘上weight \alpha\prime， 加上v2乘上weight \alpha\prime，等等，得到b1</li>
-<li>v1乘上weight \alpha\prime， 加上v2乘上weight \alpha\prime，等等，得到b2</li>
-<li>O就是Output</li>
+<li>$v^1$乘上 $\alpha^\prime_{1,1}$， 加上$v^2$乘上 $\alpha^\prime_{1,2}$，等等，得到 $b^1$</li>
+<li>$v^1$乘上 $\alpha^\prime_{1,1}$， 加上$v^2$乘上 $\alpha^\prime_{1,2}$，等等，得到 $b^2$</li>
+<li>O 就是 Output</li>
 </ul>
 </li>
 </ol>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.18.40.png" alt="截屏2023-02-09 17.18.40.png"></p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.18.40.png" alt="截屏2023-02-09 17.18.40.png"></p>
 <p>总结：先产生QKV，根据Q找出相关的位置，再对V做weighted sum。</p>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.22.53.png" alt="截屏2023-02-09 17.22.53.png"></p>
-<h1 id="怎么得到wqwk和wv">怎么得到Wq、Wk和Wv</h1>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.22.53.png" alt="截屏2023-02-09 17.22.53.png"></p>
+<h1 id="怎么得到wqwk和wv">怎么得到$W^q$、$W^k$和$W^v$</h1>
 <p>初始化一个矩阵，通过training data 在训练过程中更新。</p>
-<h1 id="multi-head-self-attention">Multi-head Self-attention</h1>
-<h2 id="为什么需要多的head">为什么需要多的head？</h2>
-<h3 id="关于相关性">关于相关性</h3>
-<ul>
-<li>在self-attention里面，是根据Q来找相关的K，但是相关性有很多种不同的形式和定义。</li>
-<li>所以应该要有多个Q，不同的Q负责不同种类的相关性。</li>
-</ul>
-<h3 id="如何设计多头">如何设计多头？</h3>
-<ul>
-<li>a乘上Wq得到q，q再乘上其他两个矩阵得到q_{i,1}和q_{i,2}
-<ul>
-<li>i代表的是位置，1和2代表的是第几个q。这里两个q负责两种不同的相关性。</li>
-</ul>
-</li>
-<li>同理，有两个q，就要有两个k和两个v</li>
-</ul>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.38.22.png" alt="截屏2023-02-09 17.38.22.png"></p>
-<h3 id="多头如何做自注意力">多头如何做自注意力？</h3>
-<ul>
-<li>q_1只管和k_1相乘，不用管是哪个位置的。（这里有位置i和j）</li>
-<li>也只和v_1相乘，对不同位置的v1做weighted sum，得到b_1</li>
-</ul>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.41.37.png" alt="截屏2023-02-09 17.41.37.png"></p>
-<ul>
-<li>然后对b1和b2做矩阵相乘，得到b</li>
-</ul>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.44.55.png" alt="截屏2023-02-09 17.44.55.png"></p>
-<h1 id="self-attention的弊端">Self-attention的弊端：</h1>
-<ul>
-<li>没有考虑到位置信息
-<ul>
-<li>每一个input vector出现在sequence的最前面还是最后面在模型里面是体现不出来的。（位置i和j是没有差别的）</li>
-<li>位置很重要:
-<ul>
-<li>例子：POS动词不会出现在句首</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>如何解决：
-<ul>
-<li>positional encoding
-<ul>
-<li>设定一个vector，叫做positional vector  e^i</li>
-<li>把e_i加上a_i，作为输入</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="positional-encoding">positional encoding</h1>
-<ul>
-<li>e_i长什么样
-<ul>
-<li>人类为每个位置设置一个专属的vector。（handcrafted）</li>
-<li>论文里面，是sin 和cos 设置的。（可以有其他的方法）</li>
-<li></li>
-</ul>
-</li>
-</ul>
-<pre><code>    ![截屏2023-02-09 17.59.29.png](%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-09_17.59.29.png)
-</code></pre>
-<h1 id="需要多少head">需要多少head？</h1>
 <h1 id="自注意模块计算两个向量的关联性">自注意模块计算两个向量的关联性</h1>
 <h2 id="内积方法"><strong>内积方法</strong></h2>
-<p>左边的向量乘以W_q矩阵，右边的向量乘以W_k矩阵，得到q和k这两个向量。然后做内积，得到一个scala标量。</p>
+<p>左边的向量乘以 $W^q$ 矩阵，右边的向量乘以 $W^k$ 矩阵，得到 $q$ 和 $k$ 这两个向量。然后做内积，得到一个标量。</p>
 <p>$$
-\alpha = q /dot k
+\alpha = q \cdot k
 $$</p>
-<p>(妈耶为什么我Latex全都忘光了)</p>
 <h2 id="相加方法"><strong>相加方法</strong></h2>
-<p>左边的向量乘以W_q矩阵，右边的向量乘以W_k矩阵，得到q和k这两个向量。然后相加丢到tanh，再乘以W，得到alpha。</p>
-<p><img src="%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.01.34.png" alt="截屏2023-02-08 17.01.34.png"></p>
+<p>左边的向量乘以 $W^q$ 矩阵，右边的向量乘以 $W^k$ 矩阵，得到 $q$ 和 $k$ 这两个向量。然后相加丢到tanh，再乘以 $W$，得到 $\alpha$。</p>
+<p><img src="/img/20230209/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%2060054d4448134accaab9f50cdda8e28f/%25E6%2588%25AA%25E5%25B1%258F2023-02-08_17.01.34.png" alt="截屏2023-02-08 17.01.34.png"></p>
 <h1 id="参考">参考：</h1>
 <p>李宏毅老师的讲课视频</p>
 <p><a href="https://www.bilibili.com/video/BV1v3411r78R?p=2&amp;vd_source=bbd38c44460fafa204a3540d4f8a2657">11.【李宏毅机器学习2021】自注意力机制 (Self-attention) (下)_哔哩哔哩_bilibili</a></p>

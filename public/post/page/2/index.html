@@ -461,32 +461,6 @@ code.has-jax {
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://huizhixu.github.io/post/20220110%E5%BC%80%E5%A7%8B%E5%AF%B9%E6%8B%8D%E7%85%A7%E4%BA%A7%E7%94%9F%E5%85%B4%E8%B6%A3/">2022-01-10 开始对拍照产生兴趣</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                从12月底，就开始对摄影产生了一点兴趣。这种兴趣的由来，其实是有迹可循的。来上海四个月，每个礼拜出门都是去商场吃饭，然后逛逛。时间久了，就觉得周末的生活很乏味，开始讨厌起逛商场来。
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 10 Jan 2022 20:07:58 &#43;0800" class="no-wrap"
-                title=" Mon, 10 Jan 2022 20:07:58 &#43;0800">
-                Mon, 10 Jan 2022 20:07:58 &#43;0800
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
                 <a href="https://huizhixu.github.io/post/20211031%E5%9B%9E%E5%9B%BD%E5%86%85%E5%8D%B7/">2021-10-30 回国内卷</a>
               </h3>
             </div>
@@ -504,6 +478,33 @@ code.has-jax {
               <relative-time datetime=" Sat, 30 Oct 2021 20:07:58 &#43;0800" class="no-wrap"
                 title=" Sat, 30 Oct 2021 20:07:58 &#43;0800">
                 Sat, 30 Oct 2021 20:07:58 &#43;0800
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                如何理解自注意力机制 Status: Not started
+理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 01 Jan 0001 00:00:00 &#43;0000" class="no-wrap"
+                title=" Mon, 01 Jan 0001 00:00:00 &#43;0000">
+                Mon, 01 Jan 0001 00:00:00 &#43;0000
               </relative-time>
             </div>
           </div>
