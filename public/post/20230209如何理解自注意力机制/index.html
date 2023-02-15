@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
-    <title> - HuizhiXu 的个人博客</title>
+    <title>2023-02-09 如何理解自注意力机制 - HuizhiXu 的个人博客</title>
     
     <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
     
@@ -18,8 +18,7 @@
 
     
     <meta name="description"
-  content="如何理解自注意力机制 Status: Not started
-理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。" />
+  content="Attention is all you need" />
 <meta name="keywords"
   content='' />
 <meta name="robots" content="noodp" />
@@ -27,10 +26,9 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content=" - HuizhiXu 的个人博客" />
+<meta name="twitter:title" content="2023-02-09 如何理解自注意力机制 - HuizhiXu 的个人博客" />
 <meta name="twitter:description"
-  content="如何理解自注意力机制 Status: Not started
-理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。" />
+  content="Attention is all you need" />
 <meta name="twitter:site" content="https://huizhixu.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -38,16 +36,17 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content=" - HuizhiXu 的个人博客">
+<meta property="og:title" content="2023-02-09 如何理解自注意力机制 - HuizhiXu 的个人博客">
 <meta property="og:description"
-  content="如何理解自注意力机制 Status: Not started
-理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。" />
+  content="Attention is all you need" />
 <meta property="og:url" content="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" />
-<meta property="og:site_name" content="" />
+<meta property="og:site_name" content="2023-02-09 如何理解自注意力机制" />
 <meta property="og:image"
   content="https://huizhixu.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-02-09 08:31:50 &#43;0800 CST" />
 
 
 
@@ -178,18 +177,18 @@ code.has-jax {
                   <span class="author">
                     <a href="https://huizhixu.github.io/">Huizhi</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/"></a></strong>
+                      href="https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">2023-02-09 如何理解自注意力机制</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Mon, 01 Jan 0001 00:00:00 &#43;0000"
+                  Created <relative-time datetime="Thu, 09 Feb 2023 08:31:50 &#43;0800"
                     class="no-wrap">
-                    Mon, 01 Jan 0001 00:00:00 &#43;0000</relative-time>
+                    Thu, 09 Feb 2023 08:31:50 &#43;0800</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:34:30 &#43;0800"
+                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:36:40 &#43;0800"
                     class="no-wrap">
-                    Wed, 15 Feb 2023 16:34:30 &#43;0800</relative-time>
+                    Wed, 15 Feb 2023 16:36:40 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -219,7 +218,7 @@ code.has-jax {
                         </div>
                       </div>
                     </details-menu>
-                      2361 Words
+                      2348 Words
                     
 
                   </div>
@@ -231,9 +230,7 @@ code.has-jax {
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="如何理解自注意力机制">如何理解自注意力机制</h1>
-<p>Status: Not started</p>
-<h1 id="理解输入与输出">理解输入与输出</h1>
+                <article class="markdown-body entry-content container-lg"><h1 id="理解输入与输出">理解输入与输出</h1>
 <ul>
 <li>输入有可能是一个 vector，有可能是多个 vector</li>
 <li>输出：
