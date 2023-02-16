@@ -186,9 +186,9 @@ code.has-jax {
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:43:54 &#43;0800"
+                  Modified <relative-time datetime="Wed, 15 Feb 2023 16:45:50 &#43;0800"
                     class="no-wrap">
-                    Wed, 15 Feb 2023 16:43:54 &#43;0800</relative-time>
+                    Wed, 15 Feb 2023 16:45:50 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -218,7 +218,7 @@ code.has-jax {
                         </div>
                       </div>
                     </details-menu>
-                      2348 Words
+                      2358 Words
                     
 
                   </div>
@@ -230,7 +230,8 @@ code.has-jax {
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="理解输入与输出">理解输入与输出</h1>
+                <article class="markdown-body entry-content container-lg"><h1 id="如何理解自注意力机制">如何理解自注意力机制</h1>
+<h2 id="理解输入与输出">理解输入与输出</h2>
 <ul>
 <li>输入有可能是一个 vector，有可能是多个 vector</li>
 <li>输出：
@@ -253,7 +254,7 @@ code.has-jax {
 </ul>
 </li>
 </ul>
-<h1 id="一个vector对应一个label的情况即输入和输出一样多也叫做sequence-labeling">一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling</h1>
+<h2 id="一个vector对应一个label的情况即输入和输出一样多也叫做sequence-labeling">一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling</h2>
 <ul>
 <li>例子： I saw a saw</li>
 <li>如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用</li>
@@ -265,10 +266,10 @@ code.has-jax {
 <li>解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。</li>
 </ul>
 <p>我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。</p>
-<h1 id="self-attention">Self-attention</h1>
+<h2 id="self-attention">Self-attention</h2>
 <p>如果要考虑上下文的信息，输入可以扔进 self-attention 之后，生成 vector with context，然后丢进FC层，然后再过一次 self-attention，然后再丢进 FC 层。</p>
 <p>可以这样理解，self-attention 获得上下文信息，FC 层专注于局部信息，交替使用。</p>
-<h2 id="运作原理">运作原理：</h2>
+<h3 id="运作原理">运作原理：</h3>
 <ul>
 <li>输入：是一串 vector，可以是整个 network 的输入，也可以是 FC 层的输出，这里用 $a$ 表示。</li>
 <li>输出：一串 vector，这里用  $b$ 表示。每一个 $b$  都对所有 $a$ 作用。（这个图乍一看很像上面的 FC，但其实不一样）</li>
@@ -323,7 +324,7 @@ $$</p>
 </ul>
 </li>
 </ul>
-<h1 id="qkv从矩阵的角度看self-attention">$QKV$（从矩阵的角度看self-attention）</h1>
+<h2 id="qkv从矩阵的角度看self-attention">$QKV$（从矩阵的角度看self-attention）</h2>
 <ol>
 <li>把 $a^1$ 到 $a^4$ 看成是矩阵 $I$ 的列，$q^1$ 到 $q^4$ 是矩阵 $Q$ 的列，那么可以转化成矩阵间的运算。</li>
 </ol>
@@ -385,18 +386,18 @@ $$</p>
 <p><img src="/img/20230209/5.png" alt="截屏2023-02-09 17.18.40.png"></p>
 <p>总结：先产生QKV，根据Q找出相关的位置，再对V做weighted sum。</p>
 <p><img src="/img/20230209/6.png" alt="截屏2023-02-09 17.22.53.png"></p>
-<h1 id="怎么得到wqwk和wv">怎么得到$W^q$、$W^k$和$W^v$</h1>
+<h2 id="怎么得到wqwk和wv">怎么得到$W^q$、$W^k$和$W^v$</h2>
 <p>初始化一个矩阵，通过training data 在训练过程中更新。</p>
-<h1 id="自注意模块计算两个向量的关联性">自注意模块计算两个向量的关联性</h1>
-<h2 id="内积方法"><strong>内积方法</strong></h2>
+<h2 id="自注意模块计算两个向量的关联性">自注意模块计算两个向量的关联性</h2>
+<h3 id="内积方法"><strong>内积方法</strong></h3>
 <p>左边的向量乘以 $W^q$ 矩阵，右边的向量乘以 $W^k$ 矩阵，得到 $q$ 和 $k$ 这两个向量。然后做内积，得到一个标量。</p>
 <p>$$
 \alpha = q \cdot k
 $$</p>
-<h2 id="相加方法"><strong>相加方法</strong></h2>
+<h3 id="相加方法"><strong>相加方法</strong></h3>
 <p>左边的向量乘以 $W^q$ 矩阵，右边的向量乘以 $W^k$ 矩阵，得到 $q$ 和 $k$ 这两个向量。然后相加丢到tanh，再乘以 $W$，得到 $\alpha$。</p>
 <p><img src="/img/20230209/7.png" alt="截屏2023-02-08 17.01.34.png"></p>
-<h1 id="参考">参考：</h1>
+<h2 id="参考">参考：</h2>
 <p>李宏毅老师的讲课视频</p>
 <p><a href="https://www.bilibili.com/video/BV1v3411r78R?p=2&amp;vd_source=bbd38c44460fafa204a3540d4f8a2657">11.【李宏毅机器学习2021】自注意力机制 (Self-attention) (下)_哔哩哔哩_bilibili</a></p>
 </article>
