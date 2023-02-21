@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cee66767-d3f1-428b-bdcc-fd0a1237e0fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/20230216/9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/content/post/20230209如何理解自注意力机制.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20230209如何理解自注意力机制.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/精致英伦风雅中国EnduringDelicacy.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20170802精致英伦风雅中国EnduringDelicacy.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/post/20230216如何理解Seq2seq.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20230216如何理解Seq2seq.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/config.template.toml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/config.template.toml" afterDir="false" />
@@ -97,7 +85,7 @@
       <workItem from="1676604888678" duration="3582000" />
       <workItem from="1676795501163" duration="75000" />
       <workItem from="1676810330281" duration="65000" />
-      <workItem from="1676957254054" duration="858000" />
+      <workItem from="1676957254054" duration="1645000" />
     </task>
     <servers />
   </component>
