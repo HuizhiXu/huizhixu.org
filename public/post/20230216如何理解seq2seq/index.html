@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
-    <title>2022-07-07 新现实是活在当下 - HuizhiXu 的个人博客</title>
+    <title>2023-02-09 如何理解Seq2seq - HuizhiXu 的个人博客</title>
     
     <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
     
@@ -18,17 +18,17 @@
 
     
     <meta name="description"
-  content="过去的一个礼拜的上海是今年最漂亮的上海，随便刷一刷小红书， 就可以看见满屏的”绝美晚霞“，“火烧云”，”绝美朝霞“，”绝美天空“， ”感觉在欧洲“。欧洲的风景那么美丽，除了历史的沉淀，蓝天白云的加分也是不少。第一次意识到上海也可以像欧洲那么美丽，哈哈。" />
+  content="有encoder和decoder就可以说这是一个Seq2seq模型" />
 <meta name="keywords"
   content='' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://huizhixu.github.io/post/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/" />
+<link rel="canonical" href="https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="2022-07-07 新现实是活在当下 - HuizhiXu 的个人博客" />
+<meta name="twitter:title" content="2023-02-09 如何理解Seq2seq - HuizhiXu 的个人博客" />
 <meta name="twitter:description"
-  content="过去的一个礼拜的上海是今年最漂亮的上海，随便刷一刷小红书， 就可以看见满屏的”绝美晚霞“，“火烧云”，”绝美朝霞“，”绝美天空“， ”感觉在欧洲“。欧洲的风景那么美丽，除了历史的沉淀，蓝天白云的加分也是不少。第一次意识到上海也可以像欧洲那么美丽，哈哈。" />
+  content="有encoder和decoder就可以说这是一个Seq2seq模型" />
 <meta name="twitter:site" content="https://huizhixu.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -36,17 +36,17 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="2022-07-07 新现实是活在当下 - HuizhiXu 的个人博客">
+<meta property="og:title" content="2023-02-09 如何理解Seq2seq - HuizhiXu 的个人博客">
 <meta property="og:description"
-  content="过去的一个礼拜的上海是今年最漂亮的上海，随便刷一刷小红书， 就可以看见满屏的”绝美晚霞“，“火烧云”，”绝美朝霞“，”绝美天空“， ”感觉在欧洲“。欧洲的风景那么美丽，除了历史的沉淀，蓝天白云的加分也是不少。第一次意识到上海也可以像欧洲那么美丽，哈哈。" />
-<meta property="og:url" content="https://huizhixu.github.io/post/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/" />
-<meta property="og:site_name" content="2022-07-07 新现实是活在当下" />
+  content="有encoder和decoder就可以说这是一个Seq2seq模型" />
+<meta property="og:url" content="https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/" />
+<meta property="og:site_name" content="2023-02-09 如何理解Seq2seq" />
 <meta property="og:image"
   content="https://huizhixu.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
-<meta property="article:published_time" content="2022-07-07 14:07:58 &#43;0800 CST" />
+<meta property="article:published_time" content="2023-02-09 08:31:50 &#43;0800 CST" />
 
 
 
@@ -177,18 +177,18 @@ code.has-jax {
                   <span class="author">
                     <a href="https://huizhixu.github.io/">Huizhi</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://huizhixu.github.io/post/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/">2022-07-07 新现实是活在当下</a></strong>
+                      href="https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/">2023-02-09 如何理解Seq2seq</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Thu, 07 Jul 2022 14:07:58 &#43;0800"
+                  Created <relative-time datetime="Thu, 09 Feb 2023 08:31:50 &#43;0800"
                     class="no-wrap">
-                    Thu, 07 Jul 2022 14:07:58 &#43;0800</relative-time>
+                    Thu, 09 Feb 2023 08:31:50 &#43;0800</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 21 Feb 2023 13:43:49 &#43;0800"
+                  Modified <relative-time datetime="Tue, 21 Feb 2023 13:46:05 &#43;0800"
                     class="no-wrap">
-                    Tue, 21 Feb 2023 13:43:49 &#43;0800</relative-time>
+                    Tue, 21 Feb 2023 13:46:05 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -218,7 +218,7 @@ code.has-jax {
                         </div>
                       </div>
                     </details-menu>
-                      1085 Words
+                      3324 Words
                     
 
                   </div>
@@ -230,18 +230,237 @@ code.has-jax {
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="新现实是活在当下">新现实是活在当下</h1>
-<p>过去的一个礼拜的上海是今年最漂亮的上海，随便刷一刷小红书，就可以看见满屏的”绝美晚霞“，“火烧云”，”绝美朝霞“，”绝美天空“， ”感觉在欧洲“。欧洲的风景那么美丽，除了历史的沉淀，蓝天白云的加分也是不少。第一次意识到上海也可以像欧洲那么美丽，哈哈。</p>
-<p>据说这是台风的功劳，台风要来，云就飘动得很快，天空就很通透。天气这么好，大家都出去撒欢了，前天晚上我和楚哥去乍浦桥拍照，刚好是太阳落山后的蓝调时间，天还没有黑，天空还是类似白天的湛蓝的颜色，大朵白云依偎在陆家嘴三件套旁边，晚风撩人。桥两边都有人在聊天，看夜景，也有大片空出来的地方，是大家都自觉为他们空出来的，因为有人在拍婚纱照。在乍浦桥上，很有以前在博物馆岛的感觉。</p>
-<p>复工之后我们基本每个周末都出去玩。特别珍惜出门的机会。这一个月之内我们去了鲁迅公园、世纪公园、上海野生动物公园、自然博物馆。真是每一个周末都没浪费啊。</p>
-<p>我和老同学还见了一次面。那次经历真的很曲折。在没有恢复堂食的时候，我听说天安千树可以堂食，于是我们就打算去那里碰碰运气。</p>
-<p>我们到了之后，发现还是不可以堂食，但是商场5楼靠近露台摆了很多桌子，可以在商场里面叫外卖在这些桌子上吃。我们看中了一家叫“山石榴”的餐馆，打算一个人在桌子这边占位，另外两个人分别去买吃的喝的。</p>
-<p>等我买完回到5楼时，吓了一跳，所有的桌子都消失了。</p>
-<p>后来我才知道，有人来突击检查，这些桌子临时被撤了，检查的人一走就可以摆上，一来就撤，简直像游击战。没办法，最后我们在外面的露台吃的饭。露台上很热闹，有人在跳舞，有人在玩滑板。也有很多人和我们一样在吃饭。那天不是很热，也有风，“山石榴”的味道也挺好，总体还不错。</p>
-<p>在天安千树，我还见到了江对面大名鼎鼎的中远两湾城。曾经看过一篇关于中远两湾城自己组织换物业的报导，太令人震撼了。因为据说这个小区是上海最大的小区，类似于北京的天通苑，小区内部就可以完成循环。这次疫情，中远两湾城也是重灾区，因为人口密度太大了。这次看到这个小区也是意料之外。</p>
-<p>被关了这么久，好像一切都恢复正常了，但偶尔在路上看到有人穿着志愿者蓝色的防护服会觉得”违和“，蓝色的防护服不应该出现在”太平盛世“，他应该只属于那两个月。</p>
-<p>可是有时候又问，那两个月真的过去了吗？现在真的是”太平盛世“吗？</p>
-<p>好像也不是，昨天我们办公楼要被封，大家都卷着细软跑路。今天我楼下住户成了次密接，他要在家隔离7天，也不知道我们楼栋会不会封。我们总说要珍惜生命，因为你永远不知道明天和意外哪一个先来。但是在上海，肯定是意外先来。所有经历过这次上海疫情的人一定会对“知足常乐，活在当下”体会更深。</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="如何理解seq2seq">如何理解Seq2seq</h1>
+<p>Status: In progress</p>
+<p>先搞清楚几个基本概念：</p>
+<p>Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。</p>
+<p>transformer是一种基于Attention的Seq2seq。</p>
+<h1 id="seq2seq">Seq2seq</h1>
+<ul>
+<li>input是一个sequence， output也是一个sequence，但是维度由模型决定。</li>
+<li>例子：
+<ul>
+<li>语音辨识：一串语音转为”今晚吃什么？“几个文字。</li>
+<li>机器翻译</li>
+<li>语音翻译：输入machine learning，输出”机器学习”。
+<ul>
+<li>为何不将”语音辨识“和”机器翻译“结合起来，因为有的语言没有文字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="结构和原理">结构和原理</h2>
+<p>Seq2seq由一个encoder和一个decoder决定</p>
+<h3 id="encoder">Encoder</h3>
+<ol>
+<li>input是一个sequence， output也是一个sequence。</li>
+<li>input vector加上positional encoding，然后经过multi-head attention，然后进行residual + layer normalization，然后经过FC，再做一次Add&amp;Norm，是这个encoder的输出。这个过程会重复。</li>
+</ol>
+<p><img src="0.png" alt="0"></p>
+<ol>
+<li>更细节的设计：</li>
+</ol>
+<ul>
+<li>input vector进来之后，经过self-attention，input和output相加，然后进行一层layer normalization。然后进入FC层，再进行一次Add&amp;Norm（和自己相加&amp;Normalization），这个输出就是一个block的输出。</li>
+</ul>
+<p><img src="1.png" alt="1"></p>
+<ul>
+<li>residual connection：输入与输出相加，防止层级过高导致的梯度消失。</li>
+<li>layer normalization：
+<ul>
+<li>输入一个向量，输出一个向量，不需要考虑batch中其他的向量。</li>
+<li>对同一个feature，同一个example不同的dimension去计算。（这里feature就是example）</li>
+<li>做法：计算它 的mean $m$和standard deviation $\sigma$</li>
+</ul>
+</li>
+</ul>
+<p>$$
+x_i^\prime =\frac {x_i - m} {\sigma}
+$$</p>
+<ul>
+<li>batch normalization：
+<ul>
+<li>对同一个dimension，不同的example，不同的feature去计算mean和standard deviation</li>
+</ul>
+</li>
+</ul>
+<h3 id="decoder">Decoder</h3>
+<ol>
+<li>decoder有两种，一种叫auto-regressive。这里讲的都是auto-regressive。</li>
+<li>decoder的输入：
+<ul>
+<li>在前边先加一个特殊的符号：BOS。</li>
+<li>每个输入可以表示成一个one hot vector。例如”机器学习“加上BOS就是5个one hot vector。</li>
+</ul>
+</li>
+<li>decoder的输出：
+<ul>
+<li>
+<p>想好decoder输出的单位是什么，假设我们做的是中文的语音辨识，那么decoder输出的就是中文，那么vocabulary就是中文的数目，常用4000个字。不同的语言输出的单位不一样，英文可以输出字母，word， subword作为单位。</p>
+</li>
+<li>
+<p>1个Input vector进去之后，出来1个output vector，它的长度和vocabulary的size是一样的。他会给vocabulary的每一个单位一个分数，分数最高的就是最后的输出。5个input vector，出来n个output vector。(n需要decoder自己决定)</p>
+<p><img src="2.png" alt="2"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>decoder看到的输入，其实就是前一个时间自己的输出。</p>
+<ul>
+<li>这里有一个问题，如果输出错误，那么输入也会错误，会造成error propagation。</li>
+</ul>
+<p><img src="3.png" alt="3"></p>
+</li>
+</ul>
+<h3 id="decoder和encoder对比">Decoder和Encoder对比</h3>
+<ol>
+<li>decoder与encoder结构类似</li>
+<li>decoder有一层masked multi-head attention</li>
+</ol>
+<p><img src="4.png" alt="4"></p>
+<p>之前的self-attention，都要看过完整的input之后才做决定。$b^1$是由$a^1$到$a^4$一起决定的。</p>
+<p>masked attention 的意思是：</p>
+<p>产生$b^1$的时候，只能用$a^1$。</p>
+<p>产生$b^2$的时候，只能用$a^1$和$a^2$。</p>
+<p><img src="5.png" alt="5"></p>
+<ol>
+<li>为什么要masked？</li>
+</ol>
+<p>想想decoder是如何运作的的。decoder的输出是一个一个产生的。先有$a^1$，然后有$a^2$。再计算$b^1$的时候，是没有$a^2$的，是没有办法把$a^2$计算进去的。</p>
+<p>encoder是一次性把$a^1$到$a^4$一起读进去。</p>
+<p><img src="6.png" alt="6"></p>
+<ol>
+<li>decoder必须自己决定输出的长度。那么如何决定呢
+<ul>
+<li>加一个stop token。decoder看到这个符号就停止。</li>
+</ul>
+</li>
+</ol>
+<h3 id="encoder-decoder">Encoder-Decoder</h3>
+<ol>
+<li>decoder结构中有一个cross attention，它的输入中有两个是来自encoder的输出，一个是来源自己。</li>
+</ol>
+<p><img src="7.png" alt="7"></p>
+<ol>
+<li>encoder产生kv，decoder产生q</li>
+</ol>
+<h2 id="如何做训练">如何做训练</h2>
+<ol>
+<li>假设做语音识别，要有训练资料，要收集一堆语音资料。</li>
+<li>我们期待，把begin丢给decoder的时候，它的第一个输出，应该要跟“机”越接近越好。在ground truth里面， “机”这个字会被表示成一个one hot vector。decoder的输出是一个distribution，是一个几率的分布，我们希望这个分布能够接近“机”的one hot vector，所以要去计算one hot vector和这个分布的cross entropy，然后希望这个cross entropy越小越好。在产生完所有的输出之后，我们希望这个总的cross entropy越小越好。</li>
+</ol>
+<p>这个计算很接近分类。可以理解为，每一次decoder在产生一个token输出的时候，就是做了一次分类。</p>
+<ol>
+<li>decoder的输入是正确答案。</li>
+</ol>
+<p>也就是说，在有Begin的情况下，输出“机”，在有begin和”机”的情况下，输出 “器”，在有begin、“机”和”器”的情况下，输出“学”。</p>
+<p>teacher forcing：在训练的时候，using the ground truth as input</p>
+<ol>
+<li>训练的时候decoder的输入给的是正确答案，推断的时候有可能出错，这里有一个mismatch。
+<ol>
+<li>如何解决：在训练的时候也给一些错误的输入，可能会学的更好，这个叫scheduled sampling。</li>
+<li>但是scheduled sampling，会伤害到transformer的平行能力。transformer有自己的scheduled sampling</li>
+</ol>
+</li>
+</ol>
+<p><img src="8.png" alt="8"></p>
+<ol>
+<li>训练tips
+<ul>
+<li>Copy Mechanism：decoder没有必要创造输出，可以直接从输入的东西里面复制。
+<ul>
+<li>在做Chat-Bot：-你好，我是小花。-小花你好，欢迎你！</li>
+<li>在做摘要：
+<ul>
+<li>数据量：要训练这种，需要百万篇文章（把标题当做摘要）</li>
+<li>从课文里面复制一些句子出来，这种叫pointer network。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Guided Attention
+<ul>
+<li>看到中文的句子，输出这段语音。有时候语音会漏字。
+<ul>
+<li>input and output monotonically aligned。强制它monotonic attention</li>
+</ul>
+</li>
+<li>对于有位置需求的语音：先说第一个字，再说第二个字等等。
+<ul>
+<li>location-aware attention</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Beam Search
+<ul>
+<li>假设decoder只能输出A和B两个字。那么decoder会每一次选择输出A还是B。 根据概率最大的选择，叫做greedy search。</li>
+<li>greedy search不是最优，全局搜索也不可能。</li>
+<li>解决方法就是beam search。（这里没懂）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优化 Evaluation metrics
+<ol>
+<li>评估的标准，Bleu score是decoder先产生一个完整的句子之后，再去跟ground truth的句子比较。</li>
+<li>训练的时候，每一个token的输出都是单独产生的。那么minimize cross entropy真的能够使bleu score最好吗？不一定。
+<ol>
+<li>所以评判标准不是cross entropy 而是bleu score</li>
+<li>可不可以在training的时候就最大化bleu score呢？ 不能，因为它不能微分</li>
+<li>这时，可以用强化学习 RL</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="应用">应用</h2>
+<ol>
+<li>question answering ：
+<ul>
+<li>很多问题NLP的任务都可以转化为问答QA，而QA可以用Seq2seq模型来解决。</li>
+<li>原理：输入是question和context拼接起来，输出是answer。</li>
+<li>例子：
+<ul>
+<li>机器翻译-这个句子的德文翻译是什么</li>
+<li>摘要：这段文字的摘要是什么？</li>
+<li>情感分析：这篇文章是正面还是负面？</li>
+</ul>
+</li>
+<li>对多数nlp任务，专门的模型比seq2seq 会得到更好的结果。</li>
+</ul>
+</li>
+</ol>
+<p><img src="9.png" alt="9"></p>
+<ol>
+<li>
+<p>句法分析：syntactic parsing 也可以用seq2seq来做。树可以用括号链接文字来表示。</p>
+<p><img src="10.png" alt="10"></p>
+</li>
+<li>
+<p>multi-label classification： 也可以用seq2seq</p>
+<ul>
+<li>multi-class classification： 有不止一个class，机器得选（有且只能）一个class出来</li>
+<li>multi-label classification：一个事物可以有=属于不同的class</li>
+</ul>
+<p><img src="11.png" alt="11"></p>
+</li>
+<li>
+<p>object detection ：也可以用seq2seq</p>
+</li>
+</ol>
+<h2 id="参考">参考：</h2>
+<ul>
+<li>
+<p><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/">李宏毅老师的课程链接</a></p>
+</li>
+<li>
+<p><a href="https://www.bilibili.com/video/BV1v3411r78R?p=4&amp;vd_source=bbd38c44460fafa204a3540d4f8a2657">【李宏毅机器学习2021】自注意力机制 (Transformer) (下)_哔哩哔哩_bilibili</a></p>
+</li>
+</ul>
 </article>
               </div>
             </div>

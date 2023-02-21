@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cee66767-d3f1-428b-bdcc-fd0a1237e0fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/20230216/9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/20190202柏林电影节地久天长观后感.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20190202柏林电影节地久天长观后感.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/post/20230209如何理解自注意力机制.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20230209如何理解自注意力机制.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/post/精致英伦风雅中国EnduringDelicacy.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20170802精致英伦风雅中国EnduringDelicacy.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/config.template.toml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/config.template.toml" afterDir="false" />
@@ -33,7 +46,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/img/20190202" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/img/20230216" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -42,13 +55,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/img/20230216" />
       <recent name="$PROJECT_DIR$/static/img/20190202" />
       <recent name="$PROJECT_DIR$/static/20230209" />
       <recent name="$PROJECT_DIR$/images/20230209" />
       <recent name="$PROJECT_DIR$/content/post" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/img/20230216" />
       <recent name="$PROJECT_DIR$/static/img" />
       <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$" />
@@ -81,6 +95,9 @@
       <workItem from="1676451080441" duration="1786000" />
       <workItem from="1676517997268" duration="617000" />
       <workItem from="1676604888678" duration="3582000" />
+      <workItem from="1676795501163" duration="75000" />
+      <workItem from="1676810330281" duration="65000" />
+      <workItem from="1676957254054" duration="858000" />
     </task>
     <servers />
   </component>

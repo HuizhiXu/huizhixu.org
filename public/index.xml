@@ -8,6 +8,15 @@
     <language>zh-cn</language>
     <lastBuildDate>Thu, 09 Feb 2023 08:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>2023-02-09 如何理解Seq2seq</title>
+      <link>https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
+      <pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
+      <description>有encoder和decoder就可以说这是一个Seq2seq模型</description>
+    </item>
+    
+    <item>
       <title>2023-02-09 如何理解自注意力机制</title>
       <link>https://huizhixu.github.io/post/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate>
@@ -40,21 +49,7 @@
       <pubDate>Mon, 24 Oct 2022 20:51:00 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/post/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
-      <description>如何在程序中起名 最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
-想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
-今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
-作者给了几个建议：
-不要容易看出类型的名字后面加上类型，例如 name 就不要叫 namestring。
-写复数，不要用单数加 collection。例如 holidays 比 holiday_list 好些。
-我这个问题还挺严重的，因为我很喜欢写 xx_list，yy_dict 等。
-在写 func 的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如 merge(table_cells) 比 merge_table_cells(x) 要好。
-要精确，不需要把每一个细节都写出。例如 recentlyUpdatedAnnualSalesBid 这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。
-变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。
-例如类名有 data，已经表明了这个类是和数据相关。那么方法可以直接写 process，不需要写 data_process。
-变量名不要包含无意义的单词。 这些单词包括：
-data, state, amount, value, manager, engine, object, entity, and instance. Python 里面用类型注释很容易避免这些问题，就算用 results，不用 results_list 也可以很快看出 results 是一个 list，有时候是 list of list。
-第二篇文章是这个《起名的那些事儿》，链接在这儿 。
-对于起名他给的建议是：</description>
+      <description>好名字有预示作用</description>
     </item>
     
     <item>
@@ -140,10 +135,10 @@ data, state, amount, value, manager, engine, object, entity, and instance. Pytho
     
     <item>
       <title>2017-08-02 Enduring Delicacy 精致英伦 风雅中国</title>
-      <link>https://huizhixu.github.io/post/%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</link>
+      <link>https://huizhixu.github.io/post/20170802%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</link>
       <pubDate>Wed, 02 Aug 2017 20:07:58 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/post/%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</guid>
+      <guid>https://huizhixu.github.io/post/20170802%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</guid>
       <description>Enduring Delicacy 精致英伦 风雅中国</description>
     </item>
     
