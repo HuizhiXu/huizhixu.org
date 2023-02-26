@@ -6,7 +6,25 @@
     <description>Recent content in Posts on HuizhiXu 的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 16 Feb 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Feb 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023-02-25 玄学：Prompt-based Learning</title>
+      <link>https://huizhixu.github.io/post/20230225%E7%8E%84%E5%AD%A6prompt-based-learning/</link>
+      <pubDate>Sat, 25 Feb 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20230225%E7%8E%84%E5%AD%A6prompt-based-learning/</guid>
+      <description>prompt engineering isn&amp;rsquo;t even a real job?</description>
+    </item>
+    
+    <item>
+      <title>2023-02-20 chatGPT有可能是个骗局吗</title>
+      <link>https://huizhixu.github.io/post/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</link>
+      <pubDate>Mon, 20 Feb 2023 20:07:58 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</guid>
+      <description>maybe.</description>
+    </item>
+    
     <item>
       <title>2023-02-16 如何理解Seq2seq</title>
       <link>https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
@@ -14,6 +32,15 @@
       
       <guid>https://huizhixu.github.io/post/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
       <description>有encoder和decoder就可以说这是一个Seq2seq模型</description>
+    </item>
+    
+    <item>
+      <title>2023-02-13 chatGPT 在攻陷所有人</title>
+      <link>https://huizhixu.github.io/post/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link>
+      <pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
+      <description>chatGP是划时代的杰作</description>
     </item>
     
     <item>

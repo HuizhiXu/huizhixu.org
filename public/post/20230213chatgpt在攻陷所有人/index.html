@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://huizhixu.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
+    <title>2023-02-13 chatGPT 在攻陷所有人 - HuizhiXu 的个人博客</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    <meta name="description"
+  content="chatGP是划时代的杰作" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://huizhixu.github.io/post/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="2023-02-13 chatGPT 在攻陷所有人 - HuizhiXu 的个人博客" />
+<meta name="twitter:description"
+  content="chatGP是划时代的杰作" />
+<meta name="twitter:site" content="https://huizhixu.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://huizhixu.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="2023-02-13 chatGPT 在攻陷所有人 - HuizhiXu 的个人博客">
+<meta property="og:description"
+  content="chatGP是划时代的杰作" />
+<meta property="og:url" content="https://huizhixu.github.io/post/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/" />
+<meta property="og:site_name" content="2023-02-13 chatGPT 在攻陷所有人" />
+<meta property="og:image"
+  content="https://huizhixu.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-02-13 20:31:50 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+    <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+        <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+            <a class="Header-link" href="https://huizhixu.github.io/">
+                <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item d-md-none">
+            <button class="Header-link btn-link js-details-target" type="button"
+                    onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+                <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+                    <path fill-rule="evenodd"
+                          d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div style="display: none;" id="header-search"
+             class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+            <div
+                    class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+                <div class="position-relative">
+                    <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+                          autocomplete="off">
+                        <label
+                                class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+                            <input type="text"
+                                   class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                                   name="q" value="" placeholder="Search" autocomplete="off">
+                            <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+            <a class="Header-link " href="https://huizhixu.github.io/">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                     width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item" style="margin-right: 0;">
+            <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+                <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+                     version="1.1" width="16" height="16">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://huizhixu.github.io/">
+                  <img class=" avatar-user"
+                    src="https://huizhixu.github.io/images/poirot.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://huizhixu.github.io/">Huizhi</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://huizhixu.github.io/post/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/">2023-02-13 chatGPT 在攻陷所有人</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 13 Feb 2023 20:31:50 &#43;0800"
+                    class="no-wrap">
+                    Mon, 13 Feb 2023 20:31:50 &#43;0800</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sun, 26 Feb 2023 16:31:52 &#43;0800"
+                    class="no-wrap">
+                    Sun, 26 Feb 2023 16:31:52 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1475 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><p>承认吧，现在全世界最火就是chatGPT。</p>
+<ol>
+<li>
+<p>去参加了王建硕老师那边组织的关于chatGPT的讨论。</p>
+<ol>
+<li>会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。</li>
+<li>从心理学和教育学来看，也开拓了我的眼界。</li>
+<li>从高效使用和商业化来看，它无疑会改变很多人的生活。</li>
+</ol>
+</li>
+<li>
+<p>chatGPT的使用感受很不错。</p>
+<ol>
+<li>我试用的方面主要在让它生成一些小功能的代码，例如爬虫，处理数据，修bug等。之前google copilot出来的时候，我的感觉没有那么惊艳。copilot可以补全代码，但是很奇怪，它经常显示大段我不需要的代码，看着闹心。</li>
+<li>如何让chatGPT有更好的效果呢？那就是写更好的prompt，也就是清晰简洁聚焦的提问。</li>
+<li>昨天看了好几篇关于prompt的技术文章，原来国外的prompt的技术已经发展得很厉害了。 看了一些好的prompt的例子，给我一种扑面而来的熟悉感，这不就是高中时候老师出的题嘛。&ldquo;请用XX写一篇关于XX的文章，文体限制在议论文，不超过800字。&rdquo;</li>
+<li>随着chatGPT兴起，产生了一种新的职业，叫做prompt engineer，他们的工作是研发出更好的提问方式，引导chatGPT给出的答案更符合用户的预期。</li>
+<li>很多人的感受是和chatGPT对话，就像和一个小朋友交流。你不能给它一个宏大的问题，让它去解决。但是可以一步一步引导它，告诉它每一步做什么，最后达成自己的目标。</li>
+<li>晚上我又看了几个chatGPT的应用，我看到的最惊艳的两个应用有两个。
+第一个是语言学习，例如和azure结合起来，练习口语。或者让chatGPT修改文章，斟酌字词，问chatGPT某句话的某个词是什么意思，怎么理解。这个应用基本上是全世界人民的需求。只要有沟通和交流的需求在，就会想要学习新的语言。 <br>
+试想一下，如果你有了语音版chatGPT，相当于你有了一个24小时的外教。当然openai和azure都需要api key，需要花一些钱。<br>
+第二个是用chatGPT生成文本，然后把这些文本用AI工具转成图片，最后形成动画或视频。现在很多人在做的抖音号视频号（其实就是垃圾营销）是可以用这种方式生成的。</li>
+<li>当然作为一个技术人员，我肯定对底层原理感兴趣。最主要的创新点在于in-context learning、强化学习以及庞大的数据输入。公司在年前就请某个大佬在公司做了chatGPT的介绍，不得不说公司领导的嗅觉还是很灵敏的。</li>
+<li>搞了几年互联网和AI，大家最后发现，科技的前沿还是在美国。国内大小厂只能跟在国际大厂的屁股后面。</li>
+</ol>
+</li>
+<li>
+<p>它的缺点在于：</p>
+<ol>
+<li>它的结果不准确。大量的例子表明它不擅长计算，并且文章写得稀里糊涂。所以它的结果是否是正确的，需要用户有能力做出判断。</li>
+<li>模型未开源，可能永远也不会开源。</li>
+</ol>
+</li>
+<li>
+<p>去年年底Notion推出Notion AI的时候，我就报名了。这个月7号收到官方的邮件说我可以使用了。我用Notion AI的感受也非常好。
+它只要在notion里面打一个&rsquo;/&lsquo;就可以了。<br>
+<img src="/img/20230213/0.png" alt="2"></p>
+<p>它的功能有很多：</p>
+<ul>
+<li>写博客、写文章</li>
+<li>写诗</li>
+<li>写文章总结</li>
+<li>发朋友圈</li>
+<li>翻译</li>
+<li>改变文字的语气（严肃、轻松、正式、自信等）</li>
+<li>所有的文章都可以变长变短</li>
+</ul>
+<p>有一天晚上我给室友演示Notion AI，她是做别的行业，不太懂AI这些。那天晚上我刚好吃了咖喱牛腩，就让Notion AI以&quot;咖喱牛腩&quot;写一篇文章。
+看着文字逐渐出来的时候，她不禁激动起来，惊呼&quot;大厉害了，要是我有这样一个助手就好了&quot;！ 有点感动，AI真的在改变我们的生活吧！</p>
+</li>
+</ol>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://huizhixu.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://huizhixu.github.io/css/toc.css' />
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://huizhixu.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://huizhixu.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

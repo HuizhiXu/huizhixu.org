@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cee66767-d3f1-428b-bdcc-fd0a1237e0fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/20230209如何理解自注意力机制.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20230209如何理解自注意力机制.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/post/20230216如何理解Seq2seq.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/post/20230216如何理解Seq2seq.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/github-style/config.template.toml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/github-style/config.template.toml" afterDir="false" />
@@ -34,7 +32,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/img/20230216" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -43,17 +41,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/static/img/20230216" />
-      <recent name="$PROJECT_DIR$/static/img/20190202" />
-      <recent name="$PROJECT_DIR$/static/20230209" />
-      <recent name="$PROJECT_DIR$/images/20230209" />
+      <recent name="$PROJECT_DIR$/static/js" />
+      <recent name="$PROJECT_DIR$/layouts/shortcodes" />
+      <recent name="$PROJECT_DIR$/static/pdf/20230225" />
       <recent name="$PROJECT_DIR$/content/post" />
+      <recent name="$PROJECT_DIR$/static/img/20230216" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/static/img/20230216" />
+      <recent name="$PROJECT_DIR$/content/post" />
+      <recent name="$PROJECT_DIR$/static/pdf" />
       <recent name="$PROJECT_DIR$/static/img" />
-      <recent name="$PROJECT_DIR$/static" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/static/img/20230213" />
+      <recent name="$PROJECT_DIR$/static/img/20230216" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -85,7 +84,9 @@
       <workItem from="1676604888678" duration="3582000" />
       <workItem from="1676795501163" duration="75000" />
       <workItem from="1676810330281" duration="65000" />
-      <workItem from="1676957254054" duration="1645000" />
+      <workItem from="1676957254054" duration="1740000" />
+      <workItem from="1677147075836" duration="979000" />
+      <workItem from="1677386962184" duration="11702000" />
     </task>
     <servers />
   </component>
