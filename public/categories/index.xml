@@ -5,6 +5,16 @@
     <link>https://huizhixu.github.io/categories/</link>
     <description>Recent content in Categories on HuizhiXu 的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://huizhixu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 31 Jan 2023 19:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nlp</title>
+      <link>https://huizhixu.github.io/categories/nlp/</link>
+      <pubDate>Tue, 31 Jan 2023 19:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/categories/nlp/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

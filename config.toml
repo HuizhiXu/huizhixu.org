@@ -3,7 +3,10 @@ languageCode = "zh-cn"
 title = "HuizhiXu 的个人博客"
 theme = "github-style"
 
-
+[taxonomies]
+   tag = "tags"
+   category = "categories"
+   
 [params]
   author = "Huizhi"
   email = "xuhuizhi@hotmail.com"
