@@ -6,7 +6,7 @@ theme = "github-style"
 [taxonomies]
    tag = "tags"
    category = "categories"
-   
+
 [params]
   author = "Huizhi"
   email = "xuhuizhi@hotmail.com"

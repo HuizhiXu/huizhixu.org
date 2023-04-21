@@ -10,4 +10,4 @@ summary: "prompt engineering isn't even a real job?"
 
 
 
-{{< embed-pdf url="./pdf/20230225/玄学：Prompt-based Learning.pdf" hidePaginator=false >}}
+{{< embed-pdf url="/pdf/20230225/玄学：Prompt-based Learning.pdf" hidePaginator=false >}}

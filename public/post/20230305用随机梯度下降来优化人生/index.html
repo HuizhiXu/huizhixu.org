@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
-    <title>2023-02-25 玄学：Prompt-based Learning - HuizhiXu 的个人博客</title>
+    <title>2023-03-05用随机梯度下降来优化人生【转载】 - HuizhiXu 的个人博客</title>
     
     <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
     
@@ -18,17 +18,17 @@
 
     
     <meta name="description"
-  content="prompt engineering isn&amp;rsquo;t even a real job?" />
+  content="学以致用，拥有更好的人生" />
 <meta name="keywords"
   content='' />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://huizhixu.github.io/post/20230225%E7%8E%84%E5%AD%A6prompt-based-learning/" />
+<link rel="canonical" href="https://huizhixu.github.io/post/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/" />
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="2023-02-25 玄学：Prompt-based Learning - HuizhiXu 的个人博客" />
+<meta name="twitter:title" content="2023-03-05用随机梯度下降来优化人生【转载】 - HuizhiXu 的个人博客" />
 <meta name="twitter:description"
-  content="prompt engineering isn&amp;rsquo;t even a real job?" />
+  content="学以致用，拥有更好的人生" />
 <meta name="twitter:site" content="https://huizhixu.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -36,17 +36,17 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="2023-02-25 玄学：Prompt-based Learning - HuizhiXu 的个人博客">
+<meta property="og:title" content="2023-03-05用随机梯度下降来优化人生【转载】 - HuizhiXu 的个人博客">
 <meta property="og:description"
-  content="prompt engineering isn&amp;rsquo;t even a real job?" />
-<meta property="og:url" content="https://huizhixu.github.io/post/20230225%E7%8E%84%E5%AD%A6prompt-based-learning/" />
-<meta property="og:site_name" content="2023-02-25 玄学：Prompt-based Learning" />
+  content="学以致用，拥有更好的人生" />
+<meta property="og:url" content="https://huizhixu.github.io/post/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/" />
+<meta property="og:site_name" content="2023-03-05用随机梯度下降来优化人生【转载】" />
 <meta property="og:image"
   content="https://huizhixu.github.io/">
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
 
-<meta property="article:published_time" content="2023-02-25 18:31:50 &#43;0800 CST" />
+<meta property="article:published_time" content="2023-03-05 18:31:50 &#43;0800 CST" />
 
 
 
@@ -177,18 +177,18 @@ code.has-jax {
                   <span class="author">
                     <a href="https://huizhixu.github.io/">Huizhi</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://huizhixu.github.io/post/20230225%E7%8E%84%E5%AD%A6prompt-based-learning/">2023-02-25 玄学：Prompt-based Learning</a></strong>
+                      href="https://huizhixu.github.io/post/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/">2023-03-05用随机梯度下降来优化人生【转载】</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Sat, 25 Feb 2023 18:31:50 &#43;0800"
+                  Created <relative-time datetime="Sun, 05 Mar 2023 18:31:50 &#43;0800"
                     class="no-wrap">
-                    Sat, 25 Feb 2023 18:31:50 &#43;0800</relative-time>
+                    Sun, 05 Mar 2023 18:31:50 &#43;0800</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 06 Mar 2023 09:53:02 &#43;0800"
+                  Modified <relative-time datetime="Mon, 06 Mar 2023 09:57:40 &#43;0800"
                     class="no-wrap">
-                    Mon, 06 Mar 2023 09:53:02 &#43;0800</relative-time>
+                    Mon, 06 Mar 2023 09:57:40 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -218,7 +218,7 @@ code.has-jax {
                         </div>
                       </div>
                     </details-menu>
-                      66 Words
+                      1251 Words
                     
 
                   </div>
@@ -230,203 +230,30 @@ code.has-jax {
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>这是在公司做的第二次分享，虽然不是很深入的内容，但是和大家交流确实很有意思。<br>
-完全是好奇心在推着我去探索，希望我能保持住~</p>
-<script src= '/js/pdf-js/build/pdf.js'></script>
-<style>
-#the-canvas {
-  border: 1px solid black;
-  direction: ltr;
-  width: 100%;
-  height: auto;
-  display: none;
-}
-
-#paginator {
-  display: none;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-#loadingWrapper {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 350px;
-}
-
-#loading {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 3px solid #d2d0d0;;
-  border-radius: 50%;
-  border-top-color: #383838;
-  animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 1s ease-in-out infinite;
-}
-
-@keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
-}
-</style>
-
-<div id="paginator">
-    <button id="prev">Previous</button>
-    <button id="next">Next</button>
-    &nbsp; &nbsp;
-    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-</div>
-<div id="embed-pdf-container">
-    <div id="loadingWrapper">
-      <div id="loading"></div>
-    </div>
-    <canvas id="the-canvas"></canvas>
-</div>
-
-<script type="text/javascript">
-window.onload = function() {
-
-
-var url = "https:\/\/huizhixu.github.io\/" + '\/pdf\/20230225\/玄学：Prompt-based Learning.pdf';
-
-var hidePaginator = "false" === "true";
-var hideLoader = "" === "true";
-var selectedPageNum = parseInt("") || 1;
-
-
-var pdfjsLib = window['pdfjs-dist/build/pdf'];
-
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https:\/\/huizhixu.github.io\/" + '/js/pdf-js/build/pdf.worker.js';
-
-
-var pdfDoc = null,
-    pageNum = selectedPageNum,
-    pageRendering = false,
-    pageNumPending = null,
-    scale = 3,
-    canvas = document.getElementById('the-canvas'),
-    ctx = canvas.getContext('2d'),
-    paginator = document.getElementById("paginator"),
-    loadingWrapper = document.getElementById('loadingWrapper');
-
-
-
-showPaginator();
-showLoader();
-
-
-
-function renderPage(num) {
-  pageRendering = true;
-  
-  pdfDoc.getPage(num).then(function(page) {
-    var viewport = page.getViewport({scale: scale});
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    
-    var renderContext = {
-      canvasContext: ctx,
-      viewport: viewport
-    };
-    var renderTask = page.render(renderContext);
-
-    
-    renderTask.promise.then(function() {
-      pageRendering = false;
-      showContent();
-      
-      if (pageNumPending !== null) {
-        
-        renderPage(pageNumPending);
-        pageNumPending = null;
-      }
-    });
-  });
-
-  
-  document.getElementById('page_num').textContent = num;
-}
-
-
-
-function showContent() {
-  loadingWrapper.style.display = 'none';
-  canvas.style.display = 'block';
-}
-
-
-
-function showLoader() {
-  if(hideLoader) return
-  loadingWrapper.style.display = 'flex';
-  canvas.style.display = 'none';
-}
-
-
-
-function showPaginator() {
-  if(hidePaginator) return
-  paginator.style.display = 'block';
-}
-
-
-
-function queueRenderPage(num) {
-  if (pageRendering) {
-    pageNumPending = num;
-  } else {
-    renderPage(num);
-  }
-}
-
-
-
-function onPrevPage() {
-  if (pageNum <= 1) {
-    return;
-  }
-  pageNum--;
-  queueRenderPage(pageNum);
-}
-document.getElementById('prev').addEventListener('click', onPrevPage);
-
-
-
-function onNextPage() {
-  if (pageNum >= pdfDoc.numPages) {
-    return;
-  }
-  pageNum++;
-  queueRenderPage(pageNum);
-}
-document.getElementById('next').addEventListener('click', onNextPage);
-
-
-
-pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-  pdfDoc = pdfDoc_;
-  var numPages = pdfDoc.numPages;
-  document.getElementById('page_count').textContent = numPages;
-  
-  
-  if(pageNum > numPages) {
-    pageNum = numPages
-  }
-
-  
-  renderPage(pageNum);
-});
-}
-
-</script>
-
+                <article class="markdown-body entry-content container-lg"><p>#用随机梯度下降来优化人生【转载】</p>
+<h2 id="要有目标">要有目标。</h2>
+<p>你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。</p>
+<h2 id="目标要大">目标要大。</h2>
+<p>不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。</p>
+<h2 id="坚持走">坚持走。</h2>
+<p>不管你的目标多复杂，随机梯度下降都是最简单的。每一次你找一个大概还行的方向（梯度），然后迈一步（下降）。两个核心要素是方向和步子的长短。但最重要的是你得一直走下去，能多走几步就多走几步。</p>
+<h2 id="痛苦的卷">痛苦的卷。</h2>
+<p>每一步里你都在试图改变你自己或者你的模型参数。改变带来痛苦。但没有改变就没有进步。你过得很痛苦不代表在朝着目标走，因为你可能走反了。但过得很舒服那一定在原地踏步。需要时刻跟自己作对。</p>
+<h2 id="可以躺平">可以躺平。</h2>
+<p>你用你内心的激情来迈步子。步子太小走不动，步子太长容易过早消耗掉了激情。周期性的调大调小步长效果挺好。所以你可以时不时休息休息。</p>
+<h2 id="四处看看">四处看看。</h2>
+<p>每一步走的方向是你对世界的认识。如果你探索的世界不怎么变化，那么要么你的目标太简单，要么你困在你的舒适区了。随机梯度下降的第一个词是随机，就是你需要四处走走，看过很多地方，做些错误的决定，这样你可以在前期迈过一些不是很好的舒适区。</p>
+<h2 id="快也是慢">快也是慢。</h2>
+<p>你没有必要特意去追求找到最好的方向和最合适的步子。你身边当然会有幸运之子，他们每一步都在别人前面。但经验告诉我们，随机梯度下降前期进度太快，后期可能乏力。就是说你过早的找到一个舒适区，忘了世界有多大。所以你不要急，前面徘徊一段时间不是坏事。成名无需太早。</p>
+<h2 id="赢在起点">赢在起点。</h2>
+<p>起点当然重要。如果你在终点附近起步，可以少走很多路。而且终点附近的路都比较平，走着舒服。当你发现别人不如你的时候，看看自己站在哪里。可能你就是运气很好，赢在了起跑线。如果你跟别人在同一起跑线，不见得你能做更好。</p>
+<h2 id="很远也能到达">很远也能到达。</h2>
+<p>如果你是在随机起点，那么做好准备前面的路会非常不平坦。越远离终点，越人迹罕见。四处都是悬崖。但随机梯度下降告诉我们，不管起点在哪里，最后得到的解都差不多。当然这个前提是你得一直按照梯度的方向走下去。如果中间梯度炸掉了，那么你随机一个起点，调整步子节奏，重新来。</p>
+<h2 id="独一无二">独一无二。</h2>
+<p>也许大家有着差不多的目标，在差不多的时间毕业买房结婚生娃。但每一步里，每个人内心中看到的世界都不一样，导致走的路不一样。你如果跑多次随机梯度下降，在各个时间点的目标函数值可能都差不多，但每次的参数千差万别。不会有人关心你每次训练出来的模型里面参数具体是什么值，除了你自己。</p>
+<h2 id="简单最好">简单最好。</h2>
+<p>当然有比随机梯度下降更复杂的算法。他们想每一步看想更远更准，想步子迈最大。但如果你的目标很复杂，简单的随机梯度下降反而效果最好。深度学习里大家都用它。关注当前，每次抬头瞄一眼世界，快速做个决定，然后迈一小步。小步快跑。只要你有目标，不要停，就能到达。</p>
+<p>转自<a href="https://zhuanlan.zhihu.com/p/414009313">知乎</a></p>
 </article>
               </div>
             </div>
