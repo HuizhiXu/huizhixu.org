@@ -6,7 +6,16 @@
     <description>Recent content on HuizhiXu 的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 05 Mar 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Apr 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title>
+      <link>https://huizhixu.github.io/post/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
+      <description>很简单地运行LLaMa的方法</description>
+    </item>
+    
     <item>
       <title>2023-03-05用随机梯度下降来优化人生【转载】</title>
       <link>https://huizhixu.github.io/post/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link>
@@ -23,22 +32,21 @@
       
       <guid>https://huizhixu.github.io/post/20230302%E5%AD%A3%E8%AF%BB/</guid>
       <description>本来过年的时候想着今年要读一些书，每个月都至少读一本，结果今天发现已经三月份了，我还在读第一本书。
-虽然没有读书，但是看了很多别人写的材料，博客，听了很多访谈。当然，主要因为chatGPT的爆火，公众号每天都充斥着关于大模型的知识。 有一些大咖表面上在聊chatGPT，其实是趁机卖自己的课和书；还有有一些人觉得这是个绝佳的创业的机会；还有一些号，明明和他八竿子打不着关系，还要硬往上面蹭。（是的，我说的就是浙江反骗码。 真的会有人去浙江反骗码上调用chatGPT吗？）
-chatGPT会是一个变革性的产品吗？就像信息时代让我们的生活发生翻天覆地的变化那样，人工智能时代也会让我们有完全不同的生活体验吗？ 还很难说。 人工智能只是少数人的游戏，因为目前来说，他太昂贵了。 先进的技术带来高效，但是与固有的生产方式相比，它并不一定能省钱。 chatGPT给每个
-现在社会太浮躁了。还记得去年冬天，行业加上疫情的原因，一片萧瑟，各大媒体都在唱衰，说是AI寒冬，结果过了个年就变成了AI盛世。 也不知道这个热火朝天的劲头能持续多久。
-另外，我觉得认知上的差异，会导致决策差异。 例如一开始我总是在想openAI和用户数据之间的关系，想着他们会不会清洗用户输入的问题，作为后续模型的补充， 后面turbo版本出来了，chatpdf出来了之后，我才意识到，这些数据对他们来说，没什么用 我以为只有花钱用上chatGPT的那些人，他们的数据才是有价值的数据。这种认知就错了。数据永远都是有用的，但是对于每一个用户的用处都不同。而openAI不需要去深究这些数据，他们只需要提供接口服务就可以了。
-我们处在一个环境中，除了学习用文字写出来的知识，我们也学会了一种&amp;quot;上下文&amp;quot; 例如一个小朋友，在学校不仅仅学了加减乘除，也学会了如何和同学打交道、体会到每一件事情的发生。 那么机器有这种能力吗？
+虽然没有读书，但是看了很多别人写的材料，博客，听了很多访谈。当然，主要因为chatGPT的爆火，公众号每天都充斥着关于大模型的知识。 有一些大咖表面上在聊chatGPT，其实是趁机卖自己的课和书；还有一些人觉得这是个绝佳的创业的机会；还有一些号，明明和他八竿子打不着关系，还要硬往上面蹭。
+还记得去年冬天，行业加上疫情的原因，一片萧瑟，各大媒体都在唱衰，说是 AI 寒冬，结果过了个年就变成了AI盛世。 也不知道这个热火朝天的劲头能持续多久。
+chatGPT会是一个变革性的产品吗？就像信息时代让我们的生活发生翻天覆地的变化那样，人工智能时代也会让我们有完全不同的生活体验吗？ 还很难说。人工智能只是少数人的游戏，因为目前来说，他太昂贵了。 先进的技术带来高效，但是与固有的生产方式相比，它并不一定能省钱。
+另外，通过chatGPT，加深了我对认知的重视程度。 一开始我总是在想 openAI 和用户数据之间的关系，想着他们会不会用户输入的数据进行清洗，在此基础上做后续模型升级。 我以为只有花钱用上chatGPT的那些人，他们的数据才是有价值的数据。这种认知就错了。数据永远都是有用的，但是对于每一个组织的作用是不同的。 而openAI不需要去深究这些数据，他们只需要提供接口服务就可以收割全世界。当然他们肯定想做更多。所以认知上的差异，会导致决策差异。
+不过，我还有另外一些疑问。机器和人对齐，增强了机器的性能。这其实是仿生学，哪种动物在哪方面做得好，我们就利用这方面，学习这方面。 但是，对于人来说， 我们人类除了学习用文字写出来的知识，我们也学会了一种&amp;quot;上下文&amp;quot;。一个小学生，在学校不仅仅学了加减乘除，也学会了如何和同学打交道，每一件事情的发生都在他身上有影响。 那么机器如何拥有这种能力呢？
+推荐我读的一些博客文章：
 Why everybody feels like theyr&amp;rsquo;e faking it? https://www.newyorker.com/magazine/2023/02/13/the-dubious-rise-of-impostor-syndrome
 Fix the machine, not the person by aaron Swartz
 http://www.aaronsw.com/weblog/productivity
-Life in Suburbia: Land of Cliche
-文笔真是好啊
-http://www.aaronsw.com/weblog/suburbia
-how to work hard http://paulgraham.com/hwh.html 做大事的人除了有天分，还有练习以及时间投入。
-里面写了首先要搞清楚工作是什么。在学校的努力一般都不算real work。
-自驱力。自己意识到自己在干什么。
-找到最重要的事情。
-里面引用了两段话 I do not remember having felt, as a boy, any passion for mathematics, and such notions as I may have had of the career of a mathematician were far from noble.</description>
+Life in Suburbia: Land of Cliche http://www.aaronsw.com/weblog/suburbia
+how to work hard http://paulgraham.com/hwh.html
+做大事的人除了有天分，还有练习以及时间投入。
+《微积分的力量》
+里面引用了两段话
+I do not remember having felt, as a boy, any passion for mathematics, and such notions as I may have had of the career of a mathematician were far from noble.</description>
     </item>
     
     <item>

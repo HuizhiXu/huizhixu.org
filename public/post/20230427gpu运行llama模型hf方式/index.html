@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://huizhixu.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
+    <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理 - HuizhiXu 的个人博客</title>
+    
+    <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    
+    <meta name="description"
+  content="很简单地运行LLaMa的方法" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://huizhixu.github.io/post/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="2023-04-27GPU运行LLaMa模型——用HF的方式推理 - HuizhiXu 的个人博客" />
+<meta name="twitter:description"
+  content="很简单地运行LLaMa的方法" />
+<meta name="twitter:site" content="https://huizhixu.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://huizhixu.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="2023-04-27GPU运行LLaMa模型——用HF的方式推理 - HuizhiXu 的个人博客">
+<meta property="og:description"
+  content="很简单地运行LLaMa的方法" />
+<meta property="og:url" content="https://huizhixu.github.io/post/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/" />
+<meta property="og:site_name" content="2023-04-27GPU运行LLaMa模型——用HF的方式推理" />
+<meta property="og:image"
+  content="https://huizhixu.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-04-27 18:31:50 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+    <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+        <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+            <a class="Header-link" href="https://huizhixu.github.io/">
+                <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item d-md-none">
+            <button class="Header-link btn-link js-details-target" type="button"
+                    onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+                <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+                    <path fill-rule="evenodd"
+                          d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div style="display: none;" id="header-search"
+             class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+            <div
+                    class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+                <div class="position-relative">
+                    <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+                          autocomplete="off">
+                        <label
+                                class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+                            <input type="text"
+                                   class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                                   name="q" value="" placeholder="Search" autocomplete="off">
+                            <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+            <a class="Header-link " href="https://huizhixu.github.io/">
+                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+                     width="32">
+                    <path fill-rule="evenodd"
+                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="Header-item" style="margin-right: 0;">
+            <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+                <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+                     version="1.1" width="16" height="16">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </header>
+</div>
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://huizhixu.github.io/">
+                  <img class=" avatar-user"
+                    src="https://huizhixu.github.io/images/poirot.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://huizhixu.github.io/">Huizhi</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://huizhixu.github.io/post/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/">2023-04-27GPU运行LLaMa模型——用HF的方式推理</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Thu, 27 Apr 2023 18:31:50 &#43;0800"
+                    class="no-wrap">
+                    Thu, 27 Apr 2023 18:31:50 &#43;0800</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 27 Apr 2023 19:10:18 &#43;0800"
+                    class="no-wrap">
+                    Thu, 27 Apr 2023 19:10:18 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1966 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="gpu运行llama模型用hf的方式推理">GPU运行LLaMa模型——用HF的方式推理</h1>
+<p>在GPU上运行中文LLaMa模型，主要是按照 <a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca">https://github.com/ymcui/Chinese-LLaMA-Alpaca</a> 这个仓库的方法。
+中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。</p>
+<h1 id="文档">文档</h1>
+<p>模型部署和推理有四种方法，我选择的是用HF的inference接口来进行推理。</p>
+<p><a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/%E4%BD%BF%E7%94%A8Transformers%E6%8E%A8%E7%90%86"></a><a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/%E4%BD%BF%E7%94%A8Transformers%E6%8E%A8%E7%90%86">https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/使用Transformers推理</a> 这里详细讲了用scripts/inference_hf.py来启动模型。</p>
+<p>原则上非常简单，直接运行下列的脚本，就可以进行推理。</p>
+<pre tabindex="0"><code>CUDA_VISIBLE_DEVICES={device_id} python scripts/inference_hf.py \\
+    --base_model path_to_original_llama_hf_dir \\
+    --lora_model path_to_chinese_llama_or_alpaca_lora \\
+    --with_prompt \\
+    --interactive
+</code></pre><p>对参数进行解释：</p>
+<ul>
+<li>base_model是Meta发布的原生llama模型</li>
+<li>lora_model是 这个是LoRa生成的模型，可以在网盘下载，也可以用HF的模型调用（例如ziqingyang/chinese-llama-lora-7b）。模型调用比较简单推荐使用。</li>
+<li>with_prompt 是否将输入与prompt模版进行合并。</li>
+<li>interactive 以交互方式启动，以便进行多次单轮问答。</li>
+</ul>
+<p>在实验之前，首先要搞清楚一些概念：</p>
+<ol>
+<li>LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA结合才能运行。
+远程LLAMA模型META提供，LoRa和Alpaca模型这个项目提供。</li>
+</ol>
+<p>为什么不能用lora模型单独推理，以我浅显的理解，它freeze了原来的模型，单独加了一些层，后续的中文训练都在这些层上做，所以需要进行模型融合。</p>
+<ol start="2">
+<li>用huggingface的推理脚本，需要将模型转换成HF支持的格式。（Don’t worry 作者把脚本都写好了）</li>
+</ol>
+<h1 id="实践">实践</h1>
+<p>下面用步骤的形式记录一下整个过程。</p>
+<h2 id="1-克隆项目">1. 克隆项目</h2>
+<pre tabindex="0"><code>git clone git@github.com:ymcui/Chinese-LLaMA-Alpaca.git
+cd Chinese-LLaMA-Alpaca
+</code></pre><h2 id="2-安装环境">2. 安装环境</h2>
+<pre tabindex="0"><code>pip install -r requirements.txt
+</code></pre><p>这一步出现了ERROR: No matching distribution found for peft==0.3.0dev</p>
+<p>解决：最后安装了peft==0.2.0</p>
+<h2 id="3-下载meta发布的原生的llama模型">3. 下载meta发布的原生的Llama模型</h2>
+<ul>
+<li>可以下载泄露版本，需要用<a href="magnet:?xt=urn:btih:ZXXDAUWYLRUXXBHUYEMS6Q5CE5WA3LVA&amp;dn=LLaMA%EF%BC%89">磁力链下载</a> 。</li>
+</ul>
+<p><a href="https://github.com/facebookresearch/llama/pull/73/files/56de950af8a48c7cae221581e2e3e2c342b2ad82">泄露地址在这</a></p>
+<ul>
+<li>也可以用HuggingFace上的7B模型</li>
+</ul>
+<pre tabindex="0"><code>mkdir -p models/7B/
+wget -P models/7B/ &lt;https://huggingface.co/nyanko7/LLaMA-7B/resolve/main/consolidated.00.pth&gt;
+wget -P models/7B/ &lt;https://huggingface.co/nyanko7/LLaMA-7B/raw/main/params.json&gt;
+wget -P models/7B/ &lt;https://huggingface.co/nyanko7/LLaMA-7B/raw/main/checklist.chk&gt;
+wget -P models/ &lt;https://huggingface.co/nyanko7/LLaMA-7B/resolve/main/tokenizer.model&gt;
+</code></pre><h2 id="4-将原版的转换成hf格式">4. 将原版的转换成hf格式</h2>
+<p>下载这些模型后，models文件夹会出现以下文件夹和文件。如果不是这种层级关系，需要换成这种。</p>
+<pre tabindex="0"><code>models
+	tokenizer.model
+	7B
+    consolidated.00.pth
+	  params.json
+	  checklist.chk
+</code></pre><p>这些文件是PyTorch（<code>.pth</code>格式的），是不能被HuggingFace-transformers加载的，需要把这些文件转成HuggingFace格式的才行。</p>
+<p>这里有两个选择：</p>
+<p>一、 如果转换为HF格式之后，后续用llama.cpp进行部署，用这个脚本convert_llama_weights_to_hf 转换成HF再融合再部署。运行</p>
+<pre tabindex="0"><code>python src/transformers/models/llama/convert_llama_weights_to_hf.py \\
+    --input_dir models \\
+    --model_size 7B \\
+    --output_dir models/7B_hf
+</code></pre><p>转换后的模型会放在output_dir也就是models/7B_hf下面。转换后的模型会有一个config.json。</p>
+<p>如果后续有的步骤出现错误， <strong>does not appear to have a file named config.json. 要记得把这里的解决方法搬过去。</strong></p>
+<p>（来源：</p>
+<p><a href="https://github.com/hpcaitech/ColossalAI/issues/3324">https://github.com/hpcaitech/ColossalAI/issues/3324</a></p>
+<p>Basically you have to convert your downloaded weights to Hugging Face Transformers format using this<code>python src/transformers/models/llama/convert_llama_weights_to_hf.py \\ --input_dir /path/to/downloaded/llama/weights --model_size 7B --output_dir /output/path</code></p>
+<p>Then you would be able to get the config.json.</p>
+<p>Source: <a href="https://huggingface.co/docs/transformers/main/en/model_doc/llama"></a><a href="https://huggingface.co/docs/transformers/main/en/model_doc/llama">https://huggingface.co/docs/transformers/main/en/model_doc/llama</a></p>
+<p>）</p>
+<p>二、如果转换为HF格式之后，后续用 HuggingFace-transformers 进行推理，可以把直接合并和转换，运行这一个步骤就可以了。</p>
+<p>运行</p>
+<pre tabindex="0"><code>CUDA_VISIBLE_DEVICES=1 python scripts/merge_llama_with_chinese_lora_to_hf.py \\
+--base_model  /models/7B \\
+--lora_model  ziqingyang/chinese-llama-lora-7b \\
+--output_dir /home/user/data/xuhuizhi/llama_pj/models/7B_cn
+</code></pre><p>如果出现错误，没有config.json文件，需要运行方法一，把转换后的文件里面的config.json拿过来，也就是说方法一和方法二两个步骤都要运行。</p>
+<p>##5. 推理</p>
+<p>运行：</p>
+<pre tabindex="0"><code>CUDA_VISIBLE_DEVICES=0 python scripts/inference_hf.py \\
+--base_model  /home/user/llama_pj/models/7B_cn \\
+--lora_model  ziqingyang/chinese-llama-lora-7b \\
+--with_prompt \\
+--interactive
+</code></pre><p>结果</p>
+<pre tabindex="0"><code>Input:苹果是植物吗
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Response:  I don&#39;t know if it was plants or animals, but I do remember seeing lots of them on my way to school every morning and coming home from work in the evening。-sarah brown student at university college for four years before she graduated with her bachelor degree in science after taking all required courses such as chemistry physics biology organic chemistry microbiology cellular immunobiology molecular genetic epidemiological theoretic biochemical physiologically based pharmacokinetic modeling statistics data analysis computer programming laboratory experience coursework research projects internships community service volunteer experiencesnetworking career fair job interviewsjob huntingresume writing cover letterspersonal statementwriting sampleessay editingcritiquesmock interviewpreparationMock Interview Mock Job FairMock Networking EventMock Career FairsMock Cover Letter Writing WorkshopsMock Personal Statement EditingWorkshopNetworking EventsMock Professional Development ProgrammeMock Business School Admission Test PreparationsMock GRE/GMAT Prep CourseMockGPA CalculatorMockPersonasMockResearch ProposalsMockPresentationMockPostersMockPPTSlidesMockMockInteractionMockJobOfferMockoffer mock offerMockMockReferencesMockReferenceLettersMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMockMock
+</code></pre><p>不知为何回复一直是英文的。</p>
+<p>切换到CPU，也不能用中文回答。</p>
+<pre tabindex="0"><code>CUDA_VISIBLE_DEVICES= python scripts/inference_hf.py \\
+--base_model  /home/user/llama_pj/models/7B_cn \\
+--lora_model  ziqingyang/chinese-llama-lora-7b \\
+--with_prompt \\
+--interactive
+</code></pre><p>试验输出如下</p>
+<pre tabindex="0"><code>Input:索尼最新的耳机
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+Response:  I will not buy this product because it doesnot work well and I don&#39;t like how much moneyit costs。-end of classroom conversation about what to do next in their lives after graduation.- end of lecture room discussion on whatafter collegegraduates should be doingnext weekendafter they leave school.- endofclassroombalance between students who are leavingschooland thosewho aren’tthe same age but have been out for longer time periodsthank you verymuchfor your help with my English study book, whichis great! thankyouverymuchfortaking care ofmyEnglishstudybookwhichistooexcellenttoo young people aged under 21 years old at present as many other younger peopleshoot down our plan before we can even get started.- end oflecture room discussionaboutwhat to dowhen two or more adults over twenty oneyearsofageare discussed togetherwithin themore than twice per year when older childrenundertwentyoneyearsinnumberbutthemoresimplythanthatmanyothersmore youthanchildrenagedownourplanbeforewecangetstarteduponestartingoutagain.[Endoffeatoryconversatilonwhathappenswhenolderadultswerebornaswellasthedidnorthenumbertheiragesbecomewithintimeperiodfromthenexttwoyearsonheretogetherforeveryoutherthanormalchild.] End offcourse convoerationsion wthing tha happen whevernold adults were born along wit hte ddid nort he rnth er number ther own ages came up again from then until now once upon another timesometimesonce againeachother timetime ago again] End of lectureroomsdiscussionabouticonshowingsome things happened some others did nothing yetsome thingssometimethatearlierthisweeknowhere
+</code></pre><h1 id="哈希值进行完整性校验">哈希值进行完整性校验</h1>
+<p>如果实验过程中不确定自己下载的模型是否完整，可以校验哈希值。官方模型的哈希值可以在仓库里找到。</p>
+<pre tabindex="0"><code>cd modles/7B
+
+echo &#34;6efc8dab194ab59e49cd24be5574d85e  consolidated.00.pth&#34; | md5sum --check -           
+echo &#34;7596560e011154b90eb51a1b15739763  params.json&#34; | md5sum --check -
+</code></pre><p>如果返回True则一致。</p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://huizhixu.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://huizhixu.github.io/css/toc.css' />
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://huizhixu.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://huizhixu.github.io/js/github-style.js"></script>
+
+
+
+
+</html>
