@@ -6,7 +6,16 @@
     <description>Recent content on HuizhiXu 的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 27 Apr 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 May 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023-05-18最近觉得很好用的两个AI产品</title>
+      <link>https://huizhixu.github.io/post/20230518%E6%9C%80%E8%BF%91%E8%A7%89%E5%BE%97%E5%BE%88%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAai%E4%BA%A7%E5%93%81/</link>
+      <pubDate>Thu, 18 May 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/post/20230518%E6%9C%80%E8%BF%91%E8%A7%89%E5%BE%97%E5%BE%88%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAai%E4%BA%A7%E5%93%81/</guid>
+      <description>AI工具是我们的好助手</description>
+    </item>
+    
     <item>
       <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title>
       <link>https://huizhixu.github.io/post/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
