@@ -169,20 +169,6 @@ DefaultContentLanguageInSubdir = true
 
 
 
-  # Check hugo docs for setting up disqus
-  #system = "giscus"
-
-  # Options for giscus, exclude hyphens
-   #repo = ""
-   repoid = ""
-   category = ""
-   categoryid = ""
-   mapping = ""
-   strict = ""
-   reactionsenabled = ""
-   emitmetadata = ""
-   inputposition = ""
-   theme = ""
 
 
 [build]
