@@ -1,5 +1,5 @@
-#baseURL = "https://huizhixu.github.io/"
-baseURL = "http:huizhixu.org/"
+baseURL = "https://huizhixu.github.io/"
+#baseURL = "http:huizhixu.org/"
 languageCode = "zh-CN"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
