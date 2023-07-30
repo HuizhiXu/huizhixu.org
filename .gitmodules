@@ -1,6 +1,6 @@
-[submodule "themes/github-style"]
-	path = themes/github-style
-	url = git@github.com:MeiK2333/github-style.git
+# [submodule "themes/github-style"]
+# 	path = themes/github-style
+# 	url = git@github.com:MeiK2333/github-style.git
 [submodule "themes/blist"]
 	path = themes/blist
 	url = git@github.com:HuizhiXu/huizhixu.github.io.git
