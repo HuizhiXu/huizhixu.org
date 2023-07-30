@@ -186,4 +186,4 @@ DefaultContentLanguageInSubdir = true
 
 
 
-#publishDir = "docs"
+publishDir = "docs"
