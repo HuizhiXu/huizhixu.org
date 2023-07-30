@@ -1,5 +1,4 @@
 baseURL = "https://huizhixu.github.io/"
-metaDataFormat = "yaml"
 languageCode = "zh-CN"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
