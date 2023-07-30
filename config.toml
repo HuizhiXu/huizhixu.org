@@ -183,7 +183,3 @@ DefaultContentLanguageInSubdir = true
     # Enable to include inline HTML
     unsafe = true
 
-
-
-
-publishDir = "docs"
