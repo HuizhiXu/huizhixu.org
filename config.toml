@@ -1,4 +1,5 @@
-baseURL = "https://huizhixu.github.io/"
+#baseURL = "https://huizhixu.github.io/"
+baseURL = "http:huizhixu.org/"
 languageCode = "zh-CN"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
@@ -38,7 +39,7 @@ DefaultContentLanguageInSubdir = true
 
     [[languages.zh_cn.menu.main]]
         name = "分类"
-        url = "tags"
+        url = "/tags/"
         weight = 4
 
  [languages.en]
@@ -59,7 +60,7 @@ DefaultContentLanguageInSubdir = true
    
     [[languages.en.menu.main]]
         name = "Blog"
-        url = "life"
+        url = "/life/"
         weight = 1
 
     [[languages.en.menu.main]]
@@ -69,7 +70,7 @@ DefaultContentLanguageInSubdir = true
 
     [[languages.en.menu.main]]
         name = "Tags"
-        url = "tags"
+        url = "/tags/"
         weight = 3
 
 
@@ -88,7 +89,7 @@ DefaultContentLanguageInSubdir = true
       logo = "/blist-logo-de.png"
     [[languages.de.menu.main]]
         name = "Blog"
-        url = "life"
+        url = "/life/"
         weight = 1
 
     [[languages.de.menu.main]]
@@ -98,7 +99,7 @@ DefaultContentLanguageInSubdir = true
 
     [[languages.de.menu.main]]
         name = "Tags"
-        url = "tags"
+        url = "/tags/"
         weight = 3
 
 #[params]
