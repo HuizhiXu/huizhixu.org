@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh_cn" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.svg">
+
+  <title>
+  2023-02-16 如何理解Seq2seq - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="有encoder和decoder就可以说这是一个Seq2seq模型" />
+  <meta name="author" content="Huizhi" />
+  <meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="https://huizhixu.github.io/css/styles.min.f95f587b6c863935880a2853758e9016659393f9590d3fe823f6bc73d05e862b.css"
+    integrity="sha256-+V9Ye2yGOTWICihTdY6QFmWTk/lZDT/oI/a8c9Behis="
+  />
+  
+  
+
+  <meta property="og:title" content="2023-02-16 如何理解Seq2seq" />
+<meta property="og:description" content="有encoder和decoder就可以说这是一个Seq2seq模型" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/zh_cn/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2023-02-16T18:31:50+08:00" />
+<meta property="article:modified_time" content="2023-03-30T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2023-02-16 如何理解Seq2seq"/>
+<meta name="twitter:description" content="有encoder和decoder就可以说这是一个Seq2seq模型"/>
+
+  <meta itemprop="name" content="2023-02-16 如何理解Seq2seq">
+<meta itemprop="description" content="有encoder和decoder就可以说这是一个Seq2seq模型"><meta itemprop="datePublished" content="2023-02-16T18:31:50+08:00" />
+<meta itemprop="dateModified" content="2023-03-30T00:00:00+00:00" />
+<meta itemprop="wordCount" content="202">
+<meta itemprop="keywords" content="emoji," />
+
+  
+  <meta name="lang" content="zh_cn" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/zh_cn/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/zh_cn/life/">生活见闻</a></li>
+    
+    <li><a href="/zh_cn/know_how/">IT技术</a></li>
+    
+    <li><a href="/zh_cn/treasure/">宝藏集结</a></li>
+    
+    <li><a href="/zh_cn/tags">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>Language</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/en" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/de" lang="de">Deutsch</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/dy" lang="dy">Test Language</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/25/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+    February 16, 2023
+  
+
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">2023-02-16 如何理解Seq2seq</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      Posted on 
+  
+    February 16, 2023
+  
+
+
+      
+        &nbsp(Last modified on 
+  
+    March 30, 2023
+  
+
+)</h5><h5 class="text-sm flex items-center flex-wrap">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;minutes
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      202&nbsp;words
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#seq2seq">Seq2seq</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e7%bb%93%e6%9e%84%e5%92%8c%e5%8e%9f%e7%90%86">结构和原理</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#encoder">Encoder</a>
+        
+
+        
+        </li><li>
+        <a href="#decoder">Decoder</a>
+        
+
+        
+        </li><li>
+        <a href="#decoder%e5%92%8cencoder%e5%af%b9%e6%af%94">Decoder和Encoder对比</a>
+        
+
+        
+        </li><li>
+        <a href="#encoder-decoder">Encoder-Decoder</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#%e5%a6%82%e4%bd%95%e5%81%9a%e8%ae%ad%e7%bb%83">如何做训练</a>
+        
+
+        
+        </li><li>
+        <a href="#%e5%ba%94%e7%94%a8">应用</a>
+        
+
+        
+        </li><li>
+        <a href="#%e5%8f%82%e8%80%83">参考：</a>
+        </li></ul>
+    </li></ul>
+  </details>
+
+    <p>先搞清楚几个基本概念：</p>
+<p>Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。</p>
+<p>transformer是一种基于Attention的Seq2seq。</p>
+<h1 id="seq2seq">Seq2seq</h1>
+<ul>
+<li>input是一个sequence， output也是一个sequence，但是维度由模型决定。</li>
+<li>例子：
+<ul>
+<li>语音辨识：一串语音转为”今晚吃什么？“几个文字。</li>
+<li>机器翻译</li>
+<li>语音翻译：输入machine learning，输出”机器学习”。
+<ul>
+<li>为何不将”语音辨识“和”机器翻译“结合起来，因为有的语言没有文字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="结构和原理">结构和原理</h2>
+<p>Seq2seq由一个encoder和一个decoder决定</p>
+<h3 id="encoder">Encoder</h3>
+<ol>
+<li>input是一个sequence， output也是一个sequence。</li>
+<li>input vector加上positional encoding，然后经过multi-head attention，然后进行residual + layer normalization，然后经过FC，再做一次Add&amp;Norm，是这个encoder的输出。这个过程会重复。</li>
+</ol>
+<p><img src="/img/20230216/0.png" alt="0"></p>
+<ol>
+<li>更细节的设计：</li>
+</ol>
+<ul>
+<li>input vector进来之后，经过self-attention，input和output相加，然后进行一层layer normalization。然后进入FC层，再进行一次Add&amp;Norm（和自己相加&amp;Normalization），这个输出就是一个block的输出。</li>
+</ul>
+<p><img src="/img/20230216/1.png" alt="1"></p>
+<ul>
+<li>residual connection：输入与输出相加，防止层级过高导致的梯度消失。</li>
+<li>layer normalization：
+<ul>
+<li>输入一个向量，输出一个向量，不需要考虑batch中其他的向量。</li>
+<li>对同一个feature，同一个example不同的dimension去计算。（这里feature就是example）</li>
+<li>做法：计算它 的mean $m$和standard deviation $\sigma$</li>
+</ul>
+</li>
+</ul>
+<p>$$
+x_i^\prime =\frac {x_i - m} {\sigma}
+$$</p>
+<ul>
+<li>batch normalization：
+<ul>
+<li>对同一个dimension，不同的example，不同的feature去计算mean和standard deviation</li>
+</ul>
+</li>
+</ul>
+<h3 id="decoder">Decoder</h3>
+<ol>
+<li>decoder有两种，一种叫auto-regressive。这里讲的都是auto-regressive。</li>
+<li>decoder的输入：
+<ul>
+<li>在前边先加一个特殊的符号：BOS。</li>
+<li>每个输入可以表示成一个one hot vector。例如”机器学习“加上BOS就是5个one hot vector。</li>
+</ul>
+</li>
+<li>decoder的输出：
+<ul>
+<li>
+<p>想好decoder输出的单位是什么，假设我们做的是中文的语音辨识，那么decoder输出的就是中文，那么vocabulary就是中文的数目，常用4000个字。不同的语言输出的单位不一样，英文可以输出字母，word， subword作为单位。</p>
+</li>
+<li>
+<p>1个Input vector进去之后，出来1个output vector，它的长度和vocabulary的size是一样的。他会给vocabulary的每一个单位一个分数，分数最高的就是最后的输出。5个input vector，出来n个output vector。(n需要decoder自己决定)</p>
+<p><img src="/img/20230216/2.png" alt="2"></p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>decoder看到的输入，其实就是前一个时间自己的输出。</p>
+<ul>
+<li>这里有一个问题，如果输出错误，那么输入也会错误，会造成error propagation。</li>
+</ul>
+<p><img src="/img/20230216/3.png" alt="3"></p>
+</li>
+</ul>
+<h3 id="decoder和encoder对比">Decoder和Encoder对比</h3>
+<ol>
+<li>decoder与encoder结构类似</li>
+<li>decoder有一层masked multi-head attention</li>
+</ol>
+<p><img src="/img/20230216/4.png" alt="4"></p>
+<p>之前的self-attention，都要看过完整的input之后才做决定。$b^1$是由$a^1$到$a^4$一起决定的。</p>
+<p>masked attention 的意思是：</p>
+<p>产生$b^1$的时候，只能用$a^1$。</p>
+<p>产生$b^2$的时候，只能用$a^1$和$a^2$。</p>
+<p><img src="/img/20230216/5.png" alt="5"></p>
+<ol>
+<li>为什么要masked？</li>
+</ol>
+<p>想想decoder是如何运作的的。decoder的输出是一个一个产生的。先有$a^1$，然后有$a^2$。再计算$b^1$的时候，是没有$a^2$的，是没有办法把$a^2$计算进去的。</p>
+<p>encoder是一次性把$a^1$到$a^4$一起读进去。</p>
+<p><img src="/img/20230216/6.png" alt="6"></p>
+<ol>
+<li>decoder必须自己决定输出的长度。那么如何决定呢
+<ul>
+<li>加一个stop token。decoder看到这个符号就停止。</li>
+</ul>
+</li>
+</ol>
+<h3 id="encoder-decoder">Encoder-Decoder</h3>
+<ol>
+<li>decoder结构中有一个cross attention，它的输入中有两个是来自encoder的输出，一个是来源自己。</li>
+</ol>
+<p><img src="/img/20230216/7.png" alt="7"></p>
+<ol>
+<li>encoder产生kv，decoder产生q</li>
+</ol>
+<h2 id="如何做训练">如何做训练</h2>
+<ol>
+<li>假设做语音识别，要有训练资料，要收集一堆语音资料。</li>
+<li>我们期待，把begin丢给decoder的时候，它的第一个输出，应该要跟“机”越接近越好。在ground truth里面， “机”这个字会被表示成一个one hot vector。decoder的输出是一个distribution，是一个几率的分布，我们希望这个分布能够接近“机”的one hot vector，所以要去计算one hot vector和这个分布的cross entropy，然后希望这个cross entropy越小越好。在产生完所有的输出之后，我们希望这个总的cross entropy越小越好。</li>
+</ol>
+<p>这个计算很接近分类。可以理解为，每一次decoder在产生一个token输出的时候，就是做了一次分类。</p>
+<ol>
+<li>decoder的输入是正确答案。</li>
+</ol>
+<p>也就是说，在有Begin的情况下，输出“机”，在有begin和”机”的情况下，输出 “器”，在有begin、“机”和”器”的情况下，输出“学”。</p>
+<p>teacher forcing：在训练的时候，using the ground truth as input</p>
+<ol>
+<li>训练的时候decoder的输入给的是正确答案，推断的时候有可能出错，这里有一个mismatch。
+<ol>
+<li>如何解决：在训练的时候也给一些错误的输入，可能会学的更好，这个叫scheduled sampling。</li>
+<li>但是scheduled sampling，会伤害到transformer的平行能力。transformer有自己的scheduled sampling</li>
+</ol>
+</li>
+</ol>
+<p><img src="/img/20230216/8.png" alt="8"></p>
+<ol>
+<li>训练tips
+<ul>
+<li>Copy Mechanism：decoder没有必要创造输出，可以直接从输入的东西里面复制。
+<ul>
+<li>在做Chat-Bot：-你好，我是小花。-小花你好，欢迎你！</li>
+<li>在做摘要：
+<ul>
+<li>数据量：要训练这种，需要百万篇文章（把标题当做摘要）</li>
+<li>从课文里面复制一些句子出来，这种叫pointer network。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Guided Attention
+<ul>
+<li>看到中文的句子，输出这段语音。有时候语音会漏字。
+<ul>
+<li>input and output monotonically aligned。强制它monotonic attention</li>
+</ul>
+</li>
+<li>对于有位置需求的语音：先说第一个字，再说第二个字等等。
+<ul>
+<li>location-aware attention</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Beam Search
+<ul>
+<li>假设decoder只能输出A和B两个字。那么decoder会每一次选择输出A还是B。 根据概率最大的选择，叫做greedy search。</li>
+<li>greedy search不是最优，全局搜索也不可能。</li>
+<li>解决方法就是beam search。（这里没懂）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优化 Evaluation metrics
+<ol>
+<li>评估的标准，Bleu score是decoder先产生一个完整的句子之后，再去跟ground truth的句子比较。</li>
+<li>训练的时候，每一个token的输出都是单独产生的。那么minimize cross entropy真的能够使bleu score最好吗？不一定。
+<ol>
+<li>所以评判标准不是cross entropy 而是bleu score</li>
+<li>可不可以在training的时候就最大化bleu score呢？ 不能，因为它不能微分</li>
+<li>这时，可以用强化学习 RL</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="应用">应用</h2>
+<ol>
+<li>question answering ：
+<ul>
+<li>很多问题NLP的任务都可以转化为问答QA，而QA可以用Seq2seq模型来解决。</li>
+<li>原理：输入是question和context拼接起来，输出是answer。</li>
+<li>例子：
+<ul>
+<li>机器翻译-这个句子的德文翻译是什么</li>
+<li>摘要：这段文字的摘要是什么？</li>
+<li>情感分析：这篇文章是正面还是负面？</li>
+</ul>
+</li>
+<li>对多数nlp任务，专门的模型比seq2seq 会得到更好的结果。</li>
+</ul>
+</li>
+</ol>
+<p><img src="/img/20230216/9.png" alt="9"></p>
+<ol>
+<li>
+<p>句法分析：syntactic parsing 也可以用seq2seq来做。树可以用括号链接文字来表示。</p>
+<p><img src="/img/20230216/10.png" alt="10"></p>
+</li>
+<li>
+<p>multi-label classification： 也可以用seq2seq</p>
+<ul>
+<li>multi-class classification： 有不止一个class，机器得选（有且只能）一个class出来</li>
+<li>multi-label classification：一个事物可以有=属于不同的class</li>
+</ul>
+<p><img src="/img/20230216/11.png" alt="11"></p>
+</li>
+<li>
+<p>object detection ：也可以用seq2seq</p>
+</li>
+</ol>
+<h2 id="参考">参考：</h2>
+<ul>
+<li>
+<p><a href="https://speech.ee.ntu.edu.tw/~hylee/ml/ml2021-course-data/" target="_blank" rel="noopener">李宏毅老师的课程链接</a>
+</p>
+</li>
+<li>
+<p><a href="https://www.bilibili.com/video/BV1v3411r78R?p=4&amp;vd_source=bbd38c44460fafa204a3540d4f8a2657" target="_blank" rel="noopener">【李宏毅机器学习2021】自注意力机制 (Transformer) (下)_哔哩哔哩_bilibili</a>
+</p>
+</li>
+</ul>
+
+  </article><div class="bg-pink-50 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

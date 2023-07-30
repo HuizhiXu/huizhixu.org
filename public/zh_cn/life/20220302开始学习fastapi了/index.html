@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh_cn" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.svg">
+
+  <title>
+  2022-03-02 开始学习 FastAPI 了 - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（[https://fastapi.tiangolo.com/zh/tutorial/body/](https://fastapi.tiangolo.com/zh/tutorial/body/) ） 学完，我就会了。" />
+  <meta name="author" content="Huizhi" />
+  <meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="https://huizhixu.github.io/css/styles.min.f95f587b6c863935880a2853758e9016659393f9590d3fe823f6bc73d05e862b.css"
+    integrity="sha256-+V9Ye2yGOTWICihTdY6QFmWTk/lZDT/oI/a8c9Behis="
+  />
+  
+  
+
+  <meta property="og:title" content="2022-03-02 开始学习 FastAPI 了" />
+<meta property="og:description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（[https://fastapi.tiangolo.com/zh/tutorial/body/](https://fastapi.tiangolo.com/zh/tutorial/body/) ） 学完，我就会了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/zh_cn/life/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/" /><meta property="article:section" content="life" />
+<meta property="article:published_time" content="2022-03-02T20:07:58+08:00" />
+<meta property="article:modified_time" content="2022-10-14T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2022-03-02 开始学习 FastAPI 了"/>
+<meta name="twitter:description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（[https://fastapi.tiangolo.com/zh/tutorial/body/](https://fastapi.tiangolo.com/zh/tutorial/body/) ） 学完，我就会了。"/>
+
+  <meta itemprop="name" content="2022-03-02 开始学习 FastAPI 了">
+<meta itemprop="description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（[https://fastapi.tiangolo.com/zh/tutorial/body/](https://fastapi.tiangolo.com/zh/tutorial/body/) ） 学完，我就会了。"><meta itemprop="datePublished" content="2022-03-02T20:07:58+08:00" />
+<meta itemprop="dateModified" content="2022-10-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="16">
+<meta itemprop="keywords" content="emoji," />
+
+  
+  <meta name="lang" content="zh_cn" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/zh_cn/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/zh_cn/life/">生活见闻</a></li>
+    
+    <li><a href="/zh_cn/know_how/">IT技术</a></li>
+    
+    <li><a href="/zh_cn/treasure/">宝藏集结</a></li>
+    
+    <li><a href="/zh_cn/tags">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>Language</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/en" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/de" lang="de">Deutsch</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/dy" lang="dy">Test Language</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/53/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+    March 2, 2022
+  
+
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">2022-03-02 开始学习 FastAPI 了</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      Posted on 
+  
+    March 2, 2022
+  
+
+
+      
+        &nbsp(Last modified on 
+  
+    October 14, 2022
+  
+
+)</h5><h5 class="text-sm flex items-center flex-wrap">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;minutes
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      16&nbsp;words
+      
+        
+      
+    </h5>
+    
+
+    
+
+    <p>学着学着突然就emo了，觉得在互联网行业一直要学习新的东西，这个过程是无休止的，何时是个头啊。</p>
+<p>正沮丧着，在浏览器上我发现了一个很久没有打开的标签文件夹——blog，里面是我这几年收藏的博客和专题网站。于是我开始一个个点开，看有哪些人还在更新。</p>
+<p>其中有一个网站，我看了好久。</p>
+<p><a href="https://yihui.org/cn/" target="_blank" rel="noopener">日志 - Yihui Xie | 谢益辉</a>
+</p>
+<p>看完了我很有感触。这种默默写博客的做法，就是我一直向往却没有做到的。非常敬佩，因为博主在努力构建自己的精神世界，和庞大的信息世界做对抗。</p>
+<p>我看过一篇文章，说每个人对不同的媒介有不同的接受度。有的人能从图像中看到丰富的信息，有的人在视频中最容易学新知识，有的人对文字的处理速度很高。有的人在做vlog，有的人还在坚持写博客。在我心里文字是最简朴，也是最丰富的。</p>
+<p>这个博主，很令人敬佩的另一个原因是，他毕业后在RStudio工作，8年了还没换工作呢。我们行业的人都挺浮躁的，因为大家都想去知名度更高的公司，报酬更高的公司，“跳来跳去“被认为是升职加薪的关键，但是也有一些人让人看到他们的内驱力是”做好事情“。</p>
+<p>我要向这种做法学习，不要那么浮躁。</p>
+<p>下班后也和一个同事聊了聊。我问他经常要学习新的东西，不会感到厌倦吗？他说要保持竞争力，学习是必须的。而且什么框架不重要，重要的是弄清楚框架的设计理念是什么，这个框架为什么这么受欢迎？它的优缺点在哪？重要的是可以把写代码当成爱好，这样就不会烦了。</p>
+<p>我意识到我的做法是有问题的，我想着学完那个教程，我就会了。学的过程中我内心不断在念叨，”还有7个部分没学“，”好的，这章过了“。唉，我干嘛要这样啊，现在又不用考试要求面面俱到。</p>
+<p>如果带着好奇心去学的话，那就是，”有了这个功能，我还想加点需求，那么又该怎么实现呢“，”为什么这么设计呢，和Flask又有什么不同哇“，这样用好奇心驱动的话，收获的应该是好奇心得到满足的永不厌倦吧。</p>
+
+  </article><div class="bg-pink-50 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

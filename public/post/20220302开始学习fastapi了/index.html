@@ -1,239 +1,125 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <script type="application/javascript" src='https://huizhixu.github.io/js/theme-mode.js'></script>
-    <link rel="stylesheet" href='https://huizhixu.github.io/css/frameworks.min.css' />
-    <link rel="stylesheet" href='https://huizhixu.github.io/css/github.min.css' />
-    <link rel="stylesheet" href='https://huizhixu.github.io/css/github-style.css' />
-    <link rel="stylesheet" href='https://huizhixu.github.io/css/light.css' />
-    <link rel="stylesheet" href='https://huizhixu.github.io/css/dark.css' />
-    <link rel="stylesheet" href='https://huizhixu.github.io/css/syntax.css' />
-    <title>2022-03-02 开始学习 FastAPI 了 - HuizhiXu 的个人博客</title>
-    
-    <link rel="icon" type="image/x-icon" href='/images/poirot.png'>
-    
-    <meta name="theme-color" content="#1e2327">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    
-    <meta name="description"
-  content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/ ） 学完，我就会了。" />
-<meta name="keywords"
-  content='' />
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://huizhixu.github.io/post/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/" />
+  <link rel="icon" href="/favicon.ico">
 
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="2022-03-02 开始学习 FastAPI 了 - HuizhiXu 的个人博客" />
-<meta name="twitter:description"
-  content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/ ） 学完，我就会了。" />
-<meta name="twitter:site" content="https://huizhixu.github.io/" />
-<meta name="twitter:creator" content="" />
-<meta name="twitter:image"
-  content="https://huizhixu.github.io/">
-
-
-<meta property="og:type" content="article" />
-<meta property="og:title" content="2022-03-02 开始学习 FastAPI 了 - HuizhiXu 的个人博客">
-<meta property="og:description"
-  content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/ ） 学完，我就会了。" />
-<meta property="og:url" content="https://huizhixu.github.io/post/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/" />
-<meta property="og:site_name" content="2022-03-02 开始学习 FastAPI 了" />
-<meta property="og:image"
-  content="https://huizhixu.github.io/">
-<meta property="og:image:width" content="2048">
-<meta property="og:image:height" content="1024">
-
-<meta property="article:published_time" content="2022-03-02 20:07:58 &#43;0800 CST" />
-
-
-
-
-
-
-
-
-
-
-</head>
-
-<body>
-  <div style="position: relative">
-    <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
-        <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
-            <a class="Header-link" href="https://huizhixu.github.io/">
-                <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
-                    <path fill-rule="evenodd"
-                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-                    </path>
-                </svg>
-            </a>
-        </div>
-        <div class="Header-item d-md-none">
-            <button class="Header-link btn-link js-details-target" type="button"
-                    onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
-                <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
-                    <path fill-rule="evenodd"
-                          d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
-                    </path>
-                </svg>
-            </button>
-        </div>
-        <div style="display: none;" id="header-search"
-             class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
-            <div
-                    class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
-                <div class="position-relative">
-                    <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
-                          autocomplete="off">
-                        <label
-                                class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
-                            <input type="text"
-                                   class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
-                                   name="q" value="" placeholder="Search" autocomplete="off">
-                            <input type="hidden" name="q" value="site:https://huizhixu.github.io/">
-                        </label>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
-            <a class="Header-link " href="https://huizhixu.github.io/">
-                <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
-                     width="32">
-                    <path fill-rule="evenodd"
-                          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-                    </path>
-                </svg>
-            </a>
-        </div>
-        <div class="Header-item" style="margin-right: 0;">
-            <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
-                <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
-                     version="1.1" width="16" height="16">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
-                    </path>
-                </svg>
-            </a>
-        </div>
-    </header>
-</div>
-
-<script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[\[','\]\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-
-MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style>
+  <title>
+  2022-03-02 开始学习 FastAPI 了 - HuizhiXu 的个人博客
+  </title>
+  <meta name="description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/
+ ） 学完，我就会了。" /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="https://huizhixu.github.io/css/styles.min.a8628a7949d76d4d5a8696640e2a604a1f7c9b8690f3511812a99462f2193a69.css"
+    integrity="sha256-qGKKeUnXbU1ahpZkDipgSh98m4aQ81EYEqmUYvIZOmk="
+  />
   
-<div>
-  <main>
-    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
-      <div class="px-0">
-        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
-          <div class="flex-auto min-width-0 width-fit mr-3">
-            <div class="d-flex">
-              <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="https://huizhixu.github.io/">
-                  <img class=" avatar-user"
-                    src="https://huizhixu.github.io/images/poirot.png"
-                    width="32" height="32"></a>
-              </div>
-              <div class="d-flex flex-column">
-                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
-                  <span class="author">
-                    <a href="https://huizhixu.github.io/">Huizhi</a></span><span
-                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://huizhixu.github.io/post/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/">2022-03-02 开始学习 FastAPI 了</a></strong>
-                </h1>
-                <div class="note m-0">
-                  Created <relative-time datetime="Wed, 02 Mar 2022 20:07:58 &#43;0800"
-                    class="no-wrap">
-                    Wed, 02 Mar 2022 20:07:58 &#43;0800</relative-time>
+  
 
-                  
-                  <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 10 Dec 2022 19:11:38 &#43;0800"
-                    class="no-wrap">
-                    Sat, 10 Dec 2022 19:11:38 &#43;0800</relative-time>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <meta property="og:title" content="2022-03-02 开始学习 FastAPI 了" />
+<meta property="og:description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/
+ ） 学完，我就会了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/post/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-02T20:07:58+08:00" />
+<meta property="article:modified_time" content="2022-03-02T20:07:58+08:00" />
 
-    <div class="container-lg px-3 new-discussion-timeline">
-      <div class="repository-content gist-content">
-        <div>
-          <div class="js-gist-file-update-container js-task-list-container file-box">
-            <div id="file-pytest" class="file my-2">
-              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
-                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
-                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
-                    
-                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
-                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
-                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
-                      </svg>
-                    </summary>
-                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
-                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
-                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
-                        </div>
-                      </div>
-                    </details-menu>
-                      770 Words
-                    
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2022-03-02 开始学习 FastAPI 了"/>
+<meta name="twitter:description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/
+ ） 学完，我就会了。"/>
 
-                  </div>
-                  <div class="file-actions flex-order-2 pt-0">
-                    
-                  </div>
-                </div>
-              </div>
+  <meta itemprop="name" content="2022-03-02 开始学习 FastAPI 了">
+<meta itemprop="description" content="最近工作中要用到FastAPI，于是昨天下午在学习FastAPI，我告诉自己，把这个教程（https://fastapi.tiangolo.com/zh/tutorial/body/
+ ） 学完，我就会了。"><meta itemprop="datePublished" content="2022-03-02T20:07:58+08:00" />
+<meta itemprop="dateModified" content="2022-03-02T20:07:58+08:00" />
+<meta itemprop="wordCount" content="16">
+<meta itemprop="keywords" content="" />
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/" class="capitalize font-extrabold text-2xl">
+    
+    HuizhiXu 的个人博客
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+
+    
+
+    
+
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">2022-03-02 开始学习 FastAPI 了</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      Posted on 
+  
+    March 2, 2022
+  
 
 
-              <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>学着学着突然就emo了，觉得在互联网行业一直要学习新的东西，这个过程是无休止的，何时是个头啊。</p>
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;minutes
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      16&nbsp;words
+      
+        
+      
+    </h5>
+    
+
+    
+
+    <p>学着学着突然就emo了，觉得在互联网行业一直要学习新的东西，这个过程是无休止的，何时是个头啊。</p>
 <p>正沮丧着，在浏览器上我发现了一个很久没有打开的标签文件夹——blog，里面是我这几年收藏的博客和专题网站。于是我开始一个个点开，看有哪些人还在更新。</p>
 <p>其中有一个网站，我看了好久。</p>
-<p><a href="https://yihui.org/cn/">日志 - Yihui Xie | 谢益辉</a></p>
+<p><a href="https://yihui.org/cn/" target="_blank" rel="noopener">日志 - Yihui Xie | 谢益辉</a>
+</p>
 <p>看完了我很有感触。这种默默写博客的做法，就是我一直向往却没有做到的。非常敬佩，因为博主在努力构建自己的精神世界，和庞大的信息世界做对抗。</p>
 <p>我看过一篇文章，说每个人对不同的媒介有不同的接受度。有的人能从图像中看到丰富的信息，有的人在视频中最容易学新知识，有的人对文字的处理速度很高。有的人在做vlog，有的人还在坚持写博客。在我心里文字是最简朴，也是最丰富的。</p>
 <p>这个博主，很令人敬佩的另一个原因是，他毕业后在RStudio工作，8年了还没换工作呢。我们行业的人都挺浮躁的，因为大家都想去知名度更高的公司，报酬更高的公司，“跳来跳去“被认为是升职加薪的关键，但是也有一些人让人看到他们的内驱力是”做好事情“。</p>
@@ -241,46 +127,53 @@ code.has-jax {
 <p>下班后也和一个同事聊了聊。我问他经常要学习新的东西，不会感到厌倦吗？他说要保持竞争力，学习是必须的。而且什么框架不重要，重要的是弄清楚框架的设计理念是什么，这个框架为什么这么受欢迎？它的优缺点在哪？重要的是可以把写代码当成爱好，这样就不会烦了。</p>
 <p>我意识到我的做法是有问题的，我想着学完那个教程，我就会了。学的过程中我内心不断在念叨，”还有7个部分没学“，”好的，这章过了“。唉，我干嘛要这样啊，现在又不用考试要求面面俱到。</p>
 <p>如果带着好奇心去学的话，那就是，”有了这个功能，我还想加点需求，那么又该怎么实现呢“，”为什么这么设计呢，和Flask又有什么不同哇“，这样用好奇心驱动的话，收获的应该是好奇心得到满足的永不厌倦吧。</p>
-</article>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+  </article><div class="bg-pink-50 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
     </div>
-  </main>
-</div>
-<script type="application/javascript" src='https://huizhixu.github.io/js/toc.js'></script>
-<link rel="stylesheet" href='https://huizhixu.github.io/css/toc.css' />
 
-
-  <div class="footer container-xl width-full p-responsive">
-  <div
-    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://huizhixu.github.io/">
-      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
-        <path fill-rule="evenodd"
-          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-        </path>
-      </svg>
-    </a>
-    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
-      
-      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
       
     </ul>
   </div>
-  <div class="d-flex flex-justify-center pb-6">
-    <span class="f6 text-gray-light"></span>
-  </div>
-
-
 </div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    2023 © HuizhiXu 的个人博客
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+
+
+
+
+
+
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
 </body>
-
-<script type="application/javascript" src="https://huizhixu.github.io/js/github-style.js"></script>
-
-
-
-
 </html>

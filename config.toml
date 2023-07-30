@@ -1,37 +1,208 @@
 baseURL = "https://huizhixu.github.io/"
-languageCode = "zh-cn"
+metaDataFormat = "yaml"
+languageCode = "zh-CN"
 title = "HuizhiXu 的个人博客"
-theme = "github-style"
+theme = "blist"
 
-[taxonomies]
-   tag = "tags"
-   category = "categories"
+[author]
+ name = "HuizhiXu"
 
-[params]
-  author = "Huizhi"
-  email = "xuhuizhi@hotmail.com"
+DefaultContentLanguage = "zh_cn"
+DefaultContentLanguageInSubdir = true
+[languages]
+ [languages.zh_cn]
+   contentDir = 'content/zh_cn'
+   weight = 1
+   languageName = '中文 (简体)'
+   languageCode = 'zh-cn'
+   languageDirection = 'ltr'
+   title = '徐慧志的个人博客'
+ [languages.zh_cn.params]
+      introTitle = "Hallo! 我是慧志"
+      introSubtitle = "我是一名后端程序员，喜欢阅读、摄影和Zumba"
+      introPhoto = "/picture.jpg"
+      logo = "/blist-logo.png"
+    [[languages.zh_cn.menu.main]]
+        name = "生活见闻"
+        url = "/life/"
+        weight = 1
+
+    [[languages.zh_cn.menu.main]]
+        name = "IT技术"
+        url = "/know_how/"
+        weight = 2
+
+    [[languages.zh_cn.menu.main]]
+        name = "宝藏集结"
+        url = "/treasure/"
+        weight = 3
+
+    [[languages.zh_cn.menu.main]]
+        name = "分类"
+        url = "tags"
+        weight = 4
+
+ [languages.en]
+    contentDir = 'content/en'
+    disabled = false
+    languageCode = 'en-US'
+    languageDirection = 'ltr'
+    languageName = 'English'
+    title = 'PoirotMore'
+    weight = 2
+
+  [languages.en.params]
+   
+      introTitle = "Hey! I'm Huizhi Xu"
+      introSubtitle = "A senior developer who enjoys reading, blogging and dancing"
+      introPhoto = "/picture.jpg"
+      logo = "/blist-logo.png"
+   
+    [[languages.en.menu.main]]
+        name = "Blog"
+        url = "life"
+        weight = 1
+
+    [[languages.en.menu.main]]
+        name = "About"
+        url = "page/about/"
+        weight = 2
+
+    [[languages.en.menu.main]]
+        name = "Tags"
+        url = "tags"
+        weight = 3
+
+
+[languages.de]
+  contentDir = 'content/de'
+  disabled = false
+  languageCode = 'de-DE'
+  languageDirection = 'ltr'
+  languageName = 'Deutsch'
+    title = 'Blog von Huizhi XU'
+    weight = 3
+[languages.de.params]
+      introTitle = "Hallo, ich bin Huizhi Xu"
+      introSubtitle = "Eine Senior-Entwicklerin, die Spaß an Lesen, Bloggen und Zumba"
+      introPhoto = "/picture.jpg"
+      logo = "/blist-logo-de.png"
+    [[languages.de.menu.main]]
+        name = "Blog"
+        url = "life"
+        weight = 1
+
+    [[languages.de.menu.main]]
+        name = "Über mich"
+        url = "page/about/"
+        weight = 2
+
+    [[languages.de.menu.main]]
+        name = "Tags"
+        url = "tags"
+        weight = 3
+  [languages.dy]
+    contentDir = "content/dy" #Example language
+    weight = 3
+    languageName = "Test Language"
+
+#[params]
+#  author = "Huizhi"
+#  email = "xuhuizhi@hotmail.com"
 #   url = "https://huizhixu.org"
-  lastmod = true
+#  lastmod = true
 #   userStatusEmoji = "😀"
-  favicon = "/images/poirot.png"
-  location = "China"
+#  favicon = "/images/poirot.png"
+#  location = "China"
 #   enableGitalk = true
 
-#   [params.gitalk]
-#     clientID = "Your client ID"
-#     clientSecret = "Your client secret"
-#     repo = "repo"
-#     owner = "Huizhi"
-#     admin = "Huizhi"
-#     id = "location.pathname"
-#     labels = "gitalk"
-#     perPage = 15
-#     pagerDirection = "last"
-#     createIssueManually = true
-#     distractionFreeMode = false
+[params]
+  # Enable the darkmode toggle in header
+  darkModeToggle = true
+  
+  # Enable search in header
+  enableSearch = true
+
+  # Option to customize the search parameters of a page
+  # Below are the supported options; Note that including entire content
+  # may slowdown the loading of search results
+  # Title of page is included by default
+  searchKeys = [
+    "tags",
+    "date",
+    "categories",
+    "summary",
+    "content",
+    "link",
+    "author"
+  ]
+  # Custom copyright - optional
+  copyright = "Copyright © 2017 - Huizhi Xu · All rights reserved"
+  favicon = "/favicon.svg"
+
+  # Used to hide the post metadata such as posted date, reading time and word count
+  # Can be used at site level or page level
+
+  hideMeta = false
+  # To hide "Other languages" option if the post is available in multiple languages
+  # Can be used at site level or page level
+  hideOtherLanguages = false
+
+  # Add support for Table of contents
+  # Can be added to a page level also in markdown frontmatter
+  toc = true
+
+  # Hides the thumbnail in post view
+  # Thumbnails in home and blog pages will still be shown
+  # This setting can also be in page's markdown file
+  hidePageThumbnail = false
 
 
-[frontmatter]
-  lastmod = ["lastmod", ":fileModTime", ":default"]
+# Comments system
+#[params.comments]
 
- publishDir = "docs"
+  # Supports disqus, giscus and utterances
+
+
+## disqus
+  #enableComments = true
+
+  #autoLoadComments = true
+  #enableDisqus = true
+  disqusShortname = "huizhi"
+
+
+
+  # Check hugo docs for setting up disqus
+  #system = "giscus"
+
+  # Options for giscus, exclude hyphens
+   #repo = ""
+   repoid = ""
+   category = ""
+   categoryid = ""
+   mapping = ""
+   strict = ""
+   reactionsenabled = ""
+   emitmetadata = ""
+   inputposition = ""
+   theme = ""
+
+
+[build]
+  writeStats = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# syntax highlight settings
+[markup]
+  [markup.highlight]
+    style = "dracula"
+  [markup.goldmark.renderer]
+    # Enable to include inline HTML
+    unsafe = true
+
+
+
+

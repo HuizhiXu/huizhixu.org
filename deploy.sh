@@ -10,7 +10,7 @@ if [ $# -eq 1  ]
 fi
 
 # Build the project.
-hugo -t github-style # if using a theme, replace by `hugo -t <yourtheme>`
+hugo -t blist # if using a theme, replace by `hugo -t <yourtheme>`
 
 # Go To Public folder
 cd public
