@@ -6,11 +6,6 @@
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://huizhixu.github.io/zh_cn/life/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="en-US"
                 href="https://huizhixu.github.io/life/"
                 />
@@ -24,7 +19,7 @@
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
+                hreflang="zh_cn"
                 href="https://huizhixu.github.io/zh_cn/"
                 />
     <xhtml:link
@@ -40,11 +35,6 @@
   </url><url>
     <loc>https://huizhixu.github.io/de/tags/emoji/</loc>
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://huizhixu.github.io/zh_cn/tags/emoji/"
-                />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
@@ -86,7 +76,7 @@
     <lastmod>2021-10-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
+                hreflang="zh_cn"
                 href="https://huizhixu.github.io/zh_cn/tags/"
                 />
     <xhtml:link
@@ -233,7 +223,7 @@
     <loc>https://huizhixu.github.io/de/categories/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
+                hreflang="zh_cn"
                 href="https://huizhixu.github.io/zh_cn/categories/"
                 />
     <xhtml:link
