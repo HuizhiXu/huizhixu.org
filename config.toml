@@ -1,6 +1,6 @@
 baseURL = "https://huizhixu.github.io/"
 #baseURL = "http:huizhixu.org"
-languageCode = "zh-CN"
+# languageCode = "zh-chs"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
 
@@ -13,32 +13,38 @@ hasCJKLanguage = true
 DefaultContentLanguage = "chs"
 DefaultContentLanguageInSubdir = true
 [languages]
- [languages.zh_cn]
+ [languages.chs]
    contentDir = 'content/chs'
    weight = 1
    languageName = '中文 (简体)'
    title = '徐慧志的个人博客'
- [languages.zh_cn.params]
+ [languages.chs.params]
       introTitle = "Hallo! 我是慧志"
       introSubtitle = "我是一名后端程序员，喜欢阅读、摄影和Zumba"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo.png"
-    [[languages.zh_cn.menu.main]]
+    [[languages.chs.menu.main]]
         name = "生活见闻"
-        url = "life"
+        url = "/life/"
         weight = 1
+        
+    [[languages.chs.menu.main]]
+        name = "关于"
+        url = "page/about/"
+        weight = 2
 
-    [[languages.zh_cn.menu.main]]
+
+    [[languages.chs.menu.main]]
         name = "IT技术"
         url = "/know_how/"
         weight = 2
 
-    [[languages.zh_cn.menu.main]]
+    [[languages.chs.menu.main]]
         name = "宝藏集结"
         url = "/treasure/"
         weight = 3
 
-    [[languages.zh_cn.menu.main]]
+    [[languages.chs.menu.main]]
         name = "分类"
         url = "/tags/"
         weight = 4
@@ -60,7 +66,7 @@ DefaultContentLanguageInSubdir = true
    
     [[languages.en.menu.main]]
         name = "Blog"
-        url = "life"
+        url = "/life/"
         weight = 1
 
     [[languages.en.menu.main]]

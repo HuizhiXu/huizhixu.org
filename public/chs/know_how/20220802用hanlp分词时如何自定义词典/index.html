@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.svg">
+
+  <title>
+  2022-08-02 用 HanLP 分词时如何自定义词典 - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="用 hanlp 的效果比较好的粗粒度分词模型 COARSE_ELECTRA_SMALL_ZH 进行分析" />
+  <meta name="author" content="Huizhi" />
+  <meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="https://huizhixu.github.io/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity="sha256-p0pLfdYeNq1LF5tlg1DyG7s27yKQQIL0ALVACrqIkzw="
+  />
+  
+  
+
+  <meta property="og:title" content="2022-08-02 用 HanLP 分词时如何自定义词典" />
+<meta property="og:description" content="用 hanlp 的效果比较好的粗粒度分词模型 COARSE_ELECTRA_SMALL_ZH 进行分析" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2022-08-02T17:51:00+08:00" />
+<meta property="article:modified_time" content="2022-10-14T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2022-08-02 用 HanLP 分词时如何自定义词典"/>
+<meta name="twitter:description" content="用 hanlp 的效果比较好的粗粒度分词模型 COARSE_ELECTRA_SMALL_ZH 进行分析"/>
+
+  <meta itemprop="name" content="2022-08-02 用 HanLP 分词时如何自定义词典">
+<meta itemprop="description" content="用 hanlp 的效果比较好的粗粒度分词模型 COARSE_ELECTRA_SMALL_ZH 进行分析"><meta itemprop="datePublished" content="2022-08-02T17:51:00+08:00" />
+<meta itemprop="dateModified" content="2022-10-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="302">
+<meta itemprop="keywords" content="emoji," />
+
+  
+  <meta name="lang" content="chs" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/chs/life/">生活见闻</a></li>
+    
+    <li><a href="/chs/know_how/">IT技术</a></li>
+    
+    <li><a href="/chs/page/about/">关于</a></li>
+    
+    <li><a href="/chs/treasure/">宝藏集结</a></li>
+    
+    <li><a href="/chs/tags/">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/en/" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/de/" lang="de">Deutsch</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/2/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2022年8月2日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">2022-08-02 用 HanLP 分词时如何自定义词典</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2022年8月2日
+  
+
+      
+        &nbsp(最近编辑 
+  
+  2022年10月14日
+  
+)</h5><h5 class="text-sm flex items-center flex-wrap">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      2&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      302&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    
+
+    <p>在分词的过程中，碰到一个这样的句子：</p>
+<p>&lsquo;<code>公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。</code>&rsquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> hanlp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tok <span style="color:#ff79c6">=</span> hanlp<span style="color:#ff79c6">.</span>load(hanlp<span style="color:#ff79c6">.</span>pretrained<span style="color:#ff79c6">.</span>tok<span style="color:#ff79c6">.</span>COARSE_ELECTRA_SMALL_ZH)
+</span></span><span style="display:flex;"><span>sentence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&#39;</span>
+</span></span><span style="display:flex;"><span>sen_list <span style="color:#ff79c6">=</span> tok(sentence)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(sen_list)
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;公司&#39;</span>, <span style="color:#f1fa8c">&#39;产品&#39;</span>, <span style="color:#f1fa8c">&#39;品质&#39;</span>, <span style="color:#f1fa8c">&#39;持续&#39;</span>, <span style="color:#f1fa8c">&#39;提升&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶&#39;</span>, <span style="color:#f1fa8c">&#39;硅&#39;</span>, <span style="color:#f1fa8c">&#39;片&#39;</span>, <span style="color:#f1fa8c">&#39;用&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;比例&#39;</span>, <span style="color:#f1fa8c">&#39;大幅&#39;</span>, <span style="color:#f1fa8c">&#39;高于&#39;</span>, <span style="color:#f1fa8c">&#39;行业&#39;</span>, <span style="color:#f1fa8c">&#39;平均&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶&#39;</span>, <span style="color:#f1fa8c">&#39;硅&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;。&#39;</span>]
+</span></span></code></pre></div><p>可以看出来，这里“单晶硅片”，“单晶硅料”， 被分为了“单晶”“硅”“料”和“单晶”“硅”“片”。</p>
+<p>如果我们想要把“单晶硅”分出来。可以设置自定义词典。tok下面有两个参数：dict_force和dict_combine，通过设置这两个参数就可以达到自定义词典的效果。</p>
+<p>dict_force和dict_combine有什么区别：</p>
+<p>dict_force是强制模式，强制模式的优先级高于统计模型。如果强制模式用于所有文本，会对其他句子进行干扰，所以强制模式一般不用于所有文本，但是可以针对某个特定句子打补丁。</p>
+<p>dict_combine是合并模式，合并模式的优先级低于统计模型。就是说句子先用统计模型分词，然后在这个分词的基础上，再进行最长匹配并合并。</p>
+<p>先看一下dict_combine的例子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_force <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">None</span>
+</span></span><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_combine <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;单晶硅&#39;</span>}
+</span></span><span style="display:flex;"><span>sentence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&#39;</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;公司&#39;</span>, <span style="color:#f1fa8c">&#39;产品&#39;</span>, <span style="color:#f1fa8c">&#39;品质&#39;</span>, <span style="color:#f1fa8c">&#39;持续&#39;</span>, <span style="color:#f1fa8c">&#39;提升&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅&#39;</span>, <span style="color:#f1fa8c">&#39;片&#39;</span>, <span style="color:#f1fa8c">&#39;用&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;比例&#39;</span>, <span style="color:#f1fa8c">&#39;大幅&#39;</span>, <span style="color:#f1fa8c">&#39;高于&#39;</span>, <span style="color:#f1fa8c">&#39;行业&#39;</span>, <span style="color:#f1fa8c">&#39;平均&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;。&#39;</span>]
+</span></span></code></pre></div><p>我们一般会用dict_combine，这样就把“单晶硅”分出来了。</p>
+<p>如果在dict_combine里面，同时有’单晶硅片&rsquo;,&lsquo;单晶硅&rsquo;，这两者都能被分出来。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_force <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">None</span>
+</span></span><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_combine <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;单晶硅片&#39;</span>,<span style="color:#f1fa8c">&#39;单晶硅&#39;</span>}
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;公司&#39;</span>, <span style="color:#f1fa8c">&#39;产品&#39;</span>, <span style="color:#f1fa8c">&#39;品质&#39;</span>, <span style="color:#f1fa8c">&#39;持续&#39;</span>, <span style="color:#f1fa8c">&#39;提升&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅片&#39;</span>, <span style="color:#f1fa8c">&#39;用&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;比例&#39;</span>, <span style="color:#f1fa8c">&#39;大幅&#39;</span>, <span style="color:#f1fa8c">&#39;高于&#39;</span>, <span style="color:#f1fa8c">&#39;行业&#39;</span>, <span style="color:#f1fa8c">&#39;平均&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;。&#39;</span>]
+</span></span></code></pre></div><p>可以看出，dict_combine的原理是在这个的基础上<code>['公司', '产品', '品质', '持续', '提升', '，', '单晶', '硅', '片', '用', '料', '比例', '大幅', '高于', '行业', '平均', '，', '单晶', '硅', '料', '价格', '上涨', '。']</code>
+进行最长匹配，再合并。所以一个被合并成了”单晶硅片”，一个合并成”单晶硅”。为什么不是链各个“单晶硅”，因为“单晶硅片”的长度大于“单晶硅”，按最长的匹配合并。</p>
+<p>同理，如果dict_combine里面是“单晶硅”和“硅料”，那么硅料将不会被分出来。</p>
+<p>但是自定义词典不是永远都有效的。HANLP这里有说明，在自定义词典下，分词是结合了统计模型和自定义词典之后的分词，并不是完全会按照我们的自定义词典来。</p>
+<p>如果我们想把单晶硅片，硅料和但单晶硅都切分正确，如果把它们都放到dict_combine里面，硅料是不会被切分对的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_combine <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;硅料&#39;</span>,<span style="color:#f1fa8c">&#39;单晶硅片&#39;</span> ,<span style="color:#f1fa8c">&#39;单晶硅&#39;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sentence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨，单晶硅价格也上涨。&#39;</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;公司&#39;</span>, <span style="color:#f1fa8c">&#39;产品&#39;</span>, <span style="color:#f1fa8c">&#39;品质&#39;</span>, <span style="color:#f1fa8c">&#39;持续&#39;</span>, <span style="color:#f1fa8c">&#39;提升&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅片&#39;</span>, <span style="color:#f1fa8c">&#39;用&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;比例&#39;</span>, <span style="color:#f1fa8c">&#39;大幅&#39;</span>, <span style="color:#f1fa8c">&#39;高于&#39;</span>, <span style="color:#f1fa8c">&#39;行业&#39;</span>, <span style="color:#f1fa8c">&#39;平均&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;也&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;。&#39;</span>]
+</span></span></code></pre></div><p>这时，可以把硅料放在dict_force里面，这样就能同时把三者都分出来。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_force <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;硅料&#39;</span>}
+</span></span><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_combine <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;单晶硅片&#39;</span>,<span style="color:#f1fa8c">&#39;单晶硅&#39;</span>}
+</span></span><span style="display:flex;"><span>sentence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨，单晶硅价格也上涨。&#39;</span>
+</span></span><span style="display:flex;"><span>sen_list <span style="color:#ff79c6">=</span> tok(sentence)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(sen_list)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;公司&#39;</span>, <span style="color:#f1fa8c">&#39;产品&#39;</span>, <span style="color:#f1fa8c">&#39;品质&#39;</span>, <span style="color:#f1fa8c">&#39;持续&#39;</span>, <span style="color:#f1fa8c">&#39;提升&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅片&#39;</span>, <span style="color:#f1fa8c">&#39;用&#39;</span>, <span style="color:#f1fa8c">&#39;料&#39;</span>, <span style="color:#f1fa8c">&#39;比例&#39;</span>, <span style="color:#f1fa8c">&#39;大幅&#39;</span>, <span style="color:#f1fa8c">&#39;高于&#39;</span>, <span style="color:#f1fa8c">&#39;行业&#39;</span>, <span style="color:#f1fa8c">&#39;平均&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶&#39;</span>, <span style="color:#f1fa8c">&#39;硅料&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;单晶硅&#39;</span>, <span style="color:#f1fa8c">&#39;价格&#39;</span>, <span style="color:#f1fa8c">&#39;也&#39;</span>, <span style="color:#f1fa8c">&#39;上涨&#39;</span>, <span style="color:#f1fa8c">&#39;。&#39;</span>]
+</span></span></code></pre></div><p>如果不是这种情况，我们不要用dict_force，因为它极有可能影响其他地方。这是教程里面的一个例子。可以看出，后面这句分错了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_force <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;川普&#39;</span>}
+</span></span><span style="display:flex;"><span>word_list <span style="color:#ff79c6">=</span> tok([<span style="color:#f1fa8c">&#34;首相和川普通电话&#34;</span>, <span style="color:#f1fa8c">&#34;银川普通人与川普通电话讲四川普通话&#34;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(word_list)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#f1fa8c">&#39;首相&#39;</span>, <span style="color:#f1fa8c">&#39;和&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通电话&#39;</span>], [<span style="color:#f1fa8c">&#39;银&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通人&#39;</span>, <span style="color:#f1fa8c">&#39;与&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通电话&#39;</span>, <span style="color:#f1fa8c">&#39;讲&#39;</span>, <span style="color:#f1fa8c">&#39;四&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通话&#39;</span>]]
+</span></span></code></pre></div><p>如果把‘普通人’也加到dict_force里面，为啥第二句还是会被分成“川普”呢？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_combine <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;硅料&#39;</span>,<span style="color:#f1fa8c">&#39;单晶硅&#39;</span>}
+</span></span><span style="display:flex;"><span>[[<span style="color:#f1fa8c">&#39;首相&#39;</span>, <span style="color:#f1fa8c">&#39;和&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通电话&#39;</span>], [<span style="color:#f1fa8c">&#39;银&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通人&#39;</span>, <span style="color:#f1fa8c">&#39;与&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通电话&#39;</span>, <span style="color:#f1fa8c">&#39;讲&#39;</span>, <span style="color:#f1fa8c">&#39;四&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通话&#39;</span>]]
+</span></span></code></pre></div><p>原文是这样解释的：</p>
+<p>即便是将<code>普通人</code>
+或<code>普通话</code>
+加入到词典中也无济于事，因为在正向最长匹配第二个句子的过程中，会匹配到<code>川普</code>
+而不会匹配后两者。</p>
+<p>我的理解是dict_combine不是按照最长匹配的，而是在发生冲突的时候，取了“川普”，舍弃了“普通人”。当然我不知道这里的取舍规则是怎么样的。总之在这种情况下我们可以给第一句话打个补丁。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_force <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;川普通电话&#39;</span>: [<span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通&#39;</span>, <span style="color:#f1fa8c">&#39;电话&#39;</span>]}
+</span></span><span style="display:flex;"><span>tok([<span style="color:#f1fa8c">&#34;首相和川普通电话&#34;</span>, <span style="color:#f1fa8c">&#34;银川普通人与川普通电话讲四川普通话&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#f1fa8c">&#39;首相&#39;</span>, <span style="color:#f1fa8c">&#39;和&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通&#39;</span>, <span style="color:#f1fa8c">&#39;电话&#39;</span>],
+</span></span><span style="display:flex;"><span> [<span style="color:#f1fa8c">&#39;银川&#39;</span>, <span style="color:#f1fa8c">&#39;普通人&#39;</span>, <span style="color:#f1fa8c">&#39;与&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通&#39;</span>, <span style="color:#f1fa8c">&#39;电话&#39;</span>, <span style="color:#f1fa8c">&#39;讲&#39;</span>, <span style="color:#f1fa8c">&#39;四川&#39;</span>, <span style="color:#f1fa8c">&#39;普通话&#39;</span>]]
+</span></span></code></pre></div><p>打补丁的意思是说，针对特殊案例进行校正。这种补丁不存在泛化性，只有出现完全一样的字符片段才会按照dict_force里面分词。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tok<span style="color:#ff79c6">.</span>dict_force <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#39;川普通电话&#39;</span>: [<span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通&#39;</span>, <span style="color:#f1fa8c">&#39;电话&#39;</span>]}
+</span></span><span style="display:flex;"><span>word_list <span style="color:#ff79c6">=</span> tok([<span style="color:#f1fa8c">&#34;首相和川普通电话&#34;</span>, <span style="color:#f1fa8c">&#34;银川普通人与川普通电话讲四川普通话&#34;</span>, <span style="color:#f1fa8c">&#34;四川普通人&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[<span style="color:#f1fa8c">&#39;首相&#39;</span>, <span style="color:#f1fa8c">&#39;和&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通&#39;</span>, <span style="color:#f1fa8c">&#39;电话&#39;</span>], [<span style="color:#f1fa8c">&#39;银川&#39;</span>, <span style="color:#f1fa8c">&#39;普通人&#39;</span>, <span style="color:#f1fa8c">&#39;与&#39;</span>, <span style="color:#f1fa8c">&#39;川普&#39;</span>, <span style="color:#f1fa8c">&#39;通&#39;</span>, <span style="color:#f1fa8c">&#39;电话&#39;</span>, <span style="color:#f1fa8c">&#39;讲&#39;</span>, <span style="color:#f1fa8c">&#39;四川&#39;</span>, <span style="color:#f1fa8c">&#39;普通话&#39;</span>], [<span style="color:#f1fa8c">&#39;四川&#39;</span>, <span style="color:#f1fa8c">&#39;普通人&#39;</span>]]
+</span></span></code></pre></div><p>总结一下：</p>
+<p>用自定义词典时，一般使用dict_combine，注意dict_combine里面的会用最长匹配。</p>
+<p>如果dict_combine里面的词有冲突，可以考虑把最短的词放在dict_force里面。</p>
+<p>如果要用dict_force，最好是用打补丁的方式，注明在什么样的字符串才用dict_force里面的分词方式。</p>
+<p>参考文章：<a href="https://github.com/hankcs/HanLP/blob/doc-zh/plugins/hanlp_demo/hanlp_demo/zh/tok_stl.ipynb" target="_blank" rel="noopener">https://github.com/hankcs/HanLP/blob/doc-zh/plugins/hanlp_demo/hanlp_demo/zh/tok_stl.ipynb</a>
+</p>
+
+  </article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

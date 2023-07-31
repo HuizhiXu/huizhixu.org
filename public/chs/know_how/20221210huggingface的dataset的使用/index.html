@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="/favicon.svg">
+
+  <title>
+  2022-12-10 HuggingFace的Dataset的使用 - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="在数据上吃了很多苦头，数据不符合模型的要求，而造成模型跑不起来，debug的时候走了很多弯路，这样的事情发生了很多次！ 所以特意把HuggingFace里面的数据类都学习一遍。" />
+  <meta name="author" content="Huizhi" />
+  <meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="https://huizhixu.github.io/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity="sha256-p0pLfdYeNq1LF5tlg1DyG7s27yKQQIL0ALVACrqIkzw="
+  />
+  
+  
+
+  <meta property="og:title" content="2022-12-10 HuggingFace的Dataset的使用" />
+<meta property="og:description" content="在数据上吃了很多苦头，数据不符合模型的要求，而造成模型跑不起来，debug的时候走了很多弯路，这样的事情发生了很多次！ 所以特意把HuggingFace里面的数据类都学习一遍。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2022-12-10T18:51:00+08:00" />
+<meta property="article:modified_time" content="2022-10-30T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2022-12-10 HuggingFace的Dataset的使用"/>
+<meta name="twitter:description" content="在数据上吃了很多苦头，数据不符合模型的要求，而造成模型跑不起来，debug的时候走了很多弯路，这样的事情发生了很多次！ 所以特意把HuggingFace里面的数据类都学习一遍。"/>
+
+  <meta itemprop="name" content="2022-12-10 HuggingFace的Dataset的使用">
+<meta itemprop="description" content="在数据上吃了很多苦头，数据不符合模型的要求，而造成模型跑不起来，debug的时候走了很多弯路，这样的事情发生了很多次！ 所以特意把HuggingFace里面的数据类都学习一遍。"><meta itemprop="datePublished" content="2022-12-10T18:51:00+08:00" />
+<meta itemprop="dateModified" content="2022-10-30T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1092">
+<meta itemprop="keywords" content="emoji," />
+
+  
+  <meta name="lang" content="chs" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="/blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="/chs/life/">生活见闻</a></li>
+    
+    <li><a href="/chs/know_how/">IT技术</a></li>
+    
+    <li><a href="/chs/page/about/">关于</a></li>
+    
+    <li><a href="/chs/treasure/">宝藏集结</a></li>
+    
+    <li><a href="/chs/tags/">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/en/" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="/de/" lang="de">Deutsch</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/17/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2022年12月10日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">2022-12-10 HuggingFace的Dataset的使用</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2022年12月10日
+  
+
+      
+        &nbsp(最近编辑 
+  
+  2022年10月30日
+  
+)</h5><h5 class="text-sm flex items-center flex-wrap">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      6&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      1092&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#hub%e4%b8%8a%e7%9a%84%e6%95%b0%e6%8d%ae%e9%9b%86a-namedatasets-from-the-huba">hub上的数据集<a name="datasets from the hub"></a></a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e5%af%bc%e5%85%a5%e6%95%b0%e6%8d%ae%e9%9b%86a-nameimport-datasetsa">导入数据集<a name="import datasets"></a></a>
+        
+
+        
+        </li><li>
+        <a href="#%e5%88%92%e5%88%86%e6%95%b0%e6%8d%ae%e9%9b%86split">划分数据集（Split）</a>
+        
+
+        
+        </li><li>
+        <a href="#dataset%e7%b1%bb">Dataset类</a>
+        
+
+        
+        </li><li>
+        <a href="#dataset%e9%a2%84%e5%a4%84%e7%90%86">Dataset预处理</a>
+        
+
+        
+        </li><li>
+        <a href="#%e8%be%93%e5%85%a5%e5%8d%95%e5%ba%8f%e5%88%97%e4%b8%8e%e8%be%93%e5%85%a5%e5%a4%9a%e5%ba%8f%e5%88%97">输入单序列与输入多序列</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e8%be%93%e5%85%a5%e5%8d%95%e5%ba%8f%e5%88%97">输入单序列</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#tokenizer%e7%9a%84%e6%95%b4%e4%b8%aa%e5%b7%a5%e4%bd%9c%e8%bf%87%e7%a8%8b">tokenizer的整个工作过程</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e7%94%a8map%e6%9d%a5%e5%af%b9%e6%89%b9%e9%87%8f%e6%95%b0%e6%8d%ae%e8%bf%9b%e8%a1%8ctokenzie">用map来对批量数据进行tokenzie</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#%e5%a6%82%e6%9e%9clabel%e6%98%afstring%e6%80%8e%e4%b9%88%e5%8f%98%e6%88%90id">如果label是string，怎么变成id？</a>
+        
+
+        
+        </li><li>
+        <a href="#%e6%a8%a1%e5%9e%8b%e8%be%93%e5%85%a5%e7%9a%84%e6%95%b0%e6%8d%ae">模型输入的数据</a>
+        
+
+        
+        </li><li>
+        <a href="#%e6%a8%a1%e5%9e%8b%e8%be%93%e5%87%ba%e7%9a%84%e6%95%b0%e6%8d%ae">模型输出的数据</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e5%ba%8f%e5%88%97%e7%bb%8f%e8%bf%87%e6%a8%a1%e5%9e%8b%e5%a4%84%e7%90%86%e4%b9%8b%e5%90%8e%e7%9a%84%e6%95%b0%e6%8d%ae%e6%98%af%e4%bb%80%e4%b9%88">序列经过模型处理之后的数据是什么？</a>
+        
+
+        
+        </li></ul>
+      </li></ul>
+      </li><li>
+        <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae">参考文献：</a>
+        </li></ul>
+  </details>
+
+    <h2 id="hub上的数据集a-namedatasets-from-the-huba">hub上的数据集<a name="datasets from the hub"></a></h2>
+<p>（这里不是互联网上任意的数据集，专指Huggingface的hub上面的，就是可以用关键字直接下载的）</p>
+<p>数据集可以在<a href="https://huggingface.co/datasets" target="_blank" rel="noopener">https://huggingface.co/datasets</a>
+ 找到，另外也可以用**<code>datasets.list_datasets()</code>
+来看有什么数据集，然后通过关键字下载。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> datasets <span style="color:#ff79c6">import</span> list_datasets
+</span></span><span style="display:flex;"><span>list_datasets(with_community_datasets <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">True</span>, with_detaikls <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">False</span>)
+</span></span></code></pre></div><p>很多例子演示的时候，都是直接用hub上的数据集演示，但是我不知道这个数据集里面的构造，尽管照着例子运行成功了，但往往一头雾水。</p>
+<p>此时我要看看这个数据集里面到底有啥东西，可以导入dataset builder来看看。（这个例子里面我们导入的数据集是”rotten_tomatoes”）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>!pip install datasets
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> datasets <span style="color:#ff79c6">import</span> load_dataset_builder
+</span></span><span style="display:flex;"><span>ds_builder <span style="color:#ff79c6">=</span> load_dataset_builder(<span style="color:#f1fa8c">&#34;rotten_tomatoes&#34;</span>) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ds_builder<span style="color:#ff79c6">.</span>info<span style="color:#ff79c6">.</span>description
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Movie Review Dataset<span style="color:#ff79c6">.</span>
+</span></span><span style="display:flex;"><span>This <span style="color:#ff79c6">is</span> a dataset of containing <span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">331</span> positive <span style="color:#ff79c6">and</span> <span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">331</span> negative processed
+</span></span><span style="display:flex;"><span>sentences <span style="color:#ff79c6">from</span> Rotten Tomatoes movie reviews<span style="color:#ff79c6">.</span> This data was first used <span style="color:#ff79c6">in</span> Bo
+</span></span><span style="display:flex;"><span>Pang <span style="color:#ff79c6">and</span> Lillian Lee, ``Seeing stars: Exploiting <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">relationships</span> <span style="color:#ff79c6">for</span>
+</span></span><span style="display:flex;"><span>sentiment categorization <span style="color:#ff79c6">with</span> respect to rating scales<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;&#39;</span>, Proceedings of the
+</span></span><span style="display:flex;"><span>ACL, <span style="color:#bd93f9">2005.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ds_builder<span style="color:#ff79c6">.</span>info<span style="color:#ff79c6">.</span>features
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f1fa8c">&#39;text&#39;</span>: Value(dtype<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;string&#39;</span>, <span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>),
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;label&#39;</span>: ClassLabel(num_classes<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>, names<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#39;neg&#39;</span>, <span style="color:#f1fa8c">&#39;pos&#39;</span>], <span style="color:#8be9fd;font-style:italic">id</span><span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>)}
+</span></span></code></pre></div><p>ds_builder.info.description 告诉我这个数据集的介绍。可以看到这个数据集来自烂番茄这个网站，有5331个正样本，5331个负样本。</p>
+<p>ds_builder.info.features  会告诉我数据的特征。它有两个特征， 这里的特征和我们平时说的特征有些许不同。平时说的特征是样本的特征，这里的特征指数据的内容+标签。这两个特征中，一个叫’text’，另一个叫’label’。’label’这个标签有两类——neg和pos。</p>
+<p>ClassLabel是什么？做分类任务的时候我们可以用它来构建dataset。</p>
+<h3 id="导入数据集a-nameimport-datasetsa">导入数据集<a name="import datasets"></a></h3>
+<p>接下来可以用load_dataset来导入这个数据集。</p>
+<p>如果不写split参数，load_dataset的返回值是一个DatasetDict类。里面只有一个train的数据集。如果写split参数，load_dataset的返回值是一个Dataset类。</p>
+<pre tabindex="0"><code>data = load_dataset(&#39;csv&#39;, data_files=one_hot_filter_path)
+
+DatasetDict({
+    train: Dataset({
+        features: [&#39;content&#39;, &#39;labels&#39;],
+        num_rows: 1581
+    })
+})
+
+data = load_dataset(&#39;csv&#39;, data_files=one_hot_filter_path, split=&#34;train&#34;)
+Dataset({
+    features: [&#39;content&#39;, &#39;labels&#39;],
+    num_rows: 1581
+})
+</code></pre><p>这里的split不是切割这个数据集，而是挑选出key为train的数据集。</p>
+<p>也可以将split设置为train+test，就挑选出了key 为train和key为test的数据集。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#39;csv&#39;</span>, data_files<span style="color:#ff79c6">=</span>one_hot_filter_path, split<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;train+test&#34;</span>)
+</span></span><span style="display:flex;"><span>Dataset({
+</span></span><span style="display:flex;"><span>    features: [<span style="color:#f1fa8c">&#39;content&#39;</span>, <span style="color:#f1fa8c">&#39;labels&#39;</span>],
+</span></span><span style="display:flex;"><span>    num_rows: <span style="color:#bd93f9">3000</span>
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>如果数据集在不同的文件，我们想要一起导入。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#34;csv&#34;</span>, data_files<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#34;my_file_1.csv&#34;</span>, <span style="color:#f1fa8c">&#34;my_file_2.csv&#34;</span>, <span style="color:#f1fa8c">&#34;my_file_3.csv&#34;</span>])
+</span></span></code></pre></div><p>也可以将文件映射到train和test</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>base_url <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;https://huggingface.co/datasets/lhoestq/demo1/resolve/main/data/&#34;</span>
+</span></span><span style="display:flex;"><span>dataset <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#39;csv&#39;</span>, data_files<span style="color:#ff79c6">=</span>{<span style="color:#f1fa8c">&#39;train&#39;</span>: base_url <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;train.csv&#39;</span>, <span style="color:#f1fa8c">&#39;test&#39;</span>: base_url <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;test.csv&#39;</span>})
+</span></span></code></pre></div><p>如果选择train数据集的部分数据。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>train_10_20_ds <span style="color:#ff79c6">=</span>load_dataset(<span style="color:#f1fa8c">&#39;glue&#39;</span>, <span style="color:#f1fa8c">&#39;mrpc&#39;</span>, split<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;train[10:20]&#39;</span>)<span style="color:#6272a4">#选择其中10 行数据</span>
+</span></span><span style="display:flex;"><span>train_10pct_ds <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#39;glue&#39;</span>, <span style="color:#f1fa8c">&#39;mrpc&#39;</span>, split<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;train[:10%]&#39;</span>)<span style="color:#6272a4">#选择10%的数据</span>
+</span></span></code></pre></div><h3 id="划分数据集split">划分数据集（Split）</h3>
+<p>datasets.Dataset.train_test_split(test_size=0.1)</p>
+<p>注意不能对DatasetDict运用train_test_split，不然会出现错误&rsquo; object has no attribute &rsquo;train_test_split’，只有对DataDict里面的Dataset运用train_test_split才可以。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#39;csv&#39;</span>, data_files<span style="color:#ff79c6">=</span>one_hot_filter_path)
+</span></span><span style="display:flex;"><span>data
+</span></span><span style="display:flex;"><span>DatasetDict({
+</span></span><span style="display:flex;"><span>    train: Dataset({
+</span></span><span style="display:flex;"><span>        features: [<span style="color:#f1fa8c">&#39;content&#39;</span>, <span style="color:#f1fa8c">&#39;labels&#39;</span>],
+</span></span><span style="display:flex;"><span>        num_rows: <span style="color:#bd93f9">1581</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data<span style="color:#ff79c6">=</span>data[<span style="color:#f1fa8c">&#39;train&#39;</span>]<span style="color:#ff79c6">.</span>train_test_split(test_size<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0.1</span>) <span style="color:#6272a4"># 拆分默认shuffle</span>
+</span></span><span style="display:flex;"><span>data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DatasetDict({
+</span></span><span style="display:flex;"><span>    train: Dataset({
+</span></span><span style="display:flex;"><span>        features: [<span style="color:#f1fa8c">&#39;content&#39;</span>, <span style="color:#f1fa8c">&#39;labels&#39;</span>],
+</span></span><span style="display:flex;"><span>        num_rows: <span style="color:#bd93f9">1422</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    test: Dataset({
+</span></span><span style="display:flex;"><span>        features: [<span style="color:#f1fa8c">&#39;content&#39;</span>, <span style="color:#f1fa8c">&#39;labels&#39;</span>],
+</span></span><span style="display:flex;"><span>        num_rows: <span style="color:#bd93f9">159</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><h3 id="dataset类">Dataset类</h3>
+<p>索引</p>
+<ol>
+<li>Dataset类可以通过下标索引来access某条数据。此时它就像列表一样，可以data[0], data[1], data[-1]。例子如下：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#f1fa8c">&#39;train&#39;</span>][<span style="color:#bd93f9">0</span>]  <span style="color:#6272a4"># 此时data[&#39;train&#39;]是Dataset类</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f1fa8c">&#39;content&#39;</span>: <span style="color:#f1fa8c">&#39;明日天气雷阵雨转晴，晚上有大雾出现。&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;labels&#39;</span>: <span style="color:#f1fa8c">&#39;天气预报&#39;</span>}
+</span></span></code></pre></div><ol>
+<li>可以用’column_name’来得到所有数据。例如我们的数据集中有content和labels两列。我们可以打印出所有的labels。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data[<span style="color:#f1fa8c">&#39;train&#39;</span>][<span style="color:#f1fa8c">&#39;labels&#39;</span>]
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;天气预报&#39;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;家政服务&#39;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;外卖服务&#39;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;网约车服务&#39;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;足球资讯&#39;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>也可以打印某一个元素的某列</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>data[<span style="color:#f1fa8c">&#39;train&#39;</span>][<span style="color:#bd93f9">1</span>][<span style="color:#f1fa8c">&#39;labels&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;家政服务&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data[<span style="color:#f1fa8c">&#39;train&#39;</span>][<span style="color:#f1fa8c">&#39;labels&#39;</span>][<span style="color:#bd93f9">1</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;家政服务&#39;</span>
+</span></span></code></pre></div><h3 id="dataset预处理">Dataset预处理</h3>
+<p>这里主要的做法有两步：1.将原始文本切割成字，然后与id对应 ；2.格式化，和机器学习框架适配。</p>
+<ol>
+<li>tokenize 文本内容</li>
+</ol>
+<p>将文本序列切割成一个一个的字(so called token)，然后映射到id。（中文的token主要看预定的规则，在bert-base-chinese里面是字）</p>
+<p>我们可以自由选择tokenizer，但通常是和预训练模型用同一个tokenizer。因为不同的模型可能对于特殊token，[SEP],[CLS]的处理是不一样的。例如我们使用了’bert-base-chinese’模型。</p>
+<p>这里说一下AUtoTokenizer。什么时候用它呢？就是不知道这个模型是从那个模型里训练出来的，关于bert我们有bertforsequenceclassification，还有很多其他的，不确定的时候就可以用AutoTokenizer</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> transformers <span style="color:#ff79c6">import</span> AutoTokenizer
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> datasets <span style="color:#ff79c6">import</span> load_dataset
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#39;csv&#39;</span>, data_files<span style="color:#ff79c6">=</span>one_hot_filter_path, split <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;train&#39;</span>)
+</span></span><span style="display:flex;"><span>data[<span style="color:#bd93f9">0</span>]  <span style="color:#6272a4"># 此时data[&#39;train&#39;]是Dataset类</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f1fa8c">&#39;content&#39;</span>: <span style="color:#f1fa8c">&#39;明日天气雷阵雨转晴，晚上有大雾出现。&#39;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;labels&#39;</span>: <span style="color:#f1fa8c">&#39;天气预报&#39;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#34;bert-base-chinese&#34;</span>)
+</span></span><span style="display:flex;"><span>tokenizer(data[<span style="color:#bd93f9">0</span>][<span style="color:#f1fa8c">&#39;content&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f1fa8c">&#39;input_ids&#39;</span>: [<span style="color:#bd93f9">101</span>, <span style="color:#bd93f9">3209</span>, <span style="color:#bd93f9">3189</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3698</span>, <span style="color:#bd93f9">7440</span>, <span style="color:#bd93f9">7347</span>, <span style="color:#bd93f9">7433</span>, <span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">3252</span>, <span style="color:#bd93f9">8024</span>, <span style="color:#bd93f9">3241</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">677</span>, <span style="color:#bd93f9">3300</span>, <span style="color:#bd93f9">1920</span>, <span style="color:#bd93f9">7443</span>, <span style="color:#bd93f9">1139</span>, <span style="color:#bd93f9">4385</span>, <span style="color:#bd93f9">511</span>, <span style="color:#bd93f9">102</span>], 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;token_type_ids&#39;</span>: [<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>], 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;attention_mask&#39;</span>: [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>]}
+</span></span></code></pre></div><p>可以看出来，文本经过tokenize之后，会生成input_ids， token_type_ids和attention_mask。</p>
+<ul>
+<li>input_ids：指文本经过切割之后的字在词典对应的的id。（是的，预训练模型会有一个词典）</li>
+</ul>
+<p>形状为(batch_size, sequence_length)。</p>
+<p>如果batch_size为10， sequence_length为256，那么输入的大小为是[10,256]</p>
+<p>Bert的输入是<code>bert:       [CLS] + tokens + [SEP] + padding</code></p>
+<p>如以上的例子中，input_ids 的结果是</p>
+<p>&lsquo;input_ids&rsquo;: [101, 3209, 3189, 1921, 3698, 7440, 7347, 7433, 6760, 3252, 8024, 3241,
+677, 3300, 1920, 7443, 1139, 4385, 511, 102], 101和102是指CLS和SEP在词表中的id。</p>
+<ul>
+<li>token_type_ids：指token对应的句子id，值为0或1。0表示对应的token属于第一句，1表示属于第二句。  （这里为什么只有两句，因为最多只能接收两个序列。）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> transformers <span style="color:#ff79c6">import</span> AutoTokenizer
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> datasets <span style="color:#ff79c6">import</span> load_dataset
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>content_1 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;明日天气雷阵雨转晴，晚上有大雾出现。&#39;</span>
+</span></span><span style="display:flex;"><span>content_2 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;后天晴转多云。&#39;</span>
+</span></span><span style="display:flex;"><span>content_3 <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;大后天台风降临。&#39;</span>
+</span></span><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#34;bert-base-chinese&#34;</span>)
+</span></span><span style="display:flex;"><span>tokenizer(content_1,content_2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f1fa8c">&#39;input_ids&#39;</span>: [<span style="color:#bd93f9">101</span>, <span style="color:#bd93f9">3209</span>, <span style="color:#bd93f9">3189</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3698</span>, <span style="color:#bd93f9">7440</span>, <span style="color:#bd93f9">7347</span>, <span style="color:#bd93f9">7433</span>, <span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">3252</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#bd93f9">8024</span>, <span style="color:#bd93f9">3241</span>, <span style="color:#bd93f9">677</span>, <span style="color:#bd93f9">3300</span>, <span style="color:#bd93f9">1920</span>, <span style="color:#bd93f9">7443</span>, <span style="color:#bd93f9">1139</span>, <span style="color:#bd93f9">4385</span>, <span style="color:#bd93f9">511</span>, <span style="color:#bd93f9">102</span>, <span style="color:#bd93f9">1400</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3252</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">1914</span>, <span style="color:#bd93f9">756</span>, <span style="color:#bd93f9">511</span>, <span style="color:#bd93f9">102</span>], 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;token_type_ids&#39;</span>: [<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>], 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;attention_mask&#39;</span>: [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>]}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer(content_1,content_2, content_3)
+</span></span></code></pre></div><p>tokenizer只能接收两个sequence，如果用这个格式输入两个以上的序列，tokenizer只在前两个sequence作用。</p>
+<ul>
+<li>attention_mask：它指的是这个token应不应该被掩盖起来。如果不应该就是1，应该就是0。如果是0，就不在padding的token上计算attention。</li>
+</ul>
+<h3 id="输入单序列与输入多序列">输入单序列与输入多序列</h3>
+<p>注意区分下面两种形式</p>
+<h4 id="输入单序列">输入单序列</h4>
+<p>为什么这两种情况输出的结果不一样呢？</p>
+<ul>
+<li>两句话在同一个序列</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#ff79c6">=</span> AutoModelForSequenceClassification<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>sequence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;It is cloudy. It is raining.&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>inputs <span style="color:#ff79c6">=</span> tokenizer(sequence, return_tensors <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pt&#39;</span>)
+</span></span><span style="display:flex;"><span>cls <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cls_logits <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)<span style="color:#ff79c6">.</span>logits
+</span></span><span style="display:flex;"><span>class_id <span style="color:#ff79c6">=</span> cls_logits<span style="color:#ff79c6">.</span>argmax()<span style="color:#ff79c6">.</span>item()
+</span></span><span style="display:flex;"><span>label <span style="color:#ff79c6">=</span> model<span style="color:#ff79c6">.</span>config<span style="color:#ff79c6">.</span>id2label[class_id]
+</span></span><span style="display:flex;"><span>prob <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>softmax(cls_logits, dim<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>tolist()[<span style="color:#bd93f9">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#39;inputs为</span><span style="color:#f1fa8c">{</span>inputs<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#39;cls的值为：</span><span style="color:#f1fa8c">{</span>cls<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">cls_logits的值为：</span><span style="color:#f1fa8c">{</span>cls_logits<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">label为</span><span style="color:#f1fa8c">{</span>label<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">prob为</span><span style="color:#f1fa8c">{</span>prob<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#39;</span>)
+</span></span></code></pre></div><p>输出为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>inputs为{<span style="color:#f1fa8c">&#39;input_ids&#39;</span>: tensor([[  <span style="color:#bd93f9">101</span>,  <span style="color:#bd93f9">2009</span>,  <span style="color:#bd93f9">2003</span>, <span style="color:#bd93f9">24706</span>,  <span style="color:#bd93f9">1012</span>,  <span style="color:#bd93f9">2009</span>,  <span style="color:#bd93f9">2003</span>, <span style="color:#bd93f9">24057</span>,  <span style="color:#bd93f9">1012</span>,   <span style="color:#bd93f9">102</span>]]), <span style="color:#f1fa8c">&#39;attention_mask&#39;</span>: tensor([[<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>]])}
+</span></span><span style="display:flex;"><span>cls的值为：SequenceClassifierOutput(loss<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, logits<span style="color:#ff79c6">=</span>tensor([[<span style="color:#bd93f9">0.1168</span>, <span style="color:#bd93f9">0.0442</span>]], grad_fn<span style="color:#ff79c6">=&lt;</span>AddmmBackward0<span style="color:#ff79c6">&gt;</span>), hidden_states<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, attentions<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>)
+</span></span><span style="display:flex;"><span>cls_logits的值为：tensor([[<span style="color:#bd93f9">0.1168</span>, <span style="color:#bd93f9">0.0442</span>]], grad_fn<span style="color:#ff79c6">=&lt;</span>AddmmBackward0<span style="color:#ff79c6">&gt;</span>)
+</span></span><span style="display:flex;"><span>label为NEGATIVE
+</span></span><span style="display:flex;"><span>prob为[<span style="color:#bd93f9">0.5181437730789185</span>, <span style="color:#bd93f9">0.48185625672340393</span>]
+</span></span></code></pre></div><ul>
+<li>两句话在不同序列</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#ff79c6">=</span> AutoModelForSequenceClassification<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>sequence_one <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;It is cloudy.&#39;</span>
+</span></span><span style="display:flex;"><span>sequence_two <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;It is raining.&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>inputs <span style="color:#ff79c6">=</span> tokenizer(sequence_one, sequence_two, return_tensors <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pt&#39;</span>)
+</span></span><span style="display:flex;"><span>cls <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cls_logits <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)<span style="color:#ff79c6">.</span>logits
+</span></span><span style="display:flex;"><span>class_id <span style="color:#ff79c6">=</span> cls_logits<span style="color:#ff79c6">.</span>argmax()<span style="color:#ff79c6">.</span>item()
+</span></span><span style="display:flex;"><span>label <span style="color:#ff79c6">=</span> model<span style="color:#ff79c6">.</span>config<span style="color:#ff79c6">.</span>id2label[class_id]
+</span></span><span style="display:flex;"><span>prob <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>softmax(cls_logits, dim<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>tolist()[<span style="color:#bd93f9">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#39;inputs为</span><span style="color:#f1fa8c">{</span>inputs<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#39;cls的值为：</span><span style="color:#f1fa8c">{</span>cls<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">cls_logits的值为：</span><span style="color:#f1fa8c">{</span>cls_logits<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">label为</span><span style="color:#f1fa8c">{</span>label<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">prob为</span><span style="color:#f1fa8c">{</span>prob<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#39;</span>)
+</span></span></code></pre></div><p>输出为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>inputs为{<span style="color:#f1fa8c">&#39;input_ids&#39;</span>: tensor([[  <span style="color:#bd93f9">101</span>,  <span style="color:#bd93f9">2009</span>,  <span style="color:#bd93f9">2003</span>, <span style="color:#bd93f9">24706</span>,  <span style="color:#bd93f9">1012</span>,   <span style="color:#bd93f9">102</span>,  <span style="color:#bd93f9">2009</span>,  <span style="color:#bd93f9">2003</span>, <span style="color:#bd93f9">24057</span>,  <span style="color:#bd93f9">1012</span>,
+</span></span><span style="display:flex;"><span>           <span style="color:#bd93f9">102</span>]]), <span style="color:#f1fa8c">&#39;attention_mask&#39;</span>: tensor([[<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>]])}
+</span></span><span style="display:flex;"><span>cls的值为：SequenceClassifierOutput(loss<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, logits<span style="color:#ff79c6">=</span>tensor([[ <span style="color:#bd93f9">1.3938</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1.1082</span>]], grad_fn<span style="color:#ff79c6">=&lt;</span>AddmmBackward0<span style="color:#ff79c6">&gt;</span>), hidden_states<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, attentions<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>)
+</span></span><span style="display:flex;"><span>cls_logits的值为：tensor([[ <span style="color:#bd93f9">1.3938</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1.1082</span>]], grad_fn<span style="color:#ff79c6">=&lt;</span>AddmmBackward0<span style="color:#ff79c6">&gt;</span>)
+</span></span><span style="display:flex;"><span>label为NEGATIVE
+</span></span><span style="display:flex;"><span>prob为[<span style="color:#bd93f9">0.924285888671875</span>, <span style="color:#bd93f9">0.07571405917406082</span>]
+</span></span></code></pre></div><h3 id="tokenizer的整个工作过程">tokenizer的整个工作过程</h3>
+<p>那么，tokenizer是如何将原始文本变成 id的呢?</p>
+<p>如下面的代码所示，tokenizer.tokenize序列进行切词，tokenizer.convert_tokens_to_ids将token映射到id。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> transformers <span style="color:#ff79c6">import</span> AutoTokenizer
+</span></span><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#34;bert-base-chinese&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sequence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;明日天气雷阵雨转晴，晚上有大雾出现。&#39;</span>
+</span></span><span style="display:flex;"><span>tokens <span style="color:#ff79c6">=</span> tokenizer<span style="color:#ff79c6">.</span>tokenize(sequence)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(tokens) <span style="color:#6272a4"># [&#39;明&#39;, &#39;日&#39;, &#39;天&#39;, &#39;气&#39;, &#39;雷&#39;, &#39;阵&#39;, &#39;雨&#39;, &#39;转&#39;, &#39;晴&#39;, &#39;，&#39;, &#39;晚&#39;, &#39;上&#39;, &#39;有&#39;, &#39;大&#39;, &#39;雾&#39;, &#39;出&#39;, &#39;现&#39;, &#39;。&#39;]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ids <span style="color:#ff79c6">=</span> tokenizer<span style="color:#ff79c6">.</span>convert_tokens_to_ids(tokens)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(ids) <span style="color:#6272a4"># [3209, 3189, 1921, 3698, 7440, 7347, 7433, 6760, 3252, 8024, 3241, 677, 3300, 1920, 7443, 1139, 4385, 511]， 与上面的相比， 上面的多了101和102，101和102分别是[CLS]，[SEP]对应的token id。</span>
+</span></span></code></pre></div><p>这个过程是可逆的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tokenizer<span style="color:#ff79c6">.</span>convert_ids_to_tokens([<span style="color:#bd93f9">3209</span>, <span style="color:#bd93f9">3189</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3698</span>, <span style="color:#bd93f9">7440</span>, <span style="color:#bd93f9">7347</span>, <span style="color:#bd93f9">7433</span>, <span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">252</span>, <span style="color:#bd93f9">8024</span>, <span style="color:#bd93f9">3241</span>, <span style="color:#bd93f9">677</span>, <span style="color:#bd93f9">3300</span>, <span style="color:#bd93f9">1920</span>, <span style="color:#bd93f9">7443</span>, <span style="color:#bd93f9">1139</span>, <span style="color:#bd93f9">4385</span>, <span style="color:#bd93f9">511</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f1fa8c">&#39;明&#39;</span>, <span style="color:#f1fa8c">&#39;日&#39;</span>, <span style="color:#f1fa8c">&#39;天&#39;</span>, <span style="color:#f1fa8c">&#39;气&#39;</span>, <span style="color:#f1fa8c">&#39;雷&#39;</span>, <span style="color:#f1fa8c">&#39;阵&#39;</span>, <span style="color:#f1fa8c">&#39;雨&#39;</span>, <span style="color:#f1fa8c">&#39;转&#39;</span>, <span style="color:#f1fa8c">&#39;晴&#39;</span>, <span style="color:#f1fa8c">&#39;，&#39;</span>, <span style="color:#f1fa8c">&#39;晚&#39;</span>, <span style="color:#f1fa8c">&#39;上&#39;</span>, <span style="color:#f1fa8c">&#39;有&#39;</span>, <span style="color:#f1fa8c">&#39;大&#39;</span>, <span style="color:#f1fa8c">&#39;雾&#39;</span>, <span style="color:#f1fa8c">&#39;出&#39;</span>, <span style="color:#f1fa8c">&#39;现&#39;</span>, <span style="color:#f1fa8c">&#39;。&#39;</span>]
+</span></span></code></pre></div><p>此外还可以用decode和encode实现这个功能。</p>
+<p>tokenizer.encode(sequence)的输入是文本序列，功能是将文本分词后映射到id。</p>
+<p>同理tokenizer.decode(tokens_id)的输入是id，输出是文本序列</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ids <span style="color:#ff79c6">=</span> tokenizer<span style="color:#ff79c6">.</span>encode(sequence)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#bd93f9">101</span>, <span style="color:#bd93f9">3209</span>, <span style="color:#bd93f9">3189</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3698</span>, <span style="color:#bd93f9">7440</span>, <span style="color:#bd93f9">7347</span>, <span style="color:#bd93f9">7433</span>, <span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">3252</span>, <span style="color:#bd93f9">8024</span>, <span style="color:#bd93f9">3241</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">677</span>, <span style="color:#bd93f9">3300</span>, <span style="color:#bd93f9">1920</span>, <span style="color:#bd93f9">7443</span>, <span style="color:#bd93f9">1139</span>, <span style="color:#bd93f9">4385</span>, <span style="color:#bd93f9">511</span>, <span style="color:#bd93f9">102</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer<span style="color:#ff79c6">.</span>encode_plus(sequence)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#f1fa8c">&#39;input_ids&#39;</span>: [<span style="color:#bd93f9">101</span>, <span style="color:#bd93f9">3209</span>, <span style="color:#bd93f9">3189</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3698</span>, <span style="color:#bd93f9">7440</span>, <span style="color:#bd93f9">7347</span>, <span style="color:#bd93f9">7433</span>, <span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">3252</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#bd93f9">8024</span>, <span style="color:#bd93f9">3241</span>, <span style="color:#bd93f9">677</span>, <span style="color:#bd93f9">3300</span>, <span style="color:#bd93f9">1920</span>, <span style="color:#bd93f9">7443</span>, <span style="color:#bd93f9">1139</span>, <span style="color:#bd93f9">4385</span>, <span style="color:#bd93f9">511</span>, <span style="color:#bd93f9">102</span>], 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;token_type_ids&#39;</span>: [<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>], 
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;attention_mask&#39;</span>: [<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>]}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer<span style="color:#ff79c6">.</span>decode([<span style="color:#bd93f9">3209</span>, <span style="color:#bd93f9">3189</span>, <span style="color:#bd93f9">1921</span>, <span style="color:#bd93f9">3698</span>, <span style="color:#bd93f9">7440</span>, <span style="color:#bd93f9">7347</span>, <span style="color:#bd93f9">7433</span>, <span style="color:#bd93f9">6760</span>, <span style="color:#bd93f9">3252</span>, <span style="color:#bd93f9">8024</span>, 
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">3241</span>, <span style="color:#bd93f9">677</span>, <span style="color:#bd93f9">3300</span>, <span style="color:#bd93f9">1920</span>, <span style="color:#bd93f9">7443</span>, <span style="color:#bd93f9">1139</span>, <span style="color:#bd93f9">4385</span>, <span style="color:#bd93f9">511</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#39;明 日 天 气 雷 阵 雨 转 晴 ， 晚 上 有 大 雾 出 现 。&#39;</span>
+</span></span></code></pre></div><p>tokenizer.encode_plus(sequence) 可以替代tokenizer(sequence)</p>
+<h4 id="用map来对批量数据进行tokenzie">用map来对批量数据进行tokenzie</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">tokenization</span>(example):
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span> tokenizer(example[<span style="color:#f1fa8c">&#34;content&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dataset <span style="color:#ff79c6">=</span> data<span style="color:#ff79c6">.</span>map(tokenization, batched<span style="color:#ff79c6">=</span><span style="color:#ff79c6">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>或者
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> BertTokenizerFast<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#34;bert-base-chinese&#34;</span>)
+</span></span><span style="display:flex;"><span>encoded_data <span style="color:#ff79c6">=</span> data<span style="color:#ff79c6">.</span>map(<span style="color:#ff79c6">lambda</span> e: tokenizer(e[<span style="color:#f1fa8c">&#39;content&#39;</span>], truncation<span style="color:#ff79c6">=</span><span style="color:#ff79c6">True</span>, padding<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;max_length&#39;</span>, max_length<span style="color:#ff79c6">=</span><span style="color:#bd93f9">512</span>), batched<span style="color:#ff79c6">=</span><span style="color:#ff79c6">True</span>)
+</span></span></code></pre></div><p>进行Tokenize之后，encoded_data的格式变为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>DatasetDict({
+</span></span><span style="display:flex;"><span>    train: Dataset({
+</span></span><span style="display:flex;"><span>        features: [<span style="color:#f1fa8c">&#39;content&#39;</span>, <span style="color:#f1fa8c">&#39;labels&#39;</span>, <span style="color:#f1fa8c">&#39;input_ids&#39;</span>, <span style="color:#f1fa8c">&#39;token_type_ids&#39;</span>, <span style="color:#f1fa8c">&#39;attention_mask&#39;</span>],
+</span></span><span style="display:flex;"><span>        num_rows: <span style="color:#bd93f9">1581</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>这里的input_ids，token_type_ids和attention_mask是模型的输入，之前的content就不需要了。怎么把content从dataset里面去掉呢？</p>
+<p>第二步是格式化，让数据符合模型需要的输入数据格式。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset<span style="color:#ff79c6">.</span>set_format(<span style="color:#8be9fd;font-style:italic">type</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;torch&#34;</span>, columns<span style="color:#ff79c6">=</span>[<span style="color:#f1fa8c">&#34;input_ids&#34;</span>, <span style="color:#f1fa8c">&#34;token_type_ids&#34;</span>, <span style="color:#f1fa8c">&#34;attention_mask&#34;</span>, <span style="color:#f1fa8c">&#34;labels&#34;</span>])
+</span></span><span style="display:flex;"><span>dataset<span style="color:#ff79c6">.</span>format[<span style="color:#f1fa8c">&#39;type&#39;</span>]
+</span></span></code></pre></div><h3 id="如果label是string怎么变成id">如果label是string，怎么变成id？</h3>
+<p><strong>align_labels_with_mapping()</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>label2id <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#34;天气预报&#34;</span>: <span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;家政服务&#34;</span>: <span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#34;足球资讯&#34;</span>: <span style="color:#bd93f9">2</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> datasets <span style="color:#ff79c6">import</span> load_dataset
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#ff79c6">=</span> load_dataset(<span style="color:#f1fa8c">&#34;csv”, split=&#34;</span>train<span style="color:#f1fa8c">&#34;)</span>
+</span></span><span style="display:flex;"><span>data_aligned <span style="color:#ff79c6">=</span> data<span style="color:#ff79c6">.</span>align_labels_with_mapping(label2id, <span style="color:#f1fa8c">&#34;label&#34;</span>)
+</span></span></code></pre></div><h3 id="模型输入的数据">模型输入的数据</h3>
+<p>input_ids</p>
+<p>token_type_ids</p>
+<p>attention_mask</p>
+<p>position_ids： 表示token在句子中的位置id。</p>
+<p>head_mask：1表示head有效，0表示无效</p>
+<p>input_embeds：替代input_ids。模型的输入也可以是Embedding后的Tensor， 形状为(batch_size, sequence_length, embedding_dim)</p>
+<p>encoder_hidden_states：encoder最后一层输出的隐藏状态序列，模型配置为decoder时使用。形状为(batch_size, sequence_length, hidden_size)</p>
+<p>encoder_attention_mask：避免在padding的token上计算attention。</p>
+<h3 id="模型输出的数据">模型输出的数据</h3>
+<h4 id="序列经过模型处理之后的数据是什么">序列经过模型处理之后的数据是什么？</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#ff79c6">=</span> AutoModelForSequenceClassification<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>sequence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;It is sunny.&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>inputs <span style="color:#ff79c6">=</span> tokenizer(sequence, return_tensors <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pt&#39;</span>)
+</span></span><span style="display:flex;"><span>cls <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)
+</span></span><span style="display:flex;"><span>cls <span style="color:#6272a4"># SequenceClassifierOutput(loss=None, logits=tensor([[-4.2761,  4.6390]], grad_fn=&lt;AddmmBackward0&gt;), hidden_states=None, attentions=None)</span>
+</span></span><span style="display:flex;"><span>cls_logits <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)<span style="color:#ff79c6">.</span>logits <span style="color:#6272a4"># tensor([[-4.2761,  4.6390]], grad_fn=&lt;AddmmBackward0&gt;)</span>
+</span></span></code></pre></div><p>cls是模型的输出结果，是一个SequenceClassifier类。输出了很多东西，计算结果，loss等。</p>
+<p>cls_logits是输出结果的一个属性。</p>
+<p>logits可以这样理解：输入数据经过模型处理，进行一大堆计算之后，会出来计算结果。在分类问题上，我们的标签是几类，那么对每类都有一个结果。这个结果，就是logits。</p>
+<p>计算出来之后，就要去看数值大的那个对应的下标。然后去id2label的词典里读。model.config.id2label存了id对应的label值。这里为{0: &lsquo;NEGATIVE&rsquo;, 1: &lsquo;POSITIVE&rsquo;}</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>predicted_class_id <span style="color:#ff79c6">=</span> cls_logits<span style="color:#ff79c6">.</span>argmax()<span style="color:#ff79c6">.</span>item()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#ff79c6">.</span>config<span style="color:#ff79c6">.</span>id2label[predicted_class_id]
+</span></span></code></pre></div><p>也可以看计算出来的结果对应的概率。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>torch<span style="color:#ff79c6">.</span>softmax(cls_logits, dim<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>tolist()[<span style="color:#bd93f9">0</span>] <span style="color:#6272a4"># [0]是因为这里是list of list，取第0个元素</span>
+</span></span></code></pre></div><p>这两个sequence会合成一句话。所以最后的result只有一个。</p>
+<p>logits是什么意思？</p>
+<p>在分类中，logits是指分类的分数（下一个步骤就是在SoftMax里面用到）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tokenizer <span style="color:#ff79c6">=</span> AutoTokenizer<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#ff79c6">=</span> AutoModelForSequenceClassification<span style="color:#ff79c6">.</span>from_pretrained(<span style="color:#f1fa8c">&#39;distilbert-base-uncased-finetuned-sst-2-english&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sequence <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;It is sunny.&#39;</span>
+</span></span><span style="display:flex;"><span>inputs <span style="color:#ff79c6">=</span> tokenizer(sequence, return_tensors <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;pt&#39;</span>)
+</span></span><span style="display:flex;"><span>labels <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>tensor([<span style="color:#bd93f9">1</span>])<span style="color:#ff79c6">.</span>unsqueeze(<span style="color:#bd93f9">0</span>)
+</span></span><span style="display:flex;"><span>labels
+</span></span><span style="display:flex;"><span>tensor([[<span style="color:#bd93f9">1</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs,labels <span style="color:#ff79c6">=</span> labels)
+</span></span><span style="display:flex;"><span>output
+</span></span><span style="display:flex;"><span>SequenceClassifierOutput(loss<span style="color:#ff79c6">=</span>tensor(<span style="color:#bd93f9">0.0001</span>, grad_fn<span style="color:#ff79c6">=&lt;</span>NllLossBackward0<span style="color:#ff79c6">&gt;</span>), 
+</span></span><span style="display:flex;"><span>logits<span style="color:#ff79c6">=</span>tensor([[<span style="color:#ff79c6">-</span><span style="color:#bd93f9">4.2761</span>,  <span style="color:#bd93f9">4.6390</span>]], grad_fn<span style="color:#ff79c6">=&lt;</span>AddmmBackward0<span style="color:#ff79c6">&gt;</span>), 
+</span></span><span style="display:flex;"><span>hidden_states<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, attentions<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs)
+</span></span><span style="display:flex;"><span>output
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SequenceClassifierOutput(loss<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, logits<span style="color:#ff79c6">=</span>tensor([[<span style="color:#ff79c6">-</span><span style="color:#bd93f9">4.2761</span>,  <span style="color:#bd93f9">4.6390</span>]], 
+</span></span><span style="display:flex;"><span>grad_fn<span style="color:#ff79c6">=&lt;</span>AddmmBackward0<span style="color:#ff79c6">&gt;</span>), hidden_states<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, attentions<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>)
+</span></span></code></pre></div><p>output是SequenceClassifierOutput类，它有一个loss，一个logits，一个隐藏状态，一个attentions属性。</p>
+<p>如果传入labels，那么就会计算loss。如果传入output_hidden_states = True和 output_attentions= True，那么这两个值也会被计算，否则就是None。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> model(<span style="color:#ff79c6">**</span>inputs, labels <span style="color:#ff79c6">=</span> labels, output_hidden_states <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">True</span>,output_attentions <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">True</span>)
+</span></span><span style="display:flex;"><span>这个输出太多了，此处不展示
+</span></span></code></pre></div><p>每一个输出的属性都可以被拿出来。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>output<span style="color:#ff79c6">.</span>loss
+</span></span><span style="display:flex;"><span>output<span style="color:#ff79c6">.</span>attentions
+</span></span><span style="display:flex;"><span>output<span style="color:#ff79c6">.</span>hidden_states
+</span></span></code></pre></div><p>也可以用output[:2]取出loss和logits的tuple。</p>
+<h2 id="参考文献">参考文献：</h2>
+<p><a href="https://blog.csdn.net/qq_56591814/article/details/120653752" target="_blank" rel="noopener">https://blog.csdn.net/qq_56591814/article/details/120653752</a>
+</p>
+
+  </article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

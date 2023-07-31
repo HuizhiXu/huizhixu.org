@@ -6,6 +6,11 @@
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/page/about/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="de-DE"
                 href="https://huizhixu.github.io/de/page/about/"
                 />
@@ -19,6 +24,11 @@
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/life/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="de-DE"
                 href="https://huizhixu.github.io/de/life/"
                 />
@@ -30,6 +40,11 @@
   </url><url>
     <loc>https://huizhixu.github.io/tags/emoji/</loc>
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/emoji/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-DE"
@@ -58,6 +73,11 @@
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/page/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="de-DE"
                 href="https://huizhixu.github.io/de/page/"
                 />
@@ -71,8 +91,8 @@
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh_cn"
-                href="https://huizhixu.github.io/zh_cn/"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -89,8 +109,8 @@
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh_cn"
-                href="https://huizhixu.github.io/zh_cn/tags/"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -226,8 +246,8 @@
     <loc>https://huizhixu.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh_cn"
-                href="https://huizhixu.github.io/zh_cn/categories/"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/categories/"
                 />
     <xhtml:link
                 rel="alternate"
