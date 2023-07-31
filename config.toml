@@ -1,4 +1,4 @@
-baseURL = "https://huizhixu.github.io"
+baseURL = "https://huizhixu.github.io/"
 #baseURL = "http:huizhixu.org"
 languageCode = "zh-CN"
 title = "HuizhiXu 的个人博客"
@@ -24,7 +24,7 @@ DefaultContentLanguageInSubdir = true
       logo = "/blist-logo.png"
     [[languages.zh_cn.menu.main]]
         name = "生活见闻"
-        url = "/life/"
+        url = "life"
         weight = 1
 
     [[languages.zh_cn.menu.main]]
