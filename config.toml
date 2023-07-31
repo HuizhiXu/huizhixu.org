@@ -1,6 +1,6 @@
-baseURL = "https://huizhixu.github.io/"
+baseURL = "https://huizhixu.github.io"
 #baseURL = "http:huizhixu.org"
-# languageCode = "zh-chs"
+metaDataFormat = "yaml"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
 
@@ -12,6 +12,7 @@ hasCJKLanguage = true
 
 DefaultContentLanguage = "chs"
 DefaultContentLanguageInSubdir = true
+
 [languages]
  [languages.chs]
    contentDir = 'content/chs'
@@ -30,35 +31,31 @@ DefaultContentLanguageInSubdir = true
         
     [[languages.chs.menu.main]]
         name = "关于"
-        url = "page/about/"
+        url = "/page/about/"
         weight = 2
 
 
     [[languages.chs.menu.main]]
         name = "IT技术"
         url = "/know_how/"
-        weight = 2
+        weight = 3
 
     [[languages.chs.menu.main]]
         name = "宝藏集结"
         url = "/treasure/"
-        weight = 3
+        weight = 4
 
     [[languages.chs.menu.main]]
         name = "分类"
         url = "/tags/"
-        weight = 4
+        weight = 5
 
  [languages.en]
     contentDir = 'content/en'
-    disabled = false
-    languageCode = 'en-US'
+    weight = 2
     languageName = 'English'
     title = 'PoirotMore'
-    weight = 2
-
   [languages.en.params]
-   
       introTitle = "Hey! I'm Huizhi Xu"
       introSubtitle = "A senior developer who enjoys reading, blogging and dancing"
       introPhoto = "/picture.jpg"
@@ -71,7 +68,7 @@ DefaultContentLanguageInSubdir = true
 
     [[languages.en.menu.main]]
         name = "About"
-        url = "page/about/"
+        url = "/page/about/"
         weight = 2
 
     [[languages.en.menu.main]]
@@ -82,11 +79,9 @@ DefaultContentLanguageInSubdir = true
 
 [languages.de]
   contentDir = 'content/de'
-  disabled = false
-  languageCode = 'de-DE'
   languageName = 'Deutsch'
-    title = 'Blog von Huizhi XU'
-    weight = 3
+  title = 'Blog von Huizhi XU'
+  weight = 3
 [languages.de.params]
       introTitle = "Hallo, ich bin Huizhi Xu"
       introSubtitle = "Eine Senior-Entwicklerin, die Spaß an Lesen, Bloggen und Zumba"
@@ -94,12 +89,12 @@ DefaultContentLanguageInSubdir = true
       logo = "/blist-logo-de.png"
     [[languages.de.menu.main]]
         name = "Blog"
-        url = "life"
+        url = "/life/"
         weight = 1
 
     [[languages.de.menu.main]]
         name = "Über mich"
-        url = "page/about/"
+        url = "/page/about/"
         weight = 2
 
     [[languages.de.menu.main]]
@@ -175,8 +170,8 @@ DefaultContentLanguageInSubdir = true
 
 
 [[menu.main]]
-  name = "博客"
-  url = "/lastModified"
+  name = "About"
+  url = "/about"
 
 [build]
   writeStats = true
