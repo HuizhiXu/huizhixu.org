@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>text on Blog von Huizhi XU</title>
-    <link>https//www.huizhixu.org/de/tags/text/</link>
+    <link>https://www.huizhixu.github.io/de/tags/text/</link>
     <description>Recent content in text on Blog von Huizhi XU</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
-    <lastBuildDate>Tue, 13 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https//www.huizhixu.org/de/tags/text/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.huizhixu.github.io/de/tags/text/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Platzhaltertext</title>
-      <link>https//www.huizhixu.org/de/life/placeholder-text/</link>
+      <link>https://www.huizhixu.github.io/de/life/placeholder-text/</link>
       <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https//www.huizhixu.org/de/life/placeholder-text/</guid>
+      <guid>https://www.huizhixu.github.io/de/life/placeholder-text/</guid>
       <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;</description>
     </item>
     

@@ -1,5 +1,5 @@
-#baseURL = "https://www.huizhixu.github.io"
-baseURL = "https//www.huizhixu.org"
+baseURL = "https://www.huizhixu.github.io"
+#baseURL = "https//www.huizhixu.org"
 metaDataFormat = "yaml"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
@@ -169,10 +169,10 @@ DefaultContentLanguageInSubdir = true
   #enableDisqus = true
   disqusShortname = "huizhi"
 
-[[headers]]
-  for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "https://www.huizhixu.github.io"
+#[[headers]]
+#  for = "/*"
+#    [headers.values]
+#    Access-Control-Allow-Origin = "https://www.huizhixu.github.io"
 
 [[menu.main]]
   name = "About"

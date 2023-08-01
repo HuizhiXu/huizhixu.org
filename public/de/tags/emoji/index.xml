@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>emoji on Blog von Huizhi XU</title>
-    <link>https//www.huizhixu.org/de/tags/emoji/</link>
+    <link>https://www.huizhixu.github.io/de/tags/emoji/</link>
     <description>Recent content in emoji on Blog von Huizhi XU</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
-    <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https//www.huizhixu.org/de/tags/emoji/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.huizhixu.github.io/de/tags/emoji/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emoji-Unterstützung</title>
-      <link>https//www.huizhixu.org/de/life/emoji-support/</link>
+      <link>https://www.huizhixu.github.io/de/life/emoji-support/</link>
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https//www.huizhixu.org/de/life/emoji-support/</guid>
+      <guid>https://www.huizhixu.github.io/de/life/emoji-support/</guid>
       <description>&lt;p&gt;Emojis können in einem Hugo-Projekt auf verschiedene Weise aktiviert werden.&lt;/p&gt;</description>
     </item>
     
