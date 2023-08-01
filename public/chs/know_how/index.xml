@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KNOW HOW on 徐慧志的个人博客</title>
-    <link>https://www.huizhixu.github.io/chs/know_how/</link>
+    <link>https//www.huizhixu.org/chs/know_how/</link>
     <description>Recent content in KNOW HOW on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Thu, 27 Apr 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://www.huizhixu.github.io/chs/know_how/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Apr 2023 18:31:50 +0800</lastBuildDate><atom:link href="https//www.huizhixu.org/chs/know_how/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
       <description>在GPU上运行中文LLaMa模型，主要是按照 https://github.com/ymcui/Chinese-LLaMA-Alpaca 这个仓库的方法。 中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。
 文档 模型部署和推理有四种方法，我选择的是用HF的inference接口来进行推理。
 https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/使用Transformers推理 这里详细讲了用scripts/inference_hf.py来启动模型。
@@ -28,10 +28,10 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
     
     <item>
       <title>2023-03-05用随机梯度下降来优化人生【转载】</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link>
       <pubDate>Sun, 05 Mar 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid>
       <description>要有目标。 你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。
 目标要大。 不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。
 坚持走。 不管你的目标多复杂，随机梯度下降都是最简单的。每一次你找一个大概还行的方向（梯度），然后迈一步（下降）。两个核心要素是方向和步子的长短。但最重要的是你得一直走下去，能多走几步就多走几步。
@@ -48,19 +48,19 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
     
     <item>
       <title>2023-03-01我都用chatGPT干了啥【汇总】</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</link>
       <pubDate>Wed, 01 Mar 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</guid>
       <description> 写诗 帮我写程序 帮我debug 帮我构造数据 帮我优化Resume 梳理NLP知识时，解释不清晰的名词，并给出例子 </description>
     </item>
     
     <item>
       <title>2023-02-20 chatGPT有可能是个骗局吗</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</link>
       <pubDate>Mon, 20 Feb 2023 20:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</guid>
       <description>昨天读了一篇文章：ChatGPT is a blurry JPEG of the web 。中文翻译在这：ChatGPT是网上所有文本的模糊图像 ，无比同意这篇文章说的，&amp;ldquo;有一种模糊是可以接受的，那就是用不同的词重新陈述信息；对于完全捏造的模糊，当我们寻找事实时，我们认为这是不可接受的&amp;rdquo;。这就是我使用chatGPT的感受。
 昨天和同事A和B闲聊，我和他们说起我调试chatGPT帮我写代码的事，我表示这个过程无比艰辛，因为它总是丢三落四的，提示了这个又忘记了那个，教了它很久，太累了。但是chatGPT总体来说还是让人很欣喜，因为它真的很聪明。
 同事A就说到，如果他是openAI老板，一定要请一些人工来选择这些答案，让这些答案更好更有人情味。同事B就表示，人少访问还可以这样做，但是现在全球有上亿用户，人工如何忙得过来，而且还有不同语言的问题，上哪去找这么多qualified的人。
@@ -74,10 +74,10 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
     
     <item>
       <title>2023-02-16 如何理解Seq2seq</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
       <pubDate>Thu, 16 Feb 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
       <description>先搞清楚几个基本概念：
 Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。
 transformer是一种基于Attention的Seq2seq。
@@ -91,10 +91,10 @@ decoder看到的输入，其实就是前一个时间自己的输出。
     
     <item>
       <title>2023-02-13 chatGPT 在攻陷所有人</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link>
       <pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
       <description>承认吧，现在全世界最火就是chatGPT。
 去参加了王建硕老师那边组织的关于chatGPT的讨论。
 会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。 从心理学和教育学来看，也开拓了我的眼界。 从高效使用和商业化来看，它无疑会改变很多人的生活。 chatGPT的使用感受很不错。
@@ -107,19 +107,19 @@ decoder看到的输入，其实就是前一个时间自己的输出。
     
     <item>
       <title>2023-02-09 如何理解自注意力机制</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
       <description>理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。</description>
     </item>
     
     <item>
       <title>2023-01-31 如何用HuggingFace对不均衡类别进行分类</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</link>
       <pubDate>Tue, 31 Jan 2023 19:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</guid>
       <description>数据均衡 做文本分类时，如果类别数量差别不大，可以用hugging face的Trainer类，训练代码如下：
 model = BertForSequenceClassification.from_pretrained(&amp;#34;bert-base-chinese&amp;#34;, num_labels=len(labels), problem_type=&amp;#34;multi_label_classification&amp;#34;, id2label=id2label, label2id=label2id) tokenizer = BertTokenizerFast.from_pretrained(&amp;#34;bert-base-chinese&amp;#34;) def compute_metrics(p): preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions result = multi_label_metrics( predictions=preds, labels=p.label_ids) return result training_args = TrainingArguments( output_dir=model_directory, learning_rate=5e-5, per_device_train_batch_size=2, per_device_eval_batch_size=2, num_train_epochs=3, dataloader_drop_last=True, weight_decay=0.01, save_steps=50, logging_steps=50 ) trainer = Trainer( model=model, args=training_args, train_dataset=data[&amp;#34;train&amp;#34;], eval_dataset=data[&amp;#34;train&amp;#34;], tokenizer=tokenizer, compute_metrics=compute_metrics ) trainer.train() trainer.evaluate() model_directory 是模型存储路径，data是数据。
 数据不均衡 如果类别数据不均衡时，例如 class A有1000个数据，class B有100个数据，也可以用上面的训练代码，但是预测B的效果不会很好。
@@ -129,10 +129,10 @@ model = BertForSequenceClassification.from_pretrained(&amp;#34;bert-base-chinese
     
     <item>
       <title>2022-12-10 HuggingFace的Dataset的使用</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 10 Dec 2022 18:51:00 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>hub上的数据集 （这里不是互联网上任意的数据集，专指Huggingface的hub上面的，就是可以用关键字直接下载的）
 数据集可以在https://huggingface.co/datasets 找到，另外也可以用**datasets.list_datasets() 来看有什么数据集，然后通过关键字下载。
 from datasets import list_datasets list_datasets(with_community_datasets = True, with_detaikls = False) 很多例子演示的时候，都是直接用hub上的数据集演示，但是我不知道这个数据集里面的构造，尽管照着例子运行成功了，但往往一头雾水。
@@ -142,10 +142,10 @@ from datasets import list_datasets list_datasets(with_community_datasets = True,
     
     <item>
       <title>2022-10-24 在程序里起名有很多要注意的</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
       <pubDate>Mon, 24 Oct 2022 20:51:00 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
       <description>最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
 想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
 今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
@@ -166,10 +166,10 @@ data, state, amount, value, manager, engine, object, entity, and instance. Pytho
     
     <item>
       <title>2022-08-02 用 HanLP 分词时如何自定义词典</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
       <pubDate>Tue, 02 Aug 2022 17:51:00 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</guid>
       <description>在分词的过程中，碰到一个这样的句子：
 &amp;lsquo;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&amp;rsquo;
 import hanlp tok = hanlp.load(hanlp.pretrained.tok.COARSE_ELECTRA_SMALL_ZH) sentence = &amp;#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&amp;#39; sen_list = tok(sentence) print(sen_list) [&amp;#39;公司&amp;#39;, &amp;#39;产品&amp;#39;, &amp;#39;品质&amp;#39;, &amp;#39;持续&amp;#39;, &amp;#39;提升&amp;#39;, &amp;#39;，&amp;#39;, &amp;#39;单晶&amp;#39;, &amp;#39;硅&amp;#39;, &amp;#39;片&amp;#39;, &amp;#39;用&amp;#39;, &amp;#39;料&amp;#39;, &amp;#39;比例&amp;#39;, &amp;#39;大幅&amp;#39;, &amp;#39;高于&amp;#39;, &amp;#39;行业&amp;#39;, &amp;#39;平均&amp;#39;, &amp;#39;，&amp;#39;, &amp;#39;单晶&amp;#39;, &amp;#39;硅&amp;#39;, &amp;#39;料&amp;#39;, &amp;#39;价格&amp;#39;, &amp;#39;上涨&amp;#39;, &amp;#39;。&amp;#39;] 可以看出来，这里“单晶硅片”，“单晶硅料”， 被分为了“单晶”“硅”“料”和“单晶”“硅”“片”。

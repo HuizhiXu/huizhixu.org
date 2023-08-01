@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>emoji on 徐慧志的个人博客</title>
-    <link>https://www.huizhixu.github.io/chs/tags/emoji/</link>
+    <link>https//www.huizhixu.org/chs/tags/emoji/</link>
     <description>Recent content in emoji on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Fri, 02 Jun 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://www.huizhixu.github.io/chs/tags/emoji/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Jun 2023 18:31:50 +0800</lastBuildDate><atom:link href="https//www.huizhixu.org/chs/tags/emoji/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023-03-02 季读——2023年（一）</title>
-      <link>https://www.huizhixu.github.io/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</link>
+      <link>https//www.huizhixu.org/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</link>
       <pubDate>Fri, 02 Jun 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</guid>
+      <guid>https//www.huizhixu.org/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</guid>
       <description>本来过年的时候想着今年要读一些书，每个月都至少读一本，结果今天发现已经三月份了，我还在读第一本书。
 虽然没有读书，但是看了很多别人写的材料，博客，听了很多访谈。当然，主要因为chatGPT的爆火，公众号每天都充斥着关于大模型的知识。 有一些大咖表面上在聊chatGPT，其实是趁机卖自己的课和书；还有一些人觉得这是个绝佳的创业的机会；还有一些号，明明和他八竿子打不着关系，还要硬往上面蹭。
 还记得去年冬天，行业加上疫情的原因，一片萧瑟，各大媒体都在唱衰，说是 AI 寒冬，结果过了个年就变成了AI盛世。 也不知道这个热火朝天的劲头能持续多久。
@@ -29,10 +29,10 @@ I do not remember having felt, as a boy, any passion for mathematics, and such n
     
     <item>
       <title>2023-06-02 季读——2023年（二）</title>
-      <link>https://www.huizhixu.github.io/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</link>
+      <link>https//www.huizhixu.org/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</link>
       <pubDate>Fri, 02 Jun 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</guid>
+      <guid>https//www.huizhixu.org/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</guid>
       <description>今天早上醒来，看到朋友圈大家都在（给娃）庆祝儿童节，发现居然已经到了6月了。想起自己的季读还没写多少。😄
 由于行业技术的快速发展，这个季度基本都在一个提高认知、拓宽眼界的技术氛围里。因此，我在这段时间里阅读的大部分文章都与技术有关。
 《Prompt Tuning的万字综述》 （https://wjn1996.blog.csdn.net/article/details/120607050） 读了四个多小时，没有全部读完。之前对Prompt Tuning的理解仅仅停留在第三章：如何构建模板，但是到第三章只是入门，后面还有更多的细节。最精髓的就是一句话：prompt的本质是参数有效性学习。
@@ -72,10 +72,10 @@ AutoGPT：多重任务——llm和agent能自我迭代。agent会不断反馈，
     
     <item>
       <title>2023-05-18最近觉得很好用的两个AI产品</title>
-      <link>https://www.huizhixu.github.io/chs/life/20230518%E6%9C%80%E8%BF%91%E8%A7%89%E5%BE%97%E5%BE%88%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAai%E4%BA%A7%E5%93%81/</link>
+      <link>https//www.huizhixu.org/chs/life/20230518%E6%9C%80%E8%BF%91%E8%A7%89%E5%BE%97%E5%BE%88%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAai%E4%BA%A7%E5%93%81/</link>
       <pubDate>Thu, 18 May 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20230518%E6%9C%80%E8%BF%91%E8%A7%89%E5%BE%97%E5%BE%88%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAai%E4%BA%A7%E5%93%81/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20230518%E6%9C%80%E8%BF%91%E8%A7%89%E5%BE%97%E5%BE%88%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%A4%E4%B8%AAai%E4%BA%A7%E5%93%81/</guid>
       <description>第一个产品是ora.ai（之前域名是ora.sh），在这个上面可以创建专业领域的机器人。
 ora上面五花八门的机器人都有，解读法律条款的机器人，帮助人们保持心理健康的机器人，图书馆机器人等。
 爱学习的我，当然主要是用机器人来学习。刚好最近在学bash语言，于是建了个bash学习机器人。
@@ -91,10 +91,10 @@ Ora调用的是OpenAI的GPT4，它和OpenAI网站上的GPT4相比，有两个优
     
     <item>
       <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
       <description>在GPU上运行中文LLaMa模型，主要是按照 https://github.com/ymcui/Chinese-LLaMA-Alpaca 这个仓库的方法。 中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。
 文档 模型部署和推理有四种方法，我选择的是用HF的inference接口来进行推理。
 https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/使用Transformers推理 这里详细讲了用scripts/inference_hf.py来启动模型。
@@ -110,10 +110,10 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
     
     <item>
       <title>2023-03-05用随机梯度下降来优化人生【转载】</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link>
       <pubDate>Sun, 05 Mar 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid>
       <description>要有目标。 你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。
 目标要大。 不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。
 坚持走。 不管你的目标多复杂，随机梯度下降都是最简单的。每一次你找一个大概还行的方向（梯度），然后迈一步（下降）。两个核心要素是方向和步子的长短。但最重要的是你得一直走下去，能多走几步就多走几步。
@@ -130,19 +130,19 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
     
     <item>
       <title>2023-03-01我都用chatGPT干了啥【汇总】</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</link>
       <pubDate>Wed, 01 Mar 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</guid>
       <description> 写诗 帮我写程序 帮我debug 帮我构造数据 帮我优化Resume 梳理NLP知识时，解释不清晰的名词，并给出例子 </description>
     </item>
     
     <item>
       <title>2023-02-20 chatGPT有可能是个骗局吗</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</link>
       <pubDate>Mon, 20 Feb 2023 20:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</guid>
       <description>昨天读了一篇文章：ChatGPT is a blurry JPEG of the web 。中文翻译在这：ChatGPT是网上所有文本的模糊图像 ，无比同意这篇文章说的，&amp;ldquo;有一种模糊是可以接受的，那就是用不同的词重新陈述信息；对于完全捏造的模糊，当我们寻找事实时，我们认为这是不可接受的&amp;rdquo;。这就是我使用chatGPT的感受。
 昨天和同事A和B闲聊，我和他们说起我调试chatGPT帮我写代码的事，我表示这个过程无比艰辛，因为它总是丢三落四的，提示了这个又忘记了那个，教了它很久，太累了。但是chatGPT总体来说还是让人很欣喜，因为它真的很聪明。
 同事A就说到，如果他是openAI老板，一定要请一些人工来选择这些答案，让这些答案更好更有人情味。同事B就表示，人少访问还可以这样做，但是现在全球有上亿用户，人工如何忙得过来，而且还有不同语言的问题，上哪去找这么多qualified的人。
@@ -156,10 +156,10 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
     
     <item>
       <title>2023-02-16 如何理解Seq2seq</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
       <pubDate>Thu, 16 Feb 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
       <description>先搞清楚几个基本概念：
 Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。
 transformer是一种基于Attention的Seq2seq。
@@ -173,10 +173,10 @@ decoder看到的输入，其实就是前一个时间自己的输出。
     
     <item>
       <title>2023-02-13 chatGPT 在攻陷所有人</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link>
       <pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
       <description>承认吧，现在全世界最火就是chatGPT。
 去参加了王建硕老师那边组织的关于chatGPT的讨论。
 会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。 从心理学和教育学来看，也开拓了我的眼界。 从高效使用和商业化来看，它无疑会改变很多人的生活。 chatGPT的使用感受很不错。
@@ -189,19 +189,19 @@ decoder看到的输入，其实就是前一个时间自己的输出。
     
     <item>
       <title>2023-02-09 如何理解自注意力机制</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
       <description>理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。</description>
     </item>
     
     <item>
       <title>2023-01-31 如何用HuggingFace对不均衡类别进行分类</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</link>
       <pubDate>Tue, 31 Jan 2023 19:31:50 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</guid>
       <description>数据均衡 做文本分类时，如果类别数量差别不大，可以用hugging face的Trainer类，训练代码如下：
 model = BertForSequenceClassification.from_pretrained(&amp;#34;bert-base-chinese&amp;#34;, num_labels=len(labels), problem_type=&amp;#34;multi_label_classification&amp;#34;, id2label=id2label, label2id=label2id) tokenizer = BertTokenizerFast.from_pretrained(&amp;#34;bert-base-chinese&amp;#34;) def compute_metrics(p): preds = p.predictions[0] if isinstance(p.predictions, tuple) else p.predictions result = multi_label_metrics( predictions=preds, labels=p.label_ids) return result training_args = TrainingArguments( output_dir=model_directory, learning_rate=5e-5, per_device_train_batch_size=2, per_device_eval_batch_size=2, num_train_epochs=3, dataloader_drop_last=True, weight_decay=0.01, save_steps=50, logging_steps=50 ) trainer = Trainer( model=model, args=training_args, train_dataset=data[&amp;#34;train&amp;#34;], eval_dataset=data[&amp;#34;train&amp;#34;], tokenizer=tokenizer, compute_metrics=compute_metrics ) trainer.train() trainer.evaluate() model_directory 是模型存储路径，data是数据。
 数据不均衡 如果类别数据不均衡时，例如 class A有1000个数据，class B有100个数据，也可以用上面的训练代码，但是预测B的效果不会很好。
@@ -211,10 +211,10 @@ model = BertForSequenceClassification.from_pretrained(&amp;#34;bert-base-chinese
     
     <item>
       <title>2022-12-10 HuggingFace的Dataset的使用</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 10 Dec 2022 18:51:00 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>hub上的数据集 （这里不是互联网上任意的数据集，专指Huggingface的hub上面的，就是可以用关键字直接下载的）
 数据集可以在https://huggingface.co/datasets 找到，另外也可以用**datasets.list_datasets() 来看有什么数据集，然后通过关键字下载。
 from datasets import list_datasets list_datasets(with_community_datasets = True, with_detaikls = False) 很多例子演示的时候，都是直接用hub上的数据集演示，但是我不知道这个数据集里面的构造，尽管照着例子运行成功了，但往往一头雾水。
@@ -224,10 +224,10 @@ from datasets import list_datasets list_datasets(with_community_datasets = True,
     
     <item>
       <title>2022-10-24 在程序里起名有很多要注意的</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
       <pubDate>Mon, 24 Oct 2022 20:51:00 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
       <description>最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
 想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
 今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
@@ -248,10 +248,10 @@ data, state, amount, value, manager, engine, object, entity, and instance. Pytho
     
     <item>
       <title>2022-08-02 用 HanLP 分词时如何自定义词典</title>
-      <link>https://www.huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
+      <link>https//www.huizhixu.org/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
       <pubDate>Tue, 02 Aug 2022 17:51:00 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</guid>
+      <guid>https//www.huizhixu.org/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</guid>
       <description>在分词的过程中，碰到一个这样的句子：
 &amp;lsquo;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&amp;rsquo;
 import hanlp tok = hanlp.load(hanlp.pretrained.tok.COARSE_ELECTRA_SMALL_ZH) sentence = &amp;#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&amp;#39; sen_list = tok(sentence) print(sen_list) [&amp;#39;公司&amp;#39;, &amp;#39;产品&amp;#39;, &amp;#39;品质&amp;#39;, &amp;#39;持续&amp;#39;, &amp;#39;提升&amp;#39;, &amp;#39;，&amp;#39;, &amp;#39;单晶&amp;#39;, &amp;#39;硅&amp;#39;, &amp;#39;片&amp;#39;, &amp;#39;用&amp;#39;, &amp;#39;料&amp;#39;, &amp;#39;比例&amp;#39;, &amp;#39;大幅&amp;#39;, &amp;#39;高于&amp;#39;, &amp;#39;行业&amp;#39;, &amp;#39;平均&amp;#39;, &amp;#39;，&amp;#39;, &amp;#39;单晶&amp;#39;, &amp;#39;硅&amp;#39;, &amp;#39;料&amp;#39;, &amp;#39;价格&amp;#39;, &amp;#39;上涨&amp;#39;, &amp;#39;。&amp;#39;] 可以看出来，这里“单晶硅片”，“单晶硅料”， 被分为了“单晶”“硅”“料”和“单晶”“硅”“片”。
@@ -265,10 +265,10 @@ tok.dict_force = None tok.dict_combine = {&amp;#39;单晶硅&amp;#39;} sentence 
     
     <item>
       <title>2022-07-19 Thomas 拍的烂尾楼</title>
-      <link>https://www.huizhixu.github.io/chs/life/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/</link>
+      <link>https//www.huizhixu.org/chs/life/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/</link>
       <pubDate>Tue, 19 Jul 2022 19:50:22 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20220719thomas%E6%8B%8D%E7%9A%84%E7%83%82%E5%B0%BE%E6%A5%BC/</guid>
       <description>从照片上看，整个公寓没有什么烟火气，房子内部还处于毛坯房的状态，是混凝土水泥这种灰蒙蒙的色调。屋内的摆设非常简陋，几乎只有床、小桌子、热水瓶这种生活必需品。没有电，用的是类似于手电筒的东西，光线非常微弱。
 可以想象，住在这里的人几乎不会过上什么幸福生活。他们的身影也是非常落寞。
 最近停贷的事情，也是越闹越大。很多人在付了首付，已经开始还贷的情况下遇到房子变成了烂尾楼。不停贷的话相当于把钱往水里扔，停贷的话个人征信遇上这种事情，对普通人来说，几乎等于个人破产了。
@@ -284,10 +284,10 @@ tok.dict_force = None tok.dict_combine = {&amp;#39;单晶硅&amp;#39;} sentence 
     
     <item>
       <title>2022-07-07 新现实是活在当下</title>
-      <link>https://www.huizhixu.github.io/chs/life/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/</link>
+      <link>https//www.huizhixu.org/chs/life/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/</link>
       <pubDate>Thu, 07 Jul 2022 14:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20220707%E6%96%B0%E7%8E%B0%E5%AE%9E%E6%98%AF%E6%B4%BB%E5%9C%A8%E5%BD%93%E4%B8%8B/</guid>
       <description>过去的一个礼拜的上海是今年最漂亮的上海，随便刷一刷小红书，就可以看见满屏的”绝美晚霞“，“火烧云”，”绝美朝霞“，”绝美天空“， ”感觉在欧洲“。欧洲的风景那么美丽，除了历史的沉淀，蓝天白云的加分也是不少。第一次意识到上海也可以像欧洲那么美丽，哈哈。
 据说这是台风的功劳，台风要来，云就飘动得很快，天空就很通透。天气这么好，大家都出去撒欢了，前天晚上我和楚哥去乍浦桥拍照，刚好是太阳落山后的蓝调时间，天还没有黑，天空还是类似白天的湛蓝的颜色，大朵白云依偎在陆家嘴三件套旁边，晚风撩人。桥两边都有人在聊天，看夜景，也有大片空出来的地方，是大家都自觉为他们空出来的，因为有人在拍婚纱照。在乍浦桥上，很有以前在博物馆岛的感觉。
 复工之后我们基本每个周末都出去玩。特别珍惜出门的机会。这一个月之内我们去了鲁迅公园、世纪公园、上海野生动物公园、自然博物馆。真是每一个周末都没浪费啊。
@@ -303,20 +303,20 @@ tok.dict_force = None tok.dict_combine = {&amp;#39;单晶硅&amp;#39;} sentence 
     
     <item>
       <title>2022-06-29 今日上海</title>
-      <link>https://www.huizhixu.github.io/chs/life/20220629%E4%BB%8A%E6%97%A5%E4%B8%8A%E6%B5%B7/</link>
+      <link>https//www.huizhixu.org/chs/life/20220629%E4%BB%8A%E6%97%A5%E4%B8%8A%E6%B5%B7/</link>
       <pubDate>Wed, 29 Jun 2022 19:22:05 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20220629%E4%BB%8A%E6%97%A5%E4%B8%8A%E6%B5%B7/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20220629%E4%BB%8A%E6%97%A5%E4%B8%8A%E6%B5%B7/</guid>
       <description>高温黄色警报 雷电黄色警报 暴雨蓝色警报 大风黄色警报 冰雹黄色警报
 但是今日出现了彩虹</description>
     </item>
     
     <item>
       <title>2022-03-02 开始学习 FastAPI 了</title>
-      <link>https://www.huizhixu.github.io/chs/life/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/</link>
+      <link>https//www.huizhixu.org/chs/life/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/</link>
       <pubDate>Wed, 02 Mar 2022 20:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20220302%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0fastapi%E4%BA%86/</guid>
       <description>学着学着突然就emo了，觉得在互联网行业一直要学习新的东西，这个过程是无休止的，何时是个头啊。
 正沮丧着，在浏览器上我发现了一个很久没有打开的标签文件夹——blog，里面是我这几年收藏的博客和专题网站。于是我开始一个个点开，看有哪些人还在更新。
 其中有一个网站，我看了好久。
@@ -331,10 +331,10 @@ tok.dict_force = None tok.dict_combine = {&amp;#39;单晶硅&amp;#39;} sentence 
     
     <item>
       <title>2022-02-18 做NLP基础不牢的痛苦</title>
-      <link>https://www.huizhixu.github.io/chs/life/20220218%E5%81%9Anlp%E7%9A%84%E7%97%9B%E8%8B%A6/</link>
+      <link>https//www.huizhixu.org/chs/life/20220218%E5%81%9Anlp%E7%9A%84%E7%97%9B%E8%8B%A6/</link>
       <pubDate>Fri, 18 Feb 2022 20:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20220218%E5%81%9Anlp%E7%9A%84%E7%97%9B%E8%8B%A6/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20220218%E5%81%9Anlp%E7%9A%84%E7%97%9B%E8%8B%A6/</guid>
       <description>最近接触到了一些NLP的东西。主要是以下方面：
 Resnet152 决策树/随机森林/逻辑回归 TextCNN NER 上面这些任务，都是用来处理文本的。但是效果都很糟糕。
 “如何识别一个标题”
@@ -346,10 +346,10 @@ Resnet152 决策树/随机森林/逻辑回归 TextCNN NER 上面这些任务，�
     
     <item>
       <title>2022-01-10 开始对拍照产生兴趣</title>
-      <link>https://www.huizhixu.github.io/chs/life/20220110%E5%BC%80%E5%A7%8B%E5%AF%B9%E6%8B%8D%E7%85%A7%E4%BA%A7%E7%94%9F%E5%85%B4%E8%B6%A3/</link>
+      <link>https//www.huizhixu.org/chs/life/20220110%E5%BC%80%E5%A7%8B%E5%AF%B9%E6%8B%8D%E7%85%A7%E4%BA%A7%E7%94%9F%E5%85%B4%E8%B6%A3/</link>
       <pubDate>Mon, 10 Jan 2022 20:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20220110%E5%BC%80%E5%A7%8B%E5%AF%B9%E6%8B%8D%E7%85%A7%E4%BA%A7%E7%94%9F%E5%85%B4%E8%B6%A3/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20220110%E5%BC%80%E5%A7%8B%E5%AF%B9%E6%8B%8D%E7%85%A7%E4%BA%A7%E7%94%9F%E5%85%B4%E8%B6%A3/</guid>
       <description>从12月底，就开始对摄影产生了一点兴趣。这种兴趣的由来，其实是有迹可循的。来上海四个月，每个礼拜出门都是去商场吃饭，然后逛逛。时间久了，就觉得周末的生活很乏味，开始讨厌起逛商场来。
 我虽然不知道会在上海住多久，但是希望自己能利用这段时间好好的感受一下上海的生活，去看一些上海的街头的景象，看一些上海的日出，日落，去周边玩，认识一些朋友。
 这个兴趣的由来，也是随着我找好的瑜伽学习场地未果的结果。学习瑜伽能够认识一些小伙伴，但是瑜伽班真的太贵啦，看了一下我身边的瑜伽馆，动不动就要交费上万元，想想还是算了。
@@ -366,10 +366,10 @@ Resnet152 决策树/随机森林/逻辑回归 TextCNN NER 上面这些任务，�
     
     <item>
       <title>2021-10-30 回国内卷</title>
-      <link>https://www.huizhixu.github.io/chs/life/20211031%E5%9B%9E%E5%9B%BD%E5%86%85%E5%8D%B7/</link>
+      <link>https//www.huizhixu.org/chs/life/20211031%E5%9B%9E%E5%9B%BD%E5%86%85%E5%8D%B7/</link>
       <pubDate>Sat, 30 Oct 2021 20:07:58 +0800</pubDate>
       
-      <guid>https://www.huizhixu.github.io/chs/life/20211031%E5%9B%9E%E5%9B%BD%E5%86%85%E5%8D%B7/</guid>
+      <guid>https//www.huizhixu.org/chs/life/20211031%E5%9B%9E%E5%9B%BD%E5%86%85%E5%8D%B7/</guid>
       <description>回国后，我如愿以偿的成为了一名又苦又累的Python后端开发工程师。一眨眼，入职已经两个多月了。我只能说，路是自己选的，苦也是自己选的，人生无非是苦中作乐。
 记得当初我要找后端开发的工作时，一个朋友劝我，“不要去做后端，等你做久了就会发现，很无聊的，后端就是体力活。”
 我头一偏，“我不，我觉得后端还挺好玩的。”
