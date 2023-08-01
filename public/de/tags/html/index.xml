@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>html on Blog von Huizhi XU</title>
-    <link>https://www.huizhixu.github.io/de/tags/html/</link>
+    <link>https://huizhixu.github.io/de/tags/html/</link>
     <description>Recent content in html on Blog von Huizhi XU</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
-    <lastBuildDate>Wed, 14 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.huizhixu.github.io/de/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/de/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Markdown Syntax Guide</title>
-      <link>https://www.huizhixu.github.io/de/life/markdown-syntax/</link>
+      <link>https://huizhixu.github.io/de/life/markdown-syntax/</link>
       <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://www.huizhixu.github.io/de/life/markdown-syntax/</guid>
+      <guid>https://huizhixu.github.io/de/life/markdown-syntax/</guid>
       <description>&lt;p&gt;Dieser Artikel bietet ein Beispiel für die grundlegende Markdown-Syntax, die in Hugo-Inhaltsdateien verwendet werden kann, und zeigt auch, ob grundlegende HTML-Elemente mit CSS in einem Hugo-Theme dekoriert sind.&lt;/p&gt;</description>
     </item>
     
