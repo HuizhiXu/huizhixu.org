@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TREASURE on 徐慧志的个人博客</title>
-    <link>https://huizhixu.github.io/chs/treasure/</link>
+    <link>https://www.huizhixu.github.io/chs/treasure/</link>
     <description>Recent content in TREASURE on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Fri, 02 Jun 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/treasure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Jun 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://www.huizhixu.github.io/chs/treasure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023-03-02 季读——2023年（一）</title>
-      <link>https://huizhixu.github.io/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</link>
+      <link>https://www.huizhixu.github.io/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</link>
       <pubDate>Fri, 02 Jun 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</guid>
+      <guid>https://www.huizhixu.github.io/chs/treasure/20230302%E5%AD%A3%E8%AF%BB/</guid>
       <description>本来过年的时候想着今年要读一些书，每个月都至少读一本，结果今天发现已经三月份了，我还在读第一本书。
 虽然没有读书，但是看了很多别人写的材料，博客，听了很多访谈。当然，主要因为chatGPT的爆火，公众号每天都充斥着关于大模型的知识。 有一些大咖表面上在聊chatGPT，其实是趁机卖自己的课和书；还有一些人觉得这是个绝佳的创业的机会；还有一些号，明明和他八竿子打不着关系，还要硬往上面蹭。
 还记得去年冬天，行业加上疫情的原因，一片萧瑟，各大媒体都在唱衰，说是 AI 寒冬，结果过了个年就变成了AI盛世。 也不知道这个热火朝天的劲头能持续多久。
@@ -29,10 +29,10 @@ I do not remember having felt, as a boy, any passion for mathematics, and such n
     
     <item>
       <title>2023-06-02 季读——2023年（二）</title>
-      <link>https://huizhixu.github.io/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</link>
+      <link>https://www.huizhixu.github.io/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</link>
       <pubDate>Fri, 02 Jun 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</guid>
+      <guid>https://www.huizhixu.github.io/chs/treasure/20230602%E5%AD%A3%E8%AF%BB/</guid>
       <description>今天早上醒来，看到朋友圈大家都在（给娃）庆祝儿童节，发现居然已经到了6月了。想起自己的季读还没写多少。😄
 由于行业技术的快速发展，这个季度基本都在一个提高认知、拓宽眼界的技术氛围里。因此，我在这段时间里阅读的大部分文章都与技术有关。
 《Prompt Tuning的万字综述》 （https://wjn1996.blog.csdn.net/article/details/120607050） 读了四个多小时，没有全部读完。之前对Prompt Tuning的理解仅仅停留在第三章：如何构建模板，但是到第三章只是入门，后面还有更多的细节。最精髓的就是一句话：prompt的本质是参数有效性学习。
@@ -72,10 +72,10 @@ AutoGPT：多重任务——llm和agent能自我迭代。agent会不断反馈，
     
     <item>
       <title>2019-02-02 柏林电影节《地久天长》观后感</title>
-      <link>https://huizhixu.github.io/chs/treasure/20190202%E6%9F%8F%E6%9E%97%E7%94%B5%E5%BD%B1%E8%8A%82%E5%9C%B0%E4%B9%85%E5%A4%A9%E9%95%BF%E8%A7%82%E5%90%8E%E6%84%9F/</link>
+      <link>https://www.huizhixu.github.io/chs/treasure/20190202%E6%9F%8F%E6%9E%97%E7%94%B5%E5%BD%B1%E8%8A%82%E5%9C%B0%E4%B9%85%E5%A4%A9%E9%95%BF%E8%A7%82%E5%90%8E%E6%84%9F/</link>
       <pubDate>Sat, 02 Feb 2019 20:07:58 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/chs/treasure/20190202%E6%9F%8F%E6%9E%97%E7%94%B5%E5%BD%B1%E8%8A%82%E5%9C%B0%E4%B9%85%E5%A4%A9%E9%95%BF%E8%A7%82%E5%90%8E%E6%84%9F/</guid>
+      <guid>https://www.huizhixu.github.io/chs/treasure/20190202%E6%9F%8F%E6%9E%97%E7%94%B5%E5%BD%B1%E8%8A%82%E5%9C%B0%E4%B9%85%E5%A4%A9%E9%95%BF%E8%A7%82%E5%90%8E%E6%84%9F/</guid>
       <description>《地久天长》主要讲了这样一个故事：
 上世纪八十年代，刘耀军家和沈英明家是好友，两人的妻子王丽云和李海燕在同一家工厂上班，两家的孩子在同一天出生甚至一起庆祝生日，两家相处和睦友好。
 后来，王丽云意外地怀上了二胎，她和丈夫都很想要这个孩子，但迫于当时计划生育政策的压力，一直没敢和别人说，商量要不去乡下生这个孩子，但又愁巨额罚款。有一天王丽云晕倒了，李海燕也知道了她怀孕这件事。李海燕在厂里的计生委工作，作为计生委副主任的她劝王丽云打掉了二胎。这是当时政策下最明智的做法。
@@ -96,10 +96,10 @@ AutoGPT：多重任务——llm和agent能自我迭代。agent会不断反馈，
     
     <item>
       <title>2017-08-02 Enduring Delicacy 精致英伦 风雅中国</title>
-      <link>https://huizhixu.github.io/chs/treasure/20170802%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</link>
+      <link>https://www.huizhixu.github.io/chs/treasure/20170802%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</link>
       <pubDate>Wed, 02 Aug 2017 20:07:58 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/chs/treasure/20170802%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</guid>
+      <guid>https://www.huizhixu.github.io/chs/treasure/20170802%E7%B2%BE%E8%87%B4%E8%8B%B1%E4%BC%A6%E9%A3%8E%E9%9B%85%E4%B8%AD%E5%9B%BDenduringdelicacy/</guid>
       <description>今天看了一节网课，是齐文昱老师的英美文学课堂，主要内容是”为什么读英文经典？“。
 下面是正文。
 我开始是从培训做起的。一开始做应试的培训，比如说，跟留学有关的，像托福考试，像SAT，SAT是美国的高考，这样一些考试。但后来我发现啊，我们有一个更便捷的方便法门，让中国人在学英语当中，少一些痛苦，少一些郁闷，和彷徨在里面。那么这个方便法门是什么呢？

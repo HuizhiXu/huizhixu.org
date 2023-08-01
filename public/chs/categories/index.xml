@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 徐慧志的个人博客</title>
-    <link>https://huizhixu.github.io/chs/categories/</link>
+    <link>https://www.huizhixu.github.io/chs/categories/</link>
     <description>Recent content in Categories on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>chs</language><atom:link href="https://huizhixu.github.io/chs/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>chs</language><atom:link href="https://www.huizhixu.github.io/chs/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
