@@ -6,9 +6,30 @@
     <description>Recent content in LIFE on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Tue, 11 Jul 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/life/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Jul 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>2023-07-11最近觉得很好用的两个AI产品</title>
+      <title>2023-07-31更换博客皮肤</title>
+      <link>https://huizhixu.github.io/chs/life/20230731%E6%9B%B4%E6%8D%A2%E5%8D%9A%E5%AE%A2%E7%9A%AE%E8%82%A4/</link>
+      <pubDate>Mon, 31 Jul 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/life/20230731%E6%9B%B4%E6%8D%A2%E5%8D%9A%E5%AE%A2%E7%9A%AE%E8%82%A4/</guid>
+      <description>哈哈哈，我发现我文章没写多少，时间都花在创建/修改/更换博客、博客域名、托管服务器和博客主题上。但不得不说，这个过程真的很有意思啊。
+我之前博客主题用的是github-styles，它的页面和github一模一样。左边是个人头像和个人信息，右边上面是置顶文章，然后是文章提交热力图，再往下就是文章的时间线，一目了然。它还能切换light/dark模式.
+一切都挺好的，但是最近觉得有点不太方便了，因为我想将文章归类存储和搜索，将生活的感想和技术上的总结分开，此外还想加一个英文和德语的界面。
+但是还是打算用Hugo，hugo真的是很方便啊，之前不太懂的我也跟着教程做出来了。于是打开Hugo的主题页面开始浏览，看了几个，最后决定用这个叫做blist主题的，它支持multi-lingual，页面也很漂亮。
+我把主题 git clone到现在的博客之后，按照步骤开始操作，但是没有生效。别着急，一般都不会一次性生效的。
+我又重新安装操作了好几遍，并且大胆地删了一些上个主题的遗留的文件夹，但是怎么改动博客都运行不起来了。
+于是我去github看了一下。发现有两个repo都是和博客相关的。事实上距离上一次折腾博客已经有了一年多了，我早已经忘记为什么要分两个repo了。而且我设置了一个自动化提交，只要运行一个bash文件就可以写文章。
+于是我又重新开始看教程，敲敲打打，修修补补。
+在这个过程中看到有人吐槽hugo的文档写的不清晰，能够感受到他的愤怒了，哈哈。
+Why Hugo&amp;amp;rsquo;s Documentation Sucks 不过过了看Hugo的文档之外，Hugo论坛hugo discourse 也是很有帮助的。
+我最后遇到的问题是，博客在本地启动，页面显示一切正常。但是在域名启动，页面显示就很奇怪，我不懂前端，猜测是部分css文件没有奇效。找了很多答案，都没有改变。最后在这个论坛上提问，很快就有人回答了。太感谢了！
+互联网世界的美妙就在于这吧。有超级多的资料可以学习，有前辈程序员写的教程，有各种论坛答疑讨论，有开源仓库的无私奉献。享受这些美好，同时也要不断地帮助别人。
+放一个修改前后的对比图：</description>
+    </item>
+    
+    <item>
+      <title>2023-07-11如何应对职场压力</title>
       <link>https://huizhixu.github.io/chs/life/20230711%E5%A6%82%E4%BD%95%E5%BA%94%E5%AF%B9%E8%81%8C%E5%9C%BA%E5%8E%8B%E5%8A%9B/</link>
       <pubDate>Tue, 11 Jul 2023 18:31:50 +0800</pubDate>
       
@@ -185,26 +206,6 @@ Ora调用的是OpenAI的GPT4，它和OpenAI网站上的GPT4相比，有两个优
 而且我在上海已经过上了传说中的995（有可能周六也要上半天班）的内卷生活，想要wlb的人肯定觉得很煎熬。回国以后我偶尔会感叹“我离世界很远”，但是又觉得“踏实过好当下每一天也很好”。
 我也说不准换国家换行业换岗位这个决定对我是利大于弊还是弊大于利，只是觉得，我喜欢什么，就应该去亲近什么。喜欢阅读，就多去读书，喜欢聊天，就多交朋友。不管这件事情最后给我带来什么，它至少给我带来了乐趣。在这些乐趣中，我才算真正倾听了内心的声音。如黑塞在《德米安》书中说的，“对每个人而言，真正的职责只有一个：找到自我。然后在心中坚守其一生，全心全意，永不停息。所有其它的路都是不完整的，是人的逃避方式，是对大众理想的懦弱回归，是随波逐流，是对内心的恐惧。”
 共勉。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://huizhixu.github.io/chs/life/20230731%E6%9B%B4%E6%8D%A2%E5%8D%9A%E5%AE%A2%E7%9A%AE%E8%82%A4/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://huizhixu.github.io/chs/life/20230731%E6%9B%B4%E6%8D%A2%E5%8D%9A%E5%AE%A2%E7%9A%AE%E8%82%A4/</guid>
-      <description>2023-07-31 有一种乐趣叫折腾博客 哈哈哈，我发现我文章没写多少，时间都花在创建/修改/更换博客、博客域名、托管服务器和博客主题上。但不得不说，这个过程真的很有意思啊。
-我之前博客主题用的是github-styles，它的页面和github一模一样。左边是个人头像和个人信息，右边上面是置顶文章，然后是文章提交热力图，再往下就是文章的时间线，一目了然。它还能切换light/dark模式.
-一切都挺好的，但是最近觉得有点不太方便了，因为我想将文章归类存储和搜索，将生活的感想和技术上的总结分开，此外还想加一个英文和德语的界面。
-但是还是打算用Hugo，hugo真的是很方便啊，之前不太懂的我也跟着教程做出来了。于是打开Hugo的主题页面开始浏览，看了几个，最后决定用这个叫做blist主题的，它支持multi-lingual，页面也很漂亮。
-我把主题 git clone到现在的博客之后，按照步骤开始操作，但是没有生效。别着急，一般都不会一次性生效的。
-我又重新安装操作了好几遍，并且大胆地删了一些上个主题的遗留的文件夹，但是怎么改动博客都运行不起来了。
-于是我去github看了一下。发现有两个repo都是和博客相关的。事实上距离上一次折腾博客已经有了一年多了，我早已经忘记为什么要分两个repo了。而且我设置了一个自动化提交，只要运行一个bash文件就可以写文章。
-于是我又重新开始看教程，敲敲打打，修修补补。
-在这个过程中看到有人吐槽hugo的文档写的不清晰，能够感受到他的愤怒了，哈哈。
-Why Hugo&amp;amp;rsquo;s Documentation Sucks 不过过了看Hugo的文档之外，Hugo论坛hugo discourse 也是很有帮助的。
-我最后遇到的问题是，博客在本地启动，页面显示一切正常。但是在域名启动，页面显示就很奇怪，我不懂前端，猜测是部分css文件没有奇效。找了很多答案，都没有改变。最后在这个论坛上提问，很快就有人回答了。太感谢了！
-互联网世界的美妙就在于这吧。有超级多的资料可以学习，有前辈程序员写的教程，有各种论坛答疑讨论，有开源仓库的无私奉献。享受这些美好，同时也要不断地帮助别人。</description>
     </item>
     
   </channel>
