@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redash on 徐慧志的个人博客</title>
+    <link>https://huizhixu.github.io/chs/tags/redash/</link>
+    <description>Recent content in Redash on 徐慧志的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>chs</language>
+    <lastBuildDate>Thu, 20 Jul 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/redash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023-07-20Redash V10安装（在Ubuntu系统上用docker部署安装）</title>
+      <link>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95-copy/</link>
+      <pubDate>Thu, 20 Jul 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95-copy/</guid>
+      <description>市面上的Redash教程太混乱了，官方发布了不同的安装方式，但是写得不是很明白。基本上都会有一个重复安装和卸载的过程，是正常的。
+这次安装的经验就是：
+千万不要从Redash的Github Master分支上拉代码，比较痛苦。
+考虑用不用Docker部署的条件是：看需不需要进行二次开发，不需要就可以进行Docker部署
+CentOS也是一个类Linux的系统，和Ubuntu一样。注意它不是指mac的操作系统。
+一、配置环境 系统环境（这个仅供参考） 系统版本： Ubuntu-22.04 目标安装目录： /opt/redash Postgresql账号/密码： postgres/abcdef123456 环境变量env文件： /opt/redash/.env 配置docker环境 #将当前用户加入docker组 sudo usermod -aG docker $USER #启动docker服务并配置自启 sudo systemctl start docker &amp;amp;&amp;amp; sudo systemctl enable docker 二、安装Redash 选定安装目录，这里是/opt/redash sudo mkdir /opt/redash sudo chown -R ${USER} /opt/redash cd /opt/redash 创建env文件，写入下列内容 #/opt/redash/env/内容 PYTHONUNBUFFERED=0 REDASH_LOG_LEVEL=INFO REDASH_REDIS_URL=redis://redis:6379/0 POSTGRES_PASSWORD=aaa123456 REDASH_COOKIE_SECRET=wo3urion23i4un2l34jm2l34k REDASH_SECRET_KEY=u2o34nlfksjelruirk REDASH_DATABASE_URL=&amp;#34;postgresql://postgres:abcdef123456@postgres/postgres&amp;#34; ORACLE_HOME=&amp;#34;/usr/lib/oracle/12.2/client64&amp;#34; LD_LIBRARY_PATH=&amp;#34;/usr/lib/oracle/12.2/client64/lib&amp;#34; REDASH_FEATURE_ALLOW_CUSTOM_JS_VISUALIZATIONS=&amp;#34;true&amp;#34; REDASH_ADDITIONAL_QUERY_RUNNERS=&amp;#34;redash.query_runner.oracle,redash.query_runner.python&amp;#34; 创建docker-compose.yml，写入下列内容 这里我只改了image的内容:image: redash/redash:10.1.0.b50633，这个image是在github的release分支上 找到的。
+version: &amp;#34;2&amp;#34; x-redash-service: &amp;amp;redash-service #现在image的值为中文开源版的tag如果要使用官方的镜像，在docker hub上查看官方tag，然后替换。 image: image: redash/redash:10.</description>
+    </item>
+    
+    <item>
+      <title>2023-07-19Ubuntu上安装Docker</title>
+      <link>https://huizhixu.github.io/chs/know_how/20230719ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85docker/</link>
+      <pubDate>Wed, 19 Jul 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20230719ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85docker/</guid>
+      <description>一、设置Docker Repository 升级apt-get到最新 sudo apt-get update sudo apt-get install ca-certificates curl gnupg 添加Docker的官方GPG key sudo install -m 0755 -d /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg sudo chmod a+r /etc/apt/keyrings/docker.gpg 设置仓库 echo \ &amp;#34;deb [arch=&amp;#34;$(dpkg --print-architecture)&amp;#34; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \ &amp;#34;$(. /etc/os-release &amp;amp;&amp;amp; echo &amp;#34;$VERSION_CODENAME&amp;#34;)&amp;#34; stable&amp;#34; | \ sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null 二、安装Docker Engine 升级apt-get到最新 sudo apt-get update 安装最新版本的Docker Engine， containerd和Docker Compose sudo apt-get install docker-ce docker-ce-cli containerd.</description>
+    </item>
+    
+  </channel>
+</rss>

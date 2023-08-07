@@ -8,14 +8,16 @@
     <language>chs</language>
     <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Über mich</title>
+      <title>关于我</title>
       <link>https://huizhixu.github.io/chs/page/about/</link>
       <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://huizhixu.github.io/chs/page/about/</guid>
-      <description>Hugo wurde in Go geschrieben und ist ein Open-Source-Generator für statische Sites, der unter der [Apache License 2.0.] (https://github.com/gohugoio/hugo/blob/master/LICENSE ) verfügbar ist. Hugo unterstützt TOML-, YAML- und JSON-Datendateitypen , Markdown- und HTML-Inhaltsdateien und verwendet Shortcodes, um Rich Content hinzuzufügen. Andere bemerkenswerte Funktionen sind Taxonomien, mehrsprachiger Modus, Bildverarbeitung, benutzerdefinierte Ausgabeformate, HTML/CSS/JS-Minifizierung und Unterstützung für Sass SCSS-Workflows.
-Hugo nutzt eine Vielzahl von Open-Source-Projekten, darunter:
-https://github.com/yuin/goldmark https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.</description>
+      <description>你好，很高兴遇到你。
+我是一个对技术热忱，喜欢阅读，喜欢思考的工程师。
+我的优点是：执行力强
+我的缺点是：执行力弱
+人就是这么矛盾！</description>
     </item>
     
   </channel>

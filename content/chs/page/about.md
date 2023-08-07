@@ -1,26 +1,18 @@
 ---
-author: Katheryn Fox
-title: Über mich
+author: Huizhi 
+title: 关于我
 date: 2021-07-15
 description:
-keywords: ["about-us", "about-hugo", "contact"]
+keywords: ["contact"]
 type: about
 ---
 
-Hugo wurde in Go geschrieben und ist ein Open-Source-Generator für statische Sites, der unter der [Apache License 2.0.] (https://github.com/gohugoio/hugo/blob/master/LICENSE) verfügbar ist. Hugo unterstützt TOML-, YAML- und JSON-Datendateitypen , Markdown- und HTML-Inhaltsdateien und verwendet Shortcodes, um Rich Content hinzuzufügen. Andere bemerkenswerte Funktionen sind Taxonomien, mehrsprachiger Modus, Bildverarbeitung, benutzerdefinierte Ausgabeformate, HTML/CSS/JS-Minifizierung und Unterstützung für Sass SCSS-Workflows.
+你好，很高兴遇到你。
 
-Hugo nutzt eine Vielzahl von Open-Source-Projekten, darunter:
+我是一个对技术热忱，喜欢阅读，喜欢思考的工程师。
 
-- https://github.com/yuin/goldmark
-- https://github.com/alecthomas/chroma
-- https://github.com/muesli/smartcrop
-- https://github.com/spf13/cobra
-- https://github.com/spf13/viper
+我的优点是：执行力强
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+我的缺点是：执行力弱
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
-
-Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+人就是这么矛盾！
