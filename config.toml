@@ -44,7 +44,7 @@ DefaultContentLanguageInSubdir = true
 
     [[languages.chs.menu.main]]
         name = "宝藏集结"
-        url = "/treasure/"
+        url = "/link/"
         weight = 4
 
     [[languages.chs.menu.main]]
