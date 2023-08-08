@@ -4,7 +4,7 @@ title:  "2023-07-19Ubuntu上安装Docker"
 date: 2023-07-19T18:31:50+08:00  
 lastmod: 2023-07-30
 description: "按照官网教程就可以了"
-tags: ["tech","Redash"]
+tags: ["tech","redash"]
 draft: false
 pin: false
 thumbnail: https://picsum.photos/id/301/400/250

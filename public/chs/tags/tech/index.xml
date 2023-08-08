@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 20 Jul 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023-07-20Redash V10安装（在Ubuntu系统上用docker部署安装）</title>
-      <link>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95-copy/</link>
+      <link>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/</link>
       <pubDate>Thu, 20 Jul 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95-copy/</guid>
+      <guid>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/</guid>
       <description>市面上的Redash教程太混乱了，官方发布了不同的安装方式，但是写得不是很明白。基本上都会有一个重复安装和卸载的过程，是正常的。
 这次安装的经验就是：
 千万不要从Redash的Github Master分支上拉代码，比较痛苦。
@@ -162,6 +162,30 @@ model = BertForSequenceClassification.from_pretrained(&amp;#34;bert-base-chinese
 from datasets import list_datasets list_datasets(with_community_datasets = True, with_detaikls = False) 很多例子演示的时候，都是直接用hub上的数据集演示，但是我不知道这个数据集里面的构造，尽管照着例子运行成功了，但往往一头雾水。
 此时我要看看这个数据集里面到底有啥东西，可以导入dataset builder来看看。（这个例子里面我们导入的数据集是”rotten_tomatoes”）。
 !pip install datasets from datasets import load_dataset_builder ds_builder = load_dataset_builder(&amp;#34;rotten_tomatoes&amp;#34;) ds_builder.info.description Movie Review Dataset. This is a dataset of containing 5,331 positive and 5,331 negative processed sentences from Rotten Tomatoes movie reviews. This data was first used in Bo Pang and Lillian Lee, ``Seeing stars: Exploiting class relationships for sentiment categorization with respect to rating scales.</description>
+    </item>
+    
+    <item>
+      <title>2022-10-24 在程序里起名有很多要注意的</title>
+      <link>https://huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
+      <pubDate>Mon, 24 Oct 2022 20:51:00 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
+      <description>最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_data，process_data，data_preprocess，deal_with_data 这些名字。再比如很多类的主入口，我经常会写 run()、xx_driver() 等等。
+想一个名字看起来简单，但是新建文件那一刻抓耳挠腮肚子里墨水空空，想不到好名字，无奈最后写下写了很多遍的 get_data 。于是学习给不同的功能函数或者变量取一些适合的名字迫在眉睫。
+今天看了关于两篇起名建议的文章，一篇是《变量名不要起得他妈的那么长》，链接在这 。 我跟着这篇文章反省了一下，有时候为了区分不同情况，我就会用下划线连接好几个单词，这样的话总体长度很长，不是很 pythonic。
+作者给了几个建议：
+不要容易看出类型的名字后面加上类型，例如 name 就不要叫 namestring。
+写复数，不要用单数加 collection。例如 holidays 比 holiday_list 好些。
+我这个问题还挺严重的，因为我很喜欢写 xx_list，yy_dict 等。
+在写 func 的名字的时候，不需要把参数也写在功能函数名称里面，因为参数列表能够看出来要处理什么参数。例如 merge(table_cells) 比 merge_table_cells(x) 要好。
+要精确，不需要把每一个细节都写出。例如 recentlyUpdatedAnnualSalesBid 这里面每一个单词细节都值得推敲，看是不是为了确保独一性而加的，没有就要去掉。
+变量名不要包含能从上下文看出来的单词。如果类名里面已经包含的单词，在类方法就不用再写了。
+例如类名有 data，已经表明了这个类是和数据相关。那么方法可以直接写 process，不需要写 data_process。
+变量名不要包含无意义的单词。 这些单词包括：
+data, state, amount, value, manager, engine, object, entity, and instance. Python 里面用类型注释很容易避免这些问题，就算用 results，不用 results_list 也可以很快看出 results 是一个 list，有时候是 list of list。
+第二篇文章是这个《起名的那些事儿》，链接在这儿 。
+对于起名他给的建议是：
+对于类名、接口名： 用名词，不用形容词。</description>
     </item>
     
     <item>

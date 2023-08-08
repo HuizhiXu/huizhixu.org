@@ -4,7 +4,7 @@ title:  "2023-04-27GPU运行LLaMa模型——用HF的方式推理"
 date: 2023-04-27T18:31:50+08:00  
 lastmod: 2023-06-30
 description: "很简单的运行LLaMa的方法"
-tags: ["tech","chatGPT"]
+tags: ["tech","ai"]
 draft: false
 pin: false
 thumbnail: https://picsum.photos/id/30/400/250
