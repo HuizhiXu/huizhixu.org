@@ -33,28 +33,6 @@ $$ P(belief|data) = \frac{P(data|belief)P(belief)}{P(data)} $$
     </item>
     
     <item>
-      <title>2023-10-31 最近用AI干了啥</title>
-      <link>https://huizhixu.github.io/chs/life/20231031%E6%9C%80%E8%BF%91%E7%94%A8ai%E5%B9%B2%E4%BA%86%E5%95%A5/</link>
-      <pubDate>Tue, 31 Oct 2023 18:31:50 +0800</pubDate>
-      
-      <guid>https://huizhixu.github.io/chs/life/20231031%E6%9C%80%E8%BF%91%E7%94%A8ai%E5%B9%B2%E4%BA%86%E5%95%A5/</guid>
-      <description>工作上已经离不开 you.com ，基本上每个工作日都会打开它： a. 询问一些基本操作，例如Pandas操作的数据格式和类型之间的转换。 b. debug 代码错误。如果第一次没有给答案我就会去谷歌搜索。
-c. 有一些思路，但还是不知道怎么做，会去问一下研究现状。
-d. 为什么用you.com而不是openAI自己的网站？因为某些原因我访问openAI要疯狂验证，但是you.com不会。
-e. 访问You.com不意味着对谷歌搜索的放弃，事实上他不能完全代替谷歌。
-用chatGPT 4 画了聚会的图，整个过程很欢乐。（感谢孙女士的支持~） 四分之二聚会的时候，chatGPT震惊了全世界，当时我用它生成了一首六人聚会的诗。
-短短六个月，openAI疯狂迭代。
-六个月之后，四分之四聚会的时候，被DALLE的功能震惊，我用它生成了六人聚会的图。
-用阿里的faceChain生成了场景图。 9月份拍了婚纱照，对其中某一张图不是很满意，为了改善这张照片，我上传了一张日常照片，并将原始婚纱照作为场景。
-faceChain将这两张照片结合在一起，生成了一张新的图像。结果证明，生成的图像在除了清晰度方面稍逊一筹外，其他方面都比原始照片效果更好。
-并且当时我是在modelscope提供的算力上跑整个代码的，整个过程很简单，很容易上手。他们最近更新了在线app，应该不用自己手撸代码了。
-github地址在这：https://github.com/modelscope/facechain ，感兴趣的朋友可以自己试试。
-用大模型写评价（1） 中午和同事去了一家川菜馆，点了毛血旺和丝瓜煮蛋，菜很好吃。结账的时候服务员说给好评可以打折，要写100字的评价。于是我用大模型生成了好评。这是它的评论。
-用大模型写评价（2） 婚纱照其实拍得挺不错的，我们很满意。整个过程都给我们很好的体验，最后交付了之后，我用大语言模型生成了好评，自己对细节做了加工，然后发出去了。（不好意思，给点评贡献了两条ai生成的内容。）
-使用chatGPT的function calling 和whisper语音控制Notion记录。 这是为了开发公司的一个项目的一小部分，自己先用Notion做尝试的。主要功能就是用语音唤醒Notion，记录。内容也不难，无非是对Notion的API进行各种操作，然后结合语音模型，整个过程是很有意思的。</description>
-    </item>
-    
-    <item>
       <title>2023-08-13 Linux回顾</title>
       <link>https://huizhixu.github.io/chs/life/20230813linux%E5%9B%9E%E9%A1%BE/</link>
       <pubDate>Sun, 13 Aug 2023 18:31:50 +0800</pubDate>
