@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
+一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
+假设mean vector matrix K为：
+K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
+有 E[x_1] = E[x_2] = 0" /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  
+
+  <meta property="og:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process" />
+<meta property="og:description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
+一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
+假设mean vector matrix K为：
+K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
+有 E[x_1] = E[x_2] = 0" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231125gaussian_process/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2023-11-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-25T00:00:00+00:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process"/>
+<meta name="twitter:description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
+一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
+假设mean vector matrix K为：
+K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
+有 E[x_1] = E[x_2] = 0"/>
+
+  <meta itemprop="name" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process">
+<meta itemprop="description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
+一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
+假设mean vector matrix K为：
+K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
+有 E[x_1] = E[x_2] = 0"><meta itemprop="datePublished" content="2023-11-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-11-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="124">
+<meta itemprop="keywords" content="tech,bayesian," />
+
+  
+  <meta name="lang" content="chs" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/know_how/">IT技术</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/302/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2023年11月25日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2023年11月25日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      124&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#gaussian-process">Gaussian Process</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#1-%e7%90%86%e8%a7%a3covariance-matrix">1. 理解covariance matrix</a>
+        
+
+        
+        </li><li>
+        <a href="#2-%e5%a4%9a%e5%85%83%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e7%9a%84%e8%be%b9%e7%bc%98%e5%88%86%e5%b8%83%e5%92%8c%e6%9d%a1%e4%bb%b6%e5%88%86%e5%b8%83">2. 多元高斯分布的边缘分布和条件分布</a>
+        
+
+        
+        </li><li>
+        <a href="#3-%e4%bb%8e%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e6%8a%bd%e6%a0%b7">3. 从高斯分布抽样</a>
+        </li></ul>
+    </li></ul>
+  </details>
+
+    <h1 id="gaussian-process">Gaussian Process</h1>
+<h2 id="1-理解covariance-matrix">1. 理解covariance matrix</h2>
+<p>Gaussian Process is a stochastic process used to characterize the distribution over function.</p>
+<p>GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。</p>
+<p>假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。</p>
+<p><img src="../../../img/20231125/gp_1.png" alt="gp_1.png"></p>
+<p>一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）</p>
+<p>假设mean vector matrix K为：</p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7B%5Cmu%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A%5Cmu_1%20%5C%5C%5Cmu_2%20%5Cend%7Bbmatrix%7D" alt="\boldsymbol{\mu} = \begin{bmatrix}\mu_1 \\\mu_2 \end{bmatrix}" title="\boldsymbol{\mu} = \begin{bmatrix} 
+\mu_1 \\mu_2 \end{bmatrix}"></p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7BK%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0AK_%7B11%7D%26K_%7B12%7D%20%5C%5CK_%7B21%7D%26K_%7B22%7D%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20%0A%5Csigma_%7B11%7D%5E2%26%5Csigma_%7B12%7D%5E2%20%5C%5C%5Csigma_%7B21%7D%5E2%26%5Csigma_%7B22%7D%5E2%20%5Cend%7Bbmatrix%7D" alt="\boldsymbol{K} = \begin{bmatrix}K\_{11}&amp;K\_{12} \\K\_{21}&amp;K\_{22} \end{bmatrix}=\begin{bmatrix}\sigma\_{11}^2&amp;\sigma\_{12}^2 \\\sigma\_{21}^2&amp;\sigma\_{22}^2 \end{bmatrix}" title="\boldsymbol{K} = \begin{bmatrix} 
+K_{11}&amp;K_{12} \K_{21}&amp;K_{22} \end{bmatrix}=\begin{bmatrix} 
+\sigma_{11}^2&amp;\sigma_{12}^2 \\sigma_{21}^2&amp;\sigma_{22}^2 \end{bmatrix}"></p>
+<p>K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。</p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Csigma_%7B11%7D%5E2%20%3D%20var%28x_1%29%20%3D%20E%5B%28x_1-E%5Bx_1%5D%29%5E2%5D%20%3D%20E%5B%28x_1%29%5E2%5D" alt="\sigma\_{11}^2 = var(x_1) = E\[(x_1-E\[x_1\])^2\] = E\[(x_1)^2\]" title="\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]"></p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Csigma_%7B12%7D%5E2%20%3D%20%5Csigma_%7B21%7D%5E2%20%3D%20E%5B%28x_1-E%5Bx_1%5D%29%28x_2-E%5Bx_2%5D%29%5D%20%3D%20E%5Bx_1x_2%5D" alt="\sigma\_{12}^2 = \sigma\_{21}^2 = E\[(x_1-E\[x_1\])(x_2-E\[x_2\])\] = E\[x_1x_2\]" title="\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]"></p>
+<p>有 E[x_1] = E[x_2] = 0</p>
+<p>图左边和右边的分布为</p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bleft%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" alt="\boldsymbol{x\_{left}} = \begin{bmatrix}x_1 \\x_2 \end{bmatrix} \sim N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0 \\0&amp;1 \end{bmatrix})" title="\boldsymbol{x_{left}} = \begin{bmatrix} 
+x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix} 
+0 \0 \end{bmatrix} ,\begin{bmatrix} 
+1&amp;0 \0&amp;1 \end{bmatrix})"></p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bright%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260.6%20%5C%5C0.6%261%20%5Cend%7Bbmatrix%7D%29" alt="\boldsymbol{x\_{right}} = \begin{bmatrix}x_1 \\x_2 \end{bmatrix} \sim N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0.6 \\0.6&amp;1 \end{bmatrix})" title="\boldsymbol{x_{right}} = \begin{bmatrix} 
+x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix} 
+0 \0 \end{bmatrix} ,\begin{bmatrix} 
+1&amp;0.6 \0.6&amp;1 \end{bmatrix})"></p>
+<p>左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。</p>
+<h2 id="2-多元高斯分布的边缘分布和条件分布">2. 多元高斯分布的边缘分布和条件分布</h2>
+<p>上述的例子是一个二元高斯分布，它有两个特征，x1和x2。在处理多元高斯分布时，我们通常对特征分布的边缘分布和条件分布感兴趣。</p>
+<p>边缘分布</p>
+<p><img src="https://latex.codecogs.com/svg.latex?p%28x_1%29%20%3D%20N%28x_1%7C%5Cmu_1%2C%20K_%7B11%7D%29" alt="p(x_1) = N(x_1\|\mu_1, K\_{11})" title="p(x_1) = N(x_1|\mu_1, K_{11})"></p>
+<p><img src="https://latex.codecogs.com/svg.latex?p%28x_2%29%20%3D%20N%28x_2%7C%5Cmu_2%2C%20K_%7B22%7D%29" alt="p(x_2) = N(x_2\|\mu_2, K\_{22})" title="p(x_2) = N(x_2|\mu_2, K_{22})"></p>
+<p>假设现在观察到x_2的值为a，那这个信息对x_1的分布会有什么影响吗？我们关注的是在x_2=a的条件下x_1的分布，这是个后验概率。</p>
+<p>The conditional posterior distribution of x_1 given x_2 = a can be written as:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?p%28x_1%7Cx_2%3Da%29%20%3D%20N%28x_1%7C%5Cmu_%7B1%7C2%7D%2C%20K_%7B1%7C2%7D%29" alt="p(x_1\|x_2=a) = N(x_1\|\mu\_{1\|2}, K\_{1\|2})" title="p(x_1|x_2=a) = N(x_1|\mu_{1|2}, K_{1|2})"></p>
+<p>The conditional posterior mean and variance are defined as follows:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Cmu_%7B1%7C2%7D%20%3D%20%5Cmu_1%20%2B%20K_%7B12%7DK%7B22%7D%5E%7B-1%7D%28a-%20%5Cmu_2%29" alt="\mu\_{1\|2} = \mu_1 + K\_{12}K{22}^{-1}(a- \mu_2)" title="\mu_{1|2} = \mu_1 + K_{12}K{22}^{-1}(a- \mu_2)"></p>
+<p><img src="https://latex.codecogs.com/svg.latex?K_%7B1%7C2%7D%20%3D%20K_%7B11%7D%20-%20K_%7B12%7DK_%7B22%7D%5E%7B-1%7DK_%7B21%7D" alt="K\_{1\|2} = K\_{11} - K\_{12}K\_{22}^{-1}K\_{21}" title="K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}"></p>
+<p>通过收集data points， 可以不断更新没有观察到的点的后验分布（这里通过x2更新x1），再通过这些分布区预测将来的变化。</p>
+<h2 id="3-从高斯分布抽样">3. 从高斯分布抽样</h2>
+<p>如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布</p>
+<p><img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29" alt="N(\mu,\sigma^2)" title="N(\mu,\sigma^2)"></p>
+<p>中采样。</p>
+<p>一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本</p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu" alt="\sigma x + \mu" title="\sigma x + \mu"></p>
+<p>。</p>
+<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29" alt="\phi^{-1}(U)" title="\phi^{-1}(U)"> 将遵循标准正太分布，其中<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D" alt="\phi^{-1}" title="\phi^{-1}">是标准正态分布累积函数的倒数。</p>
+<p><img src="../../../img/20231125/gp_2.png" alt="gp_2.png"></p>
+<p>总结：从期望的单变量高斯分布中获取随机样本，通过三个步骤：</p>
+<ol>
+<li>从均匀分布中采样</li>
+<li>使用inverse cumulative function，转换成相应的CDF值</li>
+<li>进行scale-location变换</li>
+</ol>
+<p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样。</p>
+
+  </article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

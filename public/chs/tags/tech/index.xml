@@ -6,7 +6,22 @@
     <description>Recent content in tech on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Thu, 20 Jul 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title>
+      <link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link>
+      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid>
+      <description>Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
+一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
+假设mean vector matrix K为：
+K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
+有 E[x_1] = E[x_2] = 0</description>
+    </item>
+    
     <item>
       <title>2023-07-20Redash V10安装（在Ubuntu系统上用docker部署安装）</title>
       <link>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/</link>
