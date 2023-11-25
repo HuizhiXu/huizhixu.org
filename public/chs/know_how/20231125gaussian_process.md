@@ -87,9 +87,17 @@ The conditional posterior mean and variance are defined as follows:
 
 ## 3. 从高斯分布抽样
 
-如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布\N(,^2)\中采样。
+如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布
 
-一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本\\x + \\
+![N(\mu,\sigma^2)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29 "N(\mu,\sigma^2)")
+
+中采样。
+
+一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本
+
+![\sigma x + \mu](https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu "\sigma x + \mu")
+
+。
 
 那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在\[0,1\]上，那么![\phi^{-1}(U)](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29 "\phi^{-1}(U)") 将遵循标准正太分布，其中![\phi^{-1}](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D "\phi^{-1}")是标准正态分布累积函数的倒数。
 

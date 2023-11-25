@@ -6,11 +6,11 @@
     <description>Recent content in Blog on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Sat, 25 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Nov 2023 18:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title>
       <link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link>
-      <pubDate>Sat, 25 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid>
       <description>Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
