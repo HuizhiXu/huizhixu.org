@@ -55,7 +55,7 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
 有 E[x_1] = E[x_2] = 0"><meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-11-25T18:01:50+08:00" />
-<meta itemprop="wordCount" content="124">
+<meta itemprop="wordCount" content="140">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
@@ -217,7 +217,7 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      124&nbsp;字
+      140&nbsp;字
       
         
       
@@ -255,7 +255,14 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
         
         </li><li>
         <a href="#3-%e4%bb%8e%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e6%8a%bd%e6%a0%b7">3. 从高斯分布抽样</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e5%a4%9a%e5%8f%98%e9%87%8f%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83">多变量高斯分布</a>
         </li></ul>
+    </li></ul>
     </li></ul>
   </details>
 
@@ -301,11 +308,12 @@ x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix}
 <h2 id="3-从高斯分布抽样">3. 从高斯分布抽样</h2>
 <p>如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布</p>
 <p><img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29" alt="N(\mu,\sigma^2)" title="N(\mu,\sigma^2)"></p>
-<p>中采样。</p>
+<p>中采样。
+### 单变量高斯分布</p>
 <p>一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本</p>
 <p><img src="https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu" alt="\sigma x + \mu" title="\sigma x + \mu"></p>
 <p>。</p>
-<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29" alt="\phi^{-1}(U)" title="\phi^{-1}(U)"> 将遵循标准正太分布，其中<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D" alt="\phi^{-1}" title="\phi^{-1}">是标准正态分布累积函数的倒数。</p>
+<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29" alt="\phi^{-1}(U)" title="\phi^{-1}(U)"> 将遵循标准正态分布，其中<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D" alt="\phi^{-1}" title="\phi^{-1}">是标准正态分布累积函数的倒数。</p>
 <p><img src="../../../img/20231125/gp_2.png" alt="gp_2.png"></p>
 <p>总结：从期望的单变量高斯分布中获取随机样本，通过三个步骤：</p>
 <ol>
@@ -314,6 +322,24 @@ x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix}
 <li>进行scale-location变换</li>
 </ol>
 <p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样。</p>
+<h3 id="多变量高斯分布">多变量高斯分布</h3>
+<p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样？</p>
+<p>从标准的二元正态分布抽样开始，然后进行scale-location变换。</p>
+<p>第一步：如何从标准的二元正态分布</p>
+<p><img src="https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" alt="N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0 \\0&amp;1 \end{bmatrix})" title="N(\begin{bmatrix} 
+0 \0 \end{bmatrix} ,\begin{bmatrix} 
+1&amp;0 \0&amp;1 \end{bmatrix})"></p>
+<p>中进行采样</p>
+<p><img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D" alt="\begin{bmatrix}x_1 \\x_2 \end{bmatrix}" title="\begin{bmatrix} 
+x_1 \x_2 \end{bmatrix}"></p>
+<p>因为上述的协方差非对角线都是0，那就是说x_1和x_2不相关。那么可以对x_1和x_2进行单独采样。</p>
+<p>根据边缘分布</p>
+<p><img src="https://latex.codecogs.com/svg.latex?x_1%20%5Csim%20N%280%2C%201%29" alt="x_1 \sim N(0, 1)" title="x_1 \sim N(0, 1)"></p>
+<p><img src="https://latex.codecogs.com/svg.latex?x_2%20%5Csim%20N%280%2C%201%29" alt="x_2 \sim N(0, 1)" title="x_2 \sim N(0, 1)"></p>
+<p>就又变回了从一元标准正态分布中抽样。</p>
+<p>第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 <img src="https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu" alt="\sigma x + \mu" title="\sigma x + \mu"> 的变换就可以得到遵循<img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29" alt="N(\mu,\sigma^2)" title="N(\mu,\sigma^2)">的分布）。</p>
+<p>可以使用Cholesky decomposition来计算&mdash;&mdash;给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。具体而言，Cholesky分解的结果是<img src="https://latex.codecogs.com/svg.latex?K%3DLL%5ET" alt="K=LL^T" title="K=LL^T">。</p>
+<p>因此进行 <img src="https://latex.codecogs.com/svg.latex?L%20x%20%2B%20%5Cmu" alt="L x + \mu" title="L x + \mu"> 的变换就可以得到遵循<img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2CK%29" alt="N(\mu,K)" title="N(\mu,K)">的分布。</p>
 
   </article><div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">

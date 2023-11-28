@@ -92,6 +92,7 @@ The conditional posterior mean and variance are defined as follows:
 ![N(\mu,\sigma^2)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29 "N(\mu,\sigma^2)")
 
 中采样。
+\### 单变量高斯分布
 
 一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本
 
@@ -99,7 +100,7 @@ The conditional posterior mean and variance are defined as follows:
 
 。
 
-那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在\[0,1\]上，那么![\phi^{-1}(U)](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29 "\phi^{-1}(U)") 将遵循标准正太分布，其中![\phi^{-1}](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D "\phi^{-1}")是标准正态分布累积函数的倒数。
+那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在\[0,1\]上，那么![\phi^{-1}(U)](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29 "\phi^{-1}(U)") 将遵循标准正态分布，其中![\phi^{-1}](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D "\phi^{-1}")是标准正态分布累积函数的倒数。
 
 ![gp_2.png](../../../img/20231125/gp_2.png)
 
@@ -110,3 +111,39 @@ The conditional posterior mean and variance are defined as follows:
 3.  进行scale-location变换
 
 那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样。
+
+### 多变量高斯分布
+
+那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样？
+
+从标准的二元正态分布抽样开始，然后进行scale-location变换。
+
+第一步：如何从标准的二元正态分布
+
+![N(\begin{bmatrix} 
+0 \\0 \end{bmatrix} ,\begin{bmatrix} 
+1&0 \\0&1 \end{bmatrix})](https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29 "N(\begin{bmatrix} 
+0 \\0 \end{bmatrix} ,\begin{bmatrix} 
+1&0 \\0&1 \end{bmatrix})")
+
+中进行采样
+
+![\begin{bmatrix} 
+x_1 \\x_2 \end{bmatrix}](https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D "\begin{bmatrix} 
+x_1 \\x_2 \end{bmatrix}")
+
+因为上述的协方差非对角线都是0，那就是说x_1和x_2不相关。那么可以对x_1和x_2进行单独采样。
+
+根据边缘分布
+
+![x_1 \sim N(0, 1)](https://latex.codecogs.com/svg.latex?x_1%20%5Csim%20N%280%2C%201%29 "x_1 \sim N(0, 1)")
+
+![x_2 \sim N(0, 1)](https://latex.codecogs.com/svg.latex?x_2%20%5Csim%20N%280%2C%201%29 "x_2 \sim N(0, 1)")
+
+就又变回了从一元标准正态分布中抽样。
+
+第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 ![\sigma x + \mu](https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu "\sigma x + \mu") 的变换就可以得到遵循![N(\mu,\sigma^2)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29 "N(\mu,\sigma^2)")的分布）。
+
+可以使用Cholesky decomposition来计算------给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。具体而言，Cholesky分解的结果是![K=LL^T](https://latex.codecogs.com/svg.latex?K%3DLL%5ET "K=LL^T")。
+
+因此进行 ![L x + \mu](https://latex.codecogs.com/svg.latex?L%20x%20%2B%20%5Cmu "L x + \mu") 的变换就可以得到遵循![N(\mu,K)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2CK%29 "N(\mu,K)")的分布。
