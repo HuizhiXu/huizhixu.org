@@ -6,20 +6,68 @@
     <description>Recent content in bayesian on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Sat, 25 Nov 2023 18:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/bayesian/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Dec 2023 18:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/bayesian/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gaussian Process in Practice 高斯过程实践</title>
+      <link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link>
+      <pubDate>Sun, 10 Dec 2023 18:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid>
+      <description>这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&amp;hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu + uncertainty, mu - uncertainty, alpha=0.</description>
+    </item>
+    
+    <item>
+      <title>Kernel Function 核函数</title>
+      <link>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</link>
+      <pubDate>Thu, 07 Dec 2023 18:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid>
+      <description>这篇文章主要解决三个问题：
+正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为
+书上写作
+为啥要多写一个f呢？
+是因为这个分布是针对f的分布，或者换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
+2. 核函数是什么，有什么类型 核函数就是协方差。
+核函数
+它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点xi和xj之间的统计关系。 它量化xj的变化和xi的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
+有几种常见的核：
+高斯核 Gaussian kernel 这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
+可调节参数的高斯核，又被叫做isotropic squared exponential kernel
+略(以后补充，暂时不是重点) 3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，。我们需要对这三个随机变量进行建模。假设mean vector 为 \mu， covariance matrix为K。
+这三个变量遵循多元变量的高斯分布
+基于这个数据集D，假设我们现在想知道另一个变量x_4（它对应的f值用f_*(x_4)表示）在其他位置的均值和方差的的分布。
+问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。
+f和f*的分布为
+已知先验知识： 和 ，求后验概率。
+如何求这个后验概率呢？
+我们可以将观察到的数据集与新变量一起构造一个联合分布。
+我们已经知道，数据集D最的观测值f和f(x_4)分别遵循分布
+假设四个数据的建模为随机变量f_new
+并且有
+就有
+根据多元变量的高斯分布，
+这样就求出的分布了。
+如果观测样本是有噪声的，那么可以用，即观测值 y 可以被看作是真实值 f 加上随机误差 \epsilon 。
+计算的步骤也是一样，计算公式为</description>
+    </item>
+    
     <item>
       <title>书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title>
       <link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link>
       <pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid>
-      <description>Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+      <description>1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
 假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0</description>
+有 E[x_1] = E[x_2] = 0
+图左边和右边的分布为
+左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。</description>
     </item>
     
   </channel>

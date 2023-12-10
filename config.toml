@@ -184,6 +184,8 @@ DefaultContentLanguageInSubdir = true
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
+# ignoreFiles = [ "\\.qmd$", "\\.ipynb$", "\\.py$" ]
+
 # syntax highlight settings
 [markup]
   [markup.highlight]

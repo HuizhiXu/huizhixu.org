@@ -8,13 +8,15 @@
   <title>
   书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process - 徐慧志的个人博客
   </title>
-  <meta name="description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+  <meta name="description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
 假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0" /><meta name="generator" content="Hugo 0.115.4"><link
+有 E[x_1] = E[x_2] = 0
+图左边和右边的分布为
+左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -24,13 +26,15 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
   
 
   <meta property="og:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process" />
-<meta property="og:description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+<meta property="og:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
 假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0" />
+有 E[x_1] = E[x_2] = 0
+图左边和右边的分布为
+左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231125gaussian_process/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2023-11-25T18:01:50+08:00" />
@@ -38,24 +42,28 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process"/>
-<meta name="twitter:description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+<meta name="twitter:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
 假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0"/>
+有 E[x_1] = E[x_2] = 0
+图左边和右边的分布为
+左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。"/>
 
   <meta itemprop="name" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process">
-<meta itemprop="description" content="Gaussian Process 1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+<meta itemprop="description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
 假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0"><meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00" />
+有 E[x_1] = E[x_2] = 0
+图左边和右边的分布为
+左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。"><meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-11-25T18:01:50+08:00" />
-<meta itemprop="wordCount" content="140">
+<meta itemprop="wordCount" content="138">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
@@ -217,7 +225,7 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      140&nbsp;字
+      138&nbsp;字
       
         
       
@@ -238,12 +246,6 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
 
         
         <li>
-        <a href="#gaussian-process">Gaussian Process</a>
-        
-
-        
-        <ul>
-            <li>
         <a href="#1-%e7%90%86%e8%a7%a3covariance-matrix">1. 理解covariance matrix</a>
         
 
@@ -263,11 +265,9 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
         <a href="#%e5%a4%9a%e5%8f%98%e9%87%8f%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83">多变量高斯分布</a>
         </li></ul>
     </li></ul>
-    </li></ul>
   </details>
 
-    <h1 id="gaussian-process">Gaussian Process</h1>
-<h2 id="1-理解covariance-matrix">1. 理解covariance matrix</h2>
+    <h2 id="1-理解covariance-matrix">1. 理解covariance matrix</h2>
 <p>Gaussian Process is a stochastic process used to characterize the distribution over function.</p>
 <p>GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。</p>
 <p>假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。</p>

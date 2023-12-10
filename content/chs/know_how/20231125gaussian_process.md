@@ -7,8 +7,6 @@ html-math-method: webtex
 thumbnail: https://picsum.photos/id/302/400/250
 ---
 
-# Gaussian Process
-
 ## 1. 理解covariance matrix
 
 Gaussian Process is a stochastic process used to characterize the distribution over function.

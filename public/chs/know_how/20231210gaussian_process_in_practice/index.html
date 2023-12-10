@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  Gaussian Process in Practice 高斯过程实践 - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0." /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  
+
+  <meta property="og:title" content="Gaussian Process in Practice 高斯过程实践" />
+<meta property="og:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2023-12-10T18:01:50+08:00" />
+<meta property="article:modified_time" content="2023-12-10T18:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gaussian Process in Practice 高斯过程实践"/>
+<meta name="twitter:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0."/>
+
+  <meta itemprop="name" content="Gaussian Process in Practice 高斯过程实践">
+<meta itemprop="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0."><meta itemprop="datePublished" content="2023-12-10T18:01:50+08:00" />
+<meta itemprop="dateModified" content="2023-12-10T18:01:50+08:00" />
+<meta itemprop="wordCount" content="484">
+<meta itemprop="keywords" content="tech,bayesian," />
+
+  
+  <meta name="lang" content="chs" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/know_how/">IT技术</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/305/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2023年12月10日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">Gaussian Process in Practice 高斯过程实践</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2023年12月10日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      3&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      484&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#1-%e5%85%88%e9%aa%8c%e5%88%86%e5%b8%83">1. 先验分布</a>
+        
+
+        
+        <ul>
+            <ul>
+            <li>
+        <a href="#11-%e5%a4%9a%e5%8f%98%e9%87%8f%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83">1.1 多变量高斯分布</a>
+        
+
+        
+        </li><li>
+        <a href="#12-%e7%9c%8b%e5%9b%be%e5%8f%af%e7%9f%a5">1.2 看图可知</a>
+        
+
+        
+        </li></ul>
+          <li>
+        <a href="#2-%e5%90%8e%e9%aa%8c%e5%88%86%e5%b8%83-posterior">2. 后验分布 Posterior</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#3-%e5%85%b6%e4%bb%96%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86">3. 其他（基础知识）</a>
+        </li></ul>
+  </details>
+
+    <p>这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。</p>
+<h2 id="1-先验分布">1. 先验分布</h2>
+<h4 id="11-多变量高斯分布">1.1 多变量高斯分布</h4>
+<ul>
+<li>创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n}</li>
+<li>初始化均值向量μ和协方差矩阵K（含n x n个元素）
+<ul>
+<li>假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个n<em>d的矩阵，那么K是一个m</em>n的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:])</li>
+</ul>
+</li>
+<li>执行Cholesky分解K=LL T来获得L</li>
+<li>通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中</li>
+</ul>
+<p>multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。</p>
+<h4 id="12-看图可知">1.2 看图可知</h4>
+<ul>
+<li>从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> matplotlib <span style="color:#ff79c6">import</span> pyplot <span style="color:#ff79c6">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">%</span>matplotlib inline
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 设置随机种子以确保重复性</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>seed(<span style="color:#bd93f9">8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">plot_gp</span>(mu, cov, title_str, X, X_train<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, Y_train<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>, samples<span style="color:#ff79c6">=</span>[] ):
+</span></span><span style="display:flex;"><span>    X <span style="color:#ff79c6">=</span> X<span style="color:#ff79c6">.</span>ravel() <span style="color:#6272a4"># X.ravel()用于将多维数组X展平为一维数组。</span>
+</span></span><span style="display:flex;"><span>    mu <span style="color:#ff79c6">=</span> mu<span style="color:#ff79c6">.</span>ravel()
+</span></span><span style="display:flex;"><span>    uncertainty <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.96</span> <span style="color:#ff79c6">*</span> np<span style="color:#ff79c6">.</span>sqrt(np<span style="color:#ff79c6">.</span>diag(cov)) <span style="color:#6272a4"># 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。</span>
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>fill_between(X, mu <span style="color:#ff79c6">+</span> uncertainty, mu <span style="color:#ff79c6">-</span> uncertainty, alpha<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0.1</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>plot(X, mu, label<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;Mean&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i, sampel <span style="color:#ff79c6">in</span> <span style="color:#8be9fd;font-style:italic">enumerate</span>(samples):
+</span></span><span style="display:flex;"><span>        plt<span style="color:#ff79c6">.</span>plot(X, sampel, lw<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>, ls<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;--&#39;</span>, label<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#39;Sample </span><span style="color:#f1fa8c">{</span>i<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> X_train <span style="color:#ff79c6">is</span> <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">None</span>:
+</span></span><span style="display:flex;"><span>        plt<span style="color:#ff79c6">.</span>plot(X_train, Y_train, <span style="color:#f1fa8c">&#39;rx&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>legend()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>title(title_str)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">kernel</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;定义一个核函数，返回两个输入位置之间的平方指数距离
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    将平方运算分解为三个部分
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    每个输入位置是多维的，因此需要对所有维度求和
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    sq_dist <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>sum(a<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">+</span>np<span style="color:#ff79c6">.</span>sum(b<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">2</span><span style="color:#ff79c6">*</span>np<span style="color:#ff79c6">.</span>dot(a,b<span style="color:#ff79c6">.</span>T)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> np<span style="color:#ff79c6">.</span>exp(<span style="color:#ff79c6">-</span>sq_dist)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">ise_kernel</span>(X1, X2, l<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>, sigma_f <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    Isotropic squared exponential kernel.
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    kernel是ise_kernel的特殊情况，l=1.0, sigma_f = 1.0
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    sq_dist <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>sum(X1<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">+</span> np<span style="color:#ff79c6">.</span>sum(X2<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">2</span><span style="color:#ff79c6">*</span>np<span style="color:#ff79c6">.</span>dot(X1,X2<span style="color:#ff79c6">.</span>T)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> sigma_f<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> np<span style="color:#ff79c6">.</span>exp(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">0.5</span> <span style="color:#ff79c6">/</span> l<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> sq_dist)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">multivariante_samples01</span>(X, l<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>, sigma_f<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    生成多元高斯过程的样本:通过标准正态分布生成的随机数，乘以L，得到一个多元高斯分布的随机数
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 计算pairwise distance, 得到一个nxn 矩阵</span>
+</span></span><span style="display:flex;"><span>    mu <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>zeros(X<span style="color:#ff79c6">.</span>shape)
+</span></span><span style="display:flex;"><span>    K <span style="color:#ff79c6">=</span> ise_kernel(X, X, l, sigma_f)
+</span></span><span style="display:flex;"><span>    L <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>linalg<span style="color:#ff79c6">.</span>cholesky(K <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1e-6</span><span style="color:#ff79c6">*</span>np<span style="color:#ff79c6">.</span>eye(<span style="color:#8be9fd;font-style:italic">len</span>(X)))
+</span></span><span style="display:flex;"><span>    samples <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>dot(L, np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>normal(size<span style="color:#ff79c6">=</span>(<span style="color:#8be9fd;font-style:italic">len</span>(X), <span style="color:#bd93f9">5</span>)))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> samples, K, mu
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">multivariante_samples02</span>(X, l<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>, sigma_f<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    生成多元高斯过程的样本：调用np.random.multivariate_normal()函数，得到一个多元高斯分布的随机数
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 计算pairwise distance, 得到一个nxn 矩阵</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mu <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>zeros(X<span style="color:#ff79c6">.</span>shape)
+</span></span><span style="display:flex;"><span>    K <span style="color:#ff79c6">=</span> ise_kernel(X, X)
+</span></span><span style="display:flex;"><span>    samples <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>multivariate_normal(mu<span style="color:#ff79c6">.</span>ravel(), K, <span style="color:#bd93f9">5</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> samples, K, mu
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 设置当函数增长到无穷大时函数的输入位置数量 setting number of input locations which approximates a function when growing to infinity</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">100</span>
+</span></span><span style="display:flex;"><span>X_test <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>linspace(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>,n)<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(<span style="color:#f1fa8c">f</span><span style="color:#f1fa8c">&#34;X_test的shape是</span><span style="color:#f1fa8c">{</span>X_test<span style="color:#ff79c6">.</span>shape<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>samples, K, mu <span style="color:#ff79c6">=</span> multivariante_samples02(X_test, l<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>, sigma_f<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1.0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>title_str <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;Five samples from the GP prior with 95</span><span style="color:#f1fa8c">% c</span><span style="color:#f1fa8c">onfidence intervals&#34;</span>
+</span></span><span style="display:flex;"><span>plot_gp(mu, K, title_str, X_test, samples<span style="color:#ff79c6">=</span>samples)
+</span></span></code></pre></div><pre><code>X_test的shape是(100, 1)
+</code></pre>
+<p><img src="../../../img/20231210/cell-2-output-2.png" alt="cell-2-output-2.png"></p>
+<h3 id="2-后验分布-posterior">2. 后验分布 Posterior</h3>
+<p>有了先验知识，下一步就是要得到观测数据。观测数据由input 和 output functional value 组成。 在有观测数据的情况下，我们可以将他们作为训练数据来更新GP 先验分布，得到后验分布。后验参数将通过均值和协方差矩阵来表示。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> numpy.linalg <span style="color:#ff79c6">import</span> inv
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">update_posterior</span>(X_s, X_train, Y_train, l <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.0</span>, sigma_F <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1.0</span>, sigma_y <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1e-8</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    计算后验分布的均值向量和协方差矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        X_s: 新的数据点的input locations
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        X_train: 训练数据的input locations
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        Y_train: 训练点的值
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        l: kernel的参数
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        sigma_F: kernel的参数
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        sigma_y: 噪声参数
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    Returns:
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        后验均值向量(n*d)和协方差矩阵(n*n)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    K <span style="color:#ff79c6">=</span> ise_kernel(X_train, X_train, l, sigma_F) <span style="color:#ff79c6">+</span> sigma_y<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">*</span> np<span style="color:#ff79c6">.</span>eye(<span style="color:#8be9fd;font-style:italic">len</span>(X_train))
+</span></span><span style="display:flex;"><span>    K_s <span style="color:#ff79c6">=</span> ise_kernel(X_train, X_s, l, sigma_F)
+</span></span><span style="display:flex;"><span>    K_ss <span style="color:#ff79c6">=</span> ise_kernel(X_s, X_s, l, sigma_F) <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1e-8</span> <span style="color:#ff79c6">*</span> np<span style="color:#ff79c6">.</span>eye(<span style="color:#8be9fd;font-style:italic">len</span>(X_s))
+</span></span><span style="display:flex;"><span>    K_inv <span style="color:#ff79c6">=</span> inv(K)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 计算均值向量</span>
+</span></span><span style="display:flex;"><span>    mu_s <span style="color:#ff79c6">=</span> K_s<span style="color:#ff79c6">.</span>T<span style="color:#ff79c6">.</span>dot(K_inv)<span style="color:#ff79c6">.</span>dot(Y_train)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 计算协方差矩阵</span>
+</span></span><span style="display:flex;"><span>    cov_s <span style="color:#ff79c6">=</span> K_ss <span style="color:#ff79c6">-</span> K_s<span style="color:#ff79c6">.</span>T<span style="color:#ff79c6">.</span>dot(K_inv)<span style="color:#ff79c6">.</span>dot(K_s)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> mu_s, cov_s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>X_train <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>array([<span style="color:#ff79c6">-</span><span style="color:#bd93f9">4</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">3</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span>, <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>])<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>Y_train <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>cos(X_train)
+</span></span><span style="display:flex;"><span>mu_s, cov_s <span style="color:#ff79c6">=</span> update_posterior(X_test, X_train, Y_train)
+</span></span><span style="display:flex;"><span>samples <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>multivariate_normal(mu_s<span style="color:#ff79c6">.</span>ravel(), cov_s, <span style="color:#bd93f9">6</span>)
+</span></span><span style="display:flex;"><span>plot_gp(mu_s, cov_s, <span style="color:#f1fa8c">&#34;Posterior distribution&#34;</span>, X_test, X_train<span style="color:#ff79c6">=</span>X_train, Y_train<span style="color:#ff79c6">=</span>Y_train, samples<span style="color:#ff79c6">=</span>samples)
+</span></span></code></pre></div><p><img src="../../../img/20231210/cell-3-output-1.png" alt="cell-3-output-1.png"></p>
+<h2 id="3-其他基础知识">3. 其他（基础知识）</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> matplotlib <span style="color:#ff79c6">import</span> pyplot <span style="color:#ff79c6">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">%</span>matplotlib inline
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 设置随机种子以确保重复性</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>seed(<span style="color:#bd93f9">8</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">kernel</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;定义一个核函数，返回两个输入位置之间的平方指数距离
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    将平方运算分解为三个部分
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    每个输入位置是多维的，因此需要对所有维度求和
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    sq_dist <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>sum(a<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">+</span>np<span style="color:#ff79c6">.</span>sum(b<span style="color:#ff79c6">**</span><span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">2</span><span style="color:#ff79c6">*</span>np<span style="color:#ff79c6">.</span>dot(a,b<span style="color:#ff79c6">.</span>T)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> np<span style="color:#ff79c6">.</span>exp(<span style="color:#ff79c6">-</span>sq_dist)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 设置当函数增长到无穷大时函数的输入位置数量 setting number of input locations which approximates a function when growing to infinity</span>
+</span></span><span style="display:flex;"><span>n <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">100</span>
+</span></span><span style="display:flex;"><span>X_test <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>linspace(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">5</span>,n)<span style="color:#ff79c6">.</span>reshape(<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 计算pairwise distance, 得到一个nxn 矩阵</span>
+</span></span><span style="display:flex;"><span>K <span style="color:#ff79c6">=</span> kernel(X_test, X_test)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(K<span style="color:#ff79c6">.</span>shape)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 沿对角线元素添加一个小的数以确保cholesky分解有效</span>
+</span></span><span style="display:flex;"><span>L <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>linalg<span style="color:#ff79c6">.</span>cholesky(K <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1e-10</span><span style="color:#ff79c6">*</span>np<span style="color:#ff79c6">.</span>eye(n))
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># calculating functional samples by multiplying the sd with standard normal samples</span>
+</span></span><span style="display:flex;"><span>samples <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>dot(L,np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>normal(size<span style="color:#ff79c6">=</span>(n,<span style="color:#bd93f9">5</span>)))
+</span></span><span style="display:flex;"><span>plt<span style="color:#ff79c6">.</span>plot(X_test, samples)
+</span></span><span style="display:flex;"><span>plt<span style="color:#ff79c6">.</span>title(<span style="color:#f1fa8c">&#34;Drawing five random samples from a GP prior&#34;</span>)
+</span></span></code></pre></div><pre><code>(100, 100)
+
+Text(0.5, 1.0, 'Drawing five random samples from a GP prior')
+</code></pre>
+<p><img src="../../../img/20231210/cell-4-output-3.png" alt="cell-4-output-3.png"></p>
+
+  </article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>
