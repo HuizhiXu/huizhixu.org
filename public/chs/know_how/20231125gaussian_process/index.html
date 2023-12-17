@@ -14,17 +14,34 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0
-图左边和右边的分布为
-左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。" /><meta name="generator" content="Hugo 0.115.4"><link
+$$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$
+$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
     crossorigin="anonymous"
   />
   
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
   <meta property="og:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process" />
 <meta property="og:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
@@ -32,9 +49,8 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0
-图左边和右边的分布为
-左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。" />
+$$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$
+$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231125gaussian_process/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2023-11-25T18:01:50+08:00" />
@@ -48,9 +64,8 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0
-图左边和右边的分布为
-左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。"/>
+$$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$
+$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$"/>
 
   <meta itemprop="name" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process">
 <meta itemprop="description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
@@ -59,15 +74,16 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0
-图左边和右边的分布为
-左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。"><meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00" />
+$$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$
+$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$"><meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-11-25T18:01:50+08:00" />
-<meta itemprop="wordCount" content="138">
+<meta itemprop="wordCount" content="174">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
   <meta name="lang" content="chs" />
+  
+
   
 </head>
 <body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
@@ -225,7 +241,7 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      138&nbsp;字
+      174&nbsp;字
       
         
       
@@ -262,6 +278,11 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
         
         <ul>
             <li>
+        <a href="#%e5%8d%95%e5%8f%98%e9%87%8f%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83">单变量高斯分布</a>
+        
+
+        
+        </li><li>
         <a href="#%e5%a4%9a%e5%8f%98%e9%87%8f%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83">多变量高斯分布</a>
         </li></ul>
     </li></ul>
@@ -279,10 +300,10 @@ K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如�
 <p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7BK%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0AK_%7B11%7D%26K_%7B12%7D%20%5C%5CK_%7B21%7D%26K_%7B22%7D%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20%0A%5Csigma_%7B11%7D%5E2%26%5Csigma_%7B12%7D%5E2%20%5C%5C%5Csigma_%7B21%7D%5E2%26%5Csigma_%7B22%7D%5E2%20%5Cend%7Bbmatrix%7D" alt="\boldsymbol{K} = \begin{bmatrix}K\_{11}&amp;K\_{12} \\K\_{21}&amp;K\_{22} \end{bmatrix}=\begin{bmatrix}\sigma\_{11}^2&amp;\sigma\_{12}^2 \\\sigma\_{21}^2&amp;\sigma\_{22}^2 \end{bmatrix}" title="\boldsymbol{K} = \begin{bmatrix} 
 K_{11}&amp;K_{12} \K_{21}&amp;K_{22} \end{bmatrix}=\begin{bmatrix} 
 \sigma_{11}^2&amp;\sigma_{12}^2 \\sigma_{21}^2&amp;\sigma_{22}^2 \end{bmatrix}"></p>
-<p>K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Csigma_%7B11%7D%5E2%20%3D%20var%28x_1%29%20%3D%20E%5B%28x_1-E%5Bx_1%5D%29%5E2%5D%20%3D%20E%5B%28x_1%29%5E2%5D" alt="\sigma\_{11}^2 = var(x_1) = E\[(x_1-E\[x_1\])^2\] = E\[(x_1)^2\]" title="\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Csigma_%7B12%7D%5E2%20%3D%20%5Csigma_%7B21%7D%5E2%20%3D%20E%5B%28x_1-E%5Bx_1%5D%29%28x_2-E%5Bx_2%5D%29%5D%20%3D%20E%5Bx_1x_2%5D" alt="\sigma\_{12}^2 = \sigma\_{21}^2 = E\[(x_1-E\[x_1\])(x_2-E\[x_2\])\] = E\[x_1x_2\]" title="\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]"></p>
-<p>有 E[x_1] = E[x_2] = 0</p>
+<p>K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。<br>
+$$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$</p>
+<p>$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$</p>
+<p>有 $E[x_1] = E[x_2] = 0$</p>
 <p>图左边和右边的分布为</p>
 <p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bleft%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" alt="\boldsymbol{x\_{left}} = \begin{bmatrix}x_1 \\x_2 \end{bmatrix} \sim N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0 \\0&amp;1 \end{bmatrix})" title="\boldsymbol{x_{left}} = \begin{bmatrix} 
 x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix} 
@@ -306,14 +327,10 @@ x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix}
 <p><img src="https://latex.codecogs.com/svg.latex?K_%7B1%7C2%7D%20%3D%20K_%7B11%7D%20-%20K_%7B12%7DK_%7B22%7D%5E%7B-1%7DK_%7B21%7D" alt="K\_{1\|2} = K\_{11} - K\_{12}K\_{22}^{-1}K\_{21}" title="K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}"></p>
 <p>通过收集data points， 可以不断更新没有观察到的点的后验分布（这里通过x2更新x1），再通过这些分布区预测将来的变化。</p>
 <h2 id="3-从高斯分布抽样">3. 从高斯分布抽样</h2>
-<p>如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布</p>
-<p><img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29" alt="N(\mu,\sigma^2)" title="N(\mu,\sigma^2)"></p>
-<p>中采样。
-### 单变量高斯分布</p>
-<p>一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu" alt="\sigma x + \mu" title="\sigma x + \mu"></p>
-<p>。</p>
-<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29" alt="\phi^{-1}(U)" title="\phi^{-1}(U)"> 将遵循标准正态分布，其中<img src="https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D" alt="\phi^{-1}" title="\phi^{-1}">是标准正态分布累积函数的倒数。</p>
+<p>如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布$ N(\mu,\sigma^2)$中采样。</p>
+<h3 id="单变量高斯分布">单变量高斯分布</h3>
+<p>一个常见的方法是首先从标准正态分布$ N(0,1)$ 产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本 $ \sigma x + \mu$ 。</p>
+<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么$\phi^{-1}(U)$ 将遵循标准正态分布，其中$\phi^{-1}$是标准正态分布累积函数的倒数。</p>
 <p><img src="../../../img/20231125/gp_2.png" alt="gp_2.png"></p>
 <p>总结：从期望的单变量高斯分布中获取随机样本，通过三个步骤：</p>
 <ol>
@@ -328,18 +345,20 @@ x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix}
 <p>第一步：如何从标准的二元正态分布</p>
 <p><img src="https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" alt="N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0 \\0&amp;1 \end{bmatrix})" title="N(\begin{bmatrix} 
 0 \0 \end{bmatrix} ,\begin{bmatrix} 
-1&amp;0 \0&amp;1 \end{bmatrix})"></p>
-<p>中进行采样</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D" alt="\begin{bmatrix}x_1 \\x_2 \end{bmatrix}" title="\begin{bmatrix} 
-x_1 \x_2 \end{bmatrix}"></p>
+1&amp;0 \0&amp;1 \end{bmatrix})">中进行采样 $
+\begin{bmatrix}
+x_1 \
+x_2
+\end{bmatrix}^T $</p>
 <p>因为上述的协方差非对角线都是0，那就是说x_1和x_2不相关。那么可以对x_1和x_2进行单独采样。</p>
 <p>根据边缘分布</p>
 <p><img src="https://latex.codecogs.com/svg.latex?x_1%20%5Csim%20N%280%2C%201%29" alt="x_1 \sim N(0, 1)" title="x_1 \sim N(0, 1)"></p>
 <p><img src="https://latex.codecogs.com/svg.latex?x_2%20%5Csim%20N%280%2C%201%29" alt="x_2 \sim N(0, 1)" title="x_2 \sim N(0, 1)"></p>
 <p>就又变回了从一元标准正态分布中抽样。</p>
-<p>第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 <img src="https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu" alt="\sigma x + \mu" title="\sigma x + \mu"> 的变换就可以得到遵循<img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29" alt="N(\mu,\sigma^2)" title="N(\mu,\sigma^2)">的分布）。</p>
-<p>可以使用Cholesky decomposition来计算&mdash;&mdash;给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。具体而言，Cholesky分解的结果是<img src="https://latex.codecogs.com/svg.latex?K%3DLL%5ET" alt="K=LL^T" title="K=LL^T">。</p>
-<p>因此进行 <img src="https://latex.codecogs.com/svg.latex?L%20x%20%2B%20%5Cmu" alt="L x + \mu" title="L x + \mu"> 的变换就可以得到遵循<img src="https://latex.codecogs.com/svg.latex?N%28%5Cmu%2CK%29" alt="N(\mu,K)" title="N(\mu,K)">的分布。</p>
+<p>第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 $\sigma x + \mu$的变换就可以得到遵循$N(\mu,\sigma^2)$的分布）。</p>
+<p>可以使用Cholesky decomposition来计算&mdash;&mdash;给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。<br>
+具体而言，Cholesky分解的结果是$K=LL^T$。</p>
+<p>因此进行 $L x + \mu$ 的变换就可以得到遵循$ N(\mu,K)$的分布。</p>
 
   </article><div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">

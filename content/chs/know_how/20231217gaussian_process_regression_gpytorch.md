@@ -4,7 +4,7 @@ date: 2023-12-17T17:01:50+08:00
 tags: ["tech","bayesian"]
 format: hugo-md
 jupyter: nn3.10
-html-math-method: webtex
+math: true
 thumbnail: https://picsum.photos/id/307/400/250
 ---
 
@@ -37,7 +37,7 @@ thumbnail: https://picsum.photos/id/307/400/250
 
 ### exact GP
 
-![f(x) = -\cos(\pi x) + \sin(4 \pi x)](https://latex.codecogs.com/svg.latex?f%28x%29%20%3D%20-%5Ccos%28%5Cpi%20x%29%20%2B%20%5Csin%284%20%5Cpi%20x%29 "f(x) = -\cos(\pi x) + \sin(4 \pi x)")
+$$ f(x) = -\cos(\pi x) + \sin(4 \pi x)$$ 
 
 ``` python
 import torch 
@@ -79,8 +79,14 @@ plt.plot(X_init.numpy(), y_init.numpy(), 'kx', mew=2)
 
 概率分布和边缘分布的区别：
 
-1.  概率分布 ![p(f \| x)](https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29 "p(f | x)")：这是指给定输入变量 ![x](https://latex.codecogs.com/svg.latex?x "x") 的情况下，目标变量 ![f](https://latex.codecogs.com/svg.latex?f "f") 的概率分布。在监督学习中，我们通常使用概率模型来建模输入与输出之间的关系。![p(f \| x)](https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29 "p(f | x)") 描述了模型对于给定输入 ![x](https://latex.codecogs.com/svg.latex?x "x") 的输出 ![f](https://latex.codecogs.com/svg.latex?f "f") 的不确定性。常见的例子是高斯过程模型，其中 ![p(f \| x)](https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29 "p(f | x)") 是一个高斯分布。
-2.  边缘分布 ![p(y \| x)](https://latex.codecogs.com/svg.latex?p%28y%20%7C%20x%29 "p(y | x)")：这是指给定输入变量 ![x](https://latex.codecogs.com/svg.latex?x "x") 的情况下，目标变量 ![y](https://latex.codecogs.com/svg.latex?y "y") 的概率分布。边缘分布是通过对概率分布 ![p(f \| x)](https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29 "p(f | x)") 进行积分或求和得到的，其中 ![y](https://latex.codecogs.com/svg.latex?y "y") 是通过对 ![f](https://latex.codecogs.com/svg.latex?f "f") 进行某种函数变换得到的。在监督学习中，![y](https://latex.codecogs.com/svg.latex?y "y") 通常是观测到的目标变量，而 ![f](https://latex.codecogs.com/svg.latex?f "f") 是模型对于给定输入 ![x](https://latex.codecogs.com/svg.latex?x "x") 的预测值。
+
+1.  概率分布 
+
+$p(f \| x)$ ：这是指给定输入变量 $x$ 的情况下，目标变量 $f$ 的概率分布。在监督学习中，我们通常使用概率模型来建模输入与输出之间的关系。$p(f \| x)$描述了模型对于给定输入$x$的输出 $f$的不确定性。常见的例子是高斯过程模型，其中 $p(f \| x)$是一个高斯分布。  
+
+2.  边缘分布
+
+$p(y \| x)$ ：这是指给定输入变量 $x$的情况下，目标变量 $y$的概率分布。边缘分布是通过对概率分布 $p(f \| x)$ 进行积分或求和得到的，其中 $y$ 是通过对 $f$进行某种函数变换得到的。在监督学习中，$y$ 通常是观测到的目标变量，而 $f$ 是模型对于给定输入 $x$的预测值。
 
 ``` python
 import gpytorch

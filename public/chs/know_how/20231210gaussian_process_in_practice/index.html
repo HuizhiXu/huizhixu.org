@@ -9,7 +9,7 @@
   Gaussian Process in Practice 高斯过程实践 - 徐慧志的个人博客
   </title>
   <meta name="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
 1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0." /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
@@ -17,11 +17,29 @@
     crossorigin="anonymous"
   />
   
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
   <meta property="og:title" content="Gaussian Process in Practice 高斯过程实践" />
 <meta property="og:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
 1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/" /><meta property="article:section" content="know_how" />
@@ -31,12 +49,12 @@
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Gaussian Process in Practice 高斯过程实践"/>
 <meta name="twitter:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
 1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0."/>
 
   <meta itemprop="name" content="Gaussian Process in Practice 高斯过程实践">
 <meta itemprop="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
 1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0."><meta itemprop="datePublished" content="2023-12-10T18:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-12-10T18:01:50+08:00" />
 <meta itemprop="wordCount" content="484">
@@ -44,6 +62,8 @@
 
   
   <meta name="lang" content="chs" />
+  
+
   
 </head>
 <body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
@@ -254,10 +274,10 @@
 <h2 id="1-先验分布">1. 先验分布</h2>
 <h4 id="11-多变量高斯分布">1.1 多变量高斯分布</h4>
 <ul>
-<li>创建一个包含n个候选输入位置的列表{xi，i=1，&hellip;，n}</li>
+<li>创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$</li>
 <li>初始化均值向量μ和协方差矩阵K（含n x n个元素）
 <ul>
-<li>假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个n<em>d的矩阵，那么K是一个m</em>n的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:])</li>
+<li>假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个n<em>d的矩阵，那么K是一个m</em>n的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$</li>
 </ul>
 </li>
 <li>执行Cholesky分解K=LL T来获得L</li>

@@ -3,7 +3,8 @@ title: "书籍 Bayesian Optimization Theory and Practice using Python 之Gaussia
 date: 2023-11-25T18:01:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md
-html-math-method: webtex
+# html-math-method: webtex
+math: true
 thumbnail: https://picsum.photos/id/302/400/250
 ---
 
@@ -15,15 +16,18 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 
 假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。
 
-![gp_1.png](../../../img/20231125/gp_1.png)
+![gp_1.png](/img/20231125/gp_1.png)
 
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 
 假设mean vector matrix K为：
 
+
 ![\boldsymbol{\mu} = \begin{bmatrix} 
 \mu_1 \\\mu_2 \end{bmatrix}](https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7B%5Cmu%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A%5Cmu_1%20%5C%5C%5Cmu_2%20%5Cend%7Bbmatrix%7D "\boldsymbol{\mu} = \begin{bmatrix} 
 \mu_1 \\\mu_2 \end{bmatrix}")
+
+
 
 ![\boldsymbol{K} = \begin{bmatrix} 
 K\_{11}&K\_{12} \\K\_{21}&K\_{22} \end{bmatrix}=\begin{bmatrix} 
@@ -31,13 +35,15 @@ K\_{11}&K\_{12} \\K\_{21}&K\_{22} \end{bmatrix}=\begin{bmatrix}
 K_{11}&K_{12} \\K_{21}&K_{22} \end{bmatrix}=\begin{bmatrix} 
 \sigma_{11}^2&\sigma_{12}^2 \\\sigma_{21}^2&\sigma_{22}^2 \end{bmatrix}")
 
-K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
+K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。  
+$$\sigma\_{11}^2 = var(x_1) = E\[(x_1-E\[x_1\])^2\] = E\[(x_1)^2\]$$
 
-![\sigma\_{11}^2 = var(x_1) = E\[(x_1-E\[x_1\])^2\] = E\[(x_1)^2\]](https://latex.codecogs.com/svg.latex?%5Csigma_%7B11%7D%5E2%20%3D%20var%28x_1%29%20%3D%20E%5B%28x_1-E%5Bx_1%5D%29%5E2%5D%20%3D%20E%5B%28x_1%29%5E2%5D "\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]")
 
-![\sigma\_{12}^2 = \sigma\_{21}^2 = E\[(x_1-E\[x_1\])(x_2-E\[x_2\])\] = E\[x_1x_2\]](https://latex.codecogs.com/svg.latex?%5Csigma_%7B12%7D%5E2%20%3D%20%5Csigma_%7B21%7D%5E2%20%3D%20E%5B%28x_1-E%5Bx_1%5D%29%28x_2-E%5Bx_2%5D%29%5D%20%3D%20E%5Bx_1x_2%5D "\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]")
+$$\sigma\_{12}^2 = \sigma\_{21}^2 = E\[(x_1-E\[x_1\])(x_2-E\[x_2\])\] = E\[x_1x_2\]$$
 
-有 E\[x_1\] = E\[x_2\] = 0
+
+
+有 $E\[x_1\] = E\[x_2\] = 0$ 
 
 图左边和右边的分布为
 
@@ -85,22 +91,15 @@ The conditional posterior mean and variance are defined as follows:
 
 ## 3. 从高斯分布抽样
 
-如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布
+如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布$ N(\mu,\sigma^2)$中采样。
 
-![N(\mu,\sigma^2)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29 "N(\mu,\sigma^2)")
+### 单变量高斯分布
 
-中采样。
-\### 单变量高斯分布
+一个常见的方法是首先从标准正态分布$ N(0,1)$ 产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本 $ \sigma x + \mu$ 。
 
-一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本
+那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在\[0,1\]上，那么$\phi^{-1}(U)$ 将遵循标准正态分布，其中$\phi^{-1}$是标准正态分布累积函数的倒数。
 
-![\sigma x + \mu](https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu "\sigma x + \mu")
-
-。
-
-那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在\[0,1\]上，那么![\phi^{-1}(U)](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D%28U%29 "\phi^{-1}(U)") 将遵循标准正态分布，其中![\phi^{-1}](https://latex.codecogs.com/svg.latex?%5Cphi%5E%7B-1%7D "\phi^{-1}")是标准正态分布累积函数的倒数。
-
-![gp_2.png](../../../img/20231125/gp_2.png)
+![gp_2.png](/img/20231125/gp_2.png)
 
 总结：从期望的单变量高斯分布中获取随机样本，通过三个步骤：
 
@@ -122,13 +121,11 @@ The conditional posterior mean and variance are defined as follows:
 0 \\0 \end{bmatrix} ,\begin{bmatrix} 
 1&0 \\0&1 \end{bmatrix})](https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29 "N(\begin{bmatrix} 
 0 \\0 \end{bmatrix} ,\begin{bmatrix} 
-1&0 \\0&1 \end{bmatrix})")
-
-中进行采样
-
-![\begin{bmatrix} 
-x_1 \\x_2 \end{bmatrix}](https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D "\begin{bmatrix} 
-x_1 \\x_2 \end{bmatrix}")
+1&0 \\0&1 \end{bmatrix})")中进行采样 $
+\begin{bmatrix}
+x_1 \\
+x_2 
+\end{bmatrix}^T $ 
 
 因为上述的协方差非对角线都是0，那就是说x_1和x_2不相关。那么可以对x_1和x_2进行单独采样。
 
@@ -140,8 +137,9 @@ x_1 \\x_2 \end{bmatrix}")
 
 就又变回了从一元标准正态分布中抽样。
 
-第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 ![\sigma x + \mu](https://latex.codecogs.com/svg.latex?%5Csigma%20x%20%2B%20%5Cmu "\sigma x + \mu") 的变换就可以得到遵循![N(\mu,\sigma^2)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2C%5Csigma%5E2%29 "N(\mu,\sigma^2)")的分布）。
+第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 $\sigma x + \mu$的变换就可以得到遵循$N(\mu,\sigma^2)$的分布）。
 
-可以使用Cholesky decomposition来计算------给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。具体而言，Cholesky分解的结果是![K=LL^T](https://latex.codecogs.com/svg.latex?K%3DLL%5ET "K=LL^T")。
+可以使用Cholesky decomposition来计算------给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。   
+具体而言，Cholesky分解的结果是$K=LL^T$。
 
-因此进行 ![L x + \mu](https://latex.codecogs.com/svg.latex?L%20x%20%2B%20%5Cmu "L x + \mu") 的变换就可以得到遵循![N(\mu,K)](https://latex.codecogs.com/svg.latex?N%28%5Cmu%2CK%29 "N(\mu,K)")的分布。
+因此进行 $L x + \mu$ 的变换就可以得到遵循$ N(\mu,K)$的分布。

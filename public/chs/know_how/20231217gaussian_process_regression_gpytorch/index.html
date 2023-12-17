@@ -20,8 +20,26 @@ exact GP and approximate GP Exact inference applies when the closed-form express
     crossorigin="anonymous"
   />
   
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
   <meta property="og:title" content="Gaussian Process Regression with GPyTorch" />
 <meta property="og:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
 计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
@@ -51,11 +69,13 @@ exact GP and approximate GP Exact inference applies when the closed-form express
 通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
 exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute."><meta itemprop="datePublished" content="2023-12-17T17:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-12-17T17:01:50+08:00" />
-<meta itemprop="wordCount" content="464">
+<meta itemprop="wordCount" content="488">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
   <meta name="lang" content="chs" />
+  
+
   
 </head>
 <body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
@@ -213,7 +233,7 @@ exact GP and approximate GP Exact inference applies when the closed-form express
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      464&nbsp;字
+      488&nbsp;字
       
         
       
@@ -286,7 +306,7 @@ We can simple and quick to compute the posterior distribution using <code>gpytor
 It is difficult and time-consuming to compute. In such cases we use <code>gpytorch.models.ApproximateGP</code>.</li>
 </ol>
 <h3 id="exact-gp">exact GP</h3>
-<p><img src="https://latex.codecogs.com/svg.latex?f%28x%29%20%3D%20-%5Ccos%28%5Cpi%20x%29%20%2B%20%5Csin%284%20%5Cpi%20x%29" alt="f(x) = -\cos(\pi x) + \sin(4 \pi x)" title="f(x) = -\cos(\pi x) + \sin(4 \pi x)"></p>
+<p>$$ f(x) = -\cos(\pi x) + \sin(4 \pi x)$$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> torch 
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> matplotlib <span style="color:#ff79c6">import</span> pyplot <span style="color:#ff79c6">as</span> plt
@@ -317,9 +337,13 @@ tensor([-0.4102,  0.0099, -0.7328, -1.4028, -0.7601,  0.6764,  1.5090,  0.8017,
 <h1 id="gpregressor">GPRegressor</h1>
 <p>概率分布和边缘分布的区别：</p>
 <ol>
-<li>概率分布 <img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)">：这是指给定输入变量 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的情况下，目标变量 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 的概率分布。在监督学习中，我们通常使用概率模型来建模输入与输出之间的关系。<img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)"> 描述了模型对于给定输入 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的输出 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 的不确定性。常见的例子是高斯过程模型，其中 <img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)"> 是一个高斯分布。</li>
-<li>边缘分布 <img src="https://latex.codecogs.com/svg.latex?p%28y%20%7C%20x%29" alt="p(y \| x)" title="p(y | x)">：这是指给定输入变量 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的情况下，目标变量 <img src="https://latex.codecogs.com/svg.latex?y" alt="y" title="y"> 的概率分布。边缘分布是通过对概率分布 <img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)"> 进行积分或求和得到的，其中 <img src="https://latex.codecogs.com/svg.latex?y" alt="y" title="y"> 是通过对 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 进行某种函数变换得到的。在监督学习中，<img src="https://latex.codecogs.com/svg.latex?y" alt="y" title="y"> 通常是观测到的目标变量，而 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 是模型对于给定输入 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的预测值。</li>
+<li>概率分布</li>
 </ol>
+<p>$p(f | x)$ ：这是指给定输入变量 $x$ 的情况下，目标变量 $f$ 的概率分布。在监督学习中，我们通常使用概率模型来建模输入与输出之间的关系。$p(f | x)$描述了模型对于给定输入$x$的输出 $f$的不确定性。常见的例子是高斯过程模型，其中 $p(f | x)$是一个高斯分布。</p>
+<ol start="2">
+<li>边缘分布</li>
+</ol>
+<p>$p(y | x)$ ：这是指给定输入变量 $x$的情况下，目标变量 $y$的概率分布。边缘分布是通过对概率分布 $p(f | x)$ 进行积分或求和得到的，其中 $y$ 是通过对 $f$进行某种函数变换得到的。在监督学习中，$y$ 通常是观测到的目标变量，而 $f$ 是模型对于给定输入 $x$的预测值。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> gpytorch
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">GPRegressor</span>(gpytorch<span style="color:#ff79c6">.</span>models<span style="color:#ff79c6">.</span>ExactGP):

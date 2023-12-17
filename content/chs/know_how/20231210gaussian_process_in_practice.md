@@ -4,6 +4,7 @@ date: 2023-12-10T18:01:50+08:00
 tags: ["tech","bayesian"]
 format: hugo-md
 jupyter: nn3.10
+math: true
 html-math-method: webtex
 thumbnail: https://picsum.photos/id/305/400/250
 ---
@@ -14,9 +15,9 @@ thumbnail: https://picsum.photos/id/305/400/250
 
 #### 1.1 多变量高斯分布
 
--   创建一个包含n个候选输入位置的列表{xi，i=1，...，n}
+-   创建一个包含n个候选输入位置的列表${x_i，i=1,...,n}$
 -   初始化均值向量μ和协方差矩阵K（含n x n个元素）
-    -   假设x_1和x_2是多维的矩阵。x_1是一个 m\* d的矩阵，x_2是一个n*d的矩阵，那么K是一个m*n的矩阵，K\[i,j\] = k(x_1\[i,:\], x_2\[j,:\])
+    -   假设x_1和x_2是多维的矩阵。x_1是一个 m\* d的矩阵，x_2是一个n*d的矩阵，那么K是一个m*n的矩阵，$K\[i,j\] = k(x_1\[i,:\], x_2\[j,:\])$
 -   执行Cholesky分解K=LL T来获得L
 -   通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中
 

@@ -28,7 +28,7 @@ exact GP and approximate GP Exact inference applies when the closed-form express
       
       <guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid>
       <description>这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表{xi，i=1，&amp;hellip;，n} 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，K[i,j] = k(x_1[i,:], x_2[j,:]) 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&amp;hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
 1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu + uncertainty, mu - uncertainty, alpha=0.</description>
     </item>
     
@@ -39,32 +39,21 @@ exact GP and approximate GP Exact inference applies when the closed-form express
       
       <guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid>
       <description>这篇文章主要解决三个问题：
-正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为
-书上写作
+正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。
 为啥要多写一个f呢？
-是因为这个分布是针对f的分布，或者换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
+因为这个分布是针对f的分布，换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
 2. 核函数是什么，有什么类型 核函数就是协方差。
-核函数
-它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点xi和xj之间的统计关系。 它量化xj的变化和xi的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
+核函数$K(x_i, x_j)$
+它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点$x_i$和$x_j$之间的统计关系。 它量化$x_j$的变化和$x_i$的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
 有几种常见的核：
-高斯核 Gaussian kernel 这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
-可调节参数的高斯核，又被叫做isotropic squared exponential kernel
-略(以后补充，暂时不是重点) 3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，。我们需要对这三个随机变量进行建模。假设mean vector 为 \mu， covariance matrix为K。
+高斯核 Gaussian kernel 1.1 常见的高斯核 $$ K_{ij} = k(x_i,x_j) = e^{-||X_i-X_j||^2}$$
+这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
+1.2 可调节参数的高斯核，又被叫做isotropic squared exponential kernel $$K_{ij} = k(x_i,x_j) = \sigma_f^2e^{-\frac{1}{2l^2}||X_i-X_j||^2}$$ 2. 略(以后补充，暂时不是重点)
+3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，$ D = {(x_1,f(x_1)), (x_2, f(x_2)),(x_3, f(x_3))}$。我们需要对这三个随机变量进行建模。假设mean vector 为 $\mu$， covariance matrix为$K$。
 这三个变量遵循多元变量的高斯分布
-基于这个数据集D，假设我们现在想知道另一个变量x_4（它对应的f值用f_*(x_4)表示）在其他位置的均值和方差的的分布。
+基于这个数据集D，假设我们现在想知道另一个变量$x_4$（它对应的f值用$f_*(x_4)$表示）在其他位置的均值和方差的的分布。
 问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。
-f和f*的分布为
-已知先验知识： 和 ，求后验概率。
-如何求这个后验概率呢？
-我们可以将观察到的数据集与新变量一起构造一个联合分布。
-我们已经知道，数据集D最的观测值f和f(x_4)分别遵循分布
-假设四个数据的建模为随机变量f_new
-并且有
-就有
-根据多元变量的高斯分布，
-这样就求出的分布了。
-如果观测样本是有噪声的，那么可以用，即观测值 y 可以被看作是真实值 f 加上随机误差 \epsilon 。
-计算的步骤也是一样，计算公式为</description>
+f和f*的分布为</description>
     </item>
     
     <item>
@@ -79,9 +68,18 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）
 假设mean vector matrix K为：
 K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。
-有 E[x_1] = E[x_2] = 0
-图左边和右边的分布为
-左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。</description>
+$$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$
+$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$</description>
+    </item>
+    
+    <item>
+      <title>论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics</title>
+      <link>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</link>
+      <pubDate>Mon, 20 Nov 2023 18:31:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</guid>
+      <description>Abstract
+types 第一种分类 data uncertainty (measurement noise) model uncertainty ( limited data) 第二种分类 epistemic uncertainty 认知上的不确定性，通常是由于没有足够的知识（数据）而产生 can be reducible 分为两类 model-form uncertainty 由于模型的选择导致，例如architectures, activation functions or kernel functions parameter uncertainty 在训练过程产生，由于数据不够导致 aleatory uncertainty stems from physical systems, 具有随机性, cannot be reducible e.g. noises 这种类型的不确定性在ML模型里面被看成是似然函数的一部分(a part of the likelihood function) 也被叫做data uncertainty 捕捉这种不确定性的方式有：同方差 homoscedastic和异方差 heteroscedastic 例子： test data和train data不同分布：epistemic uncertainty (model performs poorer in extrapolation than in interpolation) 测量数据由仪器导致的误差是aleatory Unc， 大试如果由于精度原因导致，则属于epistemic unc，因为提高精度可以减少这个误差 causes methods: Gaussian process regression a ML method with UQ capability 一般不用来quantify uncertainty of a final surrogate 一般用来在高度不确定的采样空间里采样，来减少训练样本的数量 to build an accurate surrogate within some lower and upper bounds of input variables to find a globally optimally design for black-box objective function 一般不评估GPR的UQ质量 因为预测一般在pre-defined design bounds Bayesian neural network Monte Carlo dropout as an alternative to traditional Bayesian neural network neural network ensemble neural network ensemble consisting of multiple neural networks deterministic UQ methods metrics classification probability can be viewed as uncertainty regression confidence interval : 没看懂： prediction may be 120 ± 15, in weeks, which represents a two-sided 95% confidence interval (i.</description>
     </item>
     
     <item>
