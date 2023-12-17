@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  Gaussian Process Regression with GPyTorch - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
+计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
+在核函数的输出上添加缩放系数是为了调整核函数的影响力。
+例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
+通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
+exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute." /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  
+
+  <meta property="og:title" content="Gaussian Process Regression with GPyTorch" />
+<meta property="og:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
+计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
+在核函数的输出上添加缩放系数是为了调整核函数的影响力。
+例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
+通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
+exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2023-12-17T17:01:50+08:00" />
+<meta property="article:modified_time" content="2023-12-17T17:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gaussian Process Regression with GPyTorch"/>
+<meta name="twitter:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
+计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
+在核函数的输出上添加缩放系数是为了调整核函数的影响力。
+例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
+通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
+exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute."/>
+
+  <meta itemprop="name" content="Gaussian Process Regression with GPyTorch">
+<meta itemprop="description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
+计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
+在核函数的输出上添加缩放系数是为了调整核函数的影响力。
+例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
+通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
+exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute."><meta itemprop="datePublished" content="2023-12-17T17:01:50+08:00" />
+<meta itemprop="dateModified" content="2023-12-17T17:01:50+08:00" />
+<meta itemprop="wordCount" content="464">
+<meta itemprop="keywords" content="tech,bayesian," />
+
+  
+  <meta name="lang" content="chs" />
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/know_how/">技术</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/307/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2023年12月17日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">Gaussian Process Regression with GPyTorch</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2023年12月17日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      3&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      464&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#%e8%ae%a1%e7%ae%97mean">计算Mean</a>
+        
+
+        
+        </li><li>
+        <a href="#%e8%ae%a1%e7%ae%97covariance">计算Covariance</a>
+        
+
+        
+        </li><li>
+        <a href="#exact-gp-and-approximate-gp">exact GP and approximate GP</a>
+        
+
+        
+        <ul>
+            <ul>
+            <li>
+        <a href="#exact-gp">exact GP</a>
+        
+
+        
+        </li></ul>
+          </ul>
+      </li><li>
+        <a href="#gpregressor">GPRegressor</a>
+        </li></ul>
+  </details>
+
+    <p>这个例子主要是利用GPytorch，来实现高斯过程回归。</p>
+<h1 id="计算mean">计算Mean</h1>
+<ol>
+<li>zero mean function <code>gpytorch.means.ZeroMean()</code></li>
+<li>constant mean function <code>gpytorch.means.ConstantMean()</code></li>
+<li>linear mean function <code>gpytorch.means.LinearMean()</code></li>
+</ol>
+<h1 id="计算covariance">计算Covariance</h1>
+<ol>
+<li>RBFKernel <code>gpytorch.kernels.RBFKernel()</code></li>
+<li>adding a scaling coefficient: <code>kernels.ScaleKernel(gpytorch.kernels.RBFKernel())</code></li>
+</ol>
+<p>一般会在核函数的输出上添加缩放系数。</p>
+<p>在核函数的输出上添加缩放系数是为了调整核函数的影响力。</p>
+<p>例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。<br>
+通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。</p>
+<h1 id="exact-gp-and-approximate-gp">exact GP and approximate GP</h1>
+<ol>
+<li>Exact inference applies when the closed-form expression of the posterior is available.
+We can simple and quick to compute the posterior distribution using <code>gpytorch.models.ExactGP</code>.</li>
+<li>Approximate inference applies when the posterior distribution involves high-dimensional integrals.
+It is difficult and time-consuming to compute. In such cases we use <code>gpytorch.models.ApproximateGP</code>.</li>
+</ol>
+<h3 id="exact-gp">exact GP</h3>
+<p><img src="https://latex.codecogs.com/svg.latex?f%28x%29%20%3D%20-%5Ccos%28%5Cpi%20x%29%20%2B%20%5Csin%284%20%5Cpi%20x%29" alt="f(x) = -\cos(\pi x) + \sin(4 \pi x)" title="f(x) = -\cos(\pi x) + \sin(4 \pi x)"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> torch 
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> matplotlib <span style="color:#ff79c6">import</span> pyplot <span style="color:#ff79c6">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">f</span>(x, noise<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34; 
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    objective function
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">-</span>torch<span style="color:#ff79c6">.</span>cos(np<span style="color:#ff79c6">.</span>pi <span style="color:#ff79c6">*</span> x) <span style="color:#ff79c6">+</span> torch<span style="color:#ff79c6">.</span>sin(<span style="color:#bd93f9">4</span> <span style="color:#ff79c6">*</span> np<span style="color:#ff79c6">.</span>pi <span style="color:#ff79c6">*</span> x) <span style="color:#ff79c6">+</span> noise <span style="color:#ff79c6">*</span> torch<span style="color:#ff79c6">.</span>randn(<span style="color:#ff79c6">*</span>x<span style="color:#ff79c6">.</span>shape)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#6272a4"># observation noise</span>
+</span></span><span style="display:flex;"><span>noise <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># number of observations</span>
+</span></span><span style="display:flex;"><span>N <span style="color:#ff79c6">=</span><span style="color:#bd93f9">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># initial observations upon initiation 生成一个等间距的函数调用</span>
+</span></span><span style="display:flex;"><span>X_init <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>linspace(<span style="color:#bd93f9">0.05</span>,<span style="color:#bd93f9">0.95</span>,N) 
+</span></span><span style="display:flex;"><span>y_init <span style="color:#ff79c6">=</span> f(X_init, noise)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(X_init)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">print</span>(y_init)
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># plot noisy observations</span>
+</span></span><span style="display:flex;"><span>plt<span style="color:#ff79c6">.</span>figure(figsize<span style="color:#ff79c6">=</span>(<span style="color:#bd93f9">8</span>,<span style="color:#bd93f9">6</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#ff79c6">.</span>plot(X_init<span style="color:#ff79c6">.</span>numpy(), y_init<span style="color:#ff79c6">.</span>numpy(), <span style="color:#f1fa8c">&#39;kx&#39;</span>, mew<span style="color:#ff79c6">=</span><span style="color:#bd93f9">2</span>)
+</span></span></code></pre></div><pre><code>tensor([0.0500, 0.1500, 0.2500, 0.3500, 0.4500, 0.5500, 0.6500, 0.7500, 0.8500,
+        0.9500])
+tensor([-0.4102,  0.0099, -0.7328, -1.4028, -0.7601,  0.6764,  1.5090,  0.8017,
+        -0.1260,  0.3746])
+</code></pre>
+<p><img src="../../../img/20231217/cell-4-output-2.png" alt="cell-4-output-2.png"></p>
+<h1 id="gpregressor">GPRegressor</h1>
+<p>概率分布和边缘分布的区别：</p>
+<ol>
+<li>概率分布 <img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)">：这是指给定输入变量 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的情况下，目标变量 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 的概率分布。在监督学习中，我们通常使用概率模型来建模输入与输出之间的关系。<img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)"> 描述了模型对于给定输入 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的输出 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 的不确定性。常见的例子是高斯过程模型，其中 <img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)"> 是一个高斯分布。</li>
+<li>边缘分布 <img src="https://latex.codecogs.com/svg.latex?p%28y%20%7C%20x%29" alt="p(y \| x)" title="p(y | x)">：这是指给定输入变量 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的情况下，目标变量 <img src="https://latex.codecogs.com/svg.latex?y" alt="y" title="y"> 的概率分布。边缘分布是通过对概率分布 <img src="https://latex.codecogs.com/svg.latex?p%28f%20%7C%20x%29" alt="p(f \| x)" title="p(f | x)"> 进行积分或求和得到的，其中 <img src="https://latex.codecogs.com/svg.latex?y" alt="y" title="y"> 是通过对 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 进行某种函数变换得到的。在监督学习中，<img src="https://latex.codecogs.com/svg.latex?y" alt="y" title="y"> 通常是观测到的目标变量，而 <img src="https://latex.codecogs.com/svg.latex?f" alt="f" title="f"> 是模型对于给定输入 <img src="https://latex.codecogs.com/svg.latex?x" alt="x" title="x"> 的预测值。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> gpytorch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">GPRegressor</span>(gpytorch<span style="color:#ff79c6">.</span>models<span style="color:#ff79c6">.</span>ExactGP):
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> __init__(self, train_inputs, train_targets, mean, kernel, likelihood<span style="color:#ff79c6">=</span><span style="color:#ff79c6">None</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> likelihood <span style="color:#ff79c6">is</span> <span style="color:#ff79c6">None</span>:
+</span></span><span style="display:flex;"><span>            likelihood <span style="color:#ff79c6">=</span> gpytorch<span style="color:#ff79c6">.</span>likelihoods<span style="color:#ff79c6">.</span>GaussianLikelihood()
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># initiate the superclass ExactGP to refresh the posterior </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">super</span>()<span style="color:#ff79c6">.</span>__init__(train_inputs, train_targets, likelihood)
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># store attributes</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>mean <span style="color:#ff79c6">=</span> mean
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>kernel <span style="color:#ff79c6">=</span> kernel
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>likelihood <span style="color:#ff79c6">=</span> likelihood
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">forward</span>(self, x):
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        Return:
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            a posterior multivariate normal distribution
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># mean and kernel are stored as attributes</span>
+</span></span><span style="display:flex;"><span>        mean_x <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>mean(x)
+</span></span><span style="display:flex;"><span>        covar_x <span style="color:#ff79c6">=</span> self<span style="color:#ff79c6">.</span>kernel(x)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> gpytorch<span style="color:#ff79c6">.</span>distributions<span style="color:#ff79c6">.</span>MultivariateNormal(mean_x, covar_x)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">predict</span>(self, x):
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        compute the marginal predictive distribution of y given x
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># set the model to evaluation mode</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#ff79c6">.</span>eval()
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4"># perform inference without gradient propagation</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">with</span> torch<span style="color:#ff79c6">.</span>no_grad():  <span style="color:#6272a4"># 在预测阶段，不需要计算梯度，因为只有前向传播</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4"># get posterior distribution p(f|x)</span>
+</span></span><span style="display:flex;"><span>            pred <span style="color:#ff79c6">=</span> self(x)
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4"># convert posterior distribution p(f|x) to p(y|x)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> self<span style="color:#ff79c6">.</span>likelihood(pred)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">plot_model</span>(model, xlim <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    X_train <span style="color:#ff79c6">=</span> model<span style="color:#ff79c6">.</span>train_inputs[<span style="color:#bd93f9">0</span>]<span style="color:#ff79c6">.</span>cpu()<span style="color:#ff79c6">.</span>numpy()
+</span></span><span style="display:flex;"><span>    y_train <span style="color:#ff79c6">=</span> model<span style="color:#ff79c6">.</span>train_targets<span style="color:#ff79c6">.</span>cpu()<span style="color:#ff79c6">.</span>numpy()
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">print</span>(X_train)
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">print</span>(y_train)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># obtain range of x axis</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> xlim <span style="color:#ff79c6">is</span> <span style="color:#ff79c6">None</span>:
+</span></span><span style="display:flex;"><span>        xmin <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">float</span>(X_train<span style="color:#ff79c6">.</span>min())
+</span></span><span style="display:flex;"><span>        xmax <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">float</span>(X_train<span style="color:#ff79c6">.</span>max())
+</span></span><span style="display:flex;"><span>        x_range <span style="color:#ff79c6">=</span> xmax <span style="color:#ff79c6">-</span> xmin
+</span></span><span style="display:flex;"><span>        xlim <span style="color:#ff79c6">=</span> [xmin <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">0.05</span> <span style="color:#ff79c6">*</span> x_range, xmax <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">0.05</span> <span style="color:#ff79c6">*</span> x_range]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    model_tensor_example <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">list</span>(model<span style="color:#ff79c6">.</span>parameters())[<span style="color:#bd93f9">0</span>]  
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">print</span>(model_tensor_example)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># The .to() method is used to specify the target device.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># .to(model_tensor_example)将张量转换为与 model_tensor_example 张量相同的设备上</span>
+</span></span><span style="display:flex;"><span>    X_plot <span style="color:#ff79c6">=</span> torch<span style="color:#ff79c6">.</span>linspace(xlim[<span style="color:#bd93f9">0</span>],xlim[<span style="color:#bd93f9">1</span>], <span style="color:#bd93f9">200</span>)<span style="color:#ff79c6">.</span>to(model_tensor_example)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># generate predictive posterior distribution</span>
+</span></span><span style="display:flex;"><span>    model<span style="color:#ff79c6">.</span>eval()
+</span></span><span style="display:flex;"><span>    predictive_distribution <span style="color:#ff79c6">=</span> model<span style="color:#ff79c6">.</span>predict(X_plot)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># obtain mean, upper and lower bounds   </span>
+</span></span><span style="display:flex;"><span>    lower, upper <span style="color:#ff79c6">=</span> predictive_distribution<span style="color:#ff79c6">.</span>confidence_region()
+</span></span><span style="display:flex;"><span>    prediction <span style="color:#ff79c6">=</span> predictive_distribution<span style="color:#ff79c6">.</span>mean<span style="color:#ff79c6">.</span>cpu()<span style="color:#ff79c6">.</span>numpy()
+</span></span><span style="display:flex;"><span>    X_plot <span style="color:#ff79c6">=</span> X_plot<span style="color:#ff79c6">.</span>numpy()
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>scatter(X_train, y_train, marker<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;x&#39;</span>, c<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;k&#39;</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>plot(X_plot, prediction)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>fill_between(X_plot, lower, upper, alpha<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0.1</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>xlabel(<span style="color:#f1fa8c">&#39;x&#39;</span>, fontsize<span style="color:#ff79c6">=</span><span style="color:#bd93f9">14</span>)
+</span></span><span style="display:flex;"><span>    plt<span style="color:#ff79c6">.</span>ylabel(<span style="color:#f1fa8c">&#39;y&#39;</span>, fontsize<span style="color:#ff79c6">=</span><span style="color:#bd93f9">14</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mean_fn <span style="color:#ff79c6">=</span> gpytorch<span style="color:#ff79c6">.</span>means<span style="color:#ff79c6">.</span>ConstantMean()
+</span></span><span style="display:flex;"><span>kernel_fn <span style="color:#ff79c6">=</span> gpytorch<span style="color:#ff79c6">.</span>kernels<span style="color:#ff79c6">.</span>ScaleKernel(gpytorch<span style="color:#ff79c6">.</span>kernels<span style="color:#ff79c6">.</span>RBFKernel())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#ff79c6">=</span> GPRegressor(X_init, y_init, mean_fn, kernel_fn)
+</span></span><span style="display:flex;"><span>plot_model(model)
+</span></span></code></pre></div><pre><code>[[0.05      ]
+ [0.14999999]
+ [0.24999999]
+ [0.35      ]
+ [0.45      ]
+ [0.55      ]
+ [0.65      ]
+ [0.75      ]
+ [0.85      ]
+ [0.95      ]]
+[-0.410193   0.0098884 -0.732843  -1.4027661 -0.7600916  0.6763583
+  1.5090019  0.801654  -0.1260201  0.3746474]
+Parameter containing:
+tensor([0.], requires_grad=True)
+</code></pre>
+<p><img src="../../../img/20231217/cell-7-output-2.png" alt="cell-7-output-2.png"></p>
+
+  </article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

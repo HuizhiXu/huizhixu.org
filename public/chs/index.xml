@@ -6,7 +6,21 @@
     <description>Recent content in Blog on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Sun, 10 Dec 2023 18:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Dec 2023 17:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gaussian Process Regression with GPyTorch</title>
+      <link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link>
+      <pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</guid>
+      <description>这个例子主要是利用GPytorch，来实现高斯过程回归。
+计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
+在核函数的输出上添加缩放系数是为了调整核函数的影响力。
+例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
+通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
+exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute.</description>
+    </item>
+    
     <item>
       <title>Gaussian Process in Practice 高斯过程实践</title>
       <link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link>

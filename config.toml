@@ -38,7 +38,7 @@ DefaultContentLanguageInSubdir = true
 
 
     [[languages.chs.menu.main]]
-        name = "IT技术"
+        name = "技术"
         url = "/know_how/"
         weight = 3
 
