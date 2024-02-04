@@ -6,7 +6,31 @@
     <description>Recent content in KNOW HOW on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Sun, 17 Dec 2023 17:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/know_how/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Feb 2024 17:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/know_how/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bayesian Optimization</title>
+      <link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</guid>
+      <description>贝叶斯优化有重要的两步步：
+构造代理模型（surrogate model） 由获取函数（acquisition function）来生成采样建议 贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。
+有了后验估计之后，就可以用获取函数Acquisition Function来生成采样建议。
+获取函数，经典的方法有EI 和 upper confidence bound，新的方法有safe constraint。
+获取函数是用来找到全局最优解，好的获取函数会尽可能快地找到全局最优解。
+序列决策 Sequential Decision-Making 在贝叶斯优化中，是通过一次又一次地做序列决策来达到优化的目的的。
+基于特定的策略，优化器将收集观察到的数据点，更新潜在的函数的后验信念，给出下一个采样点进行探索，不断重复迭代以上过程。通常设置最大值/最小值来寻找最优值。
+贝叶斯优化可以看作是一个 sequential decision process under uncertainty的过程。
+这个过程具体来说是这样的：
+优化器收集观测数据（observed data），基于特定的策略（policy），更新函数概率分布的后验信念（posterior belief），提出下一个采样点（next sampling）来进行探索，在提议的位置收集额外的数据点并重复。 不断地收集新的数据点，我们对函数知道的越来越多。 注意，上述过程包含很多东西，每一块都有研究者深入研究。
+收集观测数据：收集观测数据一般会用到observation model。Observation model就是我们对数据的采样方法（比如说Sobol或Latin hypercube），这里的目的就是希望每次训练模型的时候可以给训练算法present一些最有代表性的数据。 策略（policy）是指在贝叶斯优化中用于选择下一个采样点的决策规则。如何选择下一个点，就是说我们想对什么东西做优化——这里可以是最优的expected结果（expected improvement）或者是探索空间（expected hypervolume）等。策略也需要决定何时终止探索过程。 优化器（Optimizer）在贝叶斯优化中是整个流程的一个统称。 策略和优化器在贝叶斯优化中紧密配合。策略指导优化器选择下一个采样点，而优化器根据观测数据和模型更新概率分布。 更新函数概率分布的后验信念，通常需要一个surrogate model。包括高斯过程优化（Gaussian Process Optimization）、序列模型优化（Sequential Model-based Optimization）等。高斯过程使用高斯过程模型来建模，序列模型优化使用随机森林等算法来建模。 除此之外，还有外循环和内循环的概念。
+外循环：返回最佳点的位置或者最佳值本身。这个额外的点通常可以加入到已有的数据集来迭代下一轮。
+内循环：返回采样位置候选。通常通过最大化获取函数来完成。
+寻求最佳Policy 获取函数是一个打分器，它对每个候选位置打分，选取最大得分位置。
+如果获取函数有解析表达式，可以进行求gradient操作，那么可以将对目标函数的全局优化，转化成对获取函数的优化。
+如果获取函数无法微分，可以使用Monte Carlo Approximation来近似计算。</description>
+    </item>
+    
     <item>
       <title>Gaussian Process Regression with GPyTorch</title>
       <link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link>

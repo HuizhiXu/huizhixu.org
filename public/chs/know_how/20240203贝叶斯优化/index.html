@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  Bayesian Optimization - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="贝叶斯优化有重要的两步步：
+构造代理模型（surrogate model） 由获取函数（acquisition function）来生成采样建议 贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。
+有了后验估计之后，就可以用获取函数Acquisition Function来生成采样建议。
+获取函数，经典的方法有EI 和 upper confidence bound，新的方法有safe constraint。
+获取函数是用来找到全局最优解，好的获取函数会尽可能快地找到全局最优解。
+序列决策 Sequential Decision-Making 在贝叶斯优化中，是通过一次又一次地做序列决策来达到优化的目的的。
+基于特定的策略，优化器将收集观察到的数据点，更新潜在的函数的后验信念，给出下一个采样点进行探索，不断重复迭代以上过程。通常设置最大值/最小值来寻找最优值。
+贝叶斯优化可以看作是一个 sequential decision process under uncertainty的过程。
+这个过程具体来说是这样的：
+优化器收集观测数据（observed data），基于特定的策略（policy），更新函数概率分布的后验信念（posterior belief），提出下一个采样点（next sampling）来进行探索，在提议的位置收集额外的数据点并重复。 不断地收集新的数据点，我们对函数知道的越来越多。 注意，上述过程包含很多东西，每一块都有研究者深入研究。
+收集观测数据：收集观测数据一般会用到observation model。Observation model就是我们对数据的采样方法（比如说Sobol或Latin hypercube），这里的目的就是希望每次训练模型的时候可以给训练算法present一些最有代表性的数据。 策略（policy）是指在贝叶斯优化中用于选择下一个采样点的决策规则。如何选择下一个点，就是说我们想对什么东西做优化——这里可以是最优的expected结果（expected improvement）或者是探索空间（expected hypervolume）等。策略也需要决定何时终止探索过程。 优化器（Optimizer）在贝叶斯优化中是整个流程的一个统称。 策略和优化器在贝叶斯优化中紧密配合。策略指导优化器选择下一个采样点，而优化器根据观测数据和模型更新概率分布。 更新函数概率分布的后验信念，通常需要一个surrogate model。包括高斯过程优化（Gaussian Process Optimization）、序列模型优化（Sequential Model-based Optimization）等。高斯过程使用高斯过程模型来建模，序列模型优化使用随机森林等算法来建模。 除此之外，还有外循环和内循环的概念。
+外循环：返回最佳点的位置或者最佳值本身。这个额外的点通常可以加入到已有的数据集来迭代下一轮。
+内循环：返回采样位置候选。通常通过最大化获取函数来完成。
+寻求最佳Policy 获取函数是一个打分器，它对每个候选位置打分，选取最大得分位置。
+如果获取函数有解析表达式，可以进行求gradient操作，那么可以将对目标函数的全局优化，转化成对获取函数的优化。
+如果获取函数无法微分，可以使用Monte Carlo Approximation来近似计算。" /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
+  <meta property="og:title" content="Bayesian Optimization" />
+<meta property="og:description" content="贝叶斯优化有重要的两步步：
+构造代理模型（surrogate model） 由获取函数（acquisition function）来生成采样建议 贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。
+有了后验估计之后，就可以用获取函数Acquisition Function来生成采样建议。
+获取函数，经典的方法有EI 和 upper confidence bound，新的方法有safe constraint。
+获取函数是用来找到全局最优解，好的获取函数会尽可能快地找到全局最优解。
+序列决策 Sequential Decision-Making 在贝叶斯优化中，是通过一次又一次地做序列决策来达到优化的目的的。
+基于特定的策略，优化器将收集观察到的数据点，更新潜在的函数的后验信念，给出下一个采样点进行探索，不断重复迭代以上过程。通常设置最大值/最小值来寻找最优值。
+贝叶斯优化可以看作是一个 sequential decision process under uncertainty的过程。
+这个过程具体来说是这样的：
+优化器收集观测数据（observed data），基于特定的策略（policy），更新函数概率分布的后验信念（posterior belief），提出下一个采样点（next sampling）来进行探索，在提议的位置收集额外的数据点并重复。 不断地收集新的数据点，我们对函数知道的越来越多。 注意，上述过程包含很多东西，每一块都有研究者深入研究。
+收集观测数据：收集观测数据一般会用到observation model。Observation model就是我们对数据的采样方法（比如说Sobol或Latin hypercube），这里的目的就是希望每次训练模型的时候可以给训练算法present一些最有代表性的数据。 策略（policy）是指在贝叶斯优化中用于选择下一个采样点的决策规则。如何选择下一个点，就是说我们想对什么东西做优化——这里可以是最优的expected结果（expected improvement）或者是探索空间（expected hypervolume）等。策略也需要决定何时终止探索过程。 优化器（Optimizer）在贝叶斯优化中是整个流程的一个统称。 策略和优化器在贝叶斯优化中紧密配合。策略指导优化器选择下一个采样点，而优化器根据观测数据和模型更新概率分布。 更新函数概率分布的后验信念，通常需要一个surrogate model。包括高斯过程优化（Gaussian Process Optimization）、序列模型优化（Sequential Model-based Optimization）等。高斯过程使用高斯过程模型来建模，序列模型优化使用随机森林等算法来建模。 除此之外，还有外循环和内循环的概念。
+外循环：返回最佳点的位置或者最佳值本身。这个额外的点通常可以加入到已有的数据集来迭代下一轮。
+内循环：返回采样位置候选。通常通过最大化获取函数来完成。
+寻求最佳Policy 获取函数是一个打分器，它对每个候选位置打分，选取最大得分位置。
+如果获取函数有解析表达式，可以进行求gradient操作，那么可以将对目标函数的全局优化，转化成对获取函数的优化。
+如果获取函数无法微分，可以使用Monte Carlo Approximation来近似计算。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2024-02-03T17:01:50+08:00" />
+<meta property="article:modified_time" content="2024-02-03T17:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bayesian Optimization"/>
+<meta name="twitter:description" content="贝叶斯优化有重要的两步步：
+构造代理模型（surrogate model） 由获取函数（acquisition function）来生成采样建议 贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。
+有了后验估计之后，就可以用获取函数Acquisition Function来生成采样建议。
+获取函数，经典的方法有EI 和 upper confidence bound，新的方法有safe constraint。
+获取函数是用来找到全局最优解，好的获取函数会尽可能快地找到全局最优解。
+序列决策 Sequential Decision-Making 在贝叶斯优化中，是通过一次又一次地做序列决策来达到优化的目的的。
+基于特定的策略，优化器将收集观察到的数据点，更新潜在的函数的后验信念，给出下一个采样点进行探索，不断重复迭代以上过程。通常设置最大值/最小值来寻找最优值。
+贝叶斯优化可以看作是一个 sequential decision process under uncertainty的过程。
+这个过程具体来说是这样的：
+优化器收集观测数据（observed data），基于特定的策略（policy），更新函数概率分布的后验信念（posterior belief），提出下一个采样点（next sampling）来进行探索，在提议的位置收集额外的数据点并重复。 不断地收集新的数据点，我们对函数知道的越来越多。 注意，上述过程包含很多东西，每一块都有研究者深入研究。
+收集观测数据：收集观测数据一般会用到observation model。Observation model就是我们对数据的采样方法（比如说Sobol或Latin hypercube），这里的目的就是希望每次训练模型的时候可以给训练算法present一些最有代表性的数据。 策略（policy）是指在贝叶斯优化中用于选择下一个采样点的决策规则。如何选择下一个点，就是说我们想对什么东西做优化——这里可以是最优的expected结果（expected improvement）或者是探索空间（expected hypervolume）等。策略也需要决定何时终止探索过程。 优化器（Optimizer）在贝叶斯优化中是整个流程的一个统称。 策略和优化器在贝叶斯优化中紧密配合。策略指导优化器选择下一个采样点，而优化器根据观测数据和模型更新概率分布。 更新函数概率分布的后验信念，通常需要一个surrogate model。包括高斯过程优化（Gaussian Process Optimization）、序列模型优化（Sequential Model-based Optimization）等。高斯过程使用高斯过程模型来建模，序列模型优化使用随机森林等算法来建模。 除此之外，还有外循环和内循环的概念。
+外循环：返回最佳点的位置或者最佳值本身。这个额外的点通常可以加入到已有的数据集来迭代下一轮。
+内循环：返回采样位置候选。通常通过最大化获取函数来完成。
+寻求最佳Policy 获取函数是一个打分器，它对每个候选位置打分，选取最大得分位置。
+如果获取函数有解析表达式，可以进行求gradient操作，那么可以将对目标函数的全局优化，转化成对获取函数的优化。
+如果获取函数无法微分，可以使用Monte Carlo Approximation来近似计算。"/>
+
+  <meta itemprop="name" content="Bayesian Optimization">
+<meta itemprop="description" content="贝叶斯优化有重要的两步步：
+构造代理模型（surrogate model） 由获取函数（acquisition function）来生成采样建议 贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。
+有了后验估计之后，就可以用获取函数Acquisition Function来生成采样建议。
+获取函数，经典的方法有EI 和 upper confidence bound，新的方法有safe constraint。
+获取函数是用来找到全局最优解，好的获取函数会尽可能快地找到全局最优解。
+序列决策 Sequential Decision-Making 在贝叶斯优化中，是通过一次又一次地做序列决策来达到优化的目的的。
+基于特定的策略，优化器将收集观察到的数据点，更新潜在的函数的后验信念，给出下一个采样点进行探索，不断重复迭代以上过程。通常设置最大值/最小值来寻找最优值。
+贝叶斯优化可以看作是一个 sequential decision process under uncertainty的过程。
+这个过程具体来说是这样的：
+优化器收集观测数据（observed data），基于特定的策略（policy），更新函数概率分布的后验信念（posterior belief），提出下一个采样点（next sampling）来进行探索，在提议的位置收集额外的数据点并重复。 不断地收集新的数据点，我们对函数知道的越来越多。 注意，上述过程包含很多东西，每一块都有研究者深入研究。
+收集观测数据：收集观测数据一般会用到observation model。Observation model就是我们对数据的采样方法（比如说Sobol或Latin hypercube），这里的目的就是希望每次训练模型的时候可以给训练算法present一些最有代表性的数据。 策略（policy）是指在贝叶斯优化中用于选择下一个采样点的决策规则。如何选择下一个点，就是说我们想对什么东西做优化——这里可以是最优的expected结果（expected improvement）或者是探索空间（expected hypervolume）等。策略也需要决定何时终止探索过程。 优化器（Optimizer）在贝叶斯优化中是整个流程的一个统称。 策略和优化器在贝叶斯优化中紧密配合。策略指导优化器选择下一个采样点，而优化器根据观测数据和模型更新概率分布。 更新函数概率分布的后验信念，通常需要一个surrogate model。包括高斯过程优化（Gaussian Process Optimization）、序列模型优化（Sequential Model-based Optimization）等。高斯过程使用高斯过程模型来建模，序列模型优化使用随机森林等算法来建模。 除此之外，还有外循环和内循环的概念。
+外循环：返回最佳点的位置或者最佳值本身。这个额外的点通常可以加入到已有的数据集来迭代下一轮。
+内循环：返回采样位置候选。通常通过最大化获取函数来完成。
+寻求最佳Policy 获取函数是一个打分器，它对每个候选位置打分，选取最大得分位置。
+如果获取函数有解析表达式，可以进行求gradient操作，那么可以将对目标函数的全局优化，转化成对获取函数的优化。
+如果获取函数无法微分，可以使用Monte Carlo Approximation来近似计算。"><meta itemprop="datePublished" content="2024-02-03T17:01:50+08:00" />
+<meta itemprop="dateModified" content="2024-02-03T17:01:50+08:00" />
+<meta itemprop="wordCount" content="61">
+<meta itemprop="keywords" content="tech,bayesian," />
+
+  
+  <meta name="lang" content="chs" />
+  
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/know_how/">技术</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/308/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2024年2月3日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">Bayesian Optimization</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2024年2月3日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      61&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#%e5%ba%8f%e5%88%97%e5%86%b3%e7%ad%96-sequential-decision-making">序列决策 Sequential Decision-Making</a>
+        
+
+        
+        </li><li>
+        <a href="#%e5%af%bb%e6%b1%82%e6%9c%80%e4%bd%b3policy">寻求最佳Policy</a>
+        </li></ul>
+  </details>
+
+    <p>贝叶斯优化有重要的两步步：</p>
+<ol>
+<li>构造代理模型（surrogate model）</li>
+<li>由获取函数（acquisition function）来生成采样建议</li>
+</ol>
+<p>贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。</p>
+<p>有了后验估计之后，就可以用获取函数Acquisition Function来生成采样建议。</p>
+<p>获取函数，经典的方法有EI 和 upper confidence bound，新的方法有safe constraint。</p>
+<p>获取函数是用来找到全局最优解，好的获取函数会尽可能快地找到全局最优解。</p>
+<h3 id="序列决策-sequential-decision-making">序列决策 Sequential Decision-Making</h3>
+<p>在贝叶斯优化中，是通过一次又一次地做序列决策来达到优化的目的的。</p>
+<p>基于特定的策略，优化器将收集观察到的数据点，更新潜在的函数的后验信念，给出下一个采样点进行探索，不断重复迭代以上过程。通常设置最大值/最小值来寻找最优值。</p>
+<p>贝叶斯优化可以看作是一个 sequential decision process under uncertainty的过程。</p>
+<p>这个过程具体来说是这样的：</p>
+<ul>
+<li>优化器收集观测数据（observed data），基于特定的策略（policy），更新函数概率分布的后验信念（posterior belief），提出下一个采样点（next sampling）来进行探索，在提议的位置收集额外的数据点并重复。</li>
+<li>不断地收集新的数据点，我们对函数知道的越来越多。</li>
+</ul>
+<p>注意，上述过程包含很多东西，每一块都有研究者深入研究。</p>
+<ul>
+<li>收集观测数据：收集观测数据一般会用到observation model。Observation model就是我们对数据的采样方法（比如说Sobol或Latin hypercube），这里的目的就是希望每次训练模型的时候可以给训练算法present一些最有代表性的数据。</li>
+<li>策略（policy）是指在贝叶斯优化中用于选择下一个采样点的决策规则。如何选择下一个点，就是说我们想对什么东西做优化——这里可以是最优的expected结果（expected improvement）或者是探索空间（expected hypervolume）等。策略也需要决定何时终止探索过程。</li>
+<li>优化器（Optimizer）在贝叶斯优化中是整个流程的一个统称。</li>
+<li>策略和优化器在贝叶斯优化中紧密配合。策略指导优化器选择下一个采样点，而优化器根据观测数据和模型更新概率分布。</li>
+<li>更新函数概率分布的后验信念，通常需要一个surrogate model。包括高斯过程优化（Gaussian Process Optimization）、序列模型优化（Sequential Model-based Optimization）等。高斯过程使用高斯过程模型来建模，序列模型优化使用随机森林等算法来建模。</li>
+</ul>
+<p>除此之外，还有外循环和内循环的概念。</p>
+<p>外循环：返回最佳点的位置或者最佳值本身。这个额外的点通常可以加入到已有的数据集来迭代下一轮。</p>
+<p>内循环：返回采样位置候选。通常通过最大化获取函数来完成。</p>
+<h3 id="寻求最佳policy">寻求最佳Policy</h3>
+<p>获取函数是一个打分器，它对每个候选位置打分，选取最大得分位置。</p>
+<p>如果获取函数有解析表达式，可以进行求gradient操作，那么可以将对目标函数的全局优化，转化成对获取函数的优化。</p>
+<p>如果获取函数无法微分，可以使用Monte Carlo Approximation来近似计算。</p>
+
+  </article><div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2017 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>
