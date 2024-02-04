@@ -2,11 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://huizhixu.github.io/chs/tags/bayesian/</loc>
-    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
+    <loc>https://huizhixu.github.io/chs/tags/2023/</loc>
+    <lastmod>2024-02-04T08:31:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/life/20240204%E6%80%BB%E7%BB%932023/</loc>
+    <lastmod>2024-02-04T08:31:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/</loc>
-    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
+    <lastmod>2024-02-04T08:31:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -23,53 +26,11 @@
                 href="https://huizhixu.github.io/chs/"
                 />
   </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</loc>
-    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/</loc>
-    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/</loc>
-    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://huizhixu.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://huizhixu.github.io/de/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="chs"
-                href="https://huizhixu.github.io/chs/tags/"
-                />
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/tech/</loc>
-    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</loc>
-    <lastmod>2023-12-10T18:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</loc>
-    <lastmod>2023-12-07T18:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</loc>
-    <lastmod>2023-11-25T18:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</loc>
-    <lastmod>2023-11-20T18:31:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/2023/</loc>
-    <lastmod>2023-11-05T18:31:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/life/20231105%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/</loc>
-    <lastmod>2023-11-05T18:31:50+08:00</lastmod>
+    <loc>https://huizhixu.github.io/chs/tags/life/</loc>
+    <lastmod>2024-02-04T08:31:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/life/</loc>
-    <lastmod>2023-11-05T18:31:50+08:00</lastmod>
+    <lastmod>2024-02-04T08:31:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -86,13 +47,55 @@
                 href="https://huizhixu.github.io/chs/life/"
                 />
   </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/</loc>
+    <lastmod>2024-02-04T08:31:50+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://huizhixu.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://huizhixu.github.io/de/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/"
+                />
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/bayesian/</loc>
+    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</loc>
+    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/</loc>
+    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/tech/</loc>
+    <lastmod>2023-12-17T17:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</loc>
+    <lastmod>2023-12-10T18:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</loc>
+    <lastmod>2023-12-07T18:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</loc>
+    <lastmod>2023-11-25T18:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</loc>
+    <lastmod>2023-11-20T18:31:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/life/20231105%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/</loc>
+    <lastmod>2023-11-05T18:31:50+08:00</lastmod>
+  </url><url>
     <loc>https://huizhixu.github.io/chs/tags/read/</loc>
     <lastmod>2023-11-05T18:31:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/life/20231031%E6%9C%80%E8%BF%91%E7%94%A8ai%E5%B9%B2%E4%BA%86%E5%95%A5/</loc>
-    <lastmod>2023-10-31T18:31:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/life/</loc>
     <lastmod>2023-10-31T18:31:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/life/20230813linux%E5%9B%9E%E9%A1%BE/</loc>
