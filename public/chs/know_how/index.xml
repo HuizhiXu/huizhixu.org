@@ -32,6 +32,24 @@
     </item>
     
     <item>
+      <title>grobid的使用</title>
+      <link>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>最近被文本分块虐得不轻，看到有人介绍grobid，赶紧用上了。
+1. Grobid 介绍 Grobid 的全称是Generation of Bibliographic Data。它用机器学习来解析、提取文档。
+2. Grobid 安装 用docker安装有两个版本，机器内存大用docker pull grobid/grobid:0.8.0（需要10GB），有crf和deep learning两种模型，内存小用docker pull lfoppiano/grobid:0.8.0（需要300MB），只有crf模型。
+m1芯片需要JVM 这里有解决办法 我在本地安装的是小模型版本。
+docker pull lfoppiano/grobid:0.8.0 docker run --rm --init --ulimit core=0 -p 8070:8070 lfoppiano/grobid:0.8.0 运行上面两条命令之后就可以在http://localhost:8070/ 看到官网的经典页面了。（官网demo：https://kermitt2-grobid.hf.space/）
+3. Grobid 使用 3.1 Web 端 web端的使用很简单，在http://localhost:8070/上传文档，点submit就可以了，还能下载TEI结果。（TEI是Text Encoding Initiative， 规定了电子文档的结构。）
+3.2 API 调用 如果想使用API调用，有Node.js、Jave、Python三种方式。
+我选择的是Python调用。GitHub Repo在此：https://github.com/kermitt2/grobid_client_python
+git clone https://github.com/kermitt2/grobid_client_python cd grobid_client_python python3 setup.py install 运行
+from grobid_client.grobid_client import GrobidClient client = GrobidClient(config_path=&amp;#34;./config.json&amp;#34;) client.process(&amp;#34;processFulltextDocument&amp;#34;, &amp;#34;/mnt/data/covid/pdfs&amp;#34;, n=20) 4.</description>
+    </item>
+    
+    <item>
       <title>Gaussian Process Regression with GPyTorch</title>
       <link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link>
       <pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate>
