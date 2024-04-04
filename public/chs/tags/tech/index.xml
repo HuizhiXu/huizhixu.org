@@ -6,7 +6,27 @@
     <description>Recent content in tech on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Sat, 03 Feb 2024 17:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Mar 2024 20:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>改进量的期望 Expected Improvement</title>
+      <link>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</link>
+      <pubDate>Tue, 05 Mar 2024 20:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</guid>
+      <description>在看正文之前，先复习一下期望（Expectation）：
+在统计学和概率论中，期望是一个衡量随机变量取值的中心趋势的指标。
+对于一个连续随机变量X，其期望值可以通过以下公式计算：
+$$ \mathbb{E}[X] = \int_{-\infty}^{\infty} x \cdot p(x)dx $$
+x 是随机变量 X 的取值。 p(x) 是随机变量 X 的概率密度函数，它描述了 X 取特定值 x 的概率。 积分是在整个实数域上进行的，即从负无穷到正无穷。 进入正文。
+获取函数（Acquisition function）在多个方面存在差异，包括效用函数的选择、前瞻步骤的数量、风险厌恶或偏好的程度等。
+效用函数的意思是数据的有用性，它可以是目标函数的值，可以是协方差，可以是平均值。
+常用的Acquisition function有 EI，PI，UCB等。
+EI（Expected Improvement） 是指在选取新的点的时候，用已有数据(observations)的最大值作为benchmark，它会计算已有数据的最大值和新观察值之间的期望差，让这个期望差越大越好。
+记住，在Expected Improvement (EI) 中，我们通常对目标函数$f(x)$ 的改进感兴趣，而不是随机变量本身的期望值。
+假设观测到的数据集为$D_n = {x_{1:n}, y_{1:n}}$，其中${y_1, &amp;hellip;, y_n}$表示为在相应位置${x_1, &amp;hellip;, x_n}$收集到的观测值值。在无噪声的情况下，实际观测值是准确的，即${y_1, &amp;hellip;, y_n} = {f_1, &amp;hellip;, f_n}$。 utility可以表示为 $u(D_n) = max{f_{1:n}} = f_n^*$ 。
+如果选择一个新的点${x_{n+1},y_{n+1}}$，那么此时的 utility 为$u(D_{n+1}) = u(D_n \cup {x_{n+1}, f_{n+1}} )=max{f_{1+n}, f_n^*}$。</description>
+    </item>
+    
     <item>
       <title>Bayesian Optimization</title>
       <link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link>
