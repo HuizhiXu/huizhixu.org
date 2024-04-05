@@ -10,24 +10,21 @@
   </title>
   <meta name="description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
 背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
-大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
-通过训练资料找出参数的过程叫training或者learning。
-找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
-最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+通过训练资料找出参数的过程叫 training 或者 learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫 testin 或者 inference。
+最佳化 optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
 2.贝叶斯思想
 训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
-也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+也有可能出现，训练成功，但是测试失败，这就是Overfitting。
 下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
-语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段： （李宏毅教授除了用动漫举例子还会用武侠啊！！！）
 自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
-训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
-论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
-模型效果 在chatGPT之前的GPT系列：
-参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
-YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。" /><meta name="generator" content="Hugo 0.115.4"><link
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -57,24 +54,21 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
   <meta property="og:title" content="大型语言模型修炼史" />
 <meta property="og:description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
 背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
-大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
-通过训练资料找出参数的过程叫training或者learning。
-找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
-最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+通过训练资料找出参数的过程叫 training 或者 learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫 testin 或者 inference。
+最佳化 optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
 2.贝叶斯思想
 训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
-也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+也有可能出现，训练成功，但是测试失败，这就是Overfitting。
 下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
-语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段： （李宏毅教授除了用动漫举例子还会用武侠啊！！！）
 自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
-训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
-论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
-模型效果 在chatGPT之前的GPT系列：
-参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
-YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。" />
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2024-04-05T20:01:50+08:00" />
@@ -84,48 +78,42 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
 <meta name="twitter:title" content="大型语言模型修炼史"/>
 <meta name="twitter:description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
 背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
-大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
-通过训练资料找出参数的过程叫training或者learning。
-找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
-最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+通过训练资料找出参数的过程叫 training 或者 learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫 testin 或者 inference。
+最佳化 optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
 2.贝叶斯思想
 训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
-也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+也有可能出现，训练成功，但是测试失败，这就是Overfitting。
 下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
-语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段： （李宏毅教授除了用动漫举例子还会用武侠啊！！！）
 自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
-训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
-论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
-模型效果 在chatGPT之前的GPT系列：
-参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
-YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。"/>
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。"/>
 
   <meta itemprop="name" content="大型语言模型修炼史">
 <meta itemprop="description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
 背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
-大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
-通过训练资料找出参数的过程叫training或者learning。
-找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
-最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+通过训练资料找出参数的过程叫 training 或者 learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫 testin 或者 inference。
+最佳化 optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
 2.贝叶斯思想
 训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
-也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+也有可能出现，训练成功，但是测试失败，这就是Overfitting。
 下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
-语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段： （李宏毅教授除了用动漫举例子还会用武侠啊！！！）
 自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
-训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
-论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
-模型效果 在chatGPT之前的GPT系列：
-参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
-YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。"><meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00" />
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。"><meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00" />
 <meta itemprop="dateModified" content="2024-04-05T20:01:50+08:00" />
-<meta itemprop="wordCount" content="157">
+<meta itemprop="wordCount" content="168">
 <meta itemprop="keywords" content="tech,llm," />
 
   
@@ -289,7 +277,7 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      157&nbsp;字
+      168&nbsp;字
       
         
       
@@ -392,18 +380,19 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
 ，此篇文章内容包括第6讲和第7讲。</p>
 <h1 id="背景知识">背景知识</h1>
 <p>大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。</p>
-<p>大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。</p>
+<p>大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。</p>
 <p><strong>1. 那么怎么找出这些未知参数呢？需要训练资料。</strong></p>
-<p>通过训练资料找出参数的过程叫training或者learning。</p>
-<p>找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。</p>
-<p>最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。</p>
+<p>通过训练资料找出参数的过程叫 training 或者 learning。</p>
+<p>找出未知参数之后，通过函数来完成文字接龙的过程叫 testin 或者 inference。</p>
+<p>最佳化 optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。</p>
 <p><strong>2.贝叶斯思想</strong></p>
 <p>训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。</p>
-<p>也有可能出现，训练成功，但是测试失败。这就是Overfitting。</p>
+<p>也有可能出现，训练成功，但是测试失败，这就是Overfitting。</p>
 <p>下面这段话是训练大模型的中心思想。
 <strong>模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。</strong></p>
 <h1 id="语言模型的三个阶段">语言模型的三个阶段</h1>
-<p>把训练语言模型的历史分为三个阶段：</p>
+<p>把训练语言模型的历史分为三个阶段：
+（李宏毅教授除了用动漫举例子还会用武侠啊！！！）</p>
 <ol>
 <li>自我学习，积累实力</li>
 <li>名师指点，发挥潜力</li>
@@ -422,12 +411,11 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
 </ol>
 <ul>
 <li>
-<p>论文 <strong>Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（<strong><a href="https://arxiv.org/abs/2112.11446" target="_blank" rel="noopener">https://arxiv.org/abs/2112.11446</a>
-</strong>）</strong>：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。</p>
+<p>论文 <strong>Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher</strong>（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。</p>
 </li>
 <li>
-<p>论文 **Deduplicating Training Data Makes Language Models Better(<strong><a href="https://arxiv.org/abs/2107.06499" target="_blank" rel="noopener">https://arxiv.org/abs/2107.06499</a>
-</strong>): 讲述了去重技术可以让大模型性能更好</p>
+<p>论文 <strong>Deduplicating Training Data Makes Language Models Better</strong>(<a href="https://arxiv.org/abs/2107.06499%29" target="_blank" rel="noopener">https://arxiv.org/abs/2107.06499)</a>
+: 讲述了去重技术可以让大模型性能更好。</p>
 </li>
 </ul>
 <h3 id="模型效果">模型效果</h3>
@@ -438,8 +426,8 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
 <tr>
 <th>YEAR</th>
 <th>MODEL</th>
-<th>parameters 参数量</th>
-<th>Data Size</th>
+<th>PARAMETERS</th>
+<th>DATA SIZE</th>
 <th>模型效果</th>
 </tr>
 </thead>
@@ -462,30 +450,24 @@ YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿）
 <td>2020</td>
 <td>GPT3</td>
 <td>175B</td>
-<td>580G（300B tokens,哈利波特全集30万遍）</td>
+<td>580G（300B tokens，哈利波特全集30万遍）</td>
 <td>一般</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
 <h3 id="第一阶段的局限性">第一阶段的局限性</h3>
-<p>在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。</p>
+<p>在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。</p>
 <p>接下来就到了第二阶段：名师指点，发挥潜力。</p>
 <h2 id="第二阶段名师指点发挥潜力">第二阶段：名师指点，发挥潜力</h2>
-<p>通常的教学中，学生与老师的问答如下。第二阶段是通过这种问答的方式，让模型学会如何回答问题。</p>
+<p>通常的教学中，学生与老师的问答如下。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>学生：世界上有几大洲？
 </span></span><span style="display:flex;"><span>老师：七大洲
 </span></span><span style="display:flex;"><span>学生：世界上有几大洋？
 </span></span><span style="display:flex;"><span>老师：四大洋
-</span></span></code></pre></div><h3 id="训练细节-1">训练细节</h3>
-<p>第二阶段与第一阶段有一个显著的变化：在语料方面，不再是无人工的自监督学习，而是变成了instruction fine-tuning。  <br>
-instruction fine-tuning是指人类提供一些指令，机器学会怎么按照这些指令来做正确的回应。</p>
+</span></span></code></pre></div><p>第二阶段是通过这种问答的方式，让模型学会如何回答问题。</p>
+<h3 id="训练细节-1">训练细节</h3>
+<p>第二阶段与第一阶段有一个显著的变化：在语料方面，不再是无人工的自监督学习，而是变成了Instruction Fine-tuning。  <br>
+Instruction Fine-tuning是指人类提供一些指令，机器学会怎么按照这些指令来做正确的回应。</p>
 <p>这种语料中有label的学习，叫做监督式学习 Supervised Learning。</p>
 <p>格式如下：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：&#34;</span>
@@ -497,15 +479,22 @@ instruction fine-tuning是指人类提供一些指令，机器学会怎么按照
 </span></span></code></pre></div><p><strong>为什么要标注哪句话是User的，哪句话是AI的？</strong></p>
 <p>如果不标注的话，就会变成下面这样。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;世界上有几大洲？七大洲&#34;</span>
-</span></span></code></pre></div><p>模型处理的时候，有两种情况。有可能是，用户提问”世界上有几大洲“，AI回答”七大洲“。</p>
-<p>也有可能是，用户提问”User：世界上有几大洲？七大洲“，AI要回答”对“。</p>
+</span></span></code></pre></div><p>模型处理的时候，有两种情况。</p>
+<ol>
+<li>
+<p>用户提问”世界上有几大洲“，AI回答”七大洲“。</p>
+</li>
+<li>
+<p>用户提问”User：世界上有几大洲？七大洲“，AI要回答”对“。</p>
+</li>
+</ol>
 <p>这两种情况输出是不一样的。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：七大洲&#34;</span> 输出：<span style="color:#f1fa8c">&#34;[END]&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？七大洲 AI：&#34;</span> 输出：<span style="color:#f1fa8c">&#34;对&#34;</span>
 </span></span></code></pre></div><h3 id="第二阶段的局限性">第二阶段的局限性</h3>
-<p>人工标注很贵，如果只靠语料标注的话，无法覆盖所有的场景，模型无法理解整个世界。</p>
+<p>模型能正确回答，但是人工标注很贵，如果只靠语料标注的话，无法覆盖所有的场景，模型无法理解整个物理世界。</p>
 <h2 id="第三阶段参与实战打磨技巧">第三阶段：参与实战，打磨技巧</h2>
 <p>总结一下第一阶段和第二阶段：</p>
 <p>第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain。</p>
@@ -528,8 +517,14 @@ Lora是这样做的：假设已经有初始参数，在做最佳化的时候，�
 <p>因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。</p>
 <h1 id="大模型-finetune-的两个路线">大模型 Finetune 的两个路线</h1>
 <p>目前大模型Finetune有两个路线：</p>
+<ul>
+<li>
 <p>Pretrain + Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才）</p>
+</li>
+<li>
 <p>Pretrain + Finetune 打造一个通才 （收集涵盖不同任务的标注语料，训练一个模型，拥有多种能力）</p>
+</li>
+</ul>
 
   </article>
 <div class="px-2 mb-2">
