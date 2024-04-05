@@ -2,11 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://huizhixu.github.io/chs/tags/bayesian/</loc>
-    <lastmod>2024-03-05T20:01:50+08:00</lastmod>
-  </url><url>
     <loc>https://huizhixu.github.io/chs/</loc>
-    <lastmod>2024-03-05T20:01:50+08:00</lastmod>
+    <lastmod>2024-04-05T20:01:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
@@ -24,10 +21,13 @@
                 />
   </url><url>
     <loc>https://huizhixu.github.io/chs/know_how/</loc>
-    <lastmod>2024-03-05T20:01:50+08:00</lastmod>
+    <lastmod>2024-04-05T20:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/llm/</loc>
+    <lastmod>2024-04-05T20:01:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/tags/</loc>
-    <lastmod>2024-03-05T20:01:50+08:00</lastmod>
+    <lastmod>2024-04-05T20:01:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
@@ -45,6 +45,12 @@
                 />
   </url><url>
     <loc>https://huizhixu.github.io/chs/tags/tech/</loc>
+    <lastmod>2024-04-05T20:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</loc>
+    <lastmod>2024-04-05T20:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/bayesian/</loc>
     <lastmod>2024-03-05T20:01:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</loc>

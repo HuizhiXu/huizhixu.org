@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  大型语言模型修炼史  - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
+背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+1. 那么怎么找出这些未知参数呢？需要训练资料。
+通过训练资料找出参数的过程叫training或者learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
+最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+2.贝叶斯思想
+训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
+也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
+这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
+第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
+论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。" /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
+  <meta property="og:title" content="大型语言模型修炼史 " />
+<meta property="og:description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
+背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+1. 那么怎么找出这些未知参数呢？需要训练资料。
+通过训练资料找出参数的过程叫training或者learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
+最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+2.贝叶斯思想
+训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
+也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
+这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
+第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
+论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2024-04-05T20:01:50+08:00" />
+<meta property="article:modified_time" content="2024-04-05T20:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="大型语言模型修炼史 "/>
+<meta name="twitter:description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
+背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+1. 那么怎么找出这些未知参数呢？需要训练资料。
+通过训练资料找出参数的过程叫training或者learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
+最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+2.贝叶斯思想
+训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
+也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
+这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
+第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
+论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。"/>
+
+  <meta itemprop="name" content="大型语言模型修炼史 ">
+<meta itemprop="description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
+背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+1. 那么怎么找出这些未知参数呢？需要训练资料。
+通过训练资料找出参数的过程叫training或者learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
+最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+2.贝叶斯思想
+训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
+也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
+这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
+第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
+论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。"><meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00" />
+<meta itemprop="dateModified" content="2024-04-05T20:01:50+08:00" />
+<meta itemprop="wordCount" content="156">
+<meta itemprop="keywords" content="tech,llm," />
+
+  
+  <meta name="lang" content="chs" />
+  
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/know_how/">技术</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/311/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2024年4月5日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">大型语言模型修炼史 </h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2024年4月5日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      156&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#%e8%83%8c%e6%99%af%e7%9f%a5%e8%af%86">背景知识</a>
+        
+
+        
+        </li><li>
+        <a href="#%e8%af%ad%e8%a8%80%e6%a8%a1%e5%9e%8b%e7%9a%84%e4%b8%89%e4%b8%aa%e9%98%b6%e6%ae%b5">语言模型的三个阶段</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e7%ac%ac%e4%b8%80%e9%98%b6%e6%ae%b5%e8%87%aa%e6%88%91%e5%ad%a6%e4%b9%a0%e7%a7%af%e7%b4%af%e5%ae%9e%e5%8a%9b">第一阶段：自我学习，积累实力</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e8%ae%ad%e7%bb%83%e8%b5%84%e6%96%99%e7%9a%84%e7%bb%84%e6%88%90%e9%83%a8%e5%88%86">训练资料的组成部分</a>
+        
+
+        
+        </li><li>
+        <a href="#%e8%ae%ad%e7%bb%83%e7%bb%86%e8%8a%82">训练细节</a>
+        
+
+        
+        </li><li>
+        <a href="#%e6%a8%a1%e5%9e%8b%e6%95%88%e6%9e%9c">模型效果</a>
+        
+
+        
+        </li><li>
+        <a href="#%e7%ac%ac%e4%b8%80%e9%98%b6%e6%ae%b5%e7%9a%84%e5%b1%80%e9%99%90%e6%80%a7">第一阶段的局限性</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#%e7%ac%ac%e4%ba%8c%e9%98%b6%e6%ae%b5%e5%90%8d%e5%b8%88%e6%8c%87%e7%82%b9%e5%8f%91%e6%8c%a5%e6%bd%9c%e5%8a%9b">第二阶段：名师指点，发挥潜力</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e8%ae%ad%e7%bb%83%e7%bb%86%e8%8a%82-1">训练细节</a>
+        
+
+        
+        </li><li>
+        <a href="#%e7%ac%ac%e4%ba%8c%e9%98%b6%e6%ae%b5%e7%9a%84%e5%b1%80%e9%99%90%e6%80%a7">第二阶段的局限性</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#%e7%ac%ac%e4%b8%89%e9%98%b6%e6%ae%b5%e5%8f%82%e4%b8%8e%e5%ae%9e%e6%88%98%e6%89%93%e7%a3%a8%e6%8a%80%e5%b7%a7">第三阶段：参与实战，打磨技巧</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#%e5%a4%a7%e6%a8%a1%e5%9e%8b-finetune-%e7%9a%84%e4%b8%a4%e4%b8%aa%e8%b7%af%e7%ba%bf">大模型 Finetune 的两个路线</a>
+        </li></ul>
+  </details>
+
+    <p>注意：以下笔记内容来自李宏毅教授的课程：
+<a href="https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php" target="_blank" rel="noopener">INTRODUCTION TO GENERATIVE AI</a>
+，此篇文章内容包括第6讲和第7讲。</p>
+<h1 id="背景知识">背景知识</h1>
+<p>大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。</p>
+<p>大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。</p>
+<p><strong>1. 那么怎么找出这些未知参数呢？需要训练资料。</strong></p>
+<p>通过训练资料找出参数的过程叫training或者learning。</p>
+<p>找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。</p>
+<p>最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。</p>
+<p><strong>2.贝叶斯思想</strong></p>
+<p>训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。</p>
+<p>也有可能出现，训练成功，但是测试失败。这就是Overfitting。</p>
+<p>下面这段话是训练大模型的中心思想。
+<strong>模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。</strong></p>
+<h1 id="语言模型的三个阶段">语言模型的三个阶段</h1>
+<p>把训练语言模型的历史分为三个阶段：</p>
+<ol>
+<li>自我学习，积累实力</li>
+<li>名师指点，发挥潜力</li>
+<li>参与实战，打磨技巧</li>
+</ol>
+<h2 id="第一阶段自我学习积累实力">第一阶段：自我学习，积累实力</h2>
+<h3 id="训练资料的组成部分">训练资料的组成部分</h3>
+<p>需要多少训练资料语言模型才能学会做文字接龙呢？</p>
+<p>这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。</p>
+<p>第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。</p>
+<h3 id="训练细节">训练细节</h3>
+<ol>
+<li>训练资料哪里有：网络</li>
+<li>训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label）</li>
+<li>提到了两篇论文</li>
+</ol>
+<ul>
+<li>
+<p>论文 <strong>Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（<strong><a href="https://arxiv.org/abs/2112.11446" target="_blank" rel="noopener">https://arxiv.org/abs/2112.11446</a>
+</strong>）</strong>：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。</p>
+</li>
+<li>
+<p>论文 **Deduplicating Training Data Makes Language Models Better(<strong><a href="https://arxiv.org/abs/2107.06499" target="_blank" rel="noopener">https://arxiv.org/abs/2107.06499</a>
+</strong>): 讲述了去重技术可以让大模型性能更好</p>
+</li>
+</ul>
+<h3 id="模型效果">模型效果</h3>
+<p>在chatGPT之前的GPT系列：</p>
+<p>参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。</p>
+<table>
+<thead>
+<tr>
+<th>YEAR</th>
+<th>MODEL</th>
+<th>parameters 参数量</th>
+<th>Data Size</th>
+<th>模型效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2018</td>
+<td>GPT1</td>
+<td>117M （1亿）</td>
+<td>7000 books</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>GPT2</td>
+<td>1542M（15亿）</td>
+<td>40GB</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>GPT3</td>
+<td>175B</td>
+<td>580G（300B tokens,哈利波特全集30万遍）</td>
+<td>一般</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="第一阶段的局限性">第一阶段的局限性</h3>
+<p>在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。</p>
+<p>接下来就到了第二阶段：名师指点，发挥潜力。</p>
+<h2 id="第二阶段名师指点发挥潜力">第二阶段：名师指点，发挥潜力</h2>
+<p>通常的教学中，学生与老师的问答如下。第二阶段是通过这种问答的方式，让模型学会如何回答问题。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>学生：世界上有几大洲？
+</span></span><span style="display:flex;"><span>老师：七大洲
+</span></span><span style="display:flex;"><span>学生：世界上有几大洋？
+</span></span><span style="display:flex;"><span>老师：四大洋
+</span></span></code></pre></div><h3 id="训练细节-1">训练细节</h3>
+<p>第二阶段与第一阶段有一个显著的变化：在语料方面，不再是无人工的自监督学习，而是变成了instruction fine-tuning。  <br>
+instruction fine-tuning是指人类提供一些指令，机器学会怎么按照这些指令来做正确的回应。</p>
+<p>这种语料中有label的学习，叫做监督式学习 Supervised Learning。</p>
+<p>格式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：&#34;</span>
+</span></span><span style="display:flex;"><span>输出：<span style="color:#f1fa8c">&#34;七&#34;</span>
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：七&#34;</span>
+</span></span><span style="display:flex;"><span>输出：<span style="color:#f1fa8c">&#34;大&#34;</span>
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：七大&#34;</span>
+</span></span><span style="display:flex;"><span>输出：<span style="color:#f1fa8c">&#34;洲&#34;</span>
+</span></span></code></pre></div><p><strong>为什么要标注哪句话是User的，哪句话是AI的？</strong></p>
+<p>如果不标注的话，就会变成下面这样。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;世界上有几大洲？七大洲&#34;</span>
+</span></span></code></pre></div><p>模型处理的时候，有两种情况。有可能是，用户提问”世界上有几大洲“，AI回答”七大洲“。</p>
+<p>也有可能是，用户提问”User：世界上有几大洲？七大洲“，AI要回答”对“。</p>
+<p>这两种情况输出是不一样的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：七大洲&#34;</span> 输出：<span style="color:#f1fa8c">&#34;[END]&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？七大洲 AI：&#34;</span> 输出：<span style="color:#f1fa8c">&#34;对&#34;</span>
+</span></span></code></pre></div><h3 id="第二阶段的局限性">第二阶段的局限性</h3>
+<p>人工标注很贵，如果只靠语料标注的话，无法覆盖所有的场景，模型无法理解整个世界。</p>
+<h2 id="第三阶段参与实战打磨技巧">第三阶段：参与实战，打磨技巧</h2>
+<p>总结一下第一阶段和第二阶段：</p>
+<p>第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain。</p>
+<p>第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning。</p>
+<p>如何克服第二阶段的局限性呢？<strong>关键是用第一阶段的参数作为初始参数。</strong></p>
+<p>（贝叶斯的思想这不就来了嘛！）</p>
+<p>所以就到了第三阶段，第三阶段是由第一阶段和第二阶段组合而成的：</p>
+<p>用第一阶段的参数作为第二阶段的初始参数，继续训练，让模型既拥有第一阶段的知识，又能正确回答。</p>
+<ol>
+<li>第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？</li>
+</ol>
+<p><strong>为什么会在意这个事情？</strong></p>
+<p>因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。</p>
+<p><strong>如何解决？</strong></p>
+<p>用Apapter， 例如LoRA方法。
+Adapter是指固定或者插入参数。
+Lora是这样做的：假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，第二阶段的最佳化是找这几层的参数。</p>
+<h1 id="大模型-finetune-的两个路线">大模型 Finetune 的两个路线</h1>
+<p>目前大模型Finetune有两个路线：</p>
+<p>Pretrain + Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才）</p>
+<p>Pretrain + Finetune 打造一个通才 （收集涵盖不同任务的标注语料，训练一个模型，拥有多种能力）</p>
+
+  </article>
+<div class="px-2 mb-2">
+  
+  
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2012 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

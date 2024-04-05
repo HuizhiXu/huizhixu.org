@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>llm on 徐慧志的个人博客</title>
+    <link>https://huizhixu.github.io/chs/tags/llm/</link>
+    <description>Recent content in llm on 徐慧志的个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>chs</language>
+    <lastBuildDate>Fri, 05 Apr 2024 20:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/llm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>大型语言模型修炼史 </title>
+      <link>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</link>
+      <pubDate>Fri, 05 Apr 2024 20:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</guid>
+      <description>注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
+背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数.$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
+1. 那么怎么找出这些未知参数呢？需要训练资料。
+通过训练资料找出参数的过程叫training或者learning。
+找出未知参数之后，通过函数来完成文字接龙的过程叫testing或者inference。
+最佳化optimization：把大模型比作机器，机器训练前需要设定一些参数（例如学习率），这些参数叫超参数hyperparameter。通过这些超参数，机器可以找到最佳的参数。
+2.贝叶斯思想
+训练可能会失败，这意味着找到的参数不符合训练资料，例如，输入”床前明月“，函数输出的不是”光“。那么，就需要换一组超参数再训练一次。
+也有可能出现，训练成功，但是测试失败。这就是Overfitting。
+下面这段话是训练大模型的中心思想。 模型开始训练之前，除了要设置超参数，还要设置初始参数。一般来说，这些初始参数是随机化设置的。那我们也可以尝试给初始参数一些信息，这些初始参数是先验知识，我们给的先验知识越好，模型最后找到的参数会越接近我们想要的。
+语言模型的三个阶段 把训练语言模型的历史分为三个阶段：
+自我学习，积累实力 名师指点，发挥潜力 参与实战，打磨技巧 第一阶段：自我学习，积累实力 训练资料的组成部分 需要多少训练资料语言模型才能学会做文字接龙呢？
+这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
+第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
+训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp;amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446 ）：讲述Deepmind 训练模型Gopher的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号，过滤色情暴力等有害内容，去除低品质资料（使用语料品质分类器决定），去除重复资料等。
+论文 **Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499 ): 讲述了去重技术可以让大模型性能更好
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL parameters 参数量 Data Size 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens,哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段（自我学习，积累实力），语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2、GPT3可以回答问题，但是经常胡言乱语，不受控制。</description>
+    </item>
+    
+  </channel>
+</rss>

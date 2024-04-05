@@ -109,7 +109,6 @@ DefaultContentLanguage = "chs"
   ascentColor = "bg-blue-100"
 
   # The page bundle that is shown on the front page
-  #frontBundle = "life"
   frontBundle = "know_how"
 
 
@@ -133,15 +132,12 @@ DefaultContentLanguage = "chs"
 
 # Comments system
 [params.comments]
+  system = "disqus"
   enableComments = true
   autoLoadComments = true
   enableDisqus = true
   disqusShortname = "huizhixu-org"
 
-#[[headers]]
-#  for = "/*"
-#    [headers.values]
-#    Access-Control-Allow-Origin = "https://www.huizhixu.github.io"
 
 
 [[menu.main]]
