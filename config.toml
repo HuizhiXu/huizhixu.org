@@ -11,98 +11,73 @@ canonifyURLs = true
 
 
 hasCJKLanguage = true
-
 DefaultContentLanguage = "chs"
-DefaultContentLanguageInSubdir = true
+#DefaultContentLanguageInSubdir = true
 
 [languages]
- [languages.chs]
-   contentDir = 'content/chs'
-   weight = 1
-   languageName = '中文 (简体)'
-   title = '徐慧志的个人博客'
- [languages.chs.params]
+  [languages.chs]
+    contentDir = 'content/chs'
+    languageName = '中文 (简体)'
+    title = '徐慧志的个人博客'
+    [languages.chs.params]
       introTitle = "Hallo! 我是慧志"
       introSubtitle = "我是一名后端程序员，喜欢阅读、摄影和Zumba"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo.png"
     [[languages.chs.menu.main]]
-        name = "生活见闻"
-        url = "/life/"
-        weight = 1
-        
+      name = "生活见闻"
+      url = "/life/"
     [[languages.chs.menu.main]]
-        name = "关于"
-        url = "/page/about/"
-        weight = 2
-
-
+      name = "关于"
+      url = "/page/about/"
     [[languages.chs.menu.main]]
-        name = "技术"
-        url = "/know_how/"
-        weight = 3
-
+      name = "技术"
+      url = "/know_how/"
+      weight = 1
     [[languages.chs.menu.main]]
-        name = "宝藏集结"
-        url = "/link/"
-        weight = 4
-
+      name = "宝藏集结"
+      url = "/link/"
     [[languages.chs.menu.main]]
-        name = "分类"
-        url = "/tags/"
-        weight = 5
+      name = "分类"
+      url = "/tags/"
 
- [languages.en]
+  [languages.en]
     contentDir = 'content/en'
-    weight = 2
     languageName = 'English'
     title = 'PoirotMore'
-  [languages.en.params]
+    [languages.en.params]
       introTitle = "Hey! I'm Huizhi Xu"
       introSubtitle = "A senior developer who enjoys reading, blogging and dancing"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo.png"
-   
     [[languages.en.menu.main]]
-        name = "Blog"
-        url = "/life/"
-        weight = 1
-
+      name = "Blog"
+      url = "/life/"
     [[languages.en.menu.main]]
-        name = "About"
-        url = "/page/about/"
-        weight = 2
-
+      name = "About"
+      url = "/page/about/"
     [[languages.en.menu.main]]
-        name = "Tags"
-        url = "/tags/"
-        weight = 3
+      name = "Tags"
+      url = "/tags/"
 
-
-[languages.de]
-  contentDir = 'content/de'
-  languageName = 'Deutsch'
-  title = 'Blog von Huizhi XU'
-  weight = 3
-[languages.de.params]
+  [languages.de]
+    contentDir = 'content/de'
+    languageName = 'Deutsch'
+    title = 'Blog von Huizhi XU'
+    [languages.de.params]
       introTitle = "Hallo, ich bin Huizhi Xu"
       introSubtitle = "Eine Senior-Entwicklerin, die Spaß an Lesen, Bloggen und Zumba"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo-de.png"
     [[languages.de.menu.main]]
-        name = "Blog"
-        url = "/life/"
-        weight = 1
-
+      name = "Blog"
+      url = "/life/"
     [[languages.de.menu.main]]
-        name = "Über mich"
-        url = "/page/about/"
-        weight = 2
-
+      name = "Über mich"
+      url = "/page/about/"
     [[languages.de.menu.main]]
-        name = "Tags"
-        url = "/tags/"
-        weight = 3
+      name = "Tags"
+      url = "/tags/"
 
 
 [params]
@@ -123,10 +98,9 @@ DefaultContentLanguageInSubdir = true
     "summary",
     "content",
     "link",
-    "author"
   ]
   # Custom copyright - optional
-  copyright = "Copyright © 2017 - Huizhi Xu · All rights reserved"
+  copyright = "Copyright © 2012 - Huizhi Xu · All rights reserved"
   favicon = "/favicon.svg"
 
   # Color for the intro details and social links block, not applicable for dark mode
@@ -158,26 +132,22 @@ DefaultContentLanguageInSubdir = true
 
 
 # Comments system
-#[params.comments]
-
-  # Supports disqus, giscus and utterances
-
-
-## disqus
-  #enableComments = true
-
-  #autoLoadComments = true
-  #enableDisqus = true
-  disqusShortname = "huizhi"
+[params.comments]
+  enableComments = true
+  autoLoadComments = true
+  enableDisqus = true
+  disqusShortname = "huizhixu-org"
 
 #[[headers]]
 #  for = "/*"
 #    [headers.values]
 #    Access-Control-Allow-Origin = "https://www.huizhixu.github.io"
 
+
 [[menu.main]]
-  name = "About"
-  url = "/about"
+  name = "主页"
+  url = "/chs/"
+  weight = 1
 
 [build]
   writeStats = true
