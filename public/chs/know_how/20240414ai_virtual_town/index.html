@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  让AI村民组成虚拟村庄会发生什么事 - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？
+事实上，该系统是基于规则的一种变体。 小镇里有各种各样的角色人物，它预先设定了各个角色人物一天的行程安排。每个角色都有自己明确的人物设定和说明。例如，医生一天的工作包括在诊所为患者诊治，整理药品,以及进食、休息等日常作息。如果角色被固定下来，那么他们一天的日程安排也就相对固定了。
+之后，角色人物根据既定规划采取相应的行动。角色人物需依据规划进行下一步行动，该行动可视为状态的转变。
+角色人物如何模拟当前情景？他们通过观察来进行。构建一个观察场景，其中包含观察者和被观察者。例如，在没有事件发生的情况下，医生作为观察者，而房间作为被观察者，医生的状态保持不变，即处于等待患者的状态。医生会定期执行观察动作。一旦患者到来，医生的状态便从“等待”转变为“看病”。患者的到来对医生的状态产生影响，这就是角色人物通过大型语言模型对外界行为做出反应。
+角色人物如何知晓应做出何种反应？每当有物品出现在角色旁边，便会触发观察操作。角色人物会提出两个问题：第一，该物品与角色之间的关系是什么？第二，角色将对该物品采取何种行动？角色人物会持续提出这两个问题，而大语言模型则依据角色设定进行回答。
+角色人物的日常生活往往是单调的，因为他们的行为模式是预先设定好的。为了打破这种单调，需要外部刺激，例如有人举办活动或参加聚会，这些活动会引发角色人物的后续反应。
+如何改变角色人物的状态，进而改变其设定或生活？这需要通过反思（reflect）来实现。反思是对记忆的回顾，能够提炼出真正重要的内容。何时进行反思？当近期发生了许多重要事件时，这段记忆就显得尤为重要。如何评判事件的重要性？这由GPT来决定。反思的内容是什么？GPT会根据最近发生的事情，为机器生成三个问题，并引导机器检索记忆并作出回答。
+为什么说这个小镇是基于规则的变体？人物设定带来的routine基本上是确定的，大语言模型能带来一些在语言上的小的改变，以及大语言模型本身作为一个决策器，去判断下一步的交互。
+小镇网址： https://reverie.herokuapp.com/arXiv_Demo/ " /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
+  <meta property="og:title" content="让AI村民组成虚拟村庄会发生什么事" />
+<meta property="og:description" content="去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？
+事实上，该系统是基于规则的一种变体。 小镇里有各种各样的角色人物，它预先设定了各个角色人物一天的行程安排。每个角色都有自己明确的人物设定和说明。例如，医生一天的工作包括在诊所为患者诊治，整理药品,以及进食、休息等日常作息。如果角色被固定下来，那么他们一天的日程安排也就相对固定了。
+之后，角色人物根据既定规划采取相应的行动。角色人物需依据规划进行下一步行动，该行动可视为状态的转变。
+角色人物如何模拟当前情景？他们通过观察来进行。构建一个观察场景，其中包含观察者和被观察者。例如，在没有事件发生的情况下，医生作为观察者，而房间作为被观察者，医生的状态保持不变，即处于等待患者的状态。医生会定期执行观察动作。一旦患者到来，医生的状态便从“等待”转变为“看病”。患者的到来对医生的状态产生影响，这就是角色人物通过大型语言模型对外界行为做出反应。
+角色人物如何知晓应做出何种反应？每当有物品出现在角色旁边，便会触发观察操作。角色人物会提出两个问题：第一，该物品与角色之间的关系是什么？第二，角色将对该物品采取何种行动？角色人物会持续提出这两个问题，而大语言模型则依据角色设定进行回答。
+角色人物的日常生活往往是单调的，因为他们的行为模式是预先设定好的。为了打破这种单调，需要外部刺激，例如有人举办活动或参加聚会，这些活动会引发角色人物的后续反应。
+如何改变角色人物的状态，进而改变其设定或生活？这需要通过反思（reflect）来实现。反思是对记忆的回顾，能够提炼出真正重要的内容。何时进行反思？当近期发生了许多重要事件时，这段记忆就显得尤为重要。如何评判事件的重要性？这由GPT来决定。反思的内容是什么？GPT会根据最近发生的事情，为机器生成三个问题，并引导机器检索记忆并作出回答。
+为什么说这个小镇是基于规则的变体？人物设定带来的routine基本上是确定的，大语言模型能带来一些在语言上的小的改变，以及大语言模型本身作为一个决策器，去判断下一步的交互。
+小镇网址： https://reverie.herokuapp.com/arXiv_Demo/ " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2024-04-14T19:01:50+08:00" />
+<meta property="article:modified_time" content="2024-04-14T19:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="让AI村民组成虚拟村庄会发生什么事"/>
+<meta name="twitter:description" content="去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？
+事实上，该系统是基于规则的一种变体。 小镇里有各种各样的角色人物，它预先设定了各个角色人物一天的行程安排。每个角色都有自己明确的人物设定和说明。例如，医生一天的工作包括在诊所为患者诊治，整理药品,以及进食、休息等日常作息。如果角色被固定下来，那么他们一天的日程安排也就相对固定了。
+之后，角色人物根据既定规划采取相应的行动。角色人物需依据规划进行下一步行动，该行动可视为状态的转变。
+角色人物如何模拟当前情景？他们通过观察来进行。构建一个观察场景，其中包含观察者和被观察者。例如，在没有事件发生的情况下，医生作为观察者，而房间作为被观察者，医生的状态保持不变，即处于等待患者的状态。医生会定期执行观察动作。一旦患者到来，医生的状态便从“等待”转变为“看病”。患者的到来对医生的状态产生影响，这就是角色人物通过大型语言模型对外界行为做出反应。
+角色人物如何知晓应做出何种反应？每当有物品出现在角色旁边，便会触发观察操作。角色人物会提出两个问题：第一，该物品与角色之间的关系是什么？第二，角色将对该物品采取何种行动？角色人物会持续提出这两个问题，而大语言模型则依据角色设定进行回答。
+角色人物的日常生活往往是单调的，因为他们的行为模式是预先设定好的。为了打破这种单调，需要外部刺激，例如有人举办活动或参加聚会，这些活动会引发角色人物的后续反应。
+如何改变角色人物的状态，进而改变其设定或生活？这需要通过反思（reflect）来实现。反思是对记忆的回顾，能够提炼出真正重要的内容。何时进行反思？当近期发生了许多重要事件时，这段记忆就显得尤为重要。如何评判事件的重要性？这由GPT来决定。反思的内容是什么？GPT会根据最近发生的事情，为机器生成三个问题，并引导机器检索记忆并作出回答。
+为什么说这个小镇是基于规则的变体？人物设定带来的routine基本上是确定的，大语言模型能带来一些在语言上的小的改变，以及大语言模型本身作为一个决策器，去判断下一步的交互。
+小镇网址： https://reverie.herokuapp.com/arXiv_Demo/ "/>
+
+  <meta itemprop="name" content="让AI村民组成虚拟村庄会发生什么事">
+<meta itemprop="description" content="去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？
+事实上，该系统是基于规则的一种变体。 小镇里有各种各样的角色人物，它预先设定了各个角色人物一天的行程安排。每个角色都有自己明确的人物设定和说明。例如，医生一天的工作包括在诊所为患者诊治，整理药品,以及进食、休息等日常作息。如果角色被固定下来，那么他们一天的日程安排也就相对固定了。
+之后，角色人物根据既定规划采取相应的行动。角色人物需依据规划进行下一步行动，该行动可视为状态的转变。
+角色人物如何模拟当前情景？他们通过观察来进行。构建一个观察场景，其中包含观察者和被观察者。例如，在没有事件发生的情况下，医生作为观察者，而房间作为被观察者，医生的状态保持不变，即处于等待患者的状态。医生会定期执行观察动作。一旦患者到来，医生的状态便从“等待”转变为“看病”。患者的到来对医生的状态产生影响，这就是角色人物通过大型语言模型对外界行为做出反应。
+角色人物如何知晓应做出何种反应？每当有物品出现在角色旁边，便会触发观察操作。角色人物会提出两个问题：第一，该物品与角色之间的关系是什么？第二，角色将对该物品采取何种行动？角色人物会持续提出这两个问题，而大语言模型则依据角色设定进行回答。
+角色人物的日常生活往往是单调的，因为他们的行为模式是预先设定好的。为了打破这种单调，需要外部刺激，例如有人举办活动或参加聚会，这些活动会引发角色人物的后续反应。
+如何改变角色人物的状态，进而改变其设定或生活？这需要通过反思（reflect）来实现。反思是对记忆的回顾，能够提炼出真正重要的内容。何时进行反思？当近期发生了许多重要事件时，这段记忆就显得尤为重要。如何评判事件的重要性？这由GPT来决定。反思的内容是什么？GPT会根据最近发生的事情，为机器生成三个问题，并引导机器检索记忆并作出回答。
+为什么说这个小镇是基于规则的变体？人物设定带来的routine基本上是确定的，大语言模型能带来一些在语言上的小的改变，以及大语言模型本身作为一个决策器，去判断下一步的交互。
+小镇网址： https://reverie.herokuapp.com/arXiv_Demo/ "><meta itemprop="datePublished" content="2024-04-14T19:01:50+08:00" />
+<meta itemprop="dateModified" content="2024-04-14T19:01:50+08:00" />
+<meta itemprop="wordCount" content="11">
+<meta itemprop="keywords" content="tech,llm," />
+
+  
+  <meta name="lang" content="chs" />
+  
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/know_how/">技术</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/316/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2024年4月14日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">让AI村民组成虚拟村庄会发生什么事</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2024年4月14日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      11&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    
+
+    <p>去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？</p>
+<p>事实上，该系统是基于规则的一种变体。
+小镇里有各种各样的角色人物，它预先设定了各个角色人物一天的行程安排。每个角色都有自己明确的人物设定和说明。例如，医生一天的工作包括在诊所为患者诊治，整理药品,以及进食、休息等日常作息。如果角色被固定下来，那么他们一天的日程安排也就相对固定了。</p>
+<p>之后，角色人物根据既定规划采取相应的行动。角色人物需依据规划进行下一步行动，该行动可视为状态的转变。</p>
+<p>角色人物如何模拟当前情景？他们通过观察来进行。构建一个观察场景，其中包含观察者和被观察者。例如，在没有事件发生的情况下，医生作为观察者，而房间作为被观察者，医生的状态保持不变，即处于等待患者的状态。医生会定期执行观察动作。一旦患者到来，医生的状态便从“等待”转变为“看病”。患者的到来对医生的状态产生影响，这就是角色人物通过大型语言模型对外界行为做出反应。</p>
+<p>角色人物如何知晓应做出何种反应？每当有物品出现在角色旁边，便会触发观察操作。角色人物会提出两个问题：第一，该物品与角色之间的关系是什么？第二，角色将对该物品采取何种行动？角色人物会持续提出这两个问题，而大语言模型则依据角色设定进行回答。</p>
+<p>角色人物的日常生活往往是单调的，因为他们的行为模式是预先设定好的。为了打破这种单调，需要外部刺激，例如有人举办活动或参加聚会，这些活动会引发角色人物的后续反应。</p>
+<p>如何改变角色人物的状态，进而改变其设定或生活？这需要通过反思（reflect）来实现。反思是对记忆的回顾，能够提炼出真正重要的内容。何时进行反思？当近期发生了许多重要事件时，这段记忆就显得尤为重要。如何评判事件的重要性？这由GPT来决定。反思的内容是什么？GPT会根据最近发生的事情，为机器生成三个问题，并引导机器检索记忆并作出回答。</p>
+<p>为什么说这个小镇是基于规则的变体？人物设定带来的routine基本上是确定的，大语言模型能带来一些在语言上的小的改变，以及大语言模型本身作为一个决策器，去判断下一步的交互。</p>
+<p>小镇网址： <a href="https://reverie.herokuapp.com/arXiv_Demo/" target="_blank" rel="noopener">https://reverie.herokuapp.com/arXiv_Demo/</a>
+</p>
+
+  </article>
+<div class="px-2 mb-2">
+  
+  
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2012 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>

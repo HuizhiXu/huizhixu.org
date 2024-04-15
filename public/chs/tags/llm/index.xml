@@ -6,9 +6,55 @@
     <description>Recent content in llm on 徐慧志的个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>chs</language>
-    <lastBuildDate>Fri, 05 Apr 2024 20:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/llm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Apr 2024 19:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/llm/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>大型语言模型修炼史</title>
+      <title>让AI村民组成虚拟村庄会发生什么事</title>
+      <link>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</link>
+      <pubDate>Sun, 14 Apr 2024 19:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</guid>
+      <description>去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？
+事实上，该系统是基于规则的一种变体。 小镇里有各种各样的角色人物，它预先设定了各个角色人物一天的行程安排。每个角色都有自己明确的人物设定和说明。例如，医生一天的工作包括在诊所为患者诊治，整理药品,以及进食、休息等日常作息。如果角色被固定下来，那么他们一天的日程安排也就相对固定了。
+之后，角色人物根据既定规划采取相应的行动。角色人物需依据规划进行下一步行动，该行动可视为状态的转变。
+角色人物如何模拟当前情景？他们通过观察来进行。构建一个观察场景，其中包含观察者和被观察者。例如，在没有事件发生的情况下，医生作为观察者，而房间作为被观察者，医生的状态保持不变，即处于等待患者的状态。医生会定期执行观察动作。一旦患者到来，医生的状态便从“等待”转变为“看病”。患者的到来对医生的状态产生影响，这就是角色人物通过大型语言模型对外界行为做出反应。
+角色人物如何知晓应做出何种反应？每当有物品出现在角色旁边，便会触发观察操作。角色人物会提出两个问题：第一，该物品与角色之间的关系是什么？第二，角色将对该物品采取何种行动？角色人物会持续提出这两个问题，而大语言模型则依据角色设定进行回答。
+角色人物的日常生活往往是单调的，因为他们的行为模式是预先设定好的。为了打破这种单调，需要外部刺激，例如有人举办活动或参加聚会，这些活动会引发角色人物的后续反应。
+如何改变角色人物的状态，进而改变其设定或生活？这需要通过反思（reflect）来实现。反思是对记忆的回顾，能够提炼出真正重要的内容。何时进行反思？当近期发生了许多重要事件时，这段记忆就显得尤为重要。如何评判事件的重要性？这由GPT来决定。反思的内容是什么？GPT会根据最近发生的事情，为机器生成三个问题，并引导机器检索记忆并作出回答。
+为什么说这个小镇是基于规则的变体？人物设定带来的routine基本上是确定的，大语言模型能带来一些在语言上的小的改变，以及大语言模型本身作为一个决策器，去判断下一步的交互。
+小镇网址： https://reverie.herokuapp.com/arXiv_Demo/ </description>
+    </item>
+    
+    <item>
+      <title>大型语言模型修炼史(第三阶段)</title>
+      <link>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</link>
+      <pubDate>Sat, 13 Apr 2024 19:01:50 +0800</pubDate>
+      
+      <guid>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</guid>
+      <description>第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
+关键是用第一阶段的参数作为初始参数。
+（贝叶斯定理这不就来了嘛！）
+所以第三阶段是由第一阶段和第二阶段组合而成的：
+第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
+第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
+第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
+为什么会在意这个事情？
+因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
+如何解决？
+用Apapter， 例如LoRA。
+**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
+目前大模型Finetune有两个路线：
+Pretrain + Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain + Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
+这三个阶段示例如下：
+第一阶段：Pretrain 输入：&amp;#34;输入：人工智&amp;#34; 输出：&amp;#34;能&amp;#34; 第二阶段：Instruction Fine-tuning 输入：&amp;#34;User：世界上有几大洲？AI：&amp;#34; 输出：&amp;#34;七大洲&amp;#34; 第三阶段：RLHF 输入：&amp;#34;User：世界上有几大洲？AI：&amp;#34; 输出：&amp;#34;七大洲&amp;#34; &amp;gt; &amp;#34;谁来告诉我呀&amp;#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
+从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
+语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
+如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。</description>
+    </item>
+    
+    <item>
+      <title>大型语言模型修炼史（第一、二阶段）</title>
       <link>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</link>
       <pubDate>Fri, 05 Apr 2024 20:01:50 +0800</pubDate>
       

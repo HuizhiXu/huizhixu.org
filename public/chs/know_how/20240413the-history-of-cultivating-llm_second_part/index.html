@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  大型语言模型修炼史(第三阶段) - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
+关键是用第一阶段的参数作为初始参数。
+（贝叶斯定理这不就来了嘛！）
+所以第三阶段是由第一阶段和第二阶段组合而成的：
+第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
+第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
+第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
+为什么会在意这个事情？
+因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
+如何解决？
+用Apapter， 例如LoRA。
+**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
+目前大模型Finetune有两个路线：
+Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
+这三个阶段示例如下：
+第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
+从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
+语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
+如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。" /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
+  <meta property="og:title" content="大型语言模型修炼史(第三阶段)" />
+<meta property="og:description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
+关键是用第一阶段的参数作为初始参数。
+（贝叶斯定理这不就来了嘛！）
+所以第三阶段是由第一阶段和第二阶段组合而成的：
+第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
+第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
+第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
+为什么会在意这个事情？
+因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
+如何解决？
+用Apapter， 例如LoRA。
+**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
+目前大模型Finetune有两个路线：
+Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
+这三个阶段示例如下：
+第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
+从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
+语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
+如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2024-04-13T19:01:50+08:00" />
+<meta property="article:modified_time" content="2024-04-13T19:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="大型语言模型修炼史(第三阶段)"/>
+<meta name="twitter:description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
+关键是用第一阶段的参数作为初始参数。
+（贝叶斯定理这不就来了嘛！）
+所以第三阶段是由第一阶段和第二阶段组合而成的：
+第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
+第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
+第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
+为什么会在意这个事情？
+因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
+如何解决？
+用Apapter， 例如LoRA。
+**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
+目前大模型Finetune有两个路线：
+Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
+这三个阶段示例如下：
+第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
+从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
+语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
+如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。"/>
+
+  <meta itemprop="name" content="大型语言模型修炼史(第三阶段)">
+<meta itemprop="description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
+关键是用第一阶段的参数作为初始参数。
+（贝叶斯定理这不就来了嘛！）
+所以第三阶段是由第一阶段和第二阶段组合而成的：
+第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
+第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
+第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
+为什么会在意这个事情？
+因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
+如何解决？
+用Apapter， 例如LoRA。
+**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
+目前大模型Finetune有两个路线：
+Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
+这三个阶段示例如下：
+第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
+从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
+Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
+语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
+如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。"><meta itemprop="datePublished" content="2024-04-13T19:01:50+08:00" />
+<meta itemprop="dateModified" content="2024-04-13T19:01:50+08:00" />
+<meta itemprop="wordCount" content="102">
+<meta itemprop="keywords" content="tech,llm," />
+
+  
+  <meta name="lang" content="chs" />
+  
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/know_how/">技术</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/315/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2024年4月13日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">大型语言模型修炼史(第三阶段)</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2024年4月13日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      102&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#%e7%ac%ac%e4%b8%89%e9%98%b6%e6%ae%b5%e5%8f%82%e4%b8%8e%e5%ae%9e%e6%88%98%e6%89%93%e7%a3%a8%e6%8a%80%e5%b7%a7">第三阶段：参与实战，打磨技巧</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#rlhf">RLHF</a>
+        
+
+        
+        </li><li>
+        <a href="#%e5%a6%82%e4%bd%95%e6%9b%b4%e6%9c%89%e6%95%88%e7%9a%84%e5%88%a9%e7%94%a8%e4%ba%ba%e7%b1%bb%e7%9a%84%e5%8f%8d%e9%a6%88">如何更有效的利用人类的反馈？</a>
+        
+
+        
+        <ul>
+            <li>
+        <a href="#%e5%8f%8d%e9%a6%88%e6%a8%a1%e5%9e%8breward-model">反馈模型（Reward Model）</a>
+        
+
+        
+        </li><li>
+        <a href="#%e5%bc%ba%e5%8c%96%e5%ad%a6%e4%b9%a0%e7%9a%84%e9%9a%be%e9%a2%98">强化学习的难题：</a>
+        
+
+        
+        </li></ul>
+      </li><li>
+        <a href="#%e6%80%bb%e7%bb%93%e4%b8%89%e4%b8%aa%e9%98%b6%e6%ae%b5">总结三个阶段：</a>
+        </li></ul>
+    </li></ul>
+  </details>
+
+    <h1 id="第三阶段参与实战打磨技巧">第三阶段：参与实战，打磨技巧</h1>
+<p>如何克服第二阶段的局限性呢？</p>
+<p><strong>关键是用第一阶段的参数作为初始参数。</strong></p>
+<p>（贝叶斯定理这不就来了嘛！）</p>
+<p>所以第三阶段是由第一阶段和第二阶段组合而成的：</p>
+<p>第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain</p>
+<p>第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning</p>
+<p><strong>第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？</strong></p>
+<p>为什么会在意这个事情？</p>
+<p>因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。</p>
+<p>如何解决？</p>
+<p>用Apapter， 例如LoRA。</p>
+<p>**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。</p>
+<p>目前大模型Finetune有两个路线：</p>
+<ul>
+<li>Pretrain + Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才）</li>
+<li>Pretrain + Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型）</li>
+</ul>
+<h2 id="rlhf">RLHF</h2>
+<p>让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。</p>
+<p>这三个阶段示例如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>第一阶段：Pretrain
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;输入：人工智&#34;</span> 输出：<span style="color:#f1fa8c">&#34;能&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>第二阶段：Instruction Fine<span style="color:#ff79c6">-</span>tuning
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：&#34;</span> 输出：<span style="color:#f1fa8c">&#34;七大洲&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>第三阶段：RLHF
+</span></span><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：&#34;</span> 输出：<span style="color:#f1fa8c">&#34;七大洲&#34;</span> <span style="color:#ff79c6">&gt;</span> <span style="color:#f1fa8c">&#34;谁来告诉我呀&#34;</span>
+</span></span></code></pre></div><p>RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。</p>
+<p>从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？</p>
+<ul>
+<li>两个阶段都需要人类介入</li>
+<li>Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦</li>
+<li>RLHF 只需要做判断，人类比较轻松</li>
+<li>人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。</li>
+</ul>
+<p>从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？</p>
+<ul>
+<li>Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果）</li>
+<li>RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程）</li>
+</ul>
+<p>AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。</p>
+<p>语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。</p>
+<h2 id="如何更有效的利用人类的反馈">如何更有效的利用人类的反馈？</h2>
+<h3 id="反馈模型reward-model">反馈模型（Reward Model）</h3>
+<p>用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。</p>
+<p>流程是：</p>
+<p>输入问题，语言模型输出答案。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：&#34;</span> 输出：<span style="color:#f1fa8c">&#34;七大洲&#34;</span>
+</span></span></code></pre></div><p>上面作为整体输入到反馈模型。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>输入：<span style="color:#f1fa8c">&#34;User：世界上有几大洲？AI：七大洲&#34;</span> 输出：<span style="color:#bd93f9">95.0</span>(分数)
+</span></span></code></pre></div><p>通过与人类对齐，不管是SFT还是PPO，1.3B的模型是有机会打败175B的模型的。</p>
+<p>但是过度向虚拟人类学习，是有害的。</p>
+<p>思考：有没有可能用一个语言模型评价另一个语言模型？RLHF—&gt;RLAIF</p>
+<h3 id="强化学习的难题">强化学习的难题：</h3>
+<ul>
+<li>什么叫好？</li>
+</ul>
+<p>helpfulness reward model 和 safety reward model同时评分。(Ilama 2 论文)</p>
+<p>“请教我怎么制作火药？”</p>
+<ul>
+<li>人类自己都无法正确判断好坏的状况</li>
+</ul>
+<h2 id="总结三个阶段">总结三个阶段：</h2>
+<p>第一阶段：Pretrain 又叫Foundation Model</p>
+<p>第二阶段：instruction Fine-tuning</p>
+<p>第三阶段：RLHF</p>
+<p>第二阶段和第三阶段统称为对齐。</p>
+
+  </article>
+<div class="px-2 mb-2">
+  
+  
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2012 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>
