@@ -1,18 +1,19 @@
 ---
 author: "Hugo Authors"
-title: "Rich Content"
+title: "Measurement Metrics for Multi-Objective Optimizations"
 date: 2021-07-13
-description: "A brief description of Hugo Shortcodes"
+description: "Measurement Metrics for Multi-Objective Optimizations"
 tags: ["shortcodes", "privacy"]
+draft: True
 thumbnail: https://picsum.photos/id/1002/400/250
 ---
 
-Hugo ships with several [Built-in Shortcodes](https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes) for rich content, along with a [Privacy Config](https://gohugo.io/about/hugo-and-gdpr/) and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.
+
 
 ## <!--more-->
 
-## YouTube Privacy Enhanced Shortcode
+## Measurement Metrics for Multi-Objective Optimizations
 
-{{< youtube ZJthWmvUzzc >}}
+{{< youtube CrEHa5jmkbA >}}
 
 <br>
