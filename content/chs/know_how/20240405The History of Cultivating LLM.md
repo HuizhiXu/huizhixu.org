@@ -7,8 +7,7 @@ jupyter: nn3.10
 math: true
 thumbnail: https://picsum.photos/id/313/400/250
 ---
-注意：以下笔记内容来自李宏毅教授的课程：
-[INTRODUCTION TO GENERATIVE AI](https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php)，此篇文章内容包括第6讲和第7讲。
+
 
 
 
@@ -173,3 +172,6 @@ Lora是这样做的：假设已经有初始参数，在做最佳化的时候，�
 - Pretrain + Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才）
 
 - Pretrain + Finetune 打造一个通才 （收集涵盖不同任务的标注语料，训练一个模型，拥有多种能力）
+
+注：以上笔记内容来自李宏毅教授的课程：
+[INTRODUCTION TO GENERATIVE AI](https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php)，此篇文章内容包括第6讲和第7讲。

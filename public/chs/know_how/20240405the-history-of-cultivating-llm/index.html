@@ -8,8 +8,7 @@
   <title>
   大型语言模型修炼史（第一、二阶段） - 徐慧志的个人博客
   </title>
-  <meta name="description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
-背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+  <meta name="description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
 大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
 通过训练资料找出参数的过程叫 training 或者 learning。
@@ -24,7 +23,10 @@
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
 训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
-论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。" /><meta name="generator" content="Hugo 0.115.4"><link
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL PARAMETERS DATA SIZE 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens，哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -52,8 +54,7 @@
 
   
   <meta property="og:title" content="大型语言模型修炼史（第一、二阶段）" />
-<meta property="og:description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
-背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+<meta property="og:description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
 大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
 通过训练资料找出参数的过程叫 training 或者 learning。
@@ -68,7 +69,10 @@
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
 训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
-论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。" />
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL PARAMETERS DATA SIZE 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens，哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2024-04-05T20:01:50+08:00" />
@@ -76,8 +80,7 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="大型语言模型修炼史（第一、二阶段）"/>
-<meta name="twitter:description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
-背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+<meta name="twitter:description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
 大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
 通过训练资料找出参数的过程叫 training 或者 learning。
@@ -92,11 +95,13 @@
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
 训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
-论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。"/>
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL PARAMETERS DATA SIZE 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens，哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。"/>
 
   <meta itemprop="name" content="大型语言模型修炼史（第一、二阶段）">
-<meta itemprop="description" content="注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
-背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+<meta itemprop="description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
 大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
 通过训练资料找出参数的过程叫 training 或者 learning。
@@ -111,7 +116,10 @@
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
 训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
-论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。"><meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00" />
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL PARAMETERS DATA SIZE 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens，哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。"><meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00" />
 <meta itemprop="dateModified" content="2024-04-05T20:01:50+08:00" />
 <meta itemprop="wordCount" content="168">
 <meta itemprop="keywords" content="tech,llm," />
@@ -375,10 +383,7 @@
         </li></ul>
   </details>
 
-    <p>注意：以下笔记内容来自李宏毅教授的课程：
-<a href="https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php" target="_blank" rel="noopener">INTRODUCTION TO GENERATIVE AI</a>
-，此篇文章内容包括第6讲和第7讲。</p>
-<h1 id="背景知识">背景知识</h1>
+    <h1 id="背景知识">背景知识</h1>
 <p>大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。</p>
 <p>大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。</p>
 <p><strong>1. 那么怎么找出这些未知参数呢？需要训练资料。</strong></p>
@@ -525,6 +530,9 @@ Lora是这样做的：假设已经有初始参数，在做最佳化的时候，�
 <p>Pretrain + Finetune 打造一个通才 （收集涵盖不同任务的标注语料，训练一个模型，拥有多种能力）</p>
 </li>
 </ul>
+<p>注：以上笔记内容来自李宏毅教授的课程：
+<a href="https://speech.ee.ntu.edu.tw/~hylee/genai/2024-spring.php" target="_blank" rel="noopener">INTRODUCTION TO GENERATIVE AI</a>
+，此篇文章内容包括第6讲和第7讲。</p>
 
   </article>
 <div class="px-2 mb-2">

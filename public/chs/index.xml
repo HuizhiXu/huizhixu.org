@@ -102,8 +102,7 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
       <pubDate>Fri, 05 Apr 2024 20:01:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</guid>
-      <description>注意：以下笔记内容来自李宏毅教授的课程： INTRODUCTION TO GENERATIVE AI ，此篇文章内容包括第6讲和第7讲。
-背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+      <description>背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
 大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。
 1. 那么怎么找出这些未知参数呢？需要训练资料。
 通过训练资料找出参数的过程叫 training 或者 learning。
@@ -118,7 +117,10 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
 这些训练资料，需要包括两方面，第一是语言知识——语法。根据研究表明，一亿个词就可以掌握语法。
 第二是世界知识，也就是一些物理世界的知识。例如水的沸点是摄氏100度，而不是50度。（尽管50度也符合语言知识。）根据研究表明，300亿个词也不一定能掌握世界知识。
 训练细节 训练资料哪里有：网络 训练方法：自监督学习：机器自己教自己，不需要人工介入。（训练语料同时也是Label） 提到了两篇论文 论文 Scaling Language Models: Methods, Analysis &amp;amp; Insights from Training Gopher（https://arxiv.org/abs/2112.11446）：讲述 Deepmind 训练模型 Gopher 的过程。 里面讲了如何进行训练资料的清理，例如，过滤html符号、过滤色情暴力等有害内容、去除低品质资料（使用语料品质分类器决定）、去除重复资料等。
-论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。</description>
+论文 Deduplicating Training Data Makes Language Models Better(https://arxiv.org/abs/2107.06499) : 讲述了去重技术可以让大模型性能更好。
+模型效果 在chatGPT之前的GPT系列：
+参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。
+YEAR MODEL PARAMETERS DATA SIZE 模型效果 2018 GPT1 117M （1亿） 7000 books 一般 2019 GPT2 1542M（15亿） 40GB 一般 2020 GPT3 175B 580G（300B tokens，哈利波特全集30万遍） 一般 第一阶段的局限性 在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。</description>
     </item>
     
     <item>
