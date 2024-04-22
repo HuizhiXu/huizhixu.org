@@ -2,24 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://huizhixu.github.io/chs/tags/2024/</loc>
-    <lastmod>2024-04-17T20:31:50+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://huizhixu.github.io/tags/2024/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="chs"
-                href="https://huizhixu.github.io/chs/tags/2024/"
-                />
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/life/20240417%E5%86%8D%E8%A7%81%E8%8B%B1%E8%AF%ADpk%E5%8F%B0/</loc>
-    <lastmod>2024-04-17T20:31:50+08:00</lastmod>
-  </url><url>
     <loc>https://huizhixu.github.io/chs/</loc>
-    <lastmod>2024-04-17T20:31:50+08:00</lastmod>
+    <lastmod>2024-04-22T23:01:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -35,6 +19,52 @@
                 hreflang="chs"
                 href="https://huizhixu.github.io/chs/"
                 />
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/</loc>
+    <lastmod>2024-04-22T23:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/llm/</loc>
+    <lastmod>2024-04-22T23:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/</loc>
+    <lastmod>2024-04-22T23:01:50+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://huizhixu.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://huizhixu.github.io/de/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/"
+                />
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/tech/</loc>
+    <lastmod>2024-04-22T23:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</loc>
+    <lastmod>2024-04-22T23:01:50+08:00</lastmod>
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/tags/2024/</loc>
+    <lastmod>2024-04-17T20:31:50+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://huizhixu.github.io/tags/2024/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/2024/"
+                />
+  </url><url>
+    <loc>https://huizhixu.github.io/chs/life/20240417%E5%86%8D%E8%A7%81%E8%8B%B1%E8%AF%ADpk%E5%8F%B0/</loc>
+    <lastmod>2024-04-17T20:31:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/tags/life/</loc>
     <lastmod>2024-04-17T20:31:50+08:00</lastmod>
@@ -66,36 +96,6 @@
                 hreflang="chs"
                 href="https://huizhixu.github.io/chs/life/"
                 />
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/</loc>
-    <lastmod>2024-04-17T20:31:50+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://huizhixu.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://huizhixu.github.io/de/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="chs"
-                href="https://huizhixu.github.io/chs/tags/"
-                />
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/</loc>
-    <lastmod>2024-04-14T19:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/llm/</loc>
-    <lastmod>2024-04-14T19:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/tags/tech/</loc>
-    <lastmod>2024-04-14T19:01:50+08:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</loc>
-    <lastmod>2024-04-14T19:01:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</loc>
     <lastmod>2024-04-14T19:01:50+08:00</lastmod>
