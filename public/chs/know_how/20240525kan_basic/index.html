@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="../../../favicon.svg">
+
+  <title>
+  用大模型理解爆火的KAN网络 - 徐慧志的个人博客
+  </title>
+  <meta name="description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。" /><meta name="generator" content="Hugo 0.115.4"><link
+    rel="stylesheet"
+    href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
+    integrity=""
+    crossorigin="anonymous"
+  />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+
+  
+  <meta property="og:title" content="用大模型理解爆火的KAN网络" />
+<meta property="og:description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240525kan_basic/" /><meta property="article:section" content="know_how" />
+<meta property="article:published_time" content="2024-05-25T16:01:50+08:00" />
+<meta property="article:modified_time" content="2024-05-25T16:01:50+08:00" />
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用大模型理解爆火的KAN网络"/>
+<meta name="twitter:description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。"/>
+
+  <meta itemprop="name" content="用大模型理解爆火的KAN网络">
+<meta itemprop="description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。"><meta itemprop="datePublished" content="2024-05-25T16:01:50+08:00" />
+<meta itemprop="dateModified" content="2024-05-25T16:01:50+08:00" />
+<meta itemprop="wordCount" content="74">
+<meta itemprop="keywords" content="tech,kan," />
+
+  
+  <meta name="lang" content="chs" />
+  
+
+  
+</head>
+<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
+  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
+    
+    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
+    
+  </a>
+  <button class="mobile-menu-button md:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <line x1="4" y1="8" x2="20" y2="8" />
+      <line x1="4" y1="16" x2="20" y2="16" />
+    </svg>
+  </button>
+  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
+
+    
+    <li><a href="../../../chs/know_how/">技术</a></li>
+    
+    <li><a href="../../../chs/page/about/">关于</a></li>
+    
+    <li><a href="../../../chs/tags/">分类</a></li>
+    
+    <li><a href="../../../chs/link/">宝藏集结</a></li>
+    
+    <li><a href="../../../chs/life/">生活见闻</a></li>
+    
+
+    
+    
+    <li class="relative cursor-pointer">
+      <span class="language-switcher flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3.6" y1="9" x2="20.4" y2="9" />
+          <line x1="3.6" y1="15" x2="20.4" y2="15" />
+          <path d="M11.5 3a17 17 0 0 0 0 18" />
+          <path d="M12.5 3a17 17 0 0 1 0 18" />
+        </svg>
+        <a>语言</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
+        </svg>
+      </span>
+      <div
+        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
+        
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
+        
+        
+        
+        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
+        
+        
+      </div>
+    </li>
+    
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="open-search inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+      </span>
+    </li>
+    
+
+    
+    <li class="grid place-items-center">
+      <span class="toggle-dark-mode inline-block cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="12" r="3" />
+          <line x1="12" y1="5" x2="12" y2="5.01" />
+          <line x1="17" y1="7" x2="17" y2="7.01" />
+          <line x1="19" y1="12" x2="19" y2="12.01" />
+          <line x1="17" y1="17" x2="17" y2="17.01" />
+          <line x1="12" y1="19" x2="12" y2="19.01" />
+          <line x1="7" y1="17" x2="7" y2="17.01" />
+          <line x1="5" y1="12" x2="5" y2="12.01" />
+          <line x1="7" y1="7" x2="7" y2="7.01" />
+        </svg>
+      </span>
+    </li>
+    
+  </ul>
+</header>
+<main class="flex-1">
+  
+  
+
+  
+  <div class="relative max-w-5xl mx-auto px-4">
+    <img src="https://picsum.photos/id/322/400/250" class="rounded-lg shadow-sm w-full object-contain" />
+    
+    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+      
+  
+  2024年5月25日
+  
+
+    </div>
+    
+  </div>
+  
+
+  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+
+    <h1 class="text-2xl font-bold mb-2">用大模型理解爆火的KAN网络</h1>
+    
+    <h5 class="text-sm flex items-center flex-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <line x1="16" y1="3" x2="16" y2="7" />
+        <line x1="8" y1="3" x2="8" y2="7" />
+        <line x1="4" y1="11" x2="20" y2="11" />
+        <rect x="8" y="15" width="2" height="2" />
+      </svg>
+      发布于 
+  
+  2024年5月25日
+  
+
+      
+        &nbsp;&bull;&nbsp;
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <circle cx="12" cy="12" r="9" />
+        <polyline points="12 7 12 12 15 15" />
+      </svg>
+      1&nbsp;分钟
+      &nbsp;&bull;
+      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+        <line x1="3" y1="6" x2="3" y2="19" />
+        <line x1="12" y1="6" x2="12" y2="19" />
+        <line x1="21" y1="6" x2="21" y2="19" />
+      </svg>
+      74&nbsp;字
+      
+        
+      
+    </h5>
+    
+
+    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
+    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
+      <span>Table of contents</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <polyline points="6 9 12 15 18 9"></polyline>
+     </svg>
+    </summary>
+
+    <ul class="mt-2 pb-4">
+        
+
+        
+        <li>
+        <a href="#%e4%b8%80kan%e6%98%af%e4%bb%80%e4%b9%88">一、KAN是什么？</a>
+        
+
+        
+        </li><li>
+        <a href="#%e4%ba%8ckan%e8%83%bd%e5%81%9a%e4%bb%80%e4%b9%88">二、KAN能做什么？</a>
+        
+
+        
+        </li><li>
+        <a href="#%e4%b8%89-%e5%a4%a7%e6%a8%a1%e5%9e%8b%e5%b8%ae%e4%bd%a0%e7%90%86%e8%a7%a3kan%e7%bd%91%e7%bb%9c">三、 大模型帮你理解KAN网络</a>
+        </li></ul>
+  </details>
+
+    <p>五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。</p>
+<h2 id="一kan是什么">一、KAN是什么？</h2>
+<p><strong>Kolmogorov-Arnold 定理是数学领域的一个里程碑，它揭示了多元函数能够通过一组更简单的函数来近似表示的原理。</strong> 在神经网络的研究领域，来自 MIT 的杰出研究者 Ziming Liu 将这一定理巧妙地融入，提出了创新的 KANs（<strong>Kolmogorov-Arnold Networks</strong>）概念。（GitHub地址：https://github.com/KindXiaoming/pykan）。</p>
+<p>有兴趣挑战理解这个数学定理的朋友可以看一下这个讲解视频  <a href="https://www.youtube.com/watch?v=CkCijaXqAOM" target="_blank" rel="noopener">https://www.youtube.com/watch?v=CkCijaXqAOM</a>
+   博主徒手画 splines 曲线，并逐步阐释定理，非常引人入胜。</p>
+<p>下面是我的理解哦！</p>
+<p>如果你知道MLP的话，那可能也会对KAN刮目相看。</p>
+<p><img src="../../../img/20240525/1.png" alt="1"></p>
+<p>上面这个图就说明了为什么KAN很厉害，<strong>因为它和MLP是对偶的。</strong></p>
+<p>在深度学习中，MLP（多层感知器）是一种基础的神经网络结构，它由多个层组成，每层包含多个节点，节点之间通过边相连。**激活函数位于节点上，**以引入非线性，从而使网络能够学习复杂的函数映射。</p>
+<p>KAN沿用了MLP的网络结构，它也由多个层组成，每层包含多个节点，节点之间通过边相连。<strong>激活函数位于边上。</strong></p>
+<p>这个对偶性让我想起了电里面的**电-磁对偶性。**在经典电磁学中，电场和磁场可以通过麦克斯韦方程组相互关联。在某些情况下，电场和磁场的角色可以互换，而物理定律保持不变。这种对偶性通常会解释定律的深层次结构和统一性。<strong>当然物理和AI两个领域不一样，有可能不能做这样的对比。</strong></p>
+<h2 id="二kan能做什么">二、KAN能做什么？</h2>
+<ol>
+<li>KAN能够拟合数学公式。MLP也可以，但是KAN能用更少的参数拟合，准确性也更好。</li>
+</ol>
+<p>下图是KAN和MLP拟合同一个表达式的对比。以左边的图为例，可以看出，KANs在参数数量较少的情况下，其准确度和MLPs相比有更快的增长趋势。</p>
+<p><img src="../../../img/20240525/2.png" alt="2"></p>
+<ol start="2">
+<li>强大的可解释性</li>
+</ol>
+<p>这是另一个很令人激动的地方。在KAN里面，你可以看到线条的形状并且自主选择和锁定激活函数的公式。</p>
+<p>首先，我们需要理解激活函数的作用。激活函数是神经网络中的关键组件，它们引入了非线性，使得网络能够学习和模拟复杂的函数映射。虽然激活函数通常是非线性的，以增加模型的表达能力，但在某些情况下也可以使用线性函数。然而，线性函数由于其简单性，可能在拟合复杂模式时不如非线性函数有效。</p>
+<p>KAN定义了一系列可以选择的激活函数，总共有24种。这些激活函数包括但不限于平方、立方、正弦（sine）、余弦（cosine）、指数（exponential）等函数。</p>
+<p>用一个例子来说明它强大的可解释性。</p>
+<p>假设现在有如下表达式生成的数据。（在训练的时候并不知道这个表达式）</p>
+<p>$$
+f(x) =  \exp\left(\sin\left(\pi x_{0}\right) + x_{1}^2\right)
+$$</p>
+<p>定义一个[2,5,1]的网络。2、5、1表示的是节点。前面说过，activation function是定义在边上的，也就是说节点与节点之间会有activation function。</p>
+<p>妙的是这些activation function是可以学习的——它们会越来越像他们原本的样子。</p>
+<p>下面是它们的图，Figure 1是初始化，所有激活函数都长一个样子。</p>
+<p>Figure2是网络训练20步之后的结果。可以看到激活函数已经出现正弦函数和平方的线条了。</p>
+<p>Figure3是进行剪枝，去掉不重要的节点和激活函数。</p>
+<p>Figure4是最后的样子，右边三个激活函数基本上符合咱们数据的生成函数。</p>
+<p>作者的例子 <a href="https://kindxiaoming.github.io/pykan/Examples/Example_4_symbolic_regression.html" target="_blank" rel="noopener">https://kindxiaoming.github.io/pykan/Examples/Example_4_symbolic_regression.html</a>
+   做的更精细，结果也更精确。</p>
+<p><img src="../../../img/20240525/3.png" alt="3"></p>
+<p>KAN还有一些其他的功能，例如能解微分方程、在学习的过程中有记忆力等等。这个先不谈，后面用到了再说吧。</p>
+<p>另外，调参也是一门技术活。上面的例子，作者最后画出的图和公式一模一样。他也在GitHub Readme上面给出了很多调参建议。</p>
+<p><img src="../../../img/20240525/4.png" alt="4"></p>
+<h2 id="三-大模型帮你理解kan网络">三、 大模型帮你理解KAN网络</h2>
+<p>如果看前面提到的论文和视频没看懂的话，没有关系，咱不是还有大模型嘛。</p>
+<p><strong>来吧，开整！</strong></p>
+<blockquote>
+<p>请用生动的语言给一个20岁的大朋友解释splines以及Kolmogorov-Arnold</p>
+</blockquote>
+<blockquote>
+<p>好的，想象一下你是一位艺术家，手里拿着一支画笔，准备在画布上绘制一幅美丽的风景画。但是，你不是简单地画直线，而是要画出一条流畅、优雅的曲线，来描绘远处的山峦或者蜿蜒的河流。在数学和计算机图形学中，我们有一套特殊的工具来帮助我们绘制这样的曲线，这就是所谓的“splines”。</p>
+<p>Splines是一种数学曲线，它们非常平滑，没有尖锐的角或突然的转折。你可以把它们想象成一种非常听话的画笔，无论你怎么移动，它都能画出一条完美的曲线。在计算机图形设计中，splines被用来创建复杂的形状和动画路径，使它们看起来非常自然和流畅。</p>
+<p>现在，让我们来谈谈Kolmogorov-Arnold。这听起来可能有点复杂，但它实际上是一个关于如何测量和比较不同曲线复杂性的数学概念。想象一下，你面前有两条曲线，一条是简单的圆弧，另一条是复杂的螺旋形。虽然它们的长度可能相同，但它们的复杂性和形状却大不相同。</p>
+<p>Kolmogorov-Arnold复杂性（也称为K-复杂性）是衡量一个对象（比如曲线）可以用多简单的规则或算法来描述的度量。就像你可能会问：“我需要多少步骤来画出这条曲线？”或者“这条曲线可以用多简单的数学公式来表示？”K-复杂性越低，意味着曲线可以用更简单的规则来描述。</p>
+<p>所以，splines就像是你手中的画笔，帮助你在数学和计算机图形的世界里绘制出平滑而优雅的曲线。而Kolmogorov-Arnold就像是你用来评价这些曲线复杂性的标尺，它帮助你理解这些曲线背后的数学规律和结构。通过这些工具，我们不仅能够创造出美丽的视觉效果，还能够更深入地理解数学和自然界中的形状和模式。</p>
+</blockquote>
+<p><strong>如果还没有理解，放出小学生解释版本吧~</strong></p>
+<blockquote>
+<p>请用生动的语言给一个10岁的小朋友解释splines以及Kolmogorov-Arnold</p>
+</blockquote>
+<blockquote>
+<p>好的，亲爱的小朋友，让我们一起来想象一些好玩的东西想象一下，你有一个长长的橡皮筋，你可以用它来连接两个点，对吧？现在，如果你想要让这个橡皮筋更有趣一些，你可能会让它弯曲，或者扭来扭去的。在数学里，我们有一个特别的名字来称呼这种弯曲的橡皮筋，叫做“splines”。</p>
+<p>想象一下，你把橡皮筋的两端固定在两个点上，然后你想要橡皮筋尽可能平滑地弯曲，就像你在画画时用铅笔画一条优美的曲线一样。这就是splines做的事情，它们是数学家用来模拟平滑曲线的一种工具。</p>
+<p>现在，让我们来谈谈Kolmogorov-Arnold。这个名字听起来可能有点复杂，但它其实是一个关于如何测量和比较不同曲线弯曲程度的概念。你可以把它想象成一种特殊的尺子，用来测量你的橡皮筋弯曲得有多厉害。</p>
+<p>Kolmogorov-Arnold告诉我们，即使两条曲线看起来弯曲得差不多，它们的弯曲程度也可能完全不同。这就像两个朋友，他们可能看起来一样高，但实际上他们的身高可能相差几厘米。Kolmogorov-Arnold就是帮助我们了解这些微小差别的工具。</p>
+<p>所以，splines就像是橡皮筋，用来创造平滑的曲线，而Kolmogorov-Arnold就像是一把尺子，用来测量这些曲线的弯曲程度。数学家们用这些工具来解决很多复杂的问题，就像你用橡皮筋和尺子来创造和测量你的艺术作品一样！</p>
+</blockquote>
+<p>太好了，终于理解了吧！</p>
+
+  </article>
+<div class="px-2 mb-2">
+  
+  
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
+  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+    <div>
+      <div class="text-2xl font-bold mb-2"></div>
+      <p class="opacity-60"></p>
+    </div>
+
+    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
+      
+    </ul>
+  </div>
+</div>
+
+    </main><footer class="container p-6 mx-auto flex justify-between items-center">
+  <span class="text-sm font-light">
+    
+    Copyright © 2012 - Huizhi Xu · All rights reserved
+    
+  </span>
+  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 15l-6 -6l-6 6h12" />
+    </svg>
+  </span>
+</footer>
+
+<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
+  <div class="container max-w-3xl mx-auto p-12">
+    <div class="relative">
+      <div class="my-4 text-center text-2xl font-bold">Search</div>
+
+      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </span>
+    </div>
+
+    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
+      placeholder="Enter search query" />
+
+    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
+    <ul class="search-list my-2">
+
+    </ul>
+
+    <div class="no-results text-center my-8 hidden">
+      <div class="text-xl font-semibold mb-2">No results found</div>
+      <p class="font-light text-sm">Try adjusting your search query</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
+
+
+
+
+<script>
+  const languageMenuButton = document.querySelector('.language-switcher');
+  const languageDropdown = document.querySelector('.language-dropdown');
+  languageMenuButton.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    if (languageDropdown.classList.contains('hidden')) {
+      languageDropdown.classList.remove('hidden')
+      languageDropdown.classList.add('flex')
+    } else {
+      languageDropdown.classList.add('hidden');
+      languageDropdown.classList.remove('flex');
+    }
+  })
+</script>
+
+
+
+<script>
+  
+  const darkmode = document.querySelector('.toggle-dark-mode');
+  function toggleDarkMode() {
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkmode', 'light')
+    } else {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkmode', 'dark')
+    }
+  }
+  if (darkmode) {
+    darkmode.addEventListener('click', toggleDarkMode);
+  }
+
+  const darkStorage = localStorage.getItem('darkmode');
+  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (!darkStorage && isBrowserDark) {
+    document.documentElement.classList.add('dark');
+  }
+
+  if (darkStorage && darkStorage === 'dark') {
+    toggleDarkMode();
+  }
+</script>
+
+
+<script>
+  const mobileMenuButton = document.querySelector('.mobile-menu-button')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  function toggleMenu() {
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+  }
+  if(mobileMenu && mobileMenuButton){
+    mobileMenuButton.addEventListener('click', toggleMenu)
+  }
+</script>
+</body>
+</html>
