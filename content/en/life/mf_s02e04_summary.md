@@ -50,3 +50,11 @@ In the given scenario, Claire tells her daughter to go change because it’s too
 Then Claires calls her Dad Jay. Jay  jokingly pretends not to know about the party, teasing Claire. Claire gets angry, then Jay says, calm down, Morticia.  Morticia is from a famous television series, the Addams Family, where Morticia’s favorite holiday is also Halloween.
 
 This type of humor is known as "reference humor".
+
+Phil just  **found out** about his neighbor’s divorce. 
+
+In light of this, Phils would probably become very **introspective and clingy.**
+
+Knowing Claire, she would probably be pretty **indifferent**, especially since she’s **got her hands full** with the holiday panning.
+
+The situation really hit him hard, so Phil didn't end up helping Claire much with her prep. When the evening finally arrives, each member of the family is so self absorbed in their own petty squabbles that the House of Horrors turns into a big chaos.
