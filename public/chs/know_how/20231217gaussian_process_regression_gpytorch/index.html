@@ -8,12 +8,7 @@
   <title>
   Gaussian Process Regression with GPyTorch - 徐慧志的个人博客
   </title>
-  <meta name="description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
-计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
-在核函数的输出上添加缩放系数是为了调整核函数的影响力。
-例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
-通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
-exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute." /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。 计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -41,12 +36,7 @@ exact GP and approximate GP Exact inference applies when the closed-form express
 
   
   <meta property="og:title" content="Gaussian Process Regression with GPyTorch" />
-<meta property="og:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
-计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
-在核函数的输出上添加缩放系数是为了调整核函数的影响力。
-例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
-通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
-exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute." />
+<meta property="og:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。 计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2023-12-17T17:01:50+08:00" />
@@ -54,22 +44,12 @@ exact GP and approximate GP Exact inference applies when the closed-form express
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Gaussian Process Regression with GPyTorch"/>
-<meta name="twitter:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
-计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
-在核函数的输出上添加缩放系数是为了调整核函数的影响力。
-例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
-通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
-exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute."/>
+<meta name="twitter:description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。 计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核"/>
 
   <meta itemprop="name" content="Gaussian Process Regression with GPyTorch">
-<meta itemprop="description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。
-计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核函数的输出上添加缩放系数。
-在核函数的输出上添加缩放系数是为了调整核函数的影响力。
-例如，如果我们希望某个核函数的输出对预测结果的贡献更大，我们可以使用较大的缩放系数。相反，如果我们希望某个核函数的输出对预测结果的贡献较小，我们可以使用较小的缩放系数。
-通过在核函数的输出上应用kernels.ScaleKernel()，我们可以乘以一个固定的缩放因子，以增加或减小核函数的输出。
-exact GP and approximate GP Exact inference applies when the closed-form expression of the posterior is available. We can simple and quick to compute the posterior distribution using gpytorch.models.ExactGP. Approximate inference applies when the posterior distribution involves high-dimensional integrals. It is difficult and time-consuming to compute."><meta itemprop="datePublished" content="2023-12-17T17:01:50+08:00" />
+<meta itemprop="description" content="这个例子主要是利用GPytorch，来实现高斯过程回归。 计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核"><meta itemprop="datePublished" content="2023-12-17T17:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-12-17T17:01:50+08:00" />
-<meta itemprop="wordCount" content="488">
+<meta itemprop="wordCount" content="1022">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
@@ -234,7 +214,7 @@ exact GP and approximate GP Exact inference applies when the closed-form express
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      488&nbsp;
+      1022&nbsp;字
       
         
       
@@ -440,18 +420,18 @@ tensor([0.], requires_grad=True)
 <p><img src="../../../img/20231217/cell-7-output-2.png" alt="cell-7-output-2.png"></p>
 
   </article>
-
-
+<div class="px-2 mb-2">
   
-
   <script src="https://utteranc.es/client.js"
-  repo="HuizhiXu/huizhixu.github.io"
-  issue-term="pathname"
-  label="<your-custom-label>"
-  theme="github-light"
-  crossorigin="anonymous"
-  async>
-</script><div class="bg-blue-100 dark:bg-gray-900">
+    repo="HuizhiXu/huizhixu.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
     <div>
       <div class="text-2xl font-bold mb-2">Don&#39;t Follow Me</div>

@@ -5,6 +5,7 @@ date: 2017-08-02T20:07:58+08:00
 # lastmod: 2021-10-14
 description: "Enduring Delicacy 精致英伦 风雅中国"
 tags: ["read","2017"]
+isCJKLanguage: true
 thumbnail: https://picsum.photos/id/57/400/250
 draft: false
 ---

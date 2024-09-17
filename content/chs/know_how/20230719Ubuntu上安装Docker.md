@@ -6,6 +6,7 @@ lastmod: 2023-07-30
 description: "按照官网教程就可以了"
 tags: ["tech","redash"]
 draft: false
+isCJKLanguage: true
 pin: false
 thumbnail: https://picsum.photos/id/301/400/250
 ---

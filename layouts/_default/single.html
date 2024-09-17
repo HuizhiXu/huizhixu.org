@@ -48,7 +48,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      {{ .WordCount }}&nbsp;{{ i18n "wosrds" }}
+      {{ .WordCount }}&nbsp;{{ i18n "words" }}
       {{ if not (or (or .Site.Params.hideOtherLanguages .Params.hideOtherLanguages) false) }}
         {{ if .IsTranslated -}}
           {{- $sortedTranslations := sort .Translations "Site.Language.Weight" -}}
@@ -69,16 +69,7 @@
   </article>
 
 
-  <!-- {{- partial "comments.html" . -}} -->
-
-  <script src="https://utteranc.es/client.js"
-  repo="HuizhiXu/huizhixu.github.io"
-  issue-term="pathname"
-  label="<your-custom-label>"
-  theme="github-light"
-  crossorigin="anonymous"
-  async>
-</script>
+  {{- partial "comments.html" . -}}
 
   {{- partial "social.html" . -}}
 {{ end }}

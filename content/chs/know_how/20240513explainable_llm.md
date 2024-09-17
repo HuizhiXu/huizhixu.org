@@ -6,7 +6,8 @@ description: "大语言模型本身是黑箱，显然不是interpretable的。�
 format: hugo-md
 jupyter: nn3.10
 math: true
-thumbnail: https://picsum.photos/id/320/400/250
+isCJKLanguage: true
+# thumbnail: https://picsum.photos/id/320/400/250
 ---
 
 Explainable和Interpretable的区别：

@@ -6,6 +6,7 @@ lastmod: 2023-06-30
 description: "很简单的运行LLaMa的方法"
 tags: ["tech","ai"]
 draft: false
+isCJKLanguage: true
 pin: false
 thumbnail: https://picsum.photos/id/30/400/250
 ---

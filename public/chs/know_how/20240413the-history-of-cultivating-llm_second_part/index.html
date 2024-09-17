@@ -8,27 +8,7 @@
   <title>
   大型语言模型修炼史(第三阶段) - 徐慧志的个人博客
   </title>
-  <meta name="description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
-关键是用第一阶段的参数作为初始参数。
-（贝叶斯定理这不就来了嘛！）
-所以第三阶段是由第一阶段和第二阶段组合而成的：
-第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
-第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
-第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
-为什么会在意这个事情？
-因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
-如何解决？
-用Apapter， 例如LoRA。
-**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
-目前大模型Finetune有两个路线：
-Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
-这三个阶段示例如下：
-第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
-从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
-语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
-如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？ 关键是用第一阶段的参数作为初始参数。 （贝叶斯定理这不就来了嘛！） 所以第三阶段是由第一" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -56,27 +36,7 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
 
   
   <meta property="og:title" content="大型语言模型修炼史(第三阶段)" />
-<meta property="og:description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
-关键是用第一阶段的参数作为初始参数。
-（贝叶斯定理这不就来了嘛！）
-所以第三阶段是由第一阶段和第二阶段组合而成的：
-第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
-第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
-第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
-为什么会在意这个事情？
-因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
-如何解决？
-用Apapter， 例如LoRA。
-**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
-目前大模型Finetune有两个路线：
-Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
-这三个阶段示例如下：
-第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
-从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
-语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
-如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。" />
+<meta property="og:description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？ 关键是用第一阶段的参数作为初始参数。 （贝叶斯定理这不就来了嘛！） 所以第三阶段是由第一" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2024-04-13T19:01:50+08:00" />
@@ -84,52 +44,12 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="大型语言模型修炼史(第三阶段)"/>
-<meta name="twitter:description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
-关键是用第一阶段的参数作为初始参数。
-（贝叶斯定理这不就来了嘛！）
-所以第三阶段是由第一阶段和第二阶段组合而成的：
-第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
-第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
-第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
-为什么会在意这个事情？
-因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
-如何解决？
-用Apapter， 例如LoRA。
-**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
-目前大模型Finetune有两个路线：
-Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
-这三个阶段示例如下：
-第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
-从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
-语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
-如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。"/>
+<meta name="twitter:description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？ 关键是用第一阶段的参数作为初始参数。 （贝叶斯定理这不就来了嘛！） 所以第三阶段是由第一"/>
 
   <meta itemprop="name" content="大型语言模型修炼史(第三阶段)">
-<meta itemprop="description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？
-关键是用第一阶段的参数作为初始参数。
-（贝叶斯定理这不就来了嘛！）
-所以第三阶段是由第一阶段和第二阶段组合而成的：
-第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain
-第二阶段：通过人类标注的学习，叫做Instruction Fine-tuning
-第二阶段的最佳化这个过程找出来的参数和初始参数很不一样怎么办？
-为什么会在意这个事情？
-因为第一阶段之后，模型的能力很好：在多种语言上做预训练，只要教某一个语言的某一个任务，自动学会其他语言的同样任务。所以我们不希望模型的参数有很大的变化。
-如何解决？
-用Apapter， 例如LoRA。
-**Adapter是指固定或者插入参数。Lora是这样做的：**假设已经有初始参数，在做最佳化的时候，初始参数完全不变，只在模型后面多加几层，最佳化是找这几层的参数。
-目前大模型Finetune有两个路线：
-Pretrain &#43; Finetune 打造不同的专才（为不同的任务收集不同的语料，Bert 适合打造一堆专才） Pretrain &#43; Finetune 打造一个通才 （收集涵盖不同任务的标注语料，放入一个模型） RLHF 让模型和使用者互动，用的就是RLHF（Reinforcement Learning from Human Feedback）这个技术，这句诗第三阶段。
-这三个阶段示例如下：
-第一阶段：Pretrain 输入：&#34;输入：人工智&#34; 输出：&#34;能&#34; 第二阶段：Instruction Fine-tuning 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; 第三阶段：RLHF 输入：&#34;User：世界上有几大洲？AI：&#34; 输出：&#34;七大洲&#34; &gt; &#34;谁来告诉我呀&#34; RLHF： 当人类告诉语言模型一个答案比另一个答案要好的时候，语言模型就微调它的参数。让人类觉得好的答案多出现，人类觉得不好的答案少出现。
-从人类产生训练资料的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-两个阶段都需要人类介入 Instruction Fine-tuning 需要准备好问题和答案，人类比较辛苦 RLHF 只需要做判断，人类比较轻松 人类写出正确答案不容易，判断好坏却很容易。进一步来说，对不同答案进行排名比判断一个答案好坏要容易，因为答案好坏是相对的。 从模型学习的角度来看，RLHF和Instruction Fine-tuning有什么不同？
-Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步都是对的，结果才可能是合理的。模型对整个结果没有通盘考量。（只问过程，不问结果） RLHF 模型进入新的思考模式，不管中间接龙的每一步如何，只管最后的结果。（只问结果，不问过程） AlphaGo：整体使用一个深度神经网络，但是每一步是要解决一个分类问题，从棋盘里面去选择哪一个点最好。
-语言模型也是一样，整体是深度神经网络，每一步都是分类问题，文字接龙，去选择概率最大的那个字。
-如何更有效的利用人类的反馈？ 反馈模型（Reward Model） 用人类的反馈去训练一个反馈模型（Reward Model），用反馈模型的输出来模拟人类的喜好，达到这样的效果：“如果是人类的话会这样判断”。"><meta itemprop="datePublished" content="2024-04-13T19:01:50+08:00" />
+<meta itemprop="description" content="第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？ 关键是用第一阶段的参数作为初始参数。 （贝叶斯定理这不就来了嘛！） 所以第三阶段是由第一"><meta itemprop="datePublished" content="2024-04-13T19:01:50+08:00" />
 <meta itemprop="dateModified" content="2024-04-13T19:01:50+08:00" />
-<meta itemprop="wordCount" content="102">
+<meta itemprop="wordCount" content="1627">
 <meta itemprop="keywords" content="tech,llm," />
 
   
@@ -243,19 +163,6 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
   
 
   
-  <div class="relative max-w-5xl mx-auto px-4">
-    <img src="https://picsum.photos/id/315/400/250" class="rounded-lg shadow-sm w-full object-contain" />
-    
-    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
-      
-  
-  2024年4月13日
-  
-
-    </div>
-    
-  </div>
-  
 
   <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
 
@@ -283,7 +190,7 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-     1&nbsp;分钟
+     4&nbsp;分钟
      
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -294,7 +201,7 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      102&nbsp;
+      1627&nbsp;字
       
         
       
@@ -420,18 +327,18 @@ Instruction Fine-tuning 模型学的是怎样接下一个字 ，需要每一步�
 <p>第二阶段和第三阶段统称为对齐。</p>
 
   </article>
-
-
+<div class="px-2 mb-2">
   
-
   <script src="https://utteranc.es/client.js"
-  repo="HuizhiXu/huizhixu.github.io"
-  issue-term="pathname"
-  label="<your-custom-label>"
-  theme="github-light"
-  crossorigin="anonymous"
-  async>
-</script><div class="bg-blue-100 dark:bg-gray-900">
+    repo="HuizhiXu/huizhixu.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
     <div>
       <div class="text-2xl font-bold mb-2">Don&#39;t Follow Me</div>

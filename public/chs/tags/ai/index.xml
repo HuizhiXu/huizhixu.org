@@ -9,21 +9,11 @@
     <lastBuildDate>Thu, 27 Apr 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title>
-      <link>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F-copy/</link>
+      <link>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F-copy/</guid>
-      <description>在GPU上运行中文LLaMa模型，主要是按照 https://github.com/ymcui/Chinese-LLaMA-Alpaca 这个仓库的方法。 中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。
-文档 模型部署和推理有四种方法，我选择的是用HF的inference接口来进行推理。
-https://github.com/ymcui/Chinese-LLaMA-Alpaca/wiki/使用Transformers推理 这里详细讲了用scripts/inference_hf.py来启动模型。
-原则上非常简单，直接运行下列的脚本，就可以进行推理。
-CUDA_VISIBLE_DEVICES={device_id} python scripts/inference_hf.py \\ --base_model path_to_original_llama_hf_dir \\ --lora_model path_to_chinese_llama_or_alpaca_lora \\ --with_prompt \\ --interactive 对参数进行解释：
-base_model是Meta发布的原生llama模型 lora_model是 这个是LoRa生成的模型，可以在网盘下载，也可以用HF的模型调用（例如ziqingyang/chinese-llama-lora-7b）。模型调用比较简单推荐使用。 with_prompt 是否将输入与prompt模版进行合并。 interactive 以交互方式启动，以便进行多次单轮问答。 在实验之前，首先要搞清楚一些概念：
-LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA结合才能运行。 远程LLAMA模型META提供，LoRa和Alpaca模型这个项目提供。 为什么不能用lora模型单独推理，以我浅显的理解，它freeze了原来的模型，单独加了一些层，后续的中文训练都在这些层上做，所以需要进行模型融合。
-用huggingface的推理脚本，需要将模型转换成HF支持的格式。（Don’t worry 作者把脚本都写好了） 实践 下面用步骤的形式记录一下整个过程。
-1. 克隆项目 git clone git@github.com:ymcui/Chinese-LLaMA-Alpaca.git cd Chinese-LLaMA-Alpaca 2. 安装环境 pip install -r requirements.txt 这一步出现了ERROR: No matching distribution found for peft==0.3.0dev
-解决：最后安装了peft==0.2.0
-3. 下载meta发布的原生的Llama模型 可以下载泄露版本，需要用磁力链下载 。 泄露地址在这 也可以用HuggingFace上的7B模型 mkdir -p models/7B/ wget -P models/7B/ &amp;lt;https://huggingface.</description>
+      <guid>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
+      <description>在GPU上运行中文LLaMa模型，主要是按照 https://github.com/ymcui/Chinese-LLaMA-Alpaca 这个仓库的方法。 中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的</description>
     </item>
     
     <item>
@@ -32,18 +22,7 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
       <pubDate>Sun, 05 Mar 2023 18:31:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid>
-      <description>要有目标。 你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。
-目标要大。 不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。
-坚持走。 不管你的目标多复杂，随机梯度下降都是最简单的。每一次你找一个大概还行的方向（梯度），然后迈一步（下降）。两个核心要素是方向和步子的长短。但最重要的是你得一直走下去，能多走几步就多走几步。
-痛苦的卷。 每一步里你都在试图改变你自己或者你的模型参数。改变带来痛苦。但没有改变就没有进步。你过得很痛苦不代表在朝着目标走，因为你可能走反了。但过得很舒服那一定在原地踏步。需要时刻跟自己作对。
-可以躺平。 你用你内心的激情来迈步子。步子太小走不动，步子太长容易过早消耗掉了激情。周期性的调大调小步长效果挺好。所以你可以时不时休息休息。
-四处看看。 每一步走的方向是你对世界的认识。如果你探索的世界不怎么变化，那么要么你的目标太简单，要么你困在你的舒适区了。随机梯度下降的第一个词是随机，就是你需要四处走走，看过很多地方，做些错误的决定，这样你可以在前期迈过一些不是很好的舒适区。
-快也是慢。 你没有必要特意去追求找到最好的方向和最合适的步子。你身边当然会有幸运之子，他们每一步都在别人前面。但经验告诉我们，随机梯度下降前期进度太快，后期可能乏力。就是说你过早的找到一个舒适区，忘了世界有多大。所以你不要急，前面徘徊一段时间不是坏事。成名无需太早。
-赢在起点。 起点当然重要。如果你在终点附近起步，可以少走很多路。而且终点附近的路都比较平，走着舒服。当你发现别人不如你的时候，看看自己站在哪里。可能你就是运气很好，赢在了起跑线。如果你跟别人在同一起跑线，不见得你能做更好。
-很远也能到达。 如果你是在随机起点，那么做好准备前面的路会非常不平坦。越远离终点，越人迹罕见。四处都是悬崖。但随机梯度下降告诉我们，不管起点在哪里，最后得到的解都差不多。当然这个前提是你得一直按照梯度的方向走下去。如果中间梯度炸掉了，那么你随机一个起点，调整步子节奏，重新来。
-独一无二。 也许大家有着差不多的目标，在差不多的时间毕业买房结婚生娃。但每一步里，每个人内心中看到的世界都不一样，导致走的路不一样。你如果跑多次随机梯度下降，在各个时间点的目标函数值可能都差不多，但每次的参数千差万别。不会有人关心你每次训练出来的模型里面参数具体是什么值，除了你自己。
-简单最好。 当然有比随机梯度下降更复杂的算法。他们想每一步看想更远更准，想步子迈最大。但如果你的目标很复杂，简单的随机梯度下降反而效果最好。深度学习里大家都用它。关注当前，每次抬头瞄一眼世界，快速做个决定，然后迈一小步。小步快跑。只要你有目标，不要停，就能到达。
-转自知乎 </description>
+      <description>要有目标。 你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。 目标要大。 不管是人生目标</description>
     </item>
     
     <item>
@@ -52,15 +31,7 @@ LoRa和Alpaca模型是无法单独完成推理的，需要和META的原生LLAMA�
       <pubDate>Thu, 16 Feb 2023 18:31:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
-      <description>先搞清楚几个基本概念：
-Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。
-transformer是一种基于Attention的Seq2seq。
-Seq2seq input是一个sequence， output也是一个sequence，但是维度由模型决定。 例子： 语音辨识：一串语音转为”今晚吃什么？“几个文字。 机器翻译 语音翻译：输入machine learning，输出”机器学习”。 为何不将”语音辨识“和”机器翻译“结合起来，因为有的语言没有文字 结构和原理 Seq2seq由一个encoder和一个decoder决定
-Encoder input是一个sequence， output也是一个sequence。 input vector加上positional encoding，然后经过multi-head attention，然后进行residual + layer normalization，然后经过FC，再做一次Add&amp;amp;Norm，是这个encoder的输出。这个过程会重复。 更细节的设计： input vector进来之后，经过self-attention，input和output相加，然后进行一层layer normalization。然后进入FC层，再进行一次Add&amp;amp;Norm（和自己相加&amp;amp;Normalization），这个输出就是一个block的输出。 residual connection：输入与输出相加，防止层级过高导致的梯度消失。 layer normalization： 输入一个向量，输出一个向量，不需要考虑batch中其他的向量。 对同一个feature，同一个example不同的dimension去计算。（这里feature就是example） 做法：计算它 的mean $m$和standard deviation $\sigma$ $$ x_i^\prime =\frac {x_i - m} {\sigma} $$
-batch normalization： 对同一个dimension，不同的example，不同的feature去计算mean和standard deviation Decoder decoder有两种，一种叫auto-regressive。这里讲的都是auto-regressive。 decoder的输入： 在前边先加一个特殊的符号：BOS。 每个输入可以表示成一个one hot vector。例如”机器学习“加上BOS就是5个one hot vector。 decoder的输出： 想好decoder输出的单位是什么，假设我们做的是中文的语音辨识，那么decoder输出的就是中文，那么vocabulary就是中文的数目，常用4000个字。不同的语言输出的单位不一样，英文可以输出字母，word， subword作为单位。
-1个Input vector进去之后，出来1个output vector，它的长度和vocabulary的size是一样的。他会给vocabulary的每一个单位一个分数，分数最高的就是最后的输出。5个input vector，出来n个output vector。(n需要decoder自己决定)
-decoder看到的输入，其实就是前一个时间自己的输出。
-这里有一个问题，如果输出错误，那么输入也会错误，会造成error propagation。 Decoder和Encoder对比 decoder与encoder结构类似 decoder有一层masked multi-head attention 之前的self-attention，都要看过完整的input之后才做决定。$b^1$是由$a^1$到$a^4$一起决定的。</description>
+      <description>先搞清楚几个基本概念： Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和dec</description>
     </item>
     
     <item>
@@ -69,14 +40,7 @@ decoder看到的输入，其实就是前一个时间自己的输出。
       <pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
-      <description>承认吧，现在全世界最火就是chatGPT。
-去参加了王建硕老师那边组织的关于chatGPT的讨论。
-会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。 从心理学和教育学来看，也开拓了我的眼界。 从高效使用和商业化来看，它无疑会改变很多人的生活。 chatGPT的使用感受很不错。
-我试用的方面主要在让它生成一些小功能的代码，例如爬虫，处理数据，修bug等。之前google copilot出来的时候，我的感觉没有那么惊艳。copilot可以补全代码，但是很奇怪，它经常显示大段我不需要的代码，看着闹心。 如何让chatGPT有更好的效果呢？那就是写更好的prompt，也就是清晰简洁聚焦的提问。 昨天看了好几篇关于prompt的技术文章，原来国外的prompt的技术已经发展得很厉害了。 看了一些好的prompt的例子，给我一种扑面而来的熟悉感，这不就是高中时候老师出的题嘛。&amp;ldquo;请用XX写一篇关于XX的文章，文体限制在议论文，不超过800字。&amp;rdquo; 随着chatGPT兴起，产生了一种新的职业，叫做prompt engineer，他们的工作是研发出更好的提问方式，引导chatGPT给出的答案更符合用户的预期。 很多人的感受是和chatGPT对话，就像和一个小朋友交流。你不能给它一个宏大的问题，让它去解决。但是可以一步一步引导它，告诉它每一步做什么，最后达成自己的目标。 晚上我又看了几个chatGPT的应用，我看到的最惊艳的两个应用有两个。 第一个是语言学习，例如和azure结合起来，练习口语。或者让chatGPT修改文章，斟酌字词，问chatGPT某句话的某个词是什么意思，怎么理解。这个应用基本上是全世界人民的需求。只要有沟通和交流的需求在，就会想要学习新的语言。 试想一下，如果你有了语音版chatGPT，相当于你有了一个24小时的外教。当然openai和azure都需要api key，需要花一些钱。
-第二个是用chatGPT生成文本，然后把这些文本用AI工具转成图片，最后形成动画或视频。现在很多人在做的抖音号视频号（其实就是垃圾营销）是可以用这种方式生成的。 当然作为一个技术人员，我肯定对底层原理感兴趣。最主要的创新点在于in-context learning、强化学习以及庞大的数据输入。公司在年前就请某个大佬在公司做了chatGPT的介绍，不得不说公司领导的嗅觉还是很灵敏的。 搞了几年互联网和AI，大家最后发现，科技的前沿还是在美国。国内大小厂只能跟在国际大厂的屁股后面。 它的缺点在于：
-它的结果不准确。大量的例子表明它不擅长计算，并且文章写得稀里糊涂。所以它的结果是否是正确的，需要用户有能力做出判断。 模型未开源，可能永远也不会开源。 去年年底Notion推出Notion AI的时候，我就报名了。这个月7号收到官方的邮件说我可以使用了。我用Notion AI的感受也非常好。 它只要在notion里面打一个&amp;rsquo;/&amp;lsquo;就可以了。
-它的功能有很多：
-写博客、写文章 写诗 写文章总结 发朋友圈 翻译 改变文字的语气（严肃、轻松、正式、自信等） 所有的文章都可以变长变短 有一天晚上我给室友演示Notion AI，她是做别的行业，不太懂AI这些。那天晚上我刚好吃了咖喱牛腩，就让Notion AI以&amp;quot;咖喱牛腩&amp;quot;写一篇文章。 看着文字逐渐出来的时候，她不禁激动起来，惊呼&amp;quot;大厉害了，要是我有这样一个助手就好了&amp;quot;！ 有点感动，AI真的在改变我们的生活吧！</description>
+      <description>承认吧，现在全世界最火就是chatGPT。 去参加了王建硕老师那边组织的关于chatGPT的讨论。 会上的讨论：对新技术进行哲学思考无疑是最让我</description>
     </item>
     
     <item>
@@ -85,7 +49,7 @@ decoder看到的输入，其实就是前一个时间自己的输出。
       <pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate>
       
       <guid>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
-      <description>理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。 一个 vector 对应一个 label。一个序列对应多个 label。 例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。 模型决定 label 的个数。seq2seq 任务 例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。 一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling 例子： I saw a saw 如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用 弊端： 用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。 解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。 我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。</description>
+      <description>理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is</description>
     </item>
     
   </channel>

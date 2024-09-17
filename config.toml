@@ -10,8 +10,9 @@ canonifyURLs = true
  name = "HuizhiXu"
 
 
-hasCJKLanguage = true
+isCJKLanguage = true
 DefaultContentLanguage = "chs"
+
 #DefaultContentLanguageInSubdir = true
 
 [languages]
@@ -140,11 +141,14 @@ DefaultContentLanguage = "chs"
   hidePageThumbnail = false
 
 
+
 # Comments system
-[params.utteranc]
-  enable = true
+[params.comments]
+  # Supports disqus, giscus and utterances
+  # Check hugo docs for setting up disqus
+  system = "utterances"
   repo = "HuizhiXu/huizhixu.github.io"
-  issueTerm = "pathname"
+  issueterm = "pathname"
   theme = "github-light"
 
 

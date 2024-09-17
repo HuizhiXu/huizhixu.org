@@ -5,7 +5,8 @@ tags: ["tech","llm"]
 format: hugo-md
 jupyter: nn3.10
 math: true
-thumbnail: https://picsum.photos/id/316/400/250
+isCJKLanguage: true
+# thumbnail: https://picsum.photos/id/316/400/250
 ---
 
 去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？

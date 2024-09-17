@@ -8,9 +8,7 @@
   <title>
   Gaussian Process in Practice 高斯过程实践 - 徐慧志的个人博客
   </title>
-  <meta name="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
-1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0." /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -38,9 +36,7 @@
 
   
   <meta property="og:title" content="Gaussian Process in Practice 高斯过程实践" />
-<meta property="og:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
-1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0." />
+<meta property="og:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2023-12-10T18:01:50+08:00" />
@@ -48,16 +44,12 @@
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Gaussian Process in Practice 高斯过程实践"/>
-<meta name="twitter:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
-1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0."/>
+<meta name="twitter:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候"/>
 
   <meta itemprop="name" content="Gaussian Process in Practice 高斯过程实践">
-<meta itemprop="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
-1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。
-1.2 看图可知 从先验过程采样的五个例子，其中大多数函数的值落在95%的可信区间内。 import numpy as np from matplotlib import pyplot as plt %matplotlib inline # 设置随机种子以确保重复性 np.random.seed(8) def plot_gp(mu, cov, title_str, X, X_train=None, Y_train=None, samples=[] ): X = X.ravel() # X.ravel()用于将多维数组X展平为一维数组。 mu = mu.ravel() uncertainty = 1.96 * np.sqrt(np.diag(cov)) # 通过计算协方差矩阵的对角线元素的平方根，可以得到每个参数的标准差。乘以 1.96，可以得到一个置信区间，表示该参数的不确定性范围。 plt.fill_between(X, mu &#43; uncertainty, mu - uncertainty, alpha=0."><meta itemprop="datePublished" content="2023-12-10T18:01:50+08:00" />
+<meta itemprop="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候"><meta itemprop="datePublished" content="2023-12-10T18:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-12-10T18:01:50+08:00" />
-<meta itemprop="wordCount" content="484">
+<meta itemprop="wordCount" content="1542">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
@@ -211,7 +203,7 @@
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-     3&nbsp;分钟
+     4&nbsp;分钟
      
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -222,7 +214,7 @@
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      484&nbsp;
+      1542&nbsp;字
       
         
       
@@ -428,18 +420,18 @@ Text(0.5, 1.0, 'Drawing five random samples from a GP prior')
 <p><img src="../../../img/20231210/cell-4-output-3.png" alt="cell-4-output-3.png"></p>
 
   </article>
-
-
+<div class="px-2 mb-2">
   
-
   <script src="https://utteranc.es/client.js"
-  repo="HuizhiXu/huizhixu.github.io"
-  issue-term="pathname"
-  label="<your-custom-label>"
-  theme="github-light"
-  crossorigin="anonymous"
-  async>
-</script><div class="bg-blue-100 dark:bg-gray-900">
+    repo="HuizhiXu/huizhixu.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
     <div>
       <div class="text-2xl font-bold mb-2">Don&#39;t Follow Me</div>

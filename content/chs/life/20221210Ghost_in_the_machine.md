@@ -7,6 +7,7 @@ description: ""
 tags: ["life","2022"]
 draft: True
 pin: false
+isCJKLanguage: true
 thumbnail: https://picsum.photos/id/66/400/250
 ---
 

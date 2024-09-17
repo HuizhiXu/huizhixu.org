@@ -6,6 +6,7 @@ lastmod: 2023-03-30
 description: "如果用Trainer这个API，只要更新compute_loss方法就可以，如果是用pytorch写的训练代码或者用了huggingface accelerate模型，那么要更新自己模型的forward函数。"  
 tags: ["tech"]
 draft: false
+isCJKLanguage: true
 pin: false
 thumbnail: https://picsum.photos/id/16/400/250
 ---

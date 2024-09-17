@@ -5,6 +5,7 @@ tags: ["tech","bayesian"]
 format: hugo-md
 jupyter: nn3.10
 math: true
+isCJKLanguage: true
 thumbnail: https://picsum.photos/id/307/400/250
 ---
 

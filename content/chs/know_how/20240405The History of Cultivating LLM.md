@@ -5,7 +5,8 @@ tags: ["tech","llm"]
 format: hugo-md
 jupyter: nn3.10
 math: true
-thumbnail: https://picsum.photos/id/313/400/250
+isCJKLanguage: true
+# thumbnail: https://picsum.photos/id/313/400/250
 ---
 
 

@@ -3,6 +3,7 @@ title:  "论文 Uncertainty Quantification in Machine Learning for Engineering D
 date: 2023-11-20T18:31:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md
+isCJKLanguage: true
 html-math-method: webtex
 thumbnail: https://picsum.photos/id/310/400/250
 ---

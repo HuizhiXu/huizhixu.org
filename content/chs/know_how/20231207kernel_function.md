@@ -4,6 +4,7 @@ date: 2023-12-07T18:01:50+08:00
 tags: ["tech","bayesian"]
 format: hugo-md
 math: true
+isCJKLanguage: true
 html-math-method: webtex
 thumbnail: https://picsum.photos/id/304/400/250
 ---

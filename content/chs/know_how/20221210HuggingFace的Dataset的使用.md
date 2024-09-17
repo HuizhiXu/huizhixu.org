@@ -6,6 +6,7 @@ lastmod: 2022-10-30
 description: "在数据上吃了很多苦头，数据不符合模型的要求，而造成模型跑不起来，debug的时候走了很多弯路，这样的事情发生了很多次！ 所以特意把HuggingFace里面的数据类都学习一遍。"
 tags: ["tech"]
 draft: false
+isCJKLanguage: true
 pin: false
 thumbnail: https://picsum.photos/id/17/400/250
 ---

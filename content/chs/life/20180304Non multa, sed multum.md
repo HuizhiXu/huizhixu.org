@@ -5,6 +5,7 @@ date: 2018-03-04T20:07:58+08:00
 # lastmod: 2021-10-14
 description: ""
 tags: ["read","2018"]
+isCJKLanguage: true
 thumbnail: https://picsum.photos/id/72/400/250
 draft: false
 ---

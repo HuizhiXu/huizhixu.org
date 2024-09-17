@@ -8,22 +8,7 @@
   <title>
   Kernel Function 核函数 - 徐慧志的个人博客
   </title>
-  <meta name="description" content="这篇文章主要解决三个问题：
-正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。
-为啥要多写一个f呢？
-因为这个分布是针对f的分布，换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
-2. 核函数是什么，有什么类型 核函数就是协方差。
-核函数$K(x_i, x_j)$
-它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点$x_i$和$x_j$之间的统计关系。 它量化$x_j$的变化和$x_i$的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
-有几种常见的核：
-高斯核 Gaussian kernel 1.1 常见的高斯核 $$ K_{ij} = k(x_i,x_j) = e^{-||X_i-X_j||^2}$$
-这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
-1.2 可调节参数的高斯核，又被叫做isotropic squared exponential kernel $$K_{ij} = k(x_i,x_j) = \sigma_f^2e^{-\frac{1}{2l^2}||X_i-X_j||^2}$$ 2. 略(以后补充，暂时不是重点)
-3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，$ D = {(x_1,f(x_1)), (x_2, f(x_2)),(x_3, f(x_3))}$。我们需要对这三个随机变量进行建模。假设mean vector 为 $\mu$， covariance matrix为$K$。
-这三个变量遵循多元变量的高斯分布
-基于这个数据集D，假设我们现在想知道另一个变量$x_4$（它对应的f值用$f_*(x_4)$表示）在其他位置的均值和方差的的分布。
-问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。
-f和f*的分布为" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0" /><meta name="generator" content="Hugo 0.115.4"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -51,22 +36,7 @@ f和f*的分布为" /><meta name="generator" content="Hugo 0.115.4"><link
 
   
   <meta property="og:title" content="Kernel Function 核函数" />
-<meta property="og:description" content="这篇文章主要解决三个问题：
-正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。
-为啥要多写一个f呢？
-因为这个分布是针对f的分布，换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
-2. 核函数是什么，有什么类型 核函数就是协方差。
-核函数$K(x_i, x_j)$
-它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点$x_i$和$x_j$之间的统计关系。 它量化$x_j$的变化和$x_i$的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
-有几种常见的核：
-高斯核 Gaussian kernel 1.1 常见的高斯核 $$ K_{ij} = k(x_i,x_j) = e^{-||X_i-X_j||^2}$$
-这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
-1.2 可调节参数的高斯核，又被叫做isotropic squared exponential kernel $$K_{ij} = k(x_i,x_j) = \sigma_f^2e^{-\frac{1}{2l^2}||X_i-X_j||^2}$$ 2. 略(以后补充，暂时不是重点)
-3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，$ D = {(x_1,f(x_1)), (x_2, f(x_2)),(x_3, f(x_3))}$。我们需要对这三个随机变量进行建模。假设mean vector 为 $\mu$， covariance matrix为$K$。
-这三个变量遵循多元变量的高斯分布
-基于这个数据集D，假设我们现在想知道另一个变量$x_4$（它对应的f值用$f_*(x_4)$表示）在其他位置的均值和方差的的分布。
-问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。
-f和f*的分布为" />
+<meta property="og:description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231207kernel_function/" /><meta property="article:section" content="know_how" />
 <meta property="article:published_time" content="2023-12-07T18:01:50+08:00" />
@@ -74,42 +44,12 @@ f和f*的分布为" />
 
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Kernel Function 核函数"/>
-<meta name="twitter:description" content="这篇文章主要解决三个问题：
-正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。
-为啥要多写一个f呢？
-因为这个分布是针对f的分布，换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
-2. 核函数是什么，有什么类型 核函数就是协方差。
-核函数$K(x_i, x_j)$
-它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点$x_i$和$x_j$之间的统计关系。 它量化$x_j$的变化和$x_i$的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
-有几种常见的核：
-高斯核 Gaussian kernel 1.1 常见的高斯核 $$ K_{ij} = k(x_i,x_j) = e^{-||X_i-X_j||^2}$$
-这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
-1.2 可调节参数的高斯核，又被叫做isotropic squared exponential kernel $$K_{ij} = k(x_i,x_j) = \sigma_f^2e^{-\frac{1}{2l^2}||X_i-X_j||^2}$$ 2. 略(以后补充，暂时不是重点)
-3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，$ D = {(x_1,f(x_1)), (x_2, f(x_2)),(x_3, f(x_3))}$。我们需要对这三个随机变量进行建模。假设mean vector 为 $\mu$， covariance matrix为$K$。
-这三个变量遵循多元变量的高斯分布
-基于这个数据集D，假设我们现在想知道另一个变量$x_4$（它对应的f值用$f_*(x_4)$表示）在其他位置的均值和方差的的分布。
-问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。
-f和f*的分布为"/>
+<meta name="twitter:description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0"/>
 
   <meta itemprop="name" content="Kernel Function 核函数">
-<meta itemprop="description" content="这篇文章主要解决三个问题：
-正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。
-为啥要多写一个f呢？
-因为这个分布是针对f的分布，换句话说这里的随机变量是f，再换句话就是说这个随机变量f遵守一个正态分布。
-2. 核函数是什么，有什么类型 核函数就是协方差。
-核函数$K(x_i, x_j)$
-它计算在输入空间中任意两个点的相似度，可以用欧式距离表示。 它度量输入空间中两点$x_i$和$x_j$之间的统计关系。 它量化$x_j$的变化和$x_i$的相应变化之间的相关性。 选择不同核函数，表示数据点之间的相关性被用不同方式来衡量。
-有几种常见的核：
-高斯核 Gaussian kernel 1.1 常见的高斯核 $$ K_{ij} = k(x_i,x_j) = e^{-||X_i-X_j||^2}$$
-这里把负平方距离的指数作为距离度量。当x_i和x_j距离非常远，我们有x_i-x_j 趋向于无穷大，此时k_{ij}趋向于0。当x_i和x_j相等，k_{ij}等于1。K是一个介于0和1之间的数，由此就可以表现点之间的相关性。
-1.2 可调节参数的高斯核，又被叫做isotropic squared exponential kernel $$K_{ij} = k(x_i,x_j) = \sigma_f^2e^{-\frac{1}{2l^2}||X_i-X_j||^2}$$ 2. 略(以后补充，暂时不是重点)
-3. 已知先验知识，如何计算后验分布 假设我们有三个无噪声观测值，$ D = {(x_1,f(x_1)), (x_2, f(x_2)),(x_3, f(x_3))}$。我们需要对这三个随机变量进行建模。假设mean vector 为 $\mu$， covariance matrix为$K$。
-这三个变量遵循多元变量的高斯分布
-基于这个数据集D，假设我们现在想知道另一个变量$x_4$（它对应的f值用$f_*(x_4)$表示）在其他位置的均值和方差的的分布。
-问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。
-f和f*的分布为"><meta itemprop="datePublished" content="2023-12-07T18:01:50+08:00" />
+<meta itemprop="description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0"><meta itemprop="datePublished" content="2023-12-07T18:01:50+08:00" />
 <meta itemprop="dateModified" content="2023-12-07T18:01:50+08:00" />
-<meta itemprop="wordCount" content="119">
+<meta itemprop="wordCount" content="981">
 <meta itemprop="keywords" content="tech,bayesian," />
 
   
@@ -263,7 +203,7 @@ f和f*的分布为"><meta itemprop="datePublished" content="2023-12-07T18:01:50+
         <circle cx="12" cy="12" r="9" />
         <polyline points="12 7 12 12 15 15" />
       </svg>
-     1&nbsp;分钟
+     2&nbsp;分钟
      
       &nbsp;&bull;
       <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -274,7 +214,7 @@ f和f*的分布为"><meta itemprop="datePublished" content="2023-12-07T18:01:50+
         <line x1="12" y1="6" x2="12" y2="19" />
         <line x1="21" y1="6" x2="21" y2="19" />
       </svg>
-      119&nbsp;
+      981&nbsp;字
       
         
       
@@ -383,18 +323,18 @@ K &amp;K_{4}\K_{4}^T&amp;K_{44}\end{bmatrix})"></p>
 <p>$$ K_y = K + \sigma_y^2I$$</p>
 
   </article>
-
-
+<div class="px-2 mb-2">
   
-
   <script src="https://utteranc.es/client.js"
-  repo="HuizhiXu/huizhixu.github.io"
-  issue-term="pathname"
-  label="<your-custom-label>"
-  theme="github-light"
-  crossorigin="anonymous"
-  async>
-</script><div class="bg-blue-100 dark:bg-gray-900">
+    repo="HuizhiXu/huizhixu.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  
+</div>
+<div class="bg-blue-100 dark:bg-gray-900">
   <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
     <div>
       <div class="text-2xl font-bold mb-2">Don&#39;t Follow Me</div>
