@@ -19,17 +19,21 @@ DefaultContentLanguage = "chs"
     contentDir = 'content/chs'
     languageName = '中文 (简体)'
     title = '徐慧志的个人博客'
+    weight = 1
     [languages.chs.params]
       introTitle = "Hallo! 我是慧志"
-      introSubtitle = "我是一名后端程序员，喜欢阅读、摄影和Zumba"
+      introSubtitle = "我是一名程序员，（长期）喜欢阅读、（短暂地喜欢过）摄影和Zumba"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo.png"
+      reading_speed = 400
     [[languages.chs.menu.main]]
       name = "生活见闻"
       url = "/life/"
+      weight = 2
     [[languages.chs.menu.main]]
       name = "关于"
       url = "/page/about/"
+      weight = 3
     [[languages.chs.menu.main]]
       name = "技术"
       url = "/know_how/"
@@ -37,19 +41,23 @@ DefaultContentLanguage = "chs"
     [[languages.chs.menu.main]]
       name = "宝藏集结"
       url = "/link/"
+      weight = 4
     [[languages.chs.menu.main]]
       name = "分类"
       url = "/tags/"
+      weight = 5
 
   [languages.en]
     contentDir = 'content/en'
     languageName = 'English'
     title = 'PoirotMore'
+    weight = 2
     [languages.en.params]
       introTitle = "Hey! I'm Huizhi Xu"
       introSubtitle = "A senior developer who enjoys reading, blogging and dancing"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo.png"
+      reading_speed = 228
     [[languages.en.menu.main]]
       name = "Blog"
       url = "/life/"
@@ -64,11 +72,13 @@ DefaultContentLanguage = "chs"
     contentDir = 'content/de'
     languageName = 'Deutsch'
     title = 'Blog von Huizhi XU'
+    weight = 3
     [languages.de.params]
       introTitle = "Hallo, ich bin Huizhi Xu"
       introSubtitle = "Eine Senior-Entwicklerin, die Spaß an Lesen, Bloggen und Zumba"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo-de.png"
+      reading_speed = 179
     [[languages.de.menu.main]]
       name = "Blog"
       url = "/life/"
@@ -131,13 +141,24 @@ DefaultContentLanguage = "chs"
 
 
 # Comments system
-[params.comments]
-  system = "disqus"
-  enableComments = true
-  autoLoadComments = true
-  enableDisqus = true
-  disqusShortname = "huizhixu-org"
+[params.utteranc]
+  enable = true
+  repo = "HuizhiXu/huizhixu.github.io"
+  issueTerm = "pathname"
+  theme = "github-light"
 
+
+[params.homepage.social]
+  # Global params common for both languages
+  title = "Don't Follow Me"
+  description = "I'm lost too"
+
+  [[params.homepage.social.icons]]
+    website = "twitter"
+    url = "https://twitter.com/"
+  [[params.homepage.social.icons]]
+    website = "github"
+    url = "https://github.com/"
 
 
 [[menu.main]]
