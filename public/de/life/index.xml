@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on Blog von Huizhi XU</title>
+    <title>LIFE on Blog von Huizhi XU</title>
     <link>https://huizhixu.github.io/de/life/</link>
-    <description>Recent content in Blog on Blog von Huizhi XU</description>
+    <description>Recent content in LIFE on Blog von Huizhi XU</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
-    <lastBuildDate>Thu, 15 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/de/life/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Sep 2024 22:11:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/de/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Emoji-Unterstützung</title>
-      <link>https://huizhixu.github.io/de/life/emoji-support/</link>
-      <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
+      <title>Elisabeth(Hauptfiguren)</title>
+      <link>https://huizhixu.github.io/de/life/das_musical_elisabeth_sissi/</link>
+      <pubDate>Mon, 16 Sep 2024 22:11:50 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/de/life/emoji-support/</guid>
-      <description>&lt;p&gt;Emojis können in einem Hugo-Projekt auf verschiedene Weise aktiviert werden.&lt;/p&gt;</description>
+      <guid>https://huizhixu.github.io/de/life/das_musical_elisabeth_sissi/</guid>
+      <description>Table of Contents Wenn ich tanzen will Ich gehoer mir Mama, wo bist du? Die Schatten werden länger Wenn ich tanzen will [Elisabeth]Was für ein Triumph（多么伟大的胜利）
+[der Tod] Mein Triumph（我的凯旋）
+[Elisabeth]Welch ein Fest（多么盛大的节日）
+[der Tod]Mein Fest（我的庆典）
+[Elisabeth]Ich hab die Feinde überwunden（我已战胜敌人）
+[der Tod]So änderst du den Lauf der Welt（你改变了世界的方向）
+In meinem Sinn（按我的意思）
+So eng sind wir verbunden（我们如此紧密相连）
+[Elisabeth]Ich tus nicht für die Welt（我不是为了世界）
+[der Tod]Nicht für die Welt（不是为了世界）
+[Elisabeth]Nur für mich（只为我自己）</description>
     </item>
     
     <item>
-      <title>Markdown Syntax Guide</title>
-      <link>https://huizhixu.github.io/de/life/markdown-syntax/</link>
-      <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
+      <title>Elisabeth(Hintergrund)</title>
+      <link>https://huizhixu.github.io/de/life/das_musical_elisabeth_hintergrund/</link>
+      <pubDate>Sun, 15 Sep 2024 22:11:50 +0800</pubDate>
       
-      <guid>https://huizhixu.github.io/de/life/markdown-syntax/</guid>
-      <description>&lt;p&gt;Dieser Artikel bietet ein Beispiel für die grundlegende Markdown-Syntax, die in Hugo-Inhaltsdateien verwendet werden kann, und zeigt auch, ob grundlegende HTML-Elemente mit CSS in einem Hugo-Theme dekoriert sind.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Platzhaltertext</title>
-      <link>https://huizhixu.github.io/de/life/placeholder-text/</link>
-      <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://huizhixu.github.io/de/life/placeholder-text/</guid>
-      <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Reichhaltiger Inhalt</title>
-      <link>https://huizhixu.github.io/de/life/rich-content/</link>
-      <pubDate>Tue, 13 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://huizhixu.github.io/de/life/rich-content/</guid>
-      <description>Hugo wird mit mehreren Built-in Shortcodes für reichhaltige Inhalte geliefert, zusammen mit einer Privacy Config und einer Reihe einfacher Shortcodes, die statische und keine JS-Versionen verschiedener Social-Media-Einbettungen ermöglichen.
-more </description>
+      <guid>https://huizhixu.github.io/de/life/das_musical_elisabeth_hintergrund/</guid>
+      <description>Table of Contents Prolog Kitsch Milch Prolog [Stimme des Richters:] Aber warum, Lucheni?（但是为什么，鲁切尼？）
+Warum haben Sie die Kaiserin Elisabeth ermordet?（为什么您要暗杀皇后伊丽莎白？）
+[Lucheni:] Alla malora!（算了吧！）
+[Stimme des Richters:] Antworten Sie, Luigi Lucheni!（回答我，鲁易吉·鲁切尼！）
+[Lucheni:] Warum, warum…（为什么，为什么…）
+Nacht für Nacht dieselbe Frage（每晚都是同一个问题）
+Seit hundert Jahren!（一百年来都是这样！）
+Was soll die Fragerei?（问来问去有什么意义？）
+Merda. Ich bin tot!（该死。我已经死了！）
+[Stimme des Richters:] Das gemeine Attentat auf die Kaiserin von Österreich…（对奥地利皇后的卑鄙暗杀…）
+[Lucheni:] Va a farti fottere!（去你的！）
+[Stimme des Richters:] Nennen Sie endlich die Hintergründe!</description>
     </item>
     
   </channel>

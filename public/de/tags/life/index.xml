@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog von Huizhi XU</title>
-    <link>https://huizhixu.github.io/de/</link>
-    <description>Recent content on Blog von Huizhi XU</description>
+    <title>life on Blog von Huizhi XU</title>
+    <link>https://huizhixu.github.io/de/tags/life/</link>
+    <description>Recent content in life on Blog von Huizhi XU</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
-    <lastBuildDate>Mon, 16 Sep 2024 22:11:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/de/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Sep 2024 22:11:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/de/tags/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elisabeth(Hauptfiguren)</title>
       <link>https://huizhixu.github.io/de/life/das_musical_elisabeth_sissi/</link>
@@ -44,17 +44,6 @@ Merda. Ich bin tot!（该死。我已经死了！）
 [Stimme des Richters:] Das gemeine Attentat auf die Kaiserin von Österreich…（对奥地利皇后的卑鄙暗杀…）
 [Lucheni:] Va a farti fottere!（去你的！）
 [Stimme des Richters:] Nennen Sie endlich die Hintergründe!</description>
-    </item>
-    
-    <item>
-      <title>Über mich</title>
-      <link>https://huizhixu.github.io/de/page/about/</link>
-      <pubDate>Thu, 15 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://huizhixu.github.io/de/page/about/</guid>
-      <description>Hugo wurde in Go geschrieben und ist ein Open-Source-Generator für statische Sites, der unter der [Apache License 2.0.] (https://github.com/gohugoio/hugo/blob/master/LICENSE ) verfügbar ist. Hugo unterstützt TOML-, YAML- und JSON-Datendateitypen , Markdown- und HTML-Inhaltsdateien und verwendet Shortcodes, um Rich Content hinzuzufügen. Andere bemerkenswerte Funktionen sind Taxonomien, mehrsprachiger Modus, Bildverarbeitung, benutzerdefinierte Ausgabeformate, HTML/CSS/JS-Minifizierung und Unterstützung für Sass SCSS-Workflows.
-Hugo nutzt eine Vielzahl von Open-Source-Projekten, darunter:
-https://github.com/yuin/goldmark https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.</description>
     </item>
     
   </channel>

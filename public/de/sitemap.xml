@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://huizhixu.github.io/de/life/</loc>
-    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+    <loc>https://huizhixu.github.io/de/tags/2024/</loc>
+    <lastmod>2024-09-16T22:11:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="chs"
-                href="https://huizhixu.github.io/chs/life/"
+                href="https://huizhixu.github.io/chs/tags/2024/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://huizhixu.github.io/life/"
+                href="https://huizhixu.github.io/tags/2024/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://huizhixu.github.io/de/life/"
+                href="https://huizhixu.github.io/de/tags/2024/"
                 />
   </url><url>
     <loc>https://huizhixu.github.io/de/</loc>
-    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+    <lastmod>2024-09-16T22:11:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="chs"
@@ -38,11 +38,65 @@
                 href="https://huizhixu.github.io/de/"
                 />
   </url><url>
-    <loc>https://huizhixu.github.io/de/tags/emoji/</loc>
-    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+    <loc>https://huizhixu.github.io/de/life/das_musical_elisabeth_sissi/</loc>
+    <lastmod>2024-09-16T22:11:50+08:00</lastmod>
   </url><url>
-    <loc>https://huizhixu.github.io/de/life/emoji-support/</loc>
-    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
+    <loc>https://huizhixu.github.io/de/tags/life/</loc>
+    <lastmod>2024-09-16T22:11:50+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/life/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://huizhixu.github.io/tags/life/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://huizhixu.github.io/de/tags/life/"
+                />
+  </url><url>
+    <loc>https://huizhixu.github.io/de/life/</loc>
+    <lastmod>2024-09-16T22:11:50+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/life/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://huizhixu.github.io/life/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://huizhixu.github.io/de/life/"
+                />
+  </url><url>
+    <loc>https://huizhixu.github.io/de/tags/</loc>
+    <lastmod>2024-09-16T22:11:50+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="chs"
+                href="https://huizhixu.github.io/chs/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://huizhixu.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://huizhixu.github.io/de/tags/"
+                />
+  </url><url>
+    <loc>https://huizhixu.github.io/de/life/das_musical_elisabeth_hintergrund/</loc>
+    <lastmod>2024-09-15T22:11:50+08:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/de/page/</loc>
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
@@ -62,24 +116,6 @@
                 href="https://huizhixu.github.io/de/page/"
                 />
   </url><url>
-    <loc>https://huizhixu.github.io/de/tags/</loc>
-    <lastmod>2021-10-14T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="chs"
-                href="https://huizhixu.github.io/chs/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://huizhixu.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://huizhixu.github.io/de/tags/"
-                />
-  </url><url>
     <loc>https://huizhixu.github.io/de/page/about/</loc>
     <lastmod>2021-07-15T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -97,33 +133,6 @@
                 hreflang="de"
                 href="https://huizhixu.github.io/de/page/about/"
                 />
-  </url><url>
-    <loc>https://huizhixu.github.io/de/tags/css/</loc>
-    <lastmod>2021-07-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/tags/html/</loc>
-    <lastmod>2021-07-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/tags/markdown/</loc>
-    <lastmod>2021-07-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/life/markdown-syntax/</loc>
-    <lastmod>2021-07-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/life/placeholder-text/</loc>
-    <lastmod>2021-07-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/tags/privacy/</loc>
-    <lastmod>2021-07-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/life/rich-content/</loc>
-    <lastmod>2021-07-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/tags/shortcodes/</loc>
-    <lastmod>2021-07-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://huizhixu.github.io/de/tags/text/</loc>
-    <lastmod>2021-07-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://huizhixu.github.io/de/categories/</loc>
     <xhtml:link

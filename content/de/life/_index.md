@@ -1,4 +1,4 @@
 ---
-author: Katheryn Fox
-title: Blog
+author: Huizhi Xu
+title: LIFE
 ---
