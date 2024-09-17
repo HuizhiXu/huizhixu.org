@@ -68,7 +68,17 @@
     {{ .Content }}
   </article>
 
-  {{- partial "comments.html" . -}}
+
+  <!-- {{- partial "comments.html" . -}} -->
+
+  <script src="https://utteranc.es/client.js"
+  repo="HuizhiXu/huizhixu.github.io"
+  issue-term="pathname"
+  label="<your-custom-label>"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
 
   {{- partial "social.html" . -}}
 {{ end }}
