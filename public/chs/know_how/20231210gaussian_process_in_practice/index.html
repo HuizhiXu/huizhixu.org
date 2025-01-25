@@ -8,7 +8,20 @@
   <title>
   Gaussian Process in Practice 高斯过程实践 - 徐慧志的个人博客
   </title>
-  <meta name="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布
+1.1 多变量高斯分布
+
+创建一个包含n个候选输入位置的列表${x_i，i=1,&hellip;,n}$
+初始化均值向量μ和协方差矩阵K（含n x n个元素）
+
+假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$
+
+
+执行Cholesky分解K=LL T来获得L
+通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中
+
+multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。" /><meta name="generator" content="Hugo 0.135.0"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -35,22 +48,33 @@
     </script>
 
   
-  <meta property="og:title" content="Gaussian Process in Practice 高斯过程实践" />
-<meta property="og:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/" /><meta property="article:section" content="know_how" />
-<meta property="article:published_time" content="2023-12-10T18:01:50+08:00" />
-<meta property="article:modified_time" content="2023-12-10T18:01:50+08:00" />
+  <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/">
+  <meta property="og:site_name" content="徐慧志的个人博客">
+  <meta property="og:title" content="Gaussian Process in Practice 高斯过程实践">
+  <meta property="og:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,…,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。">
+  <meta property="og:locale" content="chs">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="know_how">
+    <meta property="article:published_time" content="2023-12-10T18:01:50+08:00">
+    <meta property="article:modified_time" content="2023-12-10T18:01:50+08:00">
+    <meta property="article:tag" content="Tech">
+    <meta property="article:tag" content="Bayesian">
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Gaussian Process in Practice 高斯过程实践"/>
-<meta name="twitter:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gaussian Process in Practice 高斯过程实践">
+  <meta name="twitter:description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,…,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。">
 
+  
   <meta itemprop="name" content="Gaussian Process in Practice 高斯过程实践">
-<meta itemprop="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候"><meta itemprop="datePublished" content="2023-12-10T18:01:50+08:00" />
-<meta itemprop="dateModified" content="2023-12-10T18:01:50+08:00" />
-<meta itemprop="wordCount" content="1542">
-<meta itemprop="keywords" content="tech,bayesian," />
+  <meta itemprop="description" content="这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。
+1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候选输入位置的列表${x_i，i=1,…,n}$ 初始化均值向量μ和协方差矩阵K（含n x n个元素） 假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个nd的矩阵，那么K是一个mn的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$ 执行Cholesky分解K=LL T来获得L 通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中 multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。">
+  <meta itemprop="datePublished" content="2023-12-10T18:01:50+08:00">
+  <meta itemprop="dateModified" content="2023-12-10T18:01:50+08:00">
+  <meta itemprop="wordCount" content="1542">
+  <meta itemprop="keywords" content="Tech,Bayesian">
 
   
   <meta name="lang" content="chs" />
@@ -353,7 +377,7 @@
 </span></span><span style="display:flex;"><span>plot_gp(mu, K, title_str, X_test, samples<span style="color:#ff79c6">=</span>samples)
 </span></span></code></pre></div><pre><code>X_test的shape是(100, 1)
 </code></pre>
-<p><img src="../../../img/20231210/cell-2-output-2.png" alt="cell-2-output-2.png"></p>
+<p><img alt="cell-2-output-2.png" src="../../../img/20231210/cell-2-output-2.png"></p>
 <h3 id="2-后验分布-posterior">2. 后验分布 Posterior</h3>
 <p>有了先验知识，下一步就是要得到观测数据。观测数据由input 和 output functional value 组成。 在有观测数据的情况下，我们可以将他们作为训练数据来更新GP 先验分布，得到后验分布。后验参数将通过均值和协方差矩阵来表示。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> numpy.linalg <span style="color:#ff79c6">import</span> inv
@@ -385,7 +409,7 @@
 </span></span><span style="display:flex;"><span>mu_s, cov_s <span style="color:#ff79c6">=</span> update_posterior(X_test, X_train, Y_train)
 </span></span><span style="display:flex;"><span>samples <span style="color:#ff79c6">=</span> np<span style="color:#ff79c6">.</span>random<span style="color:#ff79c6">.</span>multivariate_normal(mu_s<span style="color:#ff79c6">.</span>ravel(), cov_s, <span style="color:#bd93f9">6</span>)
 </span></span><span style="display:flex;"><span>plot_gp(mu_s, cov_s, <span style="color:#f1fa8c">&#34;Posterior distribution&#34;</span>, X_test, X_train<span style="color:#ff79c6">=</span>X_train, Y_train<span style="color:#ff79c6">=</span>Y_train, samples<span style="color:#ff79c6">=</span>samples)
-</span></span></code></pre></div><p><img src="../../../img/20231210/cell-3-output-1.png" alt="cell-3-output-1.png"></p>
+</span></span></code></pre></div><p><img alt="cell-3-output-1.png" src="../../../img/20231210/cell-3-output-1.png"></p>
 <h2 id="3-其他基础知识">3. 其他（基础知识）</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">import</span> numpy <span style="color:#ff79c6">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> matplotlib <span style="color:#ff79c6">import</span> pyplot <span style="color:#ff79c6">as</span> plt
@@ -417,7 +441,7 @@
 
 Text(0.5, 1.0, 'Drawing five random samples from a GP prior')
 </code></pre>
-<p><img src="../../../img/20231210/cell-4-output-3.png" alt="cell-4-output-3.png"></p>
+<p><img alt="cell-4-output-3.png" src="../../../img/20231210/cell-4-output-3.png"></p>
 
   </article>
 <div class="px-2 mb-2">

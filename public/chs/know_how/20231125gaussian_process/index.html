@@ -8,7 +8,10 @@
   <title>
   书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process - 徐慧志的个人博客
   </title>
-  <meta name="description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function. GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。 假设" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="1. 理解covariance matrix
+Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。" /><meta name="generator" content="Hugo 0.135.0"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -35,22 +38,36 @@
     </script>
 
   
-  <meta property="og:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process" />
-<meta property="og:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function. GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。 假设" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231125gaussian_process/" /><meta property="article:section" content="know_how" />
-<meta property="article:published_time" content="2023-11-25T18:01:50+08:00" />
-<meta property="article:modified_time" content="2023-11-25T18:01:50+08:00" />
+  <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231125gaussian_process/">
+  <meta property="og:site_name" content="徐慧志的个人博客">
+  <meta property="og:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process">
+  <meta property="og:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。">
+  <meta property="og:locale" content="chs">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="know_how">
+    <meta property="article:published_time" content="2023-11-25T18:01:50+08:00">
+    <meta property="article:modified_time" content="2023-11-25T18:01:50+08:00">
+    <meta property="article:tag" content="Tech">
+    <meta property="article:tag" content="Bayesian">
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process"/>
-<meta name="twitter:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function. GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。 假设"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process">
+  <meta name="twitter:description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。">
 
+  
   <meta itemprop="name" content="书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process">
-<meta itemprop="description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function. GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。 假设"><meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00" />
-<meta itemprop="dateModified" content="2023-11-25T18:01:50+08:00" />
-<meta itemprop="wordCount" content="1414">
-<meta itemprop="keywords" content="tech,bayesian," />
+  <meta itemprop="description" content="1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function.
+GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。">
+  <meta itemprop="datePublished" content="2023-11-25T18:01:50+08:00">
+  <meta itemprop="dateModified" content="2023-11-25T18:01:50+08:00">
+  <meta itemprop="wordCount" content="1414">
+  <meta itemprop="keywords" content="Tech,Bayesian">
 
   
   <meta name="lang" content="chs" />
@@ -265,46 +282,37 @@
 <p>Gaussian Process is a stochastic process used to characterize the distribution over function.</p>
 <p>GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。</p>
 <p>假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。</p>
-<p><img src="../../../img/20231125/gp_1.png" alt="gp_1.png"></p>
+<p><img alt="gp_1.png" src="../../../img/20231125/gp_1.png"></p>
 <p>一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）</p>
 <p>假设mean vector matrix K为：</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7B%5Cmu%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A%5Cmu_1%20%5C%5C%5Cmu_2%20%5Cend%7Bbmatrix%7D" alt="\boldsymbol{\mu} = \begin{bmatrix}\mu_1 \\\mu_2 \end{bmatrix}" title="\boldsymbol{\mu} = \begin{bmatrix} 
-\mu_1 \\mu_2 \end{bmatrix}"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7BK%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0AK_%7B11%7D%26K_%7B12%7D%20%5C%5CK_%7B21%7D%26K_%7B22%7D%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20%0A%5Csigma_%7B11%7D%5E2%26%5Csigma_%7B12%7D%5E2%20%5C%5C%5Csigma_%7B21%7D%5E2%26%5Csigma_%7B22%7D%5E2%20%5Cend%7Bbmatrix%7D" alt="\boldsymbol{K} = \begin{bmatrix}K\_{11}&amp;K\_{12} \\K\_{21}&amp;K\_{22} \end{bmatrix}=\begin{bmatrix}\sigma\_{11}^2&amp;\sigma\_{12}^2 \\\sigma\_{21}^2&amp;\sigma\_{22}^2 \end{bmatrix}" title="\boldsymbol{K} = \begin{bmatrix} 
-K_{11}&amp;K_{12} \K_{21}&amp;K_{22} \end{bmatrix}=\begin{bmatrix} 
-\sigma_{11}^2&amp;\sigma_{12}^2 \\sigma_{21}^2&amp;\sigma_{22}^2 \end{bmatrix}"></p>
+<p><img alt="\\boldsymbol{\\mu} = \\begin{bmatrix}\n\\mu_1 \\\\mu_2 \\end{bmatrix}" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7B%5Cmu%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A%5Cmu_1%20%5C%5C%5Cmu_2%20%5Cend%7Bbmatrix%7D" title="\\boldsymbol{\\mu} = \\begin{bmatrix} \n\\mu_1 \\\\\\mu_2 \\end{bmatrix}"></p>
+<p><img alt="\\boldsymbol{K} = \\begin{bmatrix}\nK_{11}&amp;K_{12} \\K_{21}&amp;K_{22} \\end{bmatrix}=\\begin{bmatrix}\n\\sigma_{11}^2&amp;\\sigma_{12}^2 \\\\sigma_{21}^2&amp;\\sigma_{22}^2 \\end{bmatrix}" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7BK%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0AK_%7B11%7D%26K_%7B12%7D%20%5C%5CK_%7B21%7D%26K_%7B22%7D%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20%0A%5Csigma_%7B11%7D%5E2%26%5Csigma_%7B12%7D%5E2%20%5C%5C%5Csigma_%7B21%7D%5E2%26%5Csigma_%7B22%7D%5E2%20%5Cend%7Bbmatrix%7D" title="\\boldsymbol{K} = \\begin{bmatrix} \nK_{11}&amp;K_{12} \\\\K_{21}&amp;K_{22} \\end{bmatrix}=\\begin{bmatrix} \n\\sigma_{11}^2&amp;\\sigma_{12}^2 \\\\\\sigma_{21}^2&amp;\\sigma_{22}^2 \\end{bmatrix}"></p>
 <p>K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。<br>
 $$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$</p>
 <p>$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$</p>
 <p>有 $E[x_1] = E[x_2] = 0$</p>
 <p>图左边和右边的分布为</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bleft%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" alt="\boldsymbol{x\_{left}} = \begin{bmatrix}x_1 \\x_2 \end{bmatrix} \sim N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0 \\0&amp;1 \end{bmatrix})" title="\boldsymbol{x_{left}} = \begin{bmatrix} 
-x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix} 
-0 \0 \end{bmatrix} ,\begin{bmatrix} 
-1&amp;0 \0&amp;1 \end{bmatrix})"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bright%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260.6%20%5C%5C0.6%261%20%5Cend%7Bbmatrix%7D%29" alt="\boldsymbol{x\_{right}} = \begin{bmatrix}x_1 \\x_2 \end{bmatrix} \sim N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0.6 \\0.6&amp;1 \end{bmatrix})" title="\boldsymbol{x_{right}} = \begin{bmatrix} 
-x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix} 
-0 \0 \end{bmatrix} ,\begin{bmatrix} 
-1&amp;0.6 \0.6&amp;1 \end{bmatrix})"></p>
+<p><img alt="\\boldsymbol{x_{left}} = \\begin{bmatrix}\nx_1 \\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0 \\0&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bleft%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" title="\\boldsymbol{x_{left}} = \\begin{bmatrix} \nx_1 \\\\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix} \n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \n1&amp;0 \\\\0&amp;1 \\end{bmatrix})"></p>
+<p><img alt="\\boldsymbol{x_{right}} = \\begin{bmatrix}\nx_1 \\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0.6 \\0.6&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bright%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260.6%20%5C%5C0.6%261%20%5Cend%7Bbmatrix%7D%29" title="\\boldsymbol{x_{right}} = \\begin{bmatrix} \nx_1 \\\\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix} \n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \n1&amp;0.6 \\\\0.6&amp;1 \\end{bmatrix})"></p>
 <p>左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。</p>
 <h2 id="2-多元高斯分布的边缘分布和条件分布">2. 多元高斯分布的边缘分布和条件分布</h2>
 <p>上述的例子是一个二元高斯分布，它有两个特征，x1和x2。在处理多元高斯分布时，我们通常对特征分布的边缘分布和条件分布感兴趣。</p>
 <p>边缘分布</p>
-<p><img src="https://latex.codecogs.com/svg.latex?p%28x_1%29%20%3D%20N%28x_1%7C%5Cmu_1%2C%20K_%7B11%7D%29" alt="p(x_1) = N(x_1\|\mu_1, K\_{11})" title="p(x_1) = N(x_1|\mu_1, K_{11})"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?p%28x_2%29%20%3D%20N%28x_2%7C%5Cmu_2%2C%20K_%7B22%7D%29" alt="p(x_2) = N(x_2\|\mu_2, K\_{22})" title="p(x_2) = N(x_2|\mu_2, K_{22})"></p>
+<p><img alt="p(x_1) = N(x_1|\\mu_1, K_{11})" src="https://latex.codecogs.com/svg.latex?p%28x_1%29%20%3D%20N%28x_1%7C%5Cmu_1%2C%20K_%7B11%7D%29" title="p(x_1) = N(x_1|\\mu_1, K_{11})"></p>
+<p><img alt="p(x_2) = N(x_2|\\mu_2, K_{22})" src="https://latex.codecogs.com/svg.latex?p%28x_2%29%20%3D%20N%28x_2%7C%5Cmu_2%2C%20K_%7B22%7D%29" title="p(x_2) = N(x_2|\\mu_2, K_{22})"></p>
 <p>假设现在观察到x_2的值为a，那这个信息对x_1的分布会有什么影响吗？我们关注的是在x_2=a的条件下x_1的分布，这是个后验概率。</p>
 <p>The conditional posterior distribution of x_1 given x_2 = a can be written as:</p>
-<p><img src="https://latex.codecogs.com/svg.latex?p%28x_1%7Cx_2%3Da%29%20%3D%20N%28x_1%7C%5Cmu_%7B1%7C2%7D%2C%20K_%7B1%7C2%7D%29" alt="p(x_1\|x_2=a) = N(x_1\|\mu\_{1\|2}, K\_{1\|2})" title="p(x_1|x_2=a) = N(x_1|\mu_{1|2}, K_{1|2})"></p>
+<p><img alt="p(x_1|x_2=a) = N(x_1|\\mu_{1|2}, K_{1|2})" src="https://latex.codecogs.com/svg.latex?p%28x_1%7Cx_2%3Da%29%20%3D%20N%28x_1%7C%5Cmu_%7B1%7C2%7D%2C%20K_%7B1%7C2%7D%29" title="p(x_1|x_2=a) = N(x_1|\\mu_{1|2}, K_{1|2})"></p>
 <p>The conditional posterior mean and variance are defined as follows:</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cmu_%7B1%7C2%7D%20%3D%20%5Cmu_1%20%2B%20K_%7B12%7DK%7B22%7D%5E%7B-1%7D%28a-%20%5Cmu_2%29" alt="\mu\_{1\|2} = \mu_1 + K\_{12}K{22}^{-1}(a- \mu_2)" title="\mu_{1|2} = \mu_1 + K_{12}K{22}^{-1}(a- \mu_2)"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?K_%7B1%7C2%7D%20%3D%20K_%7B11%7D%20-%20K_%7B12%7DK_%7B22%7D%5E%7B-1%7DK_%7B21%7D" alt="K\_{1\|2} = K\_{11} - K\_{12}K\_{22}^{-1}K\_{21}" title="K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}"></p>
+<p><img alt="\\mu_{1|2} = \\mu_1 + K_{12}K{22}^{-1}(a- \\mu_2)" src="https://latex.codecogs.com/svg.latex?%5Cmu_%7B1%7C2%7D%20%3D%20%5Cmu_1%20%2B%20K_%7B12%7DK%7B22%7D%5E%7B-1%7D%28a-%20%5Cmu_2%29" title="\\mu_{1|2} = \\mu_1 + K_{12}K{22}^{-1}(a- \\mu_2)"></p>
+<p><img alt="K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}" src="https://latex.codecogs.com/svg.latex?K_%7B1%7C2%7D%20%3D%20K_%7B11%7D%20-%20K_%7B12%7DK_%7B22%7D%5E%7B-1%7DK_%7B21%7D" title="K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}"></p>
 <p>通过收集data points， 可以不断更新没有观察到的点的后验分布（这里通过x2更新x1），再通过这些分布区预测将来的变化。</p>
 <h2 id="3-从高斯分布抽样">3. 从高斯分布抽样</h2>
 <p>如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布$ N(\mu,\sigma^2)$中采样。</p>
 <h3 id="单变量高斯分布">单变量高斯分布</h3>
 <p>一个常见的方法是首先从标准正态分布$ N(0,1)$ 产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本 $ \sigma x + \mu$ 。</p>
 <p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么$\phi^{-1}(U)$ 将遵循标准正态分布，其中$\phi^{-1}$是标准正态分布累积函数的倒数。</p>
-<p><img src="../../../img/20231125/gp_2.png" alt="gp_2.png"></p>
+<p><img alt="gp_2.png" src="../../../img/20231125/gp_2.png"></p>
 <p>总结：从期望的单变量高斯分布中获取随机样本，通过三个步骤：</p>
 <ol>
 <li>从均匀分布中采样</li>
@@ -316,17 +324,15 @@ x_1 \x_2 \end{bmatrix} \sim N(\begin{bmatrix}
 <p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样？</p>
 <p>从标准的二元正态分布抽样开始，然后进行scale-location变换。</p>
 <p>第一步：如何从标准的二元正态分布</p>
-<p><img src="https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" alt="N(\begin{bmatrix}0 \\0 \end{bmatrix} ,\begin{bmatrix}1&amp;0 \\0&amp;1 \end{bmatrix})" title="N(\begin{bmatrix} 
-0 \0 \end{bmatrix} ,\begin{bmatrix} 
-1&amp;0 \0&amp;1 \end{bmatrix})">中进行采样 $
+<p><img alt="N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0 \\0&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" title="N(\\begin{bmatrix} \n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \n1&amp;0 \\\\0&amp;1 \\end{bmatrix})">中进行采样 $
 \begin{bmatrix}
 x_1 \
 x_2
 \end{bmatrix}^T $</p>
 <p>因为上述的协方差非对角线都是0，那就是说x_1和x_2不相关。那么可以对x_1和x_2进行单独采样。</p>
 <p>根据边缘分布</p>
-<p><img src="https://latex.codecogs.com/svg.latex?x_1%20%5Csim%20N%280%2C%201%29" alt="x_1 \sim N(0, 1)" title="x_1 \sim N(0, 1)"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?x_2%20%5Csim%20N%280%2C%201%29" alt="x_2 \sim N(0, 1)" title="x_2 \sim N(0, 1)"></p>
+<p><img alt="x_1 \\sim N(0, 1)" src="https://latex.codecogs.com/svg.latex?x_1%20%5Csim%20N%280%2C%201%29" title="x_1 \\sim N(0, 1)"></p>
+<p><img alt="x_2 \\sim N(0, 1)" src="https://latex.codecogs.com/svg.latex?x_2%20%5Csim%20N%280%2C%201%29" title="x_2 \\sim N(0, 1)"></p>
 <p>就又变回了从一元标准正态分布中抽样。</p>
 <p>第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 $\sigma x + \mu$的变换就可以得到遵循$N(\mu,\sigma^2)$的分布）。</p>
 <p>可以使用Cholesky decomposition来计算&mdash;&mdash;给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。<br>

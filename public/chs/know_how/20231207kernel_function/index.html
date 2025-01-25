@@ -8,7 +8,14 @@
   <title>
   Kernel Function 核函数 - 徐慧志的个人博客
   </title>
-  <meta name="description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="这篇文章主要解决三个问题：
+
+正态分布的表示
+核函数是什么，有什么类型
+已知先验知识，如何计算后验分布
+
+1. 正态分布的表示
+正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。" /><meta name="generator" content="Hugo 0.135.0"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -35,22 +42,33 @@
     </script>
 
   
-  <meta property="og:title" content="Kernel Function 核函数" />
-<meta property="og:description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231207kernel_function/" /><meta property="article:section" content="know_how" />
-<meta property="article:published_time" content="2023-12-07T18:01:50+08:00" />
-<meta property="article:modified_time" content="2023-12-07T18:01:50+08:00" />
+  <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20231207kernel_function/">
+  <meta property="og:site_name" content="徐慧志的个人博客">
+  <meta property="og:title" content="Kernel Function 核函数">
+  <meta property="og:description" content="这篇文章主要解决三个问题：
+正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。">
+  <meta property="og:locale" content="chs">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="know_how">
+    <meta property="article:published_time" content="2023-12-07T18:01:50+08:00">
+    <meta property="article:modified_time" content="2023-12-07T18:01:50+08:00">
+    <meta property="article:tag" content="Tech">
+    <meta property="article:tag" content="Bayesian">
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Kernel Function 核函数"/>
-<meta name="twitter:description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kernel Function 核函数">
+  <meta name="twitter:description" content="这篇文章主要解决三个问题：
+正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。">
 
+  
   <meta itemprop="name" content="Kernel Function 核函数">
-<meta itemprop="description" content="这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0"><meta itemprop="datePublished" content="2023-12-07T18:01:50+08:00" />
-<meta itemprop="dateModified" content="2023-12-07T18:01:50+08:00" />
-<meta itemprop="wordCount" content="981">
-<meta itemprop="keywords" content="tech,bayesian," />
+  <meta itemprop="description" content="这篇文章主要解决三个问题：
+正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。">
+  <meta itemprop="datePublished" content="2023-12-07T18:01:50+08:00">
+  <meta itemprop="dateModified" content="2023-12-07T18:01:50+08:00">
+  <meta itemprop="wordCount" content="981">
+  <meta itemprop="keywords" content="Tech,Bayesian">
 
   
   <meta name="lang" content="chs" />
@@ -281,40 +299,31 @@
 <h2 id="3-已知先验知识如何计算后验分布">3. 已知先验知识，如何计算后验分布</h2>
 <p>假设我们有三个无噪声观测值，$ D = {(x_1,f(x_1)), (x_2, f(x_2)),(x_3, f(x_3))}$。我们需要对这三个随机变量进行建模。假设mean vector 为 $\mu$， covariance matrix为$K$。</p>
 <p>这三个变量遵循多元变量的高斯分布</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbold%20f%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Af%28x_1%29%20%5C%5Cf%28x_2%29%20%5C%5Cf%28x_3%29%20%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cmu%2C%20K%29%20%3DN%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5C%5C0%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0Ak_%7B11%7D%26k_%7B12%7D%26k_%7B13%7D%20%5C%5Ck_%7B21%7D%26k_%7B22%7D%26k_%7B23%7D%5C%5Ck_%7B31%7D%26k_%7B32%7D%26k_%7B33%7D%5Cend%7Bbmatrix%7D%29" alt="\bold f = \begin{bmatrix}f(x_1) \\f(x_2) \\f(x_3)  \end{bmatrix} \sim N(\mu, K) =N(\begin{bmatrix}0 \\0 \\0\end{bmatrix} ,\begin{bmatrix}k\_{11}&amp;k\_{12}&amp;k\_{13} \\k\_{21}&amp;k\_{22}&amp;k\_{23}\\k\_{31}&amp;k\_{32}&amp;k\_{33}\end{bmatrix})" title="\bold f = \begin{bmatrix} 
-f(x_1) \f(x_2) \f(x_3)  \end{bmatrix} \sim N(\mu, K) =N(\begin{bmatrix} 
-0 \0 \0\end{bmatrix} ,\begin{bmatrix} 
-k_{11}&amp;k_{12}&amp;k_{13} \k_{21}&amp;k_{22}&amp;k_{23}\k_{31}&amp;k_{32}&amp;k_{33}\end{bmatrix})"></p>
+<p><img alt="\\bold f = \\begin{bmatrix}\nf(x_1) \\f(x_2) \\f(x_3)  \\end{bmatrix} \\sim N(\\mu, K) =N(\\begin{bmatrix}\n0 \\0 \\0\\end{bmatrix} ,\\begin{bmatrix}\nk_{11}&amp;k_{12}&amp;k_{13} \\k_{21}&amp;k_{22}&amp;k_{23}\\k_{31}&amp;k_{32}&amp;k_{33}\\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cbold%20f%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Af%28x_1%29%20%5C%5Cf%28x_2%29%20%5C%5Cf%28x_3%29%20%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cmu%2C%20K%29%20%3DN%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5C%5C0%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0Ak_%7B11%7D%26k_%7B12%7D%26k_%7B13%7D%20%5C%5Ck_%7B21%7D%26k_%7B22%7D%26k_%7B23%7D%5C%5Ck_%7B31%7D%26k_%7B32%7D%26k_%7B33%7D%5Cend%7Bbmatrix%7D%29" title="\\bold f = \\begin{bmatrix} \nf(x_1) \\\\f(x_2) \\\\f(x_3)  \\end{bmatrix} \\sim N(\\mu, K) =N(\\begin{bmatrix} \n0 \\\\0 \\\\0\\end{bmatrix} ,\\begin{bmatrix} \nk_{11}&amp;k_{12}&amp;k_{13} \\\\k_{21}&amp;k_{22}&amp;k_{23}\\\\k_{31}&amp;k_{32}&amp;k_{33}\\end{bmatrix})"></p>
 <p>基于这个数据集D，假设我们现在想知道另一个变量$x_4$（它对应的f值用$f_*(x_4)$表示）在其他位置的均值和方差的的分布。</p>
 <p>问题：f 和f* 是同一个分布吗？ 不是，用不同的字母表示不同的分布。</p>
 <p>f和f*的分布为</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbold%20f%20%5Csim%20N%280%2CK%29" alt="\bold f \sim N(0,K)" title="\bold f \sim N(0,K)"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbold%20f_%2A%20%5Csim%20N%280%2Ck%28x_4%2Cx_4%29%29" alt="\bold f\_\* \sim N(0,k(x_4,x_4))" title="\bold f_* \sim N(0,k(x_4,x_4))"></p>
+<p><img alt="\\bold f \\sim N(0,K)" src="https://latex.codecogs.com/svg.latex?%5Cbold%20f%20%5Csim%20N%280%2CK%29" title="\\bold f \\sim N(0,K)"></p>
+<p><img alt="\\bold f_* \\sim N(0,k(x_4,x_4))" src="https://latex.codecogs.com/svg.latex?%5Cbold%20f_%2A%20%5Csim%20N%280%2Ck%28x_4%2Cx_4%29%29" title="\\bold f_* \\sim N(0,k(x_4,x_4))"></p>
 <p>已知先验知识：$p(f_*(x_4)|x_4) = N(f_*(x_4)|0, k(x_4,x_4))$ 和 $p(f|x) = N(f|0,K)$，求后验概率$p(f_*(x_4)|x_4,x,f)$。</p>
 <p>如何求这个后验概率呢？</p>
 <p>我们可以将观察到的数据集与新变量一起构造一个联合分布。</p>
 <p>我们已经知道，数据集D最的观测值f和f(x_4)分别遵循分布</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbold%20f%20%5Csim%20N%280%2CK%29" alt="\bold f \sim N(0,K)" title="\bold f \sim N(0,K)"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?f%28x_4%29%20%5Csim%20N%280%2C%20k%28x_4%2Cx_4%29%29%20%3D%20N%280%2C1%29" alt="f(x_4) \sim N(0, k(x_4,x_4)) = N(0,1)" title="f(x_4) \sim N(0, k(x_4,x_4)) = N(0,1)"></p>
+<p><img alt="\\bold f \\sim N(0,K)" src="https://latex.codecogs.com/svg.latex?%5Cbold%20f%20%5Csim%20N%280%2CK%29" title="\\bold f \\sim N(0,K)"></p>
+<p><img alt="f(x_4) \\sim N(0, k(x_4,x_4)) = N(0,1)" src="https://latex.codecogs.com/svg.latex?f%28x_4%29%20%5Csim%20N%280%2C%20k%28x_4%2Cx_4%29%29%20%3D%20N%280%2C1%29" title="f(x_4) \\sim N(0, k(x_4,x_4)) = N(0,1)"></p>
 <p>假设四个数据的建模为随机变量$f_{new}$</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbold%20f_%7Bnew%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Af%28x_1%29%20%5C%5Cf%28x_2%29%20%5C%5Cf%28x_3%29%20%20%5C%5Cf_%2A%28x_4%29%20%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cmu%2C%20K%29%20%3DN%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5C%5C0%5C%5C0%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0Ak_%7B11%7D%26k_%7B12%7D%26k_%7B13%7D%20%26k_%7B14%7D%20%5C%5Ck_%7B21%7D%26k_%7B22%7D%26k_%7B23%7D%26k_%7B24%7D%5C%5Ck_%7B31%7D%26k_%7B32%7D%26k_%7B33%7D%26k_%7B34%7D%5C%5Ck_%7B41%7D%26k_%7B42%7D%26k_%7B43%7D%26k_%7B44%7D%5Cend%7Bbmatrix%7D%29%20%5Csim%20N%280%2C%5Cbegin%7Bbmatrix%7D%20%0AK%20%26K_%7B4%7D%5C%5CK_%7B4%7D%5ET%26K_%7B44%7D%5Cend%7Bbmatrix%7D%29" alt="\bold f\_{new} = \begin{bmatrix}f(x_1) \\f(x_2) \\f(x_3)  \\f\_\*(x_4)  \end{bmatrix} \sim N(\mu, K) =N(\begin{bmatrix}0 \\0 \\0\\0\end{bmatrix} ,\begin{bmatrix}k\_{11}&amp;k\_{12}&amp;k\_{13} &amp;k\_{14} \\k\_{21}&amp;k\_{22}&amp;k\_{23}&amp;k\_{24}\\k\_{31}&amp;k\_{32}&amp;k\_{33}&amp;k\_{34}\\k\_{41}&amp;k\_{42}&amp;k\_{43}&amp;k\_{44}\end{bmatrix}) \sim N(0,\begin{bmatrix}K &amp;K\_{4}\\K\_{4}^T&amp;K\_{44}\end{bmatrix})" title="\bold f_{new} = \begin{bmatrix} 
-f(x_1) \f(x_2) \f(x_3)  \f_*(x_4)  \end{bmatrix} \sim N(\mu, K) =N(\begin{bmatrix} 
-0 \0 \0\0\end{bmatrix} ,\begin{bmatrix} 
-k_{11}&amp;k_{12}&amp;k_{13} &amp;k_{14} \k_{21}&amp;k_{22}&amp;k_{23}&amp;k_{24}\k_{31}&amp;k_{32}&amp;k_{33}&amp;k_{34}\k_{41}&amp;k_{42}&amp;k_{43}&amp;k_{44}\end{bmatrix}) \sim N(0,\begin{bmatrix} 
-K &amp;K_{4}\K_{4}^T&amp;K_{44}\end{bmatrix})"></p>
+<p><img alt="\\bold f_{new} = \\begin{bmatrix}\nf(x_1) \\f(x_2) \\f(x_3)  \\f_*(x_4)  \\end{bmatrix} \\sim N(\\mu, K) =N(\\begin{bmatrix}\n0 \\0 \\0\\0\\end{bmatrix} ,\\begin{bmatrix}\nk_{11}&amp;k_{12}&amp;k_{13} &amp;k_{14} \\k_{21}&amp;k_{22}&amp;k_{23}&amp;k_{24}\\k_{31}&amp;k_{32}&amp;k_{33}&amp;k_{34}\\k_{41}&amp;k_{42}&amp;k_{43}&amp;k_{44}\\end{bmatrix}) \\sim N(0,\\begin{bmatrix}\nK &amp;K_{4}\\K_{4}^T&amp;K_{44}\\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cbold%20f_%7Bnew%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Af%28x_1%29%20%5C%5Cf%28x_2%29%20%5C%5Cf%28x_3%29%20%20%5C%5Cf_%2A%28x_4%29%20%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cmu%2C%20K%29%20%3DN%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5C%5C0%5C%5C0%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0Ak_%7B11%7D%26k_%7B12%7D%26k_%7B13%7D%20%26k_%7B14%7D%20%5C%5Ck_%7B21%7D%26k_%7B22%7D%26k_%7B23%7D%26k_%7B24%7D%5C%5Ck_%7B31%7D%26k_%7B32%7D%26k_%7B33%7D%26k_%7B34%7D%5C%5Ck_%7B41%7D%26k_%7B42%7D%26k_%7B43%7D%26k_%7B44%7D%5Cend%7Bbmatrix%7D%29%20%5Csim%20N%280%2C%5Cbegin%7Bbmatrix%7D%20%0AK%20%26K_%7B4%7D%5C%5CK_%7B4%7D%5ET%26K_%7B44%7D%5Cend%7Bbmatrix%7D%29" title="\\bold f_{new} = \\begin{bmatrix} \nf(x_1) \\\\f(x_2) \\\\f(x_3)  \\\\f_*(x_4)  \\end{bmatrix} \\sim N(\\mu, K) =N(\\begin{bmatrix} \n0 \\\\0 \\\\0\\\\0\\end{bmatrix} ,\\begin{bmatrix} \nk_{11}&amp;k_{12}&amp;k_{13} &amp;k_{14} \\\\k_{21}&amp;k_{22}&amp;k_{23}&amp;k_{24}\\\\k_{31}&amp;k_{32}&amp;k_{33}&amp;k_{34}\\\\k_{41}&amp;k_{42}&amp;k_{43}&amp;k_{44}\\end{bmatrix}) \\sim N(0,\\begin{bmatrix} \nK &amp;K_{4}\\\\K_{4}^T&amp;K_{44}\\end{bmatrix})"></p>
 <p>并且有</p>
-<p><img src="https://latex.codecogs.com/svg.latex?K_4%20%3D%20k%28x_i%2Cx_4%29" alt="K_4 = k(x_i,x_4)" title="K_4 = k(x_i,x_4)"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?K_%7B44%7D%20%3D%20k%28x_4%2Cx_4%29" alt="K\_{44} = k(x_4,x_4)" title="K_{44} = k(x_4,x_4)"></p>
+<p><img alt="K_4 = k(x_i,x_4)" src="https://latex.codecogs.com/svg.latex?K_4%20%3D%20k%28x_i%2Cx_4%29" title="K_4 = k(x_i,x_4)"></p>
+<p><img alt="K_{44} = k(x_4,x_4)" src="https://latex.codecogs.com/svg.latex?K_%7B44%7D%20%3D%20k%28x_4%2Cx_4%29" title="K_{44} = k(x_4,x_4)"></p>
 <p>就有</p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20%0Af%20%5C%5Cf_%2A%28x_4%29%20%20%5Cend%7Bbmatrix%7D%5Csim%20N%280%2C%5Cbegin%7Bbmatrix%7D%20%0AK%20%26K_%7B4%7D%5C%5CK_%7B4%7D%5ET%26K_%7B44%7D%5Cend%7Bbmatrix%7D%29" alt="\begin{bmatrix}f \\f\_\*(x_4)  \end{bmatrix}\sim N(0,\begin{bmatrix}K &amp;K\_{4}\\K\_{4}^T&amp;K\_{44}\end{bmatrix})" title="\begin{bmatrix} 
-f \f_*(x_4)  \end{bmatrix}\sim N(0,\begin{bmatrix} 
-K &amp;K_{4}\K_{4}^T&amp;K_{44}\end{bmatrix})"></p>
+<p><img alt="\\begin{bmatrix}\nf \\f_*(x_4)  \\end{bmatrix}\\sim N(0,\\begin{bmatrix}\nK &amp;K_{4}\\K_{4}^T&amp;K_{44}\\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cbegin%7Bbmatrix%7D%20%0Af%20%5C%5Cf_%2A%28x_4%29%20%20%5Cend%7Bbmatrix%7D%5Csim%20N%280%2C%5Cbegin%7Bbmatrix%7D%20%0AK%20%26K_%7B4%7D%5C%5CK_%7B4%7D%5ET%26K_%7B44%7D%5Cend%7Bbmatrix%7D%29" title="\\begin{bmatrix} \nf \\\\f_*(x_4)  \\end{bmatrix}\\sim N(0,\\begin{bmatrix} \nK &amp;K_{4}\\\\K_{4}^T&amp;K_{44}\\end{bmatrix})"></p>
 <p>根据多元变量的高斯分布，</p>
-<p><img src="https://latex.codecogs.com/svg.latex?p%28f_%2A%28x_4%29%7Cx_4%2Cx%2Cf%29%20%3D%20N%28f_%2A%28x_4%29%7C%5Cmu_4%2C%20%5CSigma_4%29" alt="p(f\_\*(x_4)\|x_4,x,f) = N(f\_\*(x_4)\|\mu_4, \Sigma_4)" title="p(f_*(x_4)|x_4,x,f) = N(f_*(x_4)|\mu_4, \Sigma_4)"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5Cmu_4%20%3D%20K_4%5ETK%5E%7B-1%7Df" alt="\mu_4 = K_4^TK^{-1}f" title="\mu_4 = K_4^TK^{-1}f"></p>
-<p><img src="https://latex.codecogs.com/svg.latex?%5CSigma_4%20%3D%20K_%7B44%7D%20-%20K_4%5ETK%5E%7B-1%7DK_%7B4%7D" alt="\Sigma_4 = K\_{44} - K_4^TK^{-1}K\_{4}" title="\Sigma_4 = K_{44} - K_4^TK^{-1}K_{4}"></p>
+<p><img alt="p(f_*(x_4)|x_4,x,f) = N(f_*(x_4)|\\mu_4, \\Sigma_4)" src="https://latex.codecogs.com/svg.latex?p%28f_%2A%28x_4%29%7Cx_4%2Cx%2Cf%29%20%3D%20N%28f_%2A%28x_4%29%7C%5Cmu_4%2C%20%5CSigma_4%29" title="p(f_*(x_4)|x_4,x,f) = N(f_*(x_4)|\\mu_4, \\Sigma_4)"></p>
+<p><img alt="\\mu_4 = K_4^TK^{-1}f" src="https://latex.codecogs.com/svg.latex?%5Cmu_4%20%3D%20K_4%5ETK%5E%7B-1%7Df" title="\\mu_4 = K_4^TK^{-1}f"></p>
+<p><img alt="\\Sigma_4 = K_{44} - K_4^TK^{-1}K_{4}" src="https://latex.codecogs.com/svg.latex?%5CSigma_4%20%3D%20K_%7B44%7D%20-%20K_4%5ETK%5E%7B-1%7DK_%7B4%7D" title="\\Sigma_4 = K_{44} - K_4^TK^{-1}K_{4}"></p>
 <p>这样就求出$f_*(x_4)$的分布了。</p>
-<p><img src="../../../img/20231207/kernel.png" alt="gp_2.png"></p>
+<p><img alt="gp_2.png" src="../../../img/20231207/kernel.png"></p>
 <p>如果观测样本是有噪声的，那么可以用$y = f + \epsilon$，即观测值 $y$ 可以被看作是真实值 $f$ 加上随机误差 $\epsilon$ 。</p>
 <p>计算的步骤也是一样，计算公式为</p>
 <p>$$ p(f_*(x_4)|x_4,x,f) = N(f_*(x_4)|\mu_4, \Sigma_4)$$</p>

@@ -4,18 +4,16 @@
     <title>LINK on 徐慧志的个人博客</title>
     <link>https://huizhixu.github.io/chs/link/</link>
     <description>Recent content in LINK on 徐慧志的个人博客</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>chs</language>
-    <lastBuildDate>Mon, 31 Jul 2023 18:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/link/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://huizhixu.github.io/chs/link/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2023-07-31 NLP资源</title>
       <link>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</link>
       <pubDate>Mon, 31 Jul 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</guid>
-      <description>以下链接方便日常工作。
-Tools Visual representation of chunk splitting methods promptperfect Blog RAG-luxiangdong 经典文章 基于LangChain&amp;#43;LLM的本地知识库问答：从企业单文档问答到批量文档问答 课程 Natural Language Processing with Dan Jurafsky and Chris Manning </description>
+      <description>&lt;p&gt;以下链接方便日常工作。&lt;/p&gt;&#xA;&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://chunkviz.up.railway.app/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Visual representation of chunk splitting methods&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://promptperfect.jina.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;promptperfect&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;blog&#34;&gt;Blog&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://luxiangdong.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RAG-luxiangdong&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;经典文章&#34;&gt;经典文章&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/v_JULY_v/article/details/131552592&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;基于LangChain+LLM的本地知识库问答：从企业单文档问答到批量文档问答&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;课程&#34;&gt;课程&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLoROMvodv4rOFZnDyrlW3-nI7tMLtmiJZ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Natural Language Processing with Dan Jurafsky and Chris Manning&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
     </item>
-    
   </channel>
 </rss>

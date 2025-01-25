@@ -1,7 +1,7 @@
 ---
 author: "Huizhi"
 title:  "2024-08-24 modern family S02E04 Halloween" 
-date: 2024-04-17T20:31:50+08:00 
+date: 2024-08-24T20:31:50+08:00 
 description: "Sitcomes will have holiday specials"
 tags: ["life","2024"]
 draft: false

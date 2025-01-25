@@ -1,254 +1,201 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tech on 徐慧志的个人博客</title>
+    <title>Tech on 徐慧志的个人博客</title>
     <link>https://huizhixu.github.io/chs/tags/tech/</link>
-    <description>Recent content in tech on 徐慧志的个人博客</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Tech on 徐慧志的个人博客</description>
+    <generator>Hugo</generator>
     <language>chs</language>
-    <lastBuildDate>Sat, 25 May 2024 16:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 May 2024 16:01:50 +0800</lastBuildDate>
+    <atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用大模型理解爆火的KAN网络</title>
       <link>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</link>
       <pubDate>Sat, 25 May 2024 16:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</guid>
-      <description>五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。 一、KAN是什么？ Kolmogorov-Arnold 定理是数学领域</description>
+      <description>&lt;p&gt;五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。&lt;/p&gt;&#xA;&lt;h2 id=&#34;一kan是什么&#34;&gt;一、KAN是什么？&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Kolmogorov-Arnold 定理是数学领域的一个里程碑，它揭示了多元函数能够通过一组更简单的函数来近似表示的原理。&lt;/strong&gt; 在神经网络的研究领域，来自 MIT 的杰出研究者 Ziming Liu 将这一定理巧妙地融入，提出了创新的 KANs（&lt;strong&gt;Kolmogorov-Arnold Networks&lt;/strong&gt;）概念。（GitHub地址：https://github.com/KindXiaoming/pykan）。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>大型语言模型在「想」什么呢？ — 浅谈大型语言模型的可解释性</title>
       <link>https://huizhixu.github.io/chs/know_how/20240513explainable_llm/</link>
       <pubDate>Mon, 13 May 2024 19:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240513explainable_llm/</guid>
-      <description>Explainable和Interpretable的区别： Explainable： 事物本身是黑箱，我们尝试去解释它的行为或输出。 Interp</description>
+      <description>&lt;p&gt;Explainable和Interpretable的区别：&lt;/p&gt;&#xA;&lt;p&gt;Explainable： 事物本身是黑箱，我们尝试去解释它的行为或输出。&lt;/p&gt;&#xA;&lt;p&gt;Interpretable： 事物本身不是黑箱，其工作原理是清晰和可以理解的。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>用大语言模型打造AI Agent</title>
       <link>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</link>
       <pubDate>Mon, 22 Apr 2024 23:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</guid>
-      <description>人类需要的不仅仅是大模型，而是能做复杂的多步骤的任务的大模型，Agent因此诞生了。 知名的AI Agent 1. AutoGPT: https://github.com/Significant-Gravitas/AutoGPT AutoGPT是一个由Signific</description>
+      <description>&lt;p&gt;人类需要的不仅仅是大模型，而是能做复杂的多步骤的任务的大模型，Agent因此诞生了。&lt;/p&gt;&#xA;&lt;h1 id=&#34;知名的ai-agent&#34;&gt;知名的AI Agent&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;1. AutoGPT:  &lt;a href=&#34;https://github.com/Significant-Gravitas/AutoGPT&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/Significant-Gravitas/AutoGPT&lt;/a&gt;&#xA;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;AutoGPT是一个由Significant Gravitas开发的开源项目,旨在创建一个自主的AI代理,能够持续地学习、成长并完成各种任务。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>让AI村民组成虚拟村庄会发生什么事</title>
       <link>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</link>
       <pubDate>Sun, 14 Apr 2024 19:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</guid>
-      <description>去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢</description>
+      <description>&lt;p&gt;去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>大型语言模型修炼史(第三阶段)</title>
       <link>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</link>
       <pubDate>Sat, 13 Apr 2024 19:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</guid>
-      <description>第三阶段：参与实战，打磨技巧 如何克服第二阶段的局限性呢？ 关键是用第一阶段的参数作为初始参数。 （贝叶斯定理这不就来了嘛！） 所以第三阶段是由第一</description>
+      <description>&lt;h1 id=&#34;第三阶段参与实战打磨技巧&#34;&gt;第三阶段：参与实战，打磨技巧&lt;/h1&gt;&#xA;&lt;p&gt;如何克服第二阶段的局限性呢？&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;关键是用第一阶段的参数作为初始参数。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;（贝叶斯定理这不就来了嘛！）&lt;/p&gt;&#xA;&lt;p&gt;所以第三阶段是由第一阶段和第二阶段组合而成的：&lt;/p&gt;&#xA;&lt;p&gt;第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>大型语言模型修炼史（第一、二阶段）</title>
       <link>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</link>
       <pubDate>Fri, 05 Apr 2024 20:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</guid>
-      <description>背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。 大模型可以看成是一个函数。$$ f(未完成的句子</description>
+      <description>&lt;h1 id=&#34;背景知识&#34;&gt;背景知识&lt;/h1&gt;&#xA;&lt;p&gt;大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。&lt;/p&gt;&#xA;&lt;p&gt;大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>改进量的期望 Expected Improvement</title>
       <link>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</link>
       <pubDate>Tue, 05 Mar 2024 20:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</guid>
-      <description>在看正文之前，先复习一下期望（Expectation）： 在统计学和概率论中，期望是一个衡量随机变量取值的中心趋势的指标。 对于一个连续随机变量</description>
+      <description>&lt;p&gt;在看正文之前，先复习一下期望（Expectation）：&lt;/p&gt;&#xA;&lt;p&gt;在统计学和概率论中，期望是一个衡量随机变量取值的中心趋势的指标。&lt;/p&gt;&#xA;&lt;p&gt;对于一个连续随机变量&lt;em&gt;X&lt;/em&gt;，其期望值可以通过以下公式计算：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Bayesian Optimization</title>
       <link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link>
       <pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</guid>
-      <description>贝叶斯优化有重要的两步步： 构造代理模型（surrogate model） 由获取函数（acquisition function）来生成采样建议 贝叶</description>
+      <description>&lt;p&gt;贝叶斯优化有重要的两步步：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;构造代理模型（surrogate model）&lt;/li&gt;&#xA;&lt;li&gt;由获取函数（acquisition function）来生成采样建议&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>grobid的使用</title>
       <link>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description>最近被文本分块虐得不轻，看到有人介绍grobid，赶紧用上了。 1. Grobid 介绍 Grobid 的全称是Generation of Bibliographic Data。它用机器学习来解析、提取文</description>
+      <description>&lt;p&gt;最近被文本分块虐得不轻，看到有人介绍grobid，赶紧用上了。&lt;/p&gt;&#xA;&lt;h3 id=&#34;1-grobid-介绍&#34;&gt;1. Grobid 介绍&lt;/h3&gt;&#xA;&lt;p&gt;Grobid 的全称是Generation of Bibliographic Data。它用机器学习来解析、提取文档。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gaussian Process Regression with GPyTorch</title>
       <link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link>
       <pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</guid>
-      <description>这个例子主要是利用GPytorch，来实现高斯过程回归。 计算Mean zero mean function gpytorch.means.ZeroMean() constant mean function gpytorch.means.ConstantMean() linear mean function gpytorch.means.LinearMean() 计算Covariance RBFKernel gpytorch.kernels.RBFKernel() adding a scaling coefficient: kernels.ScaleKernel(gpytorch.kernels.RBFKernel()) 一般会在核</description>
+      <description>&lt;p&gt;这个例子主要是利用GPytorch，来实现高斯过程回归。&lt;/p&gt;&#xA;&lt;h1 id=&#34;计算mean&#34;&gt;计算Mean&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;zero mean function &lt;code&gt;gpytorch.means.ZeroMean()&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;constant mean function &lt;code&gt;gpytorch.means.ConstantMean()&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;linear mean function &lt;code&gt;gpytorch.means.LinearMean()&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;计算covariance&#34;&gt;计算Covariance&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;RBFKernel &lt;code&gt;gpytorch.kernels.RBFKernel()&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;adding a scaling coefficient: &lt;code&gt;kernels.ScaleKernel(gpytorch.kernels.RBFKernel())&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;一般会在核函数的输出上添加缩放系数。&lt;/p&gt;&#xA;&lt;p&gt;在核函数的输出上添加缩放系数是为了调整核函数的影响力。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gaussian Process in Practice 高斯过程实践</title>
       <link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link>
       <pubDate>Sun, 10 Dec 2023 18:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid>
-      <description>这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。 1. 先验分布 1.1 多变量高斯分布 创建一个包含n个候</description>
+      <description>&lt;p&gt;这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-先验分布&#34;&gt;1. 先验分布&lt;/h2&gt;&#xA;&lt;h4 id=&#34;11-多变量高斯分布&#34;&gt;1.1 多变量高斯分布&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;创建一个包含n个候选输入位置的列表${x_i，i=1,&amp;hellip;,n}$&lt;/li&gt;&#xA;&lt;li&gt;初始化均值向量μ和协方差矩阵K（含n x n个元素）&#xA;&lt;ul&gt;&#xA;&lt;li&gt;假设x_1和x_2是多维的矩阵。x_1是一个 m* d的矩阵，x_2是一个n&lt;em&gt;d的矩阵，那么K是一个m&lt;/em&gt;n的矩阵，$K[i,j] = k(x_1[i,:], x_2[j,:])$&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;执行Cholesky分解K=LL T来获得L&lt;/li&gt;&#xA;&lt;li&gt;通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Kernel Function 核函数</title>
       <link>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</link>
       <pubDate>Thu, 07 Dec 2023 18:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid>
-      <description>这篇文章主要解决三个问题： 正态分布的表示 核函数是什么，有什么类型 已知先验知识，如何计算后验分布 1. 正态分布的表示 正态分布一般表示为$f \sim N(0</description>
+      <description>&lt;p&gt;这篇文章主要解决三个问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;正态分布的表示&lt;/li&gt;&#xA;&lt;li&gt;核函数是什么，有什么类型&lt;/li&gt;&#xA;&lt;li&gt;已知先验知识，如何计算后验分布&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;1-正态分布的表示&#34;&gt;1. 正态分布的表示&lt;/h2&gt;&#xA;&lt;p&gt;正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title>
       <link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link>
       <pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid>
-      <description>1. 理解covariance matrix Gaussian Process is a stochastic process used to characterize the distribution over function. GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。 假设</description>
+      <description>&lt;h2 id=&#34;1-理解covariance-matrix&#34;&gt;1. 理解covariance matrix&lt;/h2&gt;&#xA;&lt;p&gt;Gaussian Process is a stochastic process used to characterize the distribution over function.&lt;/p&gt;&#xA;&lt;p&gt;GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。&lt;/p&gt;&#xA;&lt;p&gt;假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics</title>
       <link>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</link>
       <pubDate>Mon, 20 Nov 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</guid>
-      <description>Abstract types 第一种分类 data uncertainty (measurement noise) model uncertainty ( limited data) 第二种分类 epistemic uncertainty 认知上的不确定性，通常是由于没有足够的知识（数据）而产生 can be reducible 分为两类 model-form uncertainty 由于模型的选择导致，</description>
+      <description>&lt;p&gt;Abstract&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;types&#xA;&lt;ul&gt;&#xA;&lt;li&gt;第一种分类&#xA;&lt;ul&gt;&#xA;&lt;li&gt;data uncertainty (measurement noise)&lt;/li&gt;&#xA;&lt;li&gt;model uncertainty ( limited data)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;第二种分类&#xA;&lt;ul&gt;&#xA;&lt;li&gt;epistemic uncertainty&#xA;&lt;ul&gt;&#xA;&lt;li&gt;认知上的不确定性，通常是由于没有足够的知识（数据）而产生&lt;/li&gt;&#xA;&lt;li&gt;can be reducible&lt;/li&gt;&#xA;&lt;li&gt;分为两类&#xA;&lt;ul&gt;&#xA;&lt;li&gt;model-form uncertainty&#xA;&lt;ul&gt;&#xA;&lt;li&gt;由于模型的选择导致，例如architectures, activation functions or kernel functions&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;parameter uncertainty&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在训练过程产生，由于数据不够导致&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;aleatory uncertainty&#xA;&lt;ul&gt;&#xA;&lt;li&gt;stems from physical systems, 具有随机性, cannot be reducible&lt;/li&gt;&#xA;&lt;li&gt;e.g. noises&lt;/li&gt;&#xA;&lt;li&gt;这种类型的不确定性在ML模型里面被看成是似然函数的一部分(a part of the likelihood function)&lt;/li&gt;&#xA;&lt;li&gt;也被叫做data uncertainty&lt;/li&gt;&#xA;&lt;li&gt;捕捉这种不确定性的方式有：同方差 homoscedastic和异方差 heteroscedastic&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;例子：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;test data和train data不同分布：epistemic uncertainty (model performs poorer in extrapolation than in interpolation)&lt;/li&gt;&#xA;&lt;li&gt;测量数据由仪器导致的误差是aleatory Unc， 大试如果由于精度原因导致，则属于epistemic unc，因为提高精度可以减少这个误差&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;causes&lt;/li&gt;&#xA;&lt;li&gt;methods:&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Gaussian process regression&#xA;&lt;ul&gt;&#xA;&lt;li&gt;a ML method with UQ capability&lt;/li&gt;&#xA;&lt;li&gt;一般不用来quantify uncertainty of a final surrogate&lt;/li&gt;&#xA;&lt;li&gt;一般用来在高度不确定的采样空间里采样，来减少训练样本的数量&#xA;&lt;ul&gt;&#xA;&lt;li&gt;to build an accurate surrogate within some lower and upper bounds of input variables&lt;/li&gt;&#xA;&lt;li&gt;to find a globally optimally design for black-box objective function&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;一般不评估GPR的UQ质量&#xA;&lt;ul&gt;&#xA;&lt;li&gt;因为预测一般在pre-defined design bounds&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Bayesian neural network&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Monte Carlo dropout as an alternative to traditional Bayesian neural network&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;neural network ensemble&#xA;&lt;ul&gt;&#xA;&lt;li&gt;neural network ensemble consisting of multiple neural networks&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;deterministic UQ methods&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;metrics&#xA;&lt;ul&gt;&#xA;&lt;li&gt;classification&#xA;&lt;ul&gt;&#xA;&lt;li&gt;probability can be viewed as uncertainty&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;regression&#xA;&lt;ul&gt;&#xA;&lt;li&gt;confidence interval :&#xA;&lt;ul&gt;&#xA;&lt;li&gt;没看懂： prediction may be 120 ± 15, in weeks, which represents a two-sided 95% confidence interval (i.e.,∼1.96 standard deviations subtracted from or added to the mean estimate assuming the model-predicted RUL follows a Gaussian distribution).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
     <item>
       <title>2023-07-20Redash V10安装（在Ubuntu系统上用docker部署安装）</title>
       <link>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/</link>
       <pubDate>Thu, 20 Jul 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230720redash%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/</guid>
-      <description>市面上的Redash教程太混乱了，官方发布了不同的安装方式，但是写得不是很明白。基本上都会有一个重复安装和卸载的过程，是正常的。 这次安装的经</description>
+      <description>&lt;p&gt;市面上的Redash教程太混乱了，官方发布了不同的安装方式，但是写得不是很明白。基本上都会有一个重复安装和卸载的过程，是正常的。&lt;/p&gt;&#xA;&lt;p&gt;这次安装的经验就是：&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-07-19Ubuntu上安装Docker</title>
       <link>https://huizhixu.github.io/chs/know_how/20230719ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85docker/</link>
       <pubDate>Wed, 19 Jul 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230719ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85docker/</guid>
-      <description>一、设置Docker Repository 升级apt-get到最新 sudo apt-get update sudo apt-get install ca-certificates curl gnupg 添加Docker的官方GPG key sudo install -m 0755 -d /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg sudo chmod a+r /etc/apt/keyrings/docker.gpg 设置仓库</description>
+      <description>&lt;h1 id=&#34;一设置docker-repository&#34;&gt;一、设置Docker Repository&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;升级&lt;code&gt;apt-get&lt;/code&gt;到最新&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;get update&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;get install ca&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;certificates curl gnupg&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;添加Docker的官方GPG key&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo install &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;m &lt;span style=&#34;color:#bd93f9&#34;&gt;0755&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;d &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;etc&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;apt&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;keyrings&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;fsSL https:&lt;span style=&#34;color:#ff79c6&#34;&gt;//&lt;/span&gt;download&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;docker&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;com&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;linux&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;ubuntu&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;gpg &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt; sudo gpg &lt;span style=&#34;color:#ff79c6&#34;&gt;--&lt;/span&gt;dearmor &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;o &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;etc&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;apt&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;keyrings&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;docker&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;gpg&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chmod a&lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt;r &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;etc&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;apt&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;keyrings&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;docker&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;gpg&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;&#xA;&lt;li&gt;设置仓库&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;echo \&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;deb [arch=&amp;#34;&lt;/span&gt;$(dpkg &lt;span style=&#34;color:#ff79c6&#34;&gt;--&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;architecture)&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34; signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu &lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;  &amp;#34;&lt;/span&gt;$(&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;etc&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;os&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;release &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; echo &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;$VERSION_CODENAME&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34; stable&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt; \&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sudo tee &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;etc&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;apt&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;sources&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;list&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;d&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;docker&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;list &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;dev&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt;null&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;二安装docker-engine&#34;&gt;二、安装Docker Engine&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;升级apt-get到最新&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;get update&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;&#xA;&lt;li&gt;安装最新版本的Docker Engine， containerd和Docker Compose&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;get install docker&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;ce docker&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;ce&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;cli containerd&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;io docker&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;buildx&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;plugin docker&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;compose&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;plugin&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;&#xA;&lt;li&gt;确保安装成功&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo docker run hello&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;world&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;三配置docker环境&#34;&gt;三、配置Docker环境&lt;/h1&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;#配置log文件大小&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo sh &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;c &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;mkdir /etc/docker &amp;amp;&amp;amp; cat &amp;gt; /etc/docker/daemon.json &amp;lt;&amp;lt; EOF&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;log-driver&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;json-file&amp;#34;&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;log-opts&amp;#34;&lt;/span&gt;:{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;max-size&amp;#34;&lt;/span&gt; :&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;50m&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;max-file&amp;#34;&lt;/span&gt;:&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;EOF&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;#将当前用户加入docker组&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo usermod &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;aG docker $USER&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;#启动docker服务并配置自启&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo systemctl start docker &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo systemctl enable docker&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;四参考&#34;&gt;四、参考&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/engine/install/ubuntu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Docker官网安装&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
     </item>
-    
     <item>
       <title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title>
       <link>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid>
-      <description>在GPU上运行中文LLaMa模型，主要是按照 https://github.com/ymcui/Chinese-LLaMA-Alpaca 这个仓库的方法。 中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的</description>
+      <description>&lt;p&gt;在GPU上运行中文LLaMa模型，主要是按照 &lt;a href=&#34;https://github.com/ymcui/Chinese-LLaMA-Alpaca&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/ymcui/Chinese-LLaMA-Alpaca&lt;/a&gt;&#xA; 这个仓库的方法。&#xA;中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-03-05用随机梯度下降来优化人生【转载】</title>
       <link>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link>
       <pubDate>Sun, 05 Mar 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid>
-      <description>要有目标。 你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。 目标要大。 不管是人生目标</description>
+      <description>&lt;h2 id=&#34;要有目标&#34;&gt;要有目标。&lt;/h2&gt;&#xA;&lt;p&gt;你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。&lt;/p&gt;&#xA;&lt;h2 id=&#34;目标要大&#34;&gt;目标要大。&lt;/h2&gt;&#xA;&lt;p&gt;不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-03-01我都用chatGPT干了啥【汇总】</title>
       <link>https://huizhixu.github.io/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</link>
       <pubDate>Wed, 01 Mar 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230301%E6%88%91%E9%83%BD%E7%94%A8chatgpt%E5%B9%B2%E4%BA%86%E5%95%A5/</guid>
-      <description>写诗 帮我写程序 帮我debug 帮我构造数据 帮我优化Resume 梳理NLP知识时，解释不清晰的名词，并给出例子</description>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;写诗&lt;/li&gt;&#xA;&lt;li&gt;帮我写程序&lt;/li&gt;&#xA;&lt;li&gt;帮我debug&lt;/li&gt;&#xA;&lt;li&gt;帮我构造数据&lt;/li&gt;&#xA;&lt;li&gt;帮我优化Resume&lt;/li&gt;&#xA;&lt;li&gt;梳理NLP知识时，解释不清晰的名词，并给出例子&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
     </item>
-    
     <item>
       <title>2023-02-20 chatGPT有可能是个骗局吗</title>
       <link>https://huizhixu.github.io/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</link>
       <pubDate>Mon, 20 Feb 2023 20:07:58 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230220chatgpt%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%AA%E9%AA%97%E5%B1%80%E5%90%97/</guid>
-      <description>昨天读了一篇文章：ChatGPT is a blurry JPEG of the web 。中文翻译在这：ChatGPT是网上所有文本的模糊图像 ，无比同意这篇文章说的，&amp;ldquo;有</description>
+      <description>&lt;p&gt;昨天读了一篇文章：&lt;a href=&#34;https://www.newyorker.com/tech/annals-of-technology/chatGPT-is-a-blurry-jpeg-of-the-web&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChatGPT is a blurry JPEG of the web&lt;/a&gt;&#xA;。中文翻译在这：&lt;a href=&#34;http://www.chinawriter.com.cn/n1/2023/0213/c404090-32622497.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ChatGPT是网上所有文本的模糊图像&lt;/a&gt;&#xA; ，无比同意这篇文章说的，&amp;ldquo;有一种模糊是可以接受的，那就是用不同的词重新陈述信息；对于完全捏造的模糊，当我们寻找事实时，我们认为这是不可接受的&amp;rdquo;。这就是我使用chatGPT的感受。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-02-16 如何理解Seq2seq</title>
       <link>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link>
       <pubDate>Thu, 16 Feb 2023 18:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid>
-      <description>先搞清楚几个基本概念： Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和dec</description>
+      <description>&lt;p&gt;先搞清楚几个基本概念：&lt;/p&gt;&#xA;&lt;p&gt;Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-02-13 chatGPT 在攻陷所有人</title>
       <link>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link>
       <pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid>
-      <description>承认吧，现在全世界最火就是chatGPT。 去参加了王建硕老师那边组织的关于chatGPT的讨论。 会上的讨论：对新技术进行哲学思考无疑是最让我</description>
+      <description>&lt;p&gt;承认吧，现在全世界最火就是chatGPT。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;去参加了王建硕老师那边组织的关于chatGPT的讨论。&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。&lt;/li&gt;&#xA;&lt;li&gt;从心理学和教育学来看，也开拓了我的眼界。&lt;/li&gt;&#xA;&lt;li&gt;从高效使用和商业化来看，它无疑会改变很多人的生活。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;chatGPT的使用感受很不错。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-02-09 如何理解自注意力机制</title>
       <link>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link>
       <pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid>
-      <description>理解输入与输出 输入有可能是一个 vector，有可能是多个 vector 输出： 一个序列对应一个 label。the whole sequence has a label 例子：在情感分析里面，This is</description>
+      <description>&lt;h2 id=&#34;理解输入与输出&#34;&gt;理解输入与输出&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;输入有可能是一个 vector，有可能是多个 vector&lt;/li&gt;&#xA;&lt;li&gt;输出：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;一个序列对应一个 label。the whole sequence has a label&#xA;&lt;ul&gt;&#xA;&lt;li&gt;例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;一个 vector 对应一个 label。一个序列对应多个 label。&#xA;&lt;ul&gt;&#xA;&lt;li&gt;例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;模型决定 label 的个数。seq2seq 任务&#xA;&lt;ul&gt;&#xA;&lt;li&gt;例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;一个vector对应一个label的情况即输入和输出一样多也叫做sequence-labeling&#34;&gt;一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;例子： I saw a saw&lt;/li&gt;&#xA;&lt;li&gt;如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用&lt;/li&gt;&#xA;&lt;li&gt;弊端：&#xA;&lt;ul&gt;&#xA;&lt;li&gt;用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2023-01-31 如何用HuggingFace对不均衡类别进行分类</title>
       <link>https://huizhixu.github.io/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</link>
       <pubDate>Tue, 31 Jan 2023 19:31:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20230131%E5%A6%82%E4%BD%95%E7%94%A8huggingface%E5%AF%B9%E4%B8%8D%E5%9D%87%E8%A1%A1%E7%B1%BB%E5%88%AB%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB/</guid>
-      <description>数据均衡 做文本分类时，如果类别数量差别不大，可以用hugging face的Trainer类，训练代码如下： model = BertForSequenceClassification.from_pretrained(&amp;#34;bert-base-chinese&amp;#34;, num_labels=len(labels), problem_type=&amp;#34;multi_label_classification&amp;#34;, id2label=id2label, label2id=label2id) tokenizer = BertTokenizerFast.from_pretrained(&amp;#34;bert-base-chinese&amp;#34;) def compute_metrics(p): preds = p.predictions[0] if isinstance(p.predictions,</description>
+      <description>&lt;h2 id=&#34;数据均衡&#34;&gt;数据均衡&lt;/h2&gt;&#xA;&lt;p&gt;做文本分类时，如果类别数量差别不大，可以用hugging face的Trainer类，训练代码如下：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;model &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; BertForSequenceClassification&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;from_pretrained(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;bert-base-chinese&amp;#34;&lt;/span&gt;, num_labels&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;len&lt;/span&gt;(labels),&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                      problem_type&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;multi_label_classification&amp;#34;&lt;/span&gt;, id2label&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;id2label,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                      label2id&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;label2id)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tokenizer &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; BertTokenizerFast&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;from_pretrained(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;bert-base-chinese&amp;#34;&lt;/span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;compute_metrics&lt;/span&gt;(p):&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    preds &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; p&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;predictions[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;isinstance&lt;/span&gt;(p&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;predictions,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;tuple&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; p&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;predictions&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; multi_label_metrics(&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        predictions&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;preds,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        labels&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;p&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;label_ids)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; result&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;training_args &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; TrainingArguments(&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    output_dir&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;model_directory, &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    learning_rate&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;5e-5&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    per_device_train_batch_size&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    per_device_eval_batch_size&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    num_train_epochs&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;3&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    dataloader_drop_last&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;True&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    weight_decay&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;0.01&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    save_steps&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;50&lt;/span&gt;,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    logging_steps&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;50&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;trainer &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Trainer(&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    model&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;model,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;training_args,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    train_dataset&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;data[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;train&amp;#34;&lt;/span&gt;],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    eval_dataset&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;data[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;train&amp;#34;&lt;/span&gt;],&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    tokenizer&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;tokenizer,&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    compute_metrics&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;compute_metrics&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;trainer&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;train()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;trainer&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;evaluate()&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;model_directory 是模型存储路径，data是数据。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2022-12-10 HuggingFace的Dataset的使用</title>
       <link>https://huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 10 Dec 2022 18:51:00 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20221210huggingface%E7%9A%84dataset%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description>hub上的数据集 （这里不是互联网上任意的数据集，专指Huggingface的hub上面的，就是可以用关键字直接下载的） 数据集可以在https</description>
+      <description>&lt;h2 id=&#34;hub上的数据集a-namedatasets-from-the-huba&#34;&gt;hub上的数据集&lt;a name=&#34;datasets from the hub&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;（这里不是互联网上任意的数据集，专指Huggingface的hub上面的，就是可以用关键字直接下载的）&lt;/p&gt;&#xA;&lt;p&gt;数据集可以在&lt;a href=&#34;https://huggingface.co/datasets&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://huggingface.co/datasets&lt;/a&gt;&#xA; 找到，另外也可以用**&lt;code&gt;datasets.list_datasets()&lt;/code&gt;&#xA;来看有什么数据集，然后通过关键字下载。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2022-10-24 在程序里起名有很多要注意的</title>
       <link>https://huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</link>
       <pubDate>Mon, 24 Oct 2022 20:51:00 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20221024%E5%A6%82%E4%BD%95%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E8%B5%B7%E5%90%8D/</guid>
-      <description>最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 data_process， get_da</description>
+      <description>&lt;p&gt;最近检查以前写的代码，发现我给不同的功能函数或者变量起的名不是很精确。 比如数据处理这个阶段，就很容易取 &lt;code&gt;data_process&lt;/code&gt;， &lt;code&gt;get_data&lt;/code&gt;，&lt;code&gt;process_data&lt;/code&gt;，&lt;code&gt;data_preprocess&lt;/code&gt;，&lt;code&gt;deal_with_data&lt;/code&gt; 这些名字。再比如很多类的主入口，我经常会写 &lt;code&gt;run()&lt;/code&gt;、&lt;code&gt;xx_driver()&lt;/code&gt; 等等。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>2022-08-02 用 HanLP 分词时如何自定义词典</title>
       <link>https://huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</link>
       <pubDate>Tue, 02 Aug 2022 17:51:00 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20220802%E7%94%A8hanlp%E5%88%86%E8%AF%8D%E6%97%B6%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8/</guid>
-      <description>在分词的过程中，碰到一个这样的句子： &amp;lsquo;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&amp;rsquo; import</description>
+      <description>&lt;p&gt;在分词的过程中，碰到一个这样的句子：&lt;/p&gt;&#xA;&lt;p&gt;&amp;lsquo;&lt;code&gt;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&lt;/code&gt;&amp;rsquo;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; hanlp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tok &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; hanlp&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;load(hanlp&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;pretrained&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;tok&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;COARSE_ELECTRA_SMALL_ZH)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sentence &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;公司产品品质持续提升，单晶硅片用料比例大幅高于行业平均，单晶硅料价格上涨。&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sen_list &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; tok(sentence)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;print&lt;/span&gt;(sen_list)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;公司&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;产品&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;品质&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;持续&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;提升&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;，&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;单晶&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;硅&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;片&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;用&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;料&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;比例&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;大幅&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;高于&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;行业&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;平均&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;，&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;单晶&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;硅&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;料&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;价格&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;上涨&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;。&amp;#39;&lt;/span&gt;]&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以看出来，这里“单晶硅片”，“单晶硅料”， 被分为了“单晶”“硅”“料”和“单晶”“硅”“片”。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

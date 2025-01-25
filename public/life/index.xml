@@ -4,19 +4,23 @@
     <title>Blog on PoirotMore</title>
     <link>https://huizhixu.github.io/life/</link>
     <description>Recent content in Blog on PoirotMore</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 17 Apr 2024 20:31:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/life/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Nov 2024 20:31:50 +0800</lastBuildDate>
+    <atom:link href="https://huizhixu.github.io/life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024-11-19 Test my new MBP</title>
+      <link>https://huizhixu.github.io/life/test_mbp/</link>
+      <pubDate>Tue, 19 Nov 2024 20:31:50 +0800</pubDate>
+      <guid>https://huizhixu.github.io/life/test_mbp/</guid>
+      <description>&lt;p&gt;Oh-my-zsh is powerful.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>2024-08-24 modern family S02E04 Halloween</title>
       <link>https://huizhixu.github.io/life/mf_s02e04_summary/</link>
-      <pubDate>Wed, 17 Apr 2024 20:31:50 +0800</pubDate>
-      
+      <pubDate>Sat, 24 Aug 2024 20:31:50 +0800</pubDate>
       <guid>https://huizhixu.github.io/life/mf_s02e04_summary/</guid>
-      <description>Sitcoms have holiday specials. Christmas, Thanksgiving, Halloween are the three biggest holidays, Besides these, Valentine&amp;rsquo;s Day is another major holiday that is commonly portrayed in sitcom storylines. Those are four main holidays.
-The first season has a Christmas Special. The second season will feature a Halloween Special.
-Halloween is celebrated on October 31st and it has various traditions, such as trick-or-treat. On Halloween, children will go to people&amp;rsquo;s doors and say &amp;ldquo;trick or treat&amp;rdquo;.</description>
+      <description>&lt;p&gt;Sitcoms have holiday specials. Christmas, Thanksgiving, Halloween are the three biggest holidays, Besides these, Valentine&amp;rsquo;s Day is another major holiday that is commonly portrayed in sitcom storylines. Those are four main holidays.&lt;/p&gt;&#xA;&lt;p&gt;The first season has a Christmas Special. The second season will feature a Halloween Special.&lt;/p&gt;&#xA;&lt;p&gt;Halloween  is celebrated on October 31st and it has various traditions, such as trick-or-treat. On Halloween, children will go to people&amp;rsquo;s doors and say &amp;ldquo;trick or treat&amp;rdquo;. The homeowners can either give them candy or they will play a trick on them.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

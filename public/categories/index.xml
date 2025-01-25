@@ -4,7 +4,8 @@
     <title>Categories on PoirotMore</title>
     <link>https://huizhixu.github.io/categories/</link>
     <description>Recent content in Categories on PoirotMore</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://huizhixu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="https://huizhixu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

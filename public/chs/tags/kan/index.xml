@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kan on 徐慧志的个人博客</title>
+    <title>Kan on 徐慧志的个人博客</title>
     <link>https://huizhixu.github.io/chs/tags/kan/</link>
-    <description>Recent content in kan on 徐慧志的个人博客</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Kan on 徐慧志的个人博客</description>
+    <generator>Hugo</generator>
     <language>chs</language>
-    <lastBuildDate>Sat, 25 May 2024 16:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/kan/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 May 2024 16:01:50 +0800</lastBuildDate>
+    <atom:link href="https://huizhixu.github.io/chs/tags/kan/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用大模型理解爆火的KAN网络</title>
       <link>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</link>
       <pubDate>Sat, 25 May 2024 16:01:50 +0800</pubDate>
-      
       <guid>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</guid>
-      <description>五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。 一、KAN是什么？ Kolmogorov-Arnold 定理是数学领域</description>
+      <description>&lt;p&gt;五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。&lt;/p&gt;&#xA;&lt;h2 id=&#34;一kan是什么&#34;&gt;一、KAN是什么？&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Kolmogorov-Arnold 定理是数学领域的一个里程碑，它揭示了多元函数能够通过一组更简单的函数来近似表示的原理。&lt;/strong&gt; 在神经网络的研究领域，来自 MIT 的杰出研究者 Ziming Liu 将这一定理巧妙地融入，提出了创新的 KANs（&lt;strong&gt;Kolmogorov-Arnold Networks&lt;/strong&gt;）概念。（GitHub地址：https://github.com/KindXiaoming/pykan）。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

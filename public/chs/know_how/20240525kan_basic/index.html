@@ -8,7 +8,7 @@
   <title>
   用大模型理解爆火的KAN网络 - 徐慧志的个人博客
   </title>
-  <meta name="description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。" /><meta name="generator" content="Hugo 0.135.0"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -35,22 +35,30 @@
     </script>
 
   
-  <meta property="og:title" content="用大模型理解爆火的KAN网络" />
-<meta property="og:description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240525kan_basic/" /><meta property="article:section" content="know_how" />
-<meta property="article:published_time" content="2024-05-25T16:01:50+08:00" />
-<meta property="article:modified_time" content="2024-05-25T16:01:50+08:00" />
+  <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240525kan_basic/">
+  <meta property="og:site_name" content="徐慧志的个人博客">
+  <meta property="og:title" content="用大模型理解爆火的KAN网络">
+  <meta property="og:description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。">
+  <meta property="og:locale" content="chs">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="know_how">
+    <meta property="article:published_time" content="2024-05-25T16:01:50+08:00">
+    <meta property="article:modified_time" content="2024-05-25T16:01:50+08:00">
+    <meta property="article:tag" content="Tech">
+    <meta property="article:tag" content="Kan">
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="用大模型理解爆火的KAN网络"/>
-<meta name="twitter:description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="用大模型理解爆火的KAN网络">
+  <meta name="twitter:description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。">
 
+  
   <meta itemprop="name" content="用大模型理解爆火的KAN网络">
-<meta itemprop="description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。"><meta itemprop="datePublished" content="2024-05-25T16:01:50+08:00" />
-<meta itemprop="dateModified" content="2024-05-25T16:01:50+08:00" />
-<meta itemprop="wordCount" content="2907">
-<meta itemprop="keywords" content="tech,kan," />
+  <meta itemprop="description" content="KANs和MLPs在结构上是对偶的。在MLPs中，激活函数位于节点上；而在KANs中，激活函数位于边（edges）上。">
+  <meta itemprop="datePublished" content="2024-05-25T16:01:50+08:00">
+  <meta itemprop="dateModified" content="2024-05-25T16:01:50+08:00">
+  <meta itemprop="wordCount" content="2907">
+  <meta itemprop="keywords" content="Tech,Kan">
 
   
   <meta name="lang" content="chs" />
@@ -243,7 +251,7 @@
    博主徒手画 splines 曲线，并逐步阐释定理，非常引人入胜。</p>
 <p>下面是我的理解哦！</p>
 <p>如果你知道MLP的话，那可能也会对KAN刮目相看。</p>
-<p><img src="../../../img/20240525/1.png" alt="1"></p>
+<p><img alt="1" src="../../../img/20240525/1.png"></p>
 <p>上面这个图就说明了为什么KAN很厉害，<strong>因为它和MLP是对偶的。</strong></p>
 <p>在深度学习中，MLP（多层感知器）是一种基础的神经网络结构，它由多个层组成，每层包含多个节点，节点之间通过边相连。**激活函数位于节点上，**以引入非线性，从而使网络能够学习复杂的函数映射。</p>
 <p>KAN沿用了MLP的网络结构，它也由多个层组成，每层包含多个节点，节点之间通过边相连。<strong>激活函数位于边上。</strong></p>
@@ -253,7 +261,7 @@
 <li>KAN能够拟合数学公式。MLP也可以，但是KAN能用更少的参数拟合，准确性也更好。</li>
 </ol>
 <p>下图是KAN和MLP拟合同一个表达式的对比。以左边的图为例，可以看出，KANs在参数数量较少的情况下，其准确度和MLPs相比有更快的增长趋势。</p>
-<p><img src="../../../img/20240525/2.png" alt="2"></p>
+<p><img alt="2" src="../../../img/20240525/2.png"></p>
 <ol start="2">
 <li>强大的可解释性</li>
 </ol>
@@ -273,10 +281,10 @@ $$</p>
 <p>Figure4是最后的样子，右边三个激活函数基本上符合咱们数据的生成函数。</p>
 <p>作者的例子 <a href="https://kindxiaoming.github.io/pykan/Examples/Example_4_symbolic_regression.html" target="_blank" rel="noopener">https://kindxiaoming.github.io/pykan/Examples/Example_4_symbolic_regression.html</a>
    做的更精细，结果也更精确。</p>
-<p><img src="../../../img/20240525/3.png" alt="3"></p>
+<p><img alt="3" src="../../../img/20240525/3.png"></p>
 <p>KAN还有一些其他的功能，例如能解微分方程、在学习的过程中有记忆力等等。这个先不谈，后面用到了再说吧。</p>
 <p>另外，调参也是一门技术活。上面的例子，作者最后画出的图和公式一模一样。他也在GitHub Readme上面给出了很多调参建议。</p>
-<p><img src="../../../img/20240525/4.png" alt="4"></p>
+<p><img alt="4" src="../../../img/20240525/4.png"></p>
 <h2 id="三-大模型帮你理解kan网络">三、 大模型帮你理解KAN网络</h2>
 <p>如果看前面提到的论文和视频没看懂的话，没有关系，咱不是还有大模型嘛。</p>
 <p><strong>来吧，开整！</strong></p>

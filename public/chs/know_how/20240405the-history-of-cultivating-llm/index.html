@@ -8,7 +8,9 @@
   <title>
   大型语言模型修炼史（第一、二阶段） - 徐慧志的个人博客
   </title>
-  <meta name="description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。 大模型可以看成是一个函数。$$ f(未完成的句子" /><meta name="generator" content="Hugo 0.115.4"><link
+  <meta name="description" content="背景知识
+大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。" /><meta name="generator" content="Hugo 0.135.0"><link
     rel="stylesheet"
     href="/css/styles.min.a74a4b7dd61e36ad4b179b658350f21bbb36ef22904082f400b5400aba88933c.css"
     integrity=""
@@ -35,22 +37,33 @@
     </script>
 
   
-  <meta property="og:title" content="大型语言模型修炼史（第一、二阶段）" />
-<meta property="og:description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。 大模型可以看成是一个函数。$$ f(未完成的句子" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/" /><meta property="article:section" content="know_how" />
-<meta property="article:published_time" content="2024-04-05T20:01:50+08:00" />
-<meta property="article:modified_time" content="2024-04-05T20:01:50+08:00" />
+  <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/">
+  <meta property="og:site_name" content="徐慧志的个人博客">
+  <meta property="og:title" content="大型语言模型修炼史（第一、二阶段）">
+  <meta property="og:description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。">
+  <meta property="og:locale" content="chs">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="know_how">
+    <meta property="article:published_time" content="2024-04-05T20:01:50+08:00">
+    <meta property="article:modified_time" content="2024-04-05T20:01:50+08:00">
+    <meta property="article:tag" content="Tech">
+    <meta property="article:tag" content="Llm">
 
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="大型语言模型修炼史（第一、二阶段）"/>
-<meta name="twitter:description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。 大模型可以看成是一个函数。$$ f(未完成的句子"/>
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="大型语言模型修炼史（第一、二阶段）">
+  <meta name="twitter:description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。">
 
+  
   <meta itemprop="name" content="大型语言模型修炼史（第一、二阶段）">
-<meta itemprop="description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。 大模型可以看成是一个函数。$$ f(未完成的句子"><meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00" />
-<meta itemprop="dateModified" content="2024-04-05T20:01:50+08:00" />
-<meta itemprop="wordCount" content="2478">
-<meta itemprop="keywords" content="tech,llm," />
+  <meta itemprop="description" content="背景知识 大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。
+大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。">
+  <meta itemprop="datePublished" content="2024-04-05T20:01:50+08:00">
+  <meta itemprop="dateModified" content="2024-04-05T20:01:50+08:00">
+  <meta itemprop="wordCount" content="2478">
+  <meta itemprop="keywords" content="Tech,Llm">
 
   
   <meta name="lang" content="chs" />
@@ -343,38 +356,38 @@
 <p>在chatGPT之前的GPT系列：</p>
 <p>参数量代表着模型的复杂程度，语料大小代表着模型接收的语料数量。</p>
 <table>
-<thead>
-<tr>
-<th>YEAR</th>
-<th>MODEL</th>
-<th>PARAMETERS</th>
-<th>DATA SIZE</th>
-<th>模型效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2018</td>
-<td>GPT1</td>
-<td>117M （1亿）</td>
-<td>7000 books</td>
-<td>一般</td>
-</tr>
-<tr>
-<td>2019</td>
-<td>GPT2</td>
-<td>1542M（15亿）</td>
-<td>40GB</td>
-<td>一般</td>
-</tr>
-<tr>
-<td>2020</td>
-<td>GPT3</td>
-<td>175B</td>
-<td>580G（300B tokens，哈利波特全集30万遍）</td>
-<td>一般</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">YEAR</th>
+          <th style="text-align: left">MODEL</th>
+          <th style="text-align: left">PARAMETERS</th>
+          <th style="text-align: left">DATA SIZE</th>
+          <th style="text-align: left">模型效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">2018</td>
+          <td style="text-align: left">GPT1</td>
+          <td style="text-align: left">117M （1亿）</td>
+          <td style="text-align: left">7000 books</td>
+          <td style="text-align: left">一般</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">2019</td>
+          <td style="text-align: left">GPT2</td>
+          <td style="text-align: left">1542M（15亿）</td>
+          <td style="text-align: left">40GB</td>
+          <td style="text-align: left">一般</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">2020</td>
+          <td style="text-align: left">GPT3</td>
+          <td style="text-align: left">175B</td>
+          <td style="text-align: left">580G（300B tokens，哈利波特全集30万遍）</td>
+          <td style="text-align: left">一般</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="第一阶段的局限性">第一阶段的局限性</h3>
 <p>在这个阶段，语言模型根据网络资料学习了很多东西，却不知道使用方法。GPT1、GPT2和GPT3可以回答问题，但是经常胡言乱语，不受控制。</p>
