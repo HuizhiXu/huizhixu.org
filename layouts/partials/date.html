@@ -1,20 +1,19 @@
 {{ if or (eq "de" .language.Lang) (eq "fr" .language.Lang) }}
   {{ if eq "long" .format }}
-    {{ .date.Format "02" }}. {{ i18n (.date.Format "January")}} {{ .date.Format "2006"}}
+    {{ .date.Format "02. January 2006" }}
   {{ else }}
-    {{ .date.Format "02" }}. {{ substr (i18n (.date.Format "January")) 0 3 }} {{ .date.Format "06"}}
+    {{ .date.Format "02. Jan 2006" }}
   {{ end }}
-  // Date format for Chinese User
 {{ else if or (eq "chs" .language.Lang) (eq "cht" .language.Lang) }}
   {{ if eq "long" .format }}
-  {{ .date.Format "2006年"}}{{ i18n (.date.Format "January")}}{{ .date.Format "2日" }}
+    {{ .date.Format "2006年01月02日" }}
   {{ else }}
-  {{ .date.Format "2006-1-2" }}
+    {{ .date.Format "2006-01-02" }}
   {{ end }}
 {{ else }}
   {{ if eq "long" .format }}
-   {{ .date.Format "January 2, 2006" }}
+    {{ .date.Format "January 2, 2006" }}
   {{ else }}
-   {{ .date.Format "Jan 2, 06" }}
+    {{ .date.Format "Jan 2, 2006" }}
   {{ end }}
 {{ end }}

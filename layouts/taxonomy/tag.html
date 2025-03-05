@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="container px-6 pt-6 mx-auto">
+  <h1 class="text-3xl font-bold">{{ .Title }}</h1>
+  
+  <div class="mt-6">
+    {{ range .Pages }}
+      {{- partial "blog-card.html" . -}}
+    {{ end }}
+  </div>
+</div>
+{{ end }}
