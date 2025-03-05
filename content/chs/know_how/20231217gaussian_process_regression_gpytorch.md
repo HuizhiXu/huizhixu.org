@@ -6,7 +6,7 @@ format: hugo-md
 jupyter: nn3.10
 math: true
 isCJKLanguage: true
-thumbnail: https://picsum.photos/id/307/400/250
+# thumbnail: https://picsum.photos/id/307/400/250
 ---
 
 这个例子主要是利用GPytorch，来实现高斯过程回归。

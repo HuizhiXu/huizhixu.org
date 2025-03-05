@@ -7,7 +7,7 @@ jupyter: nn3.10
 math: true
 isCJKLanguage: true
 html-math-method: webtex
-thumbnail: https://picsum.photos/id/305/400/250
+# thumbnail: https://picsum.photos/id/305/400/250
 ---
 
 这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。

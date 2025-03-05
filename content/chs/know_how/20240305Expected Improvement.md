@@ -6,7 +6,7 @@ format: hugo-md
 jupyter: nn3.10
 math: true
 isCJKLanguage: true
-thumbnail: https://picsum.photos/id/311/400/250
+# thumbnail: https://picsum.photos/id/311/400/250
 ---
 在看正文之前，先复习一下期望（Expectation）：
 

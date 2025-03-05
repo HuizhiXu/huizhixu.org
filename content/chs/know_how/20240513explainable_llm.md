@@ -10,7 +10,7 @@ isCJKLanguage: true
 # thumbnail: https://picsum.photos/id/320/400/250
 ---
 
-Explainable和Interpretable的区别：
+Explainable 和 Interpretable的区别：
 
 Explainable： 事物本身是黑箱，我们尝试去解释它的行为或输出。
 

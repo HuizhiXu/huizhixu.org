@@ -5,7 +5,7 @@ tags: ["tech","bayesian"]
 format: hugo-md
 isCJKLanguage: true
 html-math-method: webtex
-thumbnail: https://picsum.photos/id/310/400/250
+# thumbnail: https://picsum.photos/id/310/400/250
 ---
 
 

@@ -6,7 +6,7 @@ format: hugo-md
 # html-math-method: webtex
 math: true
 isCJKLanguage: true
-thumbnail: https://picsum.photos/id/302/400/250
+# thumbnail: https://picsum.photos/id/302/400/250
 ---
 
 ## 1. 理解covariance matrix

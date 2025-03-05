@@ -2,7 +2,7 @@
 author: "Huizhi"
 title: "2022-12-10 Ghost in the Machine"
 date: 2022-12-10T20:07:58+08:00 
-lastmod: 2022-10-14
+# lastmod: 2022-10-14
 description: ""
 tags: ["life","2022"]
 draft: True

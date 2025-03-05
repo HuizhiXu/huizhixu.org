@@ -6,7 +6,7 @@ format: hugo-md
 math: true
 isCJKLanguage: true
 html-math-method: webtex
-thumbnail: https://picsum.photos/id/304/400/250
+# thumbnail: https://picsum.photos/id/304/400/250
 ---
 
 
