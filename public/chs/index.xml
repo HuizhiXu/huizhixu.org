@@ -6,8 +6,15 @@
     <description>Recent content in Blog on 徐慧志的个人博客</description>
     <generator>Hugo</generator>
     <language>chs</language>
-    <lastBuildDate>Fri, 28 Feb 2025 12:11:50 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Mar 2025 22:11:50 +0800</lastBuildDate>
     <atom:link href="https://huizhixu.github.io/chs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2025-03-14 读《来自巫师档案》——《哈利·波特》的B面故事</title>
+      <link>https://huizhixu.github.io/chs/life/20250314_from_the_wizarding_archive/</link>
+      <pubDate>Fri, 14 Mar 2025 22:11:50 +0800</pubDate>
+      <guid>https://huizhixu.github.io/chs/life/20250314_from_the_wizarding_archive/</guid>
+      <description>&lt;p&gt;&lt;img alt=&#34;legende&#34; src=&#34;../img/20250314/1.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;微信读书上去年上了J.K.罗琳的新书——《来自巫师档案》，一直想看来着，最近终于把第一卷看完啦。&lt;/p&gt;&#xA;&lt;p&gt;读完这本书，我对《哈利·波特》魔法世界的幕后故事有了更深的了解。书中不仅揭示了波特家族和马尔福家族的历史，还让我对德拉科·马尔福、佩妮阿姨和洛哈特教授有了全新的认识。（书中还有更多魔法世界的设定细节，例如魔杖，巫师的出行方式，世界上其他地方的巫师是怎样的等等。）&lt;/p&gt;</description>
+    </item>
     <item>
       <title>2025-02-28 2月总结</title>
       <link>https://huizhixu.github.io/chs/life/20250228_2%E6%9C%88%E6%80%BB%E7%BB%93/</link>
@@ -209,7 +216,7 @@
       <link>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</link>
       <pubDate>Mon, 31 Jul 2023 18:31:50 +0800</pubDate>
       <guid>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</guid>
-      <description>&lt;p&gt;以下链接方便日常工作。&lt;/p&gt;&#xA;&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://chunkviz.up.railway.app/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Visual representation of chunk splitting methods&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://promptperfect.jina.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;promptperfect&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;blog&#34;&gt;Blog&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://luxiangdong.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RAG-luxiangdong&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;经典文章&#34;&gt;经典文章&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/v_JULY_v/article/details/131552592&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;基于LangChain+LLM的本地知识库问答：从企业单文档问答到批量文档问答&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;课程&#34;&gt;课程&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLoROMvodv4rOFZnDyrlW3-nI7tMLtmiJZ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Natural Language Processing with Dan Jurafsky and Chris Manning&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+      <description>&lt;p&gt;以下链接方便日常工作。&lt;/p&gt;&#xA;&lt;h2 id=&#34;经典文章&#34;&gt;经典文章&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://karpathy.github.io/2015/05/21/rnn-effectiveness/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;The Unreasonable Effectiveness of Recurrent Neural Networks&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://colah.github.io/posts/2015-08-Understanding-LSTMs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Understanding-LSTMs&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;课程&#34;&gt;课程&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLoROMvodv4rOFZnDyrlW3-nI7tMLtmiJZ&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Natural Language Processing with Dan Jurafsky and Chris Manning&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://chunkviz.up.railway.app/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Visual representation of chunk splitting methods&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://promptperfect.jina.ai/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;promptperfect&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;blog&#34;&gt;Blog&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://luxiangdong.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RAG-luxiangdong&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;实践&#34;&gt;实践&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/v_JULY_v/article/details/131552592&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;基于LangChain+LLM的本地知识库问答：从企业单文档问答到批量文档问答&lt;/a&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
     </item>
     <item>
       <title>2023-07-31 更换博客皮肤</title>
