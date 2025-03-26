@@ -12,7 +12,7 @@ canonifyURLs = true
 
 isCJKLanguage = true
 DefaultContentLanguage = "chs"
-DefaultContentLanguageInSubdir = false
+DefaultContentLanguageInSubdir = true
 
 [languages]
   [languages.chs]

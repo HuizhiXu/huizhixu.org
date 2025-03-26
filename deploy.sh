@@ -10,7 +10,7 @@ if [ $# -eq 1  ]
 fi
 
 # Build the project.
-hugo -t blist # if using a theme, replace by `hugo -t <yourtheme>`
+hugo --buildDrafts=false -t blist # if using a theme, replace by `hugo -t <yourtheme>`
 
 # Go To Public folder
 cd public
