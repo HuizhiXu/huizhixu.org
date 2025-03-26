@@ -159,8 +159,8 @@ DefaultContentLanguageInSubdir = false
 
 [params.homepage.social]
   # Global params common for both languages
-  title = "Don't Follow Me"
-  description = "I'm lost too"
+  title = "Sein heißt werden, leben heißt lernen."
+  description = "Der einfache Weg is immer verkehrt."
 
   [[params.homepage.social.icons]]
     website = "twitter"
