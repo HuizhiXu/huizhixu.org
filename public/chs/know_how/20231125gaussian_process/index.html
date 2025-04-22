@@ -11,9 +11,9 @@
   <meta name="description" content="1. 理解covariance matrix
 Gaussian Process is a stochastic process used to characterize the distribution over function.
 GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。
-假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。" /><meta name="generator" content="Hugo 0.135.0"><link
+假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。" /><meta name="generator" content="Hugo 0.136.0"><link
     rel="stylesheet"
-    href="/css/styles.min.dc5654d499a9ed0fdbc77e56637a32e8d6d51ced10e8fbc005528189c8f72212.css"
+    href="/css/styles.min.509c66a5b28498114476a8f54dca6727af1bc33036a37e617334b9733b436393.css"
     integrity=""
     crossorigin="anonymous"
   />
@@ -270,15 +270,15 @@ GP将一组有限的参数theta从一个连空间拓展到一个连续无限空�
 <p><img alt="gp_1.png" src="../../../img/20231125/gp_1.png"></p>
 <p>一个高斯分布可以用mean vector 和covariance matrix来表示。均值向量描述了从高斯分布重复采样的集中趋势，协方差矩阵描述了点之间的相关性。（The mean vector describes the central tendency if we were to sample from the Gaussian distribution repeatedly, and the covariance matrix describes how the features of the data are related to each other）</p>
 <p>假设mean vector matrix K为：</p>
-<p><img alt="\\boldsymbol{\\mu} = \\begin{bmatrix}\n\\mu_1 \\\\mu_2 \\end{bmatrix}" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7B%5Cmu%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A%5Cmu_1%20%5C%5C%5Cmu_2%20%5Cend%7Bbmatrix%7D" title="\\boldsymbol{\\mu} = \\begin{bmatrix} \n\\mu_1 \\\\\\mu_2 \\end{bmatrix}"></p>
-<p><img alt="\\boldsymbol{K} = \\begin{bmatrix}\nK_{11}&amp;K_{12} \\K_{21}&amp;K_{22} \\end{bmatrix}=\\begin{bmatrix}\n\\sigma_{11}^2&amp;\\sigma_{12}^2 \\\\sigma_{21}^2&amp;\\sigma_{22}^2 \\end{bmatrix}" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7BK%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0AK_%7B11%7D%26K_%7B12%7D%20%5C%5CK_%7B21%7D%26K_%7B22%7D%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20%0A%5Csigma_%7B11%7D%5E2%26%5Csigma_%7B12%7D%5E2%20%5C%5C%5Csigma_%7B21%7D%5E2%26%5Csigma_%7B22%7D%5E2%20%5Cend%7Bbmatrix%7D" title="\\boldsymbol{K} = \\begin{bmatrix} \nK_{11}&amp;K_{12} \\\\K_{21}&amp;K_{22} \\end{bmatrix}=\\begin{bmatrix} \n\\sigma_{11}^2&amp;\\sigma_{12}^2 \\\\\\sigma_{21}^2&amp;\\sigma_{22}^2 \\end{bmatrix}"></p>
+<p><img alt="\\boldsymbol{\\mu} = \\begin{bmatrix}\n\\mu_1 \\\\mu_2 \\end{bmatrix}" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7B%5Cmu%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0A%5Cmu_1%20%5C%5C%5Cmu_2%20%5Cend%7Bbmatrix%7D" title="\\boldsymbol{\\mu} = \\begin{bmatrix} \r\n\\mu_1 \\\\\\mu_2 \\end{bmatrix}"></p>
+<p><img alt="\\boldsymbol{K} = \\begin{bmatrix}\nK_{11}&amp;K_{12} \\K_{21}&amp;K_{22} \\end{bmatrix}=\\begin{bmatrix}\n\\sigma_{11}^2&amp;\\sigma_{12}^2 \\\\sigma_{21}^2&amp;\\sigma_{22}^2 \\end{bmatrix}" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7BK%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0AK_%7B11%7D%26K_%7B12%7D%20%5C%5CK_%7B21%7D%26K_%7B22%7D%20%5Cend%7Bbmatrix%7D%3D%5Cbegin%7Bbmatrix%7D%20%0A%5Csigma_%7B11%7D%5E2%26%5Csigma_%7B12%7D%5E2%20%5C%5C%5Csigma_%7B21%7D%5E2%26%5Csigma_%7B22%7D%5E2%20%5Cend%7Bbmatrix%7D" title="\\boldsymbol{K} = \\begin{bmatrix} \r\nK_{11}&amp;K_{12} \\\\K_{21}&amp;K_{22} \\end{bmatrix}=\\begin{bmatrix} \r\n\\sigma_{11}^2&amp;\\sigma_{12}^2 \\\\\\sigma_{21}^2&amp;\\sigma_{22}^2 \\end{bmatrix}"></p>
 <p>K 可以告诉我们，当x1增加的时候，x2变化的大小和方向是如何变化的。K用点积来衡量x1维和x2维的相似性。<br>
 $$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$</p>
 <p>$$\sigma_{12}^2 = \sigma_{21}^2 = E[(x_1-E[x_1])(x_2-E[x_2])] = E[x_1x_2]$$</p>
 <p>有 $E[x_1] = E[x_2] = 0$</p>
 <p>图左边和右边的分布为</p>
-<p><img alt="\\boldsymbol{x_{left}} = \\begin{bmatrix}\nx_1 \\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0 \\0&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bleft%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" title="\\boldsymbol{x_{left}} = \\begin{bmatrix} \nx_1 \\\\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix} \n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \n1&amp;0 \\\\0&amp;1 \\end{bmatrix})"></p>
-<p><img alt="\\boldsymbol{x_{right}} = \\begin{bmatrix}\nx_1 \\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0.6 \\0.6&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bright%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260.6%20%5C%5C0.6%261%20%5Cend%7Bbmatrix%7D%29" title="\\boldsymbol{x_{right}} = \\begin{bmatrix} \nx_1 \\\\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix} \n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \n1&amp;0.6 \\\\0.6&amp;1 \\end{bmatrix})"></p>
+<p><img alt="\\boldsymbol{x_{left}} = \\begin{bmatrix}\nx_1 \\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0 \\0&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bleft%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" title="\\boldsymbol{x_{left}} = \\begin{bmatrix} \r\nx_1 \\\\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix} \r\n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \r\n1&amp;0 \\\\0&amp;1 \\end{bmatrix})"></p>
+<p><img alt="\\boldsymbol{x_{right}} = \\begin{bmatrix}\nx_1 \\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0.6 \\0.6&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?%5Cboldsymbol%7Bx_%7Bright%7D%7D%20%3D%20%5Cbegin%7Bbmatrix%7D%20%0Ax_1%20%5C%5Cx_2%20%5Cend%7Bbmatrix%7D%20%5Csim%20N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260.6%20%5C%5C0.6%261%20%5Cend%7Bbmatrix%7D%29" title="\\boldsymbol{x_{right}} = \\begin{bmatrix} \r\nx_1 \\\\x_2 \\end{bmatrix} \\sim N(\\begin{bmatrix} \r\n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \r\n1&amp;0.6 \\\\0.6&amp;1 \\end{bmatrix})"></p>
 <p>左侧的协方差项为0，表示变量不相关。右侧的协方差项为0.6，表示存在正相关性。</p>
 <h2 id="2-多元高斯分布的边缘分布和条件分布">2. 多元高斯分布的边缘分布和条件分布</h2>
 <p>上述的例子是一个二元高斯分布，它有两个特征，x1和x2。在处理多元高斯分布时，我们通常对特征分布的边缘分布和条件分布感兴趣。</p>
@@ -309,7 +309,7 @@ $$\sigma_{11}^2 = var(x_1) = E[(x_1-E[x_1])^2] = E[(x_1)^2]$$</p>
 <p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样？</p>
 <p>从标准的二元正态分布抽样开始，然后进行scale-location变换。</p>
 <p>第一步：如何从标准的二元正态分布</p>
-<p><img alt="N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0 \\0&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" title="N(\\begin{bmatrix} \n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \n1&amp;0 \\\\0&amp;1 \\end{bmatrix})">中进行采样 $
+<p><img alt="N(\\begin{bmatrix}\n0 \\0 \\end{bmatrix} ,\\begin{bmatrix}\n1&amp;0 \\0&amp;1 \\end{bmatrix})" src="https://latex.codecogs.com/svg.latex?N%28%5Cbegin%7Bbmatrix%7D%20%0A0%20%5C%5C0%20%5Cend%7Bbmatrix%7D%20%2C%5Cbegin%7Bbmatrix%7D%20%0A1%260%20%5C%5C0%261%20%5Cend%7Bbmatrix%7D%29" title="N(\\begin{bmatrix} \r\n0 \\\\0 \\end{bmatrix} ,\\begin{bmatrix} \r\n1&amp;0 \\\\0&amp;1 \\end{bmatrix})">中进行采样 $
 \begin{bmatrix}
 x_1 \
 x_2
