@@ -20,38 +20,35 @@ jobs:
         hugo-version: '0.135.0'
         extended: true
 
-    - name: Markdown From Notion
-      uses: akkuman/notion_to_github_blog@master
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        notion_token: ${{ secrets.NOTION_TOKEN }}
-        notion_database_id: ${{ secrets.NOTION_DATABASE_ID }}
-        img_store_type: github
-        img_store_path_prefix: static/img/notion
-        img_store_github_token: ${{ secrets.CHECKOUT_TOKEN }}
-        img_store_github_repo: HuizhiXu/pictures
-        img_store_github_branch: master
-        md_store_path_prefix: content/chs/know_how
+        python-version: '3.8'
 
-    - name: Build Hugo Site
-      run: hugo --minify
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install notion-sdk-py md2notion python-frontmatter pyyaml requests
 
-    - name: Push to huizhixu.org Repository
-      uses: cpina/github-action-push-to-another-repository@main
+    - name: Run Notion to Blog Script
       env:
-        API_TOKEN_GITHUB: ${{ secrets.CHECKOUT_TOKEN }}
-      with:
-        source-directory: 'content/chs/know_how'
-        destination-github-username: 'HuizhiXu'
-        destination-repository-name: 'huizhixu.org'
-        target-branch: master
-        target-directory: 'content/chs/know_how'
-        user-email: xuhuizhi@hotmail.com
+        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        POST_DIR: 'content/chs/know_how'
+      run: python scripts/notion_to_blog.py
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.DEPLOY_KEY }}
-        external_repository: HuizhiXu/huizhixu.github.io
-        publish_branch: master
-        publish_dir: ./public        
-        commit_message: 'Deploy from Notion: ${{ github.event.issue.title }}'
+    - name: Configure Git
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+
+    - name: Initialize and Update Submodules
+      run: |
+        git submodule init
+        git submodule update --recursive
+
+    - name: Run Deploy Script
+      run: |
+        chmod +x deploy.sh
+        ./deploy.sh "Auto deploy from GitHub Actions"
