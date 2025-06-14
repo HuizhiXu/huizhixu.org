@@ -35,12 +35,16 @@ jobs:
     - name: Build Hugo Site
       run: hugo --minify
 
-    - name: Push to GitHub
-      uses: EndBug/add-and-commit@v7
+    - name: Push to huizhixu.org Repository
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.CHECKOUT_TOKEN }}
       with:
-        message: 'Notion CI: Add new blog post'
-        add: |
-          content/chs/know_how
+        source-directory: 'content/chs/know_how'
+        destination-github-username: 'HuizhiXu'
+        destination-repository-name: 'huizhixu.org'
+        target-branch: main
+        target-directory: 'content/chs/know_how'
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
