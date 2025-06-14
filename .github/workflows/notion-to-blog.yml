@@ -10,9 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Blog Repository
+      uses: actions/checkout@v2
       with:
         token: ${{ secrets.CHECKOUT_TOKEN }}
+        fetch-depth: 0
+
+    - name: Checkout Pictures Repository
+      uses: actions/checkout@v2
+      with:
+        repository: HuizhiXu/pictures
+        token: ${{ secrets.CHECKOUT_TOKEN }}
+        path: pictures_repo
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
@@ -28,15 +37,25 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install notion-sdk-py md2notion python-frontmatter pyyaml requests
+        pip install -r scripts/requirements.txt
 
     - name: Run Notion to Blog Script
       env:
         NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
         POST_DIR: 'content/chs/know_how'
+        GITHUB_REPO: 'HuizhiXu/pictures'
       run: python scripts/notion_to_blog.py
+
+    - name: Commit and Push Pictures
+      working-directory: pictures_repo
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add .
+        git diff --quiet && git diff --staged --quiet || git commit -m "Add new images from Notion"
+        git push
 
     - name: Configure Git
       run: |
