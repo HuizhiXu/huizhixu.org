@@ -43,8 +43,9 @@ jobs:
         source-directory: 'content/chs/know_how'
         destination-github-username: 'HuizhiXu'
         destination-repository-name: 'huizhixu.org'
-        target-branch: main
+        target-branch: master
         target-directory: 'content/chs/know_how'
+        user-email: xuhuizhi@hotmail.com
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
