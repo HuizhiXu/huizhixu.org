@@ -1,0 +1,5 @@
+notion-sdk-py
+md2notion
+python-frontmatter
+pyyaml
+requests
