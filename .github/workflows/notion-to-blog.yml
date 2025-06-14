@@ -41,7 +41,6 @@ jobs:
         message: 'Notion CI: Add new blog post'
         add: |
           content/chs/know_how
-          static/img/notion
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
