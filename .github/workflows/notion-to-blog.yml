@@ -41,7 +41,7 @@ jobs:
       env:
         NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        GITHUB_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
+        CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
         POST_DIR: 'content/chs/know_how'
         GITHUB_REPO: 'HuizhiXu/pictures'
       run: python scripts/notion_to_blog.py
