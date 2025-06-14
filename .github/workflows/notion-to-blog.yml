@@ -1,0 +1,53 @@
+name: Notion To Blog
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  notion-to-blog:
+    if: ${{ github.event.issue.user.login == github.actor && contains(github.event.issue.title, 'notion-ci') }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.CHECKOUT_TOKEN }}
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+        extended: true
+
+    - name: Markdown From Notion
+      uses: akkuman/notion_to_github_blog@master
+      with:
+        notion_token: ${{ secrets.NOTION_TOKEN }}
+        notion_database_id: ${{ secrets.NOTION_DATABASE_ID }}
+        img_store_type: github
+        img_store_path_prefix: static/img/notion
+        img_store_github_token: ${{ secrets.CHECKOUT_TOKEN }}
+        img_store_github_repo: HuizhiXu/pictures
+        img_store_github_branch: master
+        md_store_path_prefix: content/chs/know_how
+
+    - name: Build Hugo Site
+      run: hugo --minify
+
+    - name: Push to GitHub
+      uses: EndBug/add-and-commit@v7
+      with:
+        message: 'Notion CI: Add new blog post'
+        add: |
+          content/chs/know_how
+          static/img/notion
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
+        external_repository: HuizhiXu/huizhixu.github.io
+        publish_branch: master
+        publish_dir: ./public        
+        commit_message: 'Deploy from Notion: ${{ github.event.issue.title }}'
