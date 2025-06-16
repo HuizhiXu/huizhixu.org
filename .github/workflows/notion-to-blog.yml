@@ -11,8 +11,9 @@ jobs:
 
     steps:
     - name: Checkout Blog Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
+        repository: HuizhiXu/huizhixu.org
         token: ${{ secrets.CHECKOUT_TOKEN }}
         fetch-depth: 0
 
