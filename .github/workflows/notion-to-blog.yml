@@ -16,14 +16,7 @@ jobs:
         repository: HuizhiXu/huizhixu.org
         token: ${{ secrets.CHECKOUT_TOKEN }}
         fetch-depth: 0
-
-    - name: Checkout Pictures Repository
-      uses: actions/checkout@v4
-      with:
-        repository: HuizhiXu/pictures
-        token: ${{ secrets.CHECKOUT_TOKEN }}
-        path: pictures_repo
-        fetch-depth: 1
+        submodules: false
 
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
@@ -47,15 +40,6 @@ jobs:
         POST_DIR: 'content/chs/know_how'
         GITHUB_REPO: 'HuizhiXu/pictures'
       run: python scripts/notion_to_blog.py
-
-    - name: Commit and Push Pictures
-      working-directory: pictures_repo
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git add .
-        git diff --quiet && git diff --staged --quiet || git commit -m "Add new images from Notion"
-        git push
 
     - name: Configure Git
       run: |
