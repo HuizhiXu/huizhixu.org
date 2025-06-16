@@ -16,7 +16,7 @@ jobs:
         token: ${{ secrets.CHECKOUT_TOKEN }}
         fetch-depth: 0
 
-        - name: Checkout Pictures Repository
+    - name: Checkout Pictures Repository
       uses: actions/checkout@v4
       with:
         repository: HuizhiXu/pictures
