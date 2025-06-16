@@ -16,7 +16,7 @@ hugo --buildDrafts=false -t blist # if using a theme, replace by `hugo -t <yourt
 cd public
 
 # Add changes to git.
-git add .
+git add -f .
 
 # Commit changes.
 git commit -m "$msg"
