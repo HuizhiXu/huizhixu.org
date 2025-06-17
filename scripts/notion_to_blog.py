@@ -16,7 +16,7 @@ NOTION_TOKEN = os.getenv('NOTION_TOKEN')
 DATABASE_ID = os.getenv('NOTION_DATABASE_ID')
 POST_DIR = os.getenv('POST_DIR', 'content/chs/know_how')
 GITHUB_REPO = os.getenv('GITHUB_REPO', 'HuizhiXu/pictures')
-GITHUB_BRANCH = os.getenv('GITHUB_BRANCH', 'main')
+GITHUB_BRANCH = os.getenv('GITHUB_BRANCH', 'master')
 GITHUB_API_BASE = 'https://api.github.com'
 
 # 全局变量，用于存储当前处理的文章的日期（从MDFilename中提取）
@@ -520,6 +520,20 @@ def process_notion_page(page: Dict[str, Any]) -> None:
             print(f'[ERR] 页面缺少标题: {page_id}')
             return
         
+        # 检查发布状态
+        publish_status = None
+        if 'PublishStatus' in properties and properties['PublishStatus']['select']:
+            publish_status = properties['PublishStatus']['select']['name']
+            print(f'[INF] 页面发布状态: {publish_status}')
+        else:
+            print(f'[INF] 页面没有设置发布状态，跳过: {page_id}')
+            return
+        
+        # 根据发布状态决定是否处理页面
+        if publish_status not in ['Publish', 'Update']:
+            print(f'[INF] 页面不需要发布或更新，跳过: {page_id}')
+            return
+        
         # 检查是否有MDFilename属性，并提取日期
         md_filename = None
         image_folder_date = None
@@ -540,6 +554,22 @@ def process_notion_page(page: Dict[str, Any]) -> None:
         
         # 保存为Markdown文件
         save_markdown_file(page, content)
+        
+        # 更新页面状态为Published
+        try:
+            client.pages.update(
+                page_id=page_id,
+                properties={
+                    'PublishStatus': {
+                        'select': {
+                            'name': 'Published'
+                        }
+                    }
+                }
+            )
+            print(f'[INF] 已更新页面状态为Published: {page_id}')
+        except Exception as e:
+            print(f'[WARN] 更新页面状态失败: {str(e)}')
         
         # 重置全局变量
         CURRENT_IMAGE_FOLDER_DATE = None
