@@ -35,7 +35,7 @@ jobs:
     - name: Copy Scripts
       run: |
         mkdir -p scripts
-        curl -o scripts/notion_to_blog.py https://raw.githubusercontent.com/HuizhiXu/huizhixu.org/main/scripts/notion_to_blog.py
+        curl -o scripts/notion_to_blog.py https://raw.githubusercontent.com/HuizhiXu/huizhixu.org/master/scripts/notion_to_blog.py
 
     - name: Run Notion to Blog Script
       env:
