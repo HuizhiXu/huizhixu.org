@@ -522,12 +522,21 @@ def process_notion_page(page: Dict[str, Any]) -> None:
         
         # 检查发布状态
         publish_status = None
-        if 'PublishStatus' in properties and properties['PublishStatus']['select']:
-            publish_status = properties['PublishStatus']['select']['name']
-            print(f'[INF] 页面发布状态: {publish_status}')
+        if 'PublishStatus' in properties:
+            if 'select' in properties['PublishStatus'] and properties['PublishStatus']['select']:
+                publish_status = properties['PublishStatus']['select']['name']
+                print(f'[INF] 页面发布状态: {publish_status}')
+            else:
+                print(f'[WARN] PublishStatus 属性存在但不是 select 类型或为空: {page_id}')
+                # 如果没有设置 PublishStatus，默认处理所有页面
+                # 可以根据需要修改此行为
+                publish_status = 'Publish'  # 默认值
+                print(f'[INF] 使用默认发布状态: {publish_status}')
         else:
-            print(f'[INF] 页面没有设置发布状态，跳过: {page_id}')
-            return
+            print(f'[WARN] 页面没有设置 PublishStatus 属性，使用默认值: {page_id}')
+            # 如果没有 PublishStatus 属性，默认处理所有页面
+            publish_status = 'Publish'  # 默认值
+            print(f'[INF] 使用默认发布状态: {publish_status}')
         
         # 根据发布状态决定是否处理页面
         if publish_status not in ['Publish', 'Update']:
@@ -557,19 +566,29 @@ def process_notion_page(page: Dict[str, Any]) -> None:
         
         # 更新页面状态为Published
         try:
-            client.pages.update(
-                page_id=page_id,
-                properties={
-                    'PublishStatus': {
-                        'select': {
-                            'name': 'Published'
+            # 只有当原始状态是 Publish 或 Update 时才更新状态
+            if publish_status in ['Publish', 'Update']:
+                # 检查 PublishStatus 属性是否存在且是 select 类型
+                if 'PublishStatus' in properties and ('select' in properties['PublishStatus'] or properties['PublishStatus'].get('type') == 'select'):
+                    client.pages.update(
+                        page_id=page_id,
+                        properties={
+                            'PublishStatus': {
+                                'select': {
+                                    'name': 'Published'
+                                }
+                            }
                         }
-                    }
-                }
-            )
-            print(f'[INF] 已更新页面状态为Published: {page_id}')
+                    )
+                    print(f'[INF] 已更新页面状态为Published: {page_id}')
+                else:
+                    print(f'[WARN] 无法更新页面状态：PublishStatus 属性不存在或不是 select 类型: {page_id}')
+            else:
+                print(f'[INF] 页面状态不是 Publish 或 Update，不更新状态: {page_id}')
         except Exception as e:
             print(f'[WARN] 更新页面状态失败: {str(e)}')
+            import traceback
+            print(traceback.format_exc())
         
         # 重置全局变量
         CURRENT_IMAGE_FOLDER_DATE = None
