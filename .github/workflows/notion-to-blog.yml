@@ -56,7 +56,7 @@ jobs:
       run: |
         git add content/
         git commit -m "Add new blog posts from Notion" || echo "No changes to commit"
-        git push origin main || echo "No changes to push"
+        git push origin master || echo "No changes to push"
 
     - name: Build Hugo site
       run: hugo --buildDrafts=false -t blist
