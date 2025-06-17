@@ -32,6 +32,11 @@ jobs:
     - name: Install Dependencies
       run: python -m pip install notion-client md2notion python-frontmatter pyyaml requests
 
+    - name: Copy Scripts
+      run: |
+        mkdir -p scripts
+        curl -o scripts/notion_to_blog.py https://raw.githubusercontent.com/HuizhiXu/huizhixu.org/main/scripts/notion_to_blog.py
+
     - name: Run Notion to Blog Script
       env:
         NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -39,12 +44,19 @@ jobs:
         CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
         POST_DIR: 'content/chs/know_how'
         GITHUB_REPO: 'HuizhiXu/pictures'
+        GITHUB_BRANCH: 'master'
       run: python scripts/notion_to_blog.py
 
     - name: Configure Git
       run: |
         git config --global user.name 'GitHub Actions'
         git config --global user.email 'actions@github.com'
+
+    - name: Commit Changes
+      run: |
+        git add content/
+        git commit -m "Add new blog posts from Notion" || echo "No changes to commit"
+        git push origin main || echo "No changes to push"
 
     - name: Build Hugo site
       run: hugo --buildDrafts=false -t blist
