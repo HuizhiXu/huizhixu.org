@@ -2,9 +2,10 @@ import os
 import re
 import base64
 import hashlib
+import time
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from notion_client import Client
 import requests
 import json
@@ -17,6 +18,9 @@ POST_DIR = os.getenv('POST_DIR', 'content/chs/know_how')
 GITHUB_REPO = os.getenv('GITHUB_REPO', 'HuizhiXu/pictures')
 GITHUB_BRANCH = os.getenv('GITHUB_BRANCH', 'main')
 GITHUB_API_BASE = 'https://api.github.com'
+
+# 全局变量，用于存储当前处理的文章的日期（从MDFilename中提取）
+CURRENT_IMAGE_FOLDER_DATE = None
 
 # 检查必要的环境变量
 required_env_vars = {
@@ -62,12 +66,24 @@ def upload_to_github(image_data: bytes, image_name: str) -> str:
         image_data: 图片数据
         image_name: 图片名称
     Returns:
-        GitHub图片URL
+        GitHub图片URL或None（如果上传失败）
     """
     # 生成唯一的文件名
     file_hash = hashlib.md5(image_data).hexdigest()[:8]
     file_ext = os.path.splitext(image_name)[1]
     file_name = f"{file_hash}{file_ext}"
+    
+    # 确定文件路径（是否包含日期文件夹）
+    file_path = file_name
+    raw_url_path = file_name
+    
+    # 如果有日期信息，则创建日期文件夹
+    if CURRENT_IMAGE_FOLDER_DATE:
+        file_path = f"{CURRENT_IMAGE_FOLDER_DATE}/{file_name}"
+        raw_url_path = f"{CURRENT_IMAGE_FOLDER_DATE}/{file_name}"
+        print(f"[INF] 使用日期文件夹 {CURRENT_IMAGE_FOLDER_DATE} 存储图片")
+    
+    print(f"[INF] 准备上传图片 {file_path} 到 GitHub 仓库 {GITHUB_REPO}")
     
     # 设置API请求头
     headers = {
@@ -75,43 +91,84 @@ def upload_to_github(image_data: bytes, image_name: str) -> str:
         'Accept': 'application/vnd.github.v3+json'
     }
     
-    try:
-        # 检查文件是否已存在
-        check_url = f"{GITHUB_API_BASE}/repos/{GITHUB_REPO}/contents/{file_name}"
-        response = requests.get(check_url, headers=headers)
-        response.raise_for_status()
-        
-        if response.status_code == 200:
-            # 文件已存在，直接返回URL
-            return f"https://raw.githubusercontent.com/{GITHUB_REPO}/{GITHUB_BRANCH}/{file_name}"
-        
-        # 文件不存在，创建新文件
-        content = base64.b64encode(image_data).decode()
-        data = {
-            'message': f'Upload {image_name}',
-            'content': content,
-            'branch': GITHUB_BRANCH
-        }
-        
-        # 发送创建文件请求
-        create_url = f"{GITHUB_API_BASE}/repos/{GITHUB_REPO}/contents/{file_name}"
-        response = requests.put(create_url, headers=headers, data=json.dumps(data))
-        response.raise_for_status()
-        
-        # 检查响应内容
-        response_data = response.json()
-        if 'content' not in response_data:
-            raise ValueError(f'GitHub API响应异常: {response_data}')
+    # 最大重试次数
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # 检查文件是否已存在
+            check_url = f"{GITHUB_API_BASE}/repos/{GITHUB_REPO}/contents/{file_path}"
+            print(f"[INF] 检查文件是否存在: {check_url}")
+            response = requests.get(check_url, headers=headers)
             
-        return f"https://raw.githubusercontent.com/{GITHUB_REPO}/{GITHUB_BRANCH}/{file_name}"
-    except requests.exceptions.RequestException as e:
-        print(f'上传图片到GitHub失败: {e}')
-        if hasattr(e.response, 'json'):
-            print(f'错误详情: {e.response.json()}')
-        return None
-    except Exception as e:
-        print(f'上传图片时发生错误: {e}')
-        return None
+            # 如果文件存在，直接返回URL
+            if response.status_code == 200:
+                print(f"[INF] 文件 {file_path} 已存在于GitHub仓库中")
+                return f"https://raw.githubusercontent.com/{GITHUB_REPO}/{GITHUB_BRANCH}/{raw_url_path}"
+            
+            # 如果是404错误，说明文件不存在，继续创建
+            if response.status_code != 404:
+                response.raise_for_status()
+            
+            # 文件不存在，创建新文件
+            print(f"[INF] 文件 {file_path} 不存在，准备创建")
+            content = base64.b64encode(image_data).decode()
+            data = {
+                'message': f'Upload {image_name}',
+                'content': content,
+                'branch': GITHUB_BRANCH
+            }
+            
+            # 发送创建文件请求
+            create_url = f"{GITHUB_API_BASE}/repos/{GITHUB_REPO}/contents/{file_path}"
+            print(f"[INF] 发送创建文件请求: {create_url}")
+            response = requests.put(create_url, headers=headers, data=json.dumps(data))
+            response.raise_for_status()
+            
+            # 检查响应内容
+            response_data = response.json()
+            if 'content' not in response_data:
+                print(f"[WARN] GitHub API响应异常: {response_data}")
+                raise ValueError(f'GitHub API响应异常: {response_data}')
+            
+            print(f"[INF] 文件 {file_path} 成功上传到GitHub")
+            return f"https://raw.githubusercontent.com/{GITHUB_REPO}/{GITHUB_BRANCH}/{raw_url_path}"
+            
+        except requests.exceptions.RequestException as e:
+            retry_count += 1
+            error_msg = f'上传图片到GitHub失败 (尝试 {retry_count}/{max_retries}): {e}'
+            print(f"[ERR] {error_msg}")
+            
+            # 提取详细错误信息
+            if hasattr(e, 'response') and e.response is not None:
+                try:
+                    error_details = e.response.json()
+                    print(f"[ERR] 错误详情: {error_details}")
+                    
+                    # 检查是否是认证问题
+                    if e.response.status_code == 401:
+                        print(f"[ERR] 认证失败! 请检查CHECKOUT_TOKEN是否有效且具有足够权限")
+                    # 检查是否是仓库不存在
+                    elif e.response.status_code == 404:
+                        print(f"[ERR] 仓库或路径不存在! 请检查GITHUB_REPO={GITHUB_REPO}和GITHUB_BRANCH={GITHUB_BRANCH}是否正确")
+                except:
+                    print(f"[ERR] 无法解析错误响应: {e.response.text if hasattr(e.response, 'text') else 'No response text'}")
+            
+            # 如果还有重试机会，等待后重试
+            if retry_count < max_retries:
+                wait_time = 2 ** retry_count  # 指数退避
+                print(f"[INF] 等待 {wait_time} 秒后重试...")
+                time.sleep(wait_time)
+            else:
+                print(f"[ERR] 已达到最大重试次数 ({max_retries})，上传失败")
+                return None
+                
+        except Exception as e:
+            print(f"[ERR] 上传图片时发生未知错误: {e}")
+            return None
+    
+    return None
 
 def download_image(url: str) -> Tuple[bytes, str]:
     """下载图片
@@ -119,20 +176,42 @@ def download_image(url: str) -> Tuple[bytes, str]:
     Args:
         url: 图片URL
     Returns:
-        图片数据和文件名
+        图片数据和文件名的元组，如果下载失败则返回(None, None)
     """
-    response = requests.get(url)
-    response.raise_for_status()
+    try:
+        print(f"[INF] 开始下载图片: {url}")
+        # 设置超时，避免长时间等待
+        response = requests.get(url, timeout=30)
+        response.raise_for_status()
+        
+        # 从URL中获取文件名
+        file_name = os.path.basename(url.split('?')[0])  # 移除URL参数
+        
+        # 如果URL中没有有效的文件名，使用内容类型和时间戳生成
+        if not file_name or '.' not in file_name:
+            content_type = response.headers.get('content-type', '')
+            ext = content_type.split('/')[-1]
+            if ext in ['jpeg', 'png', 'gif', 'webp', 'svg+xml']:
+                if ext == 'svg+xml':
+                    ext = 'svg'
+                timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+                file_name = f"image_{timestamp}.{ext}"
+            else:
+                # 默认使用png格式
+                file_name = f"image_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+        
+        print(f"[INF] 图片下载成功: {file_name} ({len(response.content)} 字节)")
+        return response.content, file_name
     
-    # 从URL中获取文件名
-    file_name = os.path.basename(url)
-    if not file_name:
-        # 如果URL中没有文件名，使用内容类型生成
-        content_type = response.headers.get('content-type', '')
-        ext = content_type.split('/')[-1]
-        file_name = f"image.{ext}"
-    
-    return response.content, file_name
+    except requests.exceptions.Timeout:
+        print(f"[ERR] 下载图片超时: {url}")
+        return None, None
+    except requests.exceptions.RequestException as e:
+        print(f"[ERR] 下载图片失败: {url}, 错误: {e}")
+        return None, None
+    except Exception as e:
+        print(f"[ERR] 下载图片时发生未知错误: {e}")
+        return None, None
 
 def convert_notion_blocks_to_markdown(page_id: str) -> str:
     """将Notion页面内容转换为Markdown格式
@@ -180,22 +259,46 @@ def convert_notion_blocks_to_markdown(page_id: str) -> str:
         elif block_type == 'image':
             # 处理图片
             image_block = block['image']
-            if image_block['type'] == 'external':
+            image_type = image_block['type']
+            print(f"[INF] 处理图片块，类型: {image_type}")
+            
+            if image_type == 'external':
                 image_url = image_block['external']['url']
+                print(f"[INF] 处理外部图片: {image_url}")
             else:  # file
                 image_url = image_block['file']['url']
+                print(f"[INF] 处理Notion托管图片: {image_url}")
             
             try:
                 # 下载图片
+                print(f"[INF] 开始下载并处理图片...")
                 image_data, image_name = download_image(image_url)
+                
+                # 检查下载是否成功
+                if image_data is None or image_name is None:
+                    print(f"[WARN] 图片下载失败，将使用原始URL")
+                    caption = ''.join(text['plain_text'] for text in image_block.get('caption', []))
+                    markdown_content.append(f'![{caption}]({image_url})\n\n')
+                    continue
+                
                 # 上传到GitHub
+                print(f"[INF] 图片下载成功，准备上传到GitHub")
                 github_url = upload_to_github(image_data, image_name)
-                # 添加Markdown图片语法
-                caption = ''.join(text['plain_text'] for text in image_block.get('caption', []))
-                markdown_content.append(f'![{caption}]({github_url})\n\n')
+                
+                # 检查上传是否成功
+                if github_url is None:
+                    print(f"[WARN] 图片上传到GitHub失败，将使用原始URL")
+                    caption = ''.join(text['plain_text'] for text in image_block.get('caption', []))
+                    markdown_content.append(f'![{caption}]({image_url})\n\n')
+                else:
+                    # 添加Markdown图片语法
+                    caption = ''.join(text['plain_text'] for text in image_block.get('caption', []))
+                    print(f"[INF] 图片处理成功，使用GitHub URL: {github_url}")
+                    markdown_content.append(f'![{caption}]({github_url})\n\n')
             except Exception as e:
-                print(f'[ERR] 处理图片失败: {str(e)}')
+                print(f'[ERR] 处理图片时发生未捕获的异常: {str(e)}')
                 # 如果处理失败，使用原始URL
+                caption = ''.join(text['plain_text'] for text in image_block.get('caption', []))
                 markdown_content.append(f'![image]({image_url})\n\n')
     
     return ''.join(markdown_content)
@@ -206,13 +309,49 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     Args:
         page: Notion页面信息
         content: Markdown内容
+    Returns:
+        文件名（如果有MDFilename属性）或None
     """
     # 获取页面属性
     properties = page['properties']
     title = ''.join(text['plain_text'] for text in properties['Title']['title'])
     slug = ''.join(text['plain_text'] for text in properties['Slug']['rich_text']) if 'Slug' in properties else title.lower().replace(' ', '-')
-    date = properties['Date']['date']['start'] if 'Date' in properties else datetime.now().isoformat()
+    original_date = properties['Date']['date']['start'] if 'Date' in properties else datetime.now().isoformat()
     tags = [item['name'] for item in properties['Tags']['multi_select']] if 'Tags' in properties else []
+    
+    # 检查是否有MDFilename属性
+    md_filename = None
+    date = original_date  # 默认使用原始日期
+    
+    if 'MDFilename' in properties and properties['MDFilename']['rich_text']:
+        md_filename = ''.join(text['plain_text'] for text in properties['MDFilename']['rich_text'])
+        print(f"[INF] 使用MDFilename属性作为文件名: {md_filename}")
+        
+        # 尝试从MDFilename中提取日期（假设格式为YYYYMMDD开头）
+        date_match = re.match(r'^(\d{8})', md_filename)
+        if date_match:
+            date_str = date_match.group(1)
+            try:
+                # 将YYYYMMDD格式转换为YYYY-MM-DD格式
+                year = date_str[:4]
+                month = date_str[4:6]
+                day = date_str[6:8]
+                
+                # 从原始日期中提取时间部分（如果有）
+                time_part = ""
+                if 'T' in original_date:
+                    time_part = original_date.split('T')[1]
+                
+                # 组合新的日期时间
+                if time_part:
+                    date = f"{year}-{month}-{day}T{time_part}"
+                else:
+                    date = f"{year}-{month}-{day}"
+                    
+                print(f"[INF] 从MDFilename中提取到日期: {date}")
+            except Exception as e:
+                print(f"[WARN] 从MDFilename提取日期失败: {e}，使用原始日期: {original_date}")
+                date = original_date
     
     # 从 Article 属性获取文章内容
     article_content = ''
@@ -227,18 +366,34 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     else:
         article_content = content
     
+    # 获取Description属性（如果有）
+    description = ""
+    if 'Description' in properties and properties['Description']['rich_text']:
+        description = ''.join(text['plain_text'] for text in properties['Description']['rich_text'])
+        print(f"[INF] 从Notion获取到Description: {description}")
+    
     # 创建frontmatter
-    frontmatter = f"---\ntitle: \"{title}\"\ndate: {date}\ntags: {tags}\n---\n\n{article_content}"
+    frontmatter = f"---\ntitle: \"{title}\"\ndate: {date}\ntags: {tags}\ndescription: \"{description}\"\n---\n\n{article_content}"
     
     # 确保目录存在
     os.makedirs(POST_DIR, exist_ok=True)
     
+    # 确定文件名
+    if md_filename:
+        # 使用MDFilename属性作为文件名
+        file_path = os.path.join(POST_DIR, md_filename)
+    else:
+        # 使用slug作为文件名
+        file_path = os.path.join(POST_DIR, f"{slug}.md")
+    
     # 保存文件
-    file_path = os.path.join(POST_DIR, f"{slug}.md")
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(frontmatter)
     
     print(f'[INF] 已保存文章: {file_path}')
+    
+    # 返回使用的文件名，用于后续处理
+    return md_filename
 
 def calc_md5(content: bytes):
     md5_hash = hashlib.md5()
@@ -365,11 +520,29 @@ def process_notion_page(page: Dict[str, Any]) -> None:
             print(f'[ERR] 页面缺少标题: {page_id}')
             return
         
+        # 检查是否有MDFilename属性，并提取日期
+        md_filename = None
+        image_folder_date = None
+        if 'MDFilename' in properties and properties['MDFilename']['rich_text']:
+            md_filename = ''.join(text['plain_text'] for text in properties['MDFilename']['rich_text'])
+            # 尝试从MDFilename中提取日期（假设格式为YYYYMMDD开头）
+            date_match = re.match(r'^(\d{8})', md_filename)
+            if date_match:
+                image_folder_date = date_match.group(1)
+                print(f"[INF] 从MDFilename中提取到日期: {image_folder_date}")
+        
+        # 设置全局变量，供图片上传函数使用
+        global CURRENT_IMAGE_FOLDER_DATE
+        CURRENT_IMAGE_FOLDER_DATE = image_folder_date
+        
         # 获取并转换内容
         content = convert_notion_blocks_to_markdown(page_id)
         
         # 保存为Markdown文件
         save_markdown_file(page, content)
+        
+        # 重置全局变量
+        CURRENT_IMAGE_FOLDER_DATE = None
         
     except KeyError as e:
         print(f'[ERR] 处理页面失败: 缺少必要字段 {str(e)}')
