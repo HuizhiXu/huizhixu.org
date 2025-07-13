@@ -304,7 +304,8 @@ def convert_notion_blocks_to_markdown(page_id: str) -> str:
     return ''.join(markdown_content)
 
 def save_markdown_file(page: Dict[str, Any], content: str) -> None:
-    """保存Markdown文件
+    """
+    保存Markdown文件
     
     Args:
         page: Notion页面信息
@@ -385,6 +386,24 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     else:
         # 使用slug作为文件名
         file_path = os.path.join(POST_DIR, f"{slug}.md")
+    
+    # 检查文件是否已存在
+    if os.path.exists(file_path):
+        # 获取页面ID用于日志
+        page_id = page.get('id', '未知ID')
+        
+        # 获取PublishStatus属性
+        publish_status = None
+        if 'PublishStatus' in properties:
+            if 'select' in properties['PublishStatus'] and properties['PublishStatus']['select']:
+                publish_status = properties['PublishStatus']['select']['name']
+        
+        # 如果状态是Update，则覆盖文件；否则跳过
+        if publish_status == 'Update':
+            print(f"[INF] 文件已存在，但状态为Update，将覆盖: {file_path}")
+        else:
+            print(f"[WARN] 文件已存在，跳过: {file_path} (页面ID: {page_id})")
+            return md_filename
     
     # 保存文件
     with open(file_path, 'w', encoding='utf-8') as f:

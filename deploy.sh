@@ -10,10 +10,13 @@ if [ $# -eq 1  ]
 fi
 
 # Build the project.
-hugo --buildDrafts=false -t blist # if using a theme, replace by `hugo -t <yourtheme>`
+hugo --buildDrafts=false -t blist
 
 # Go To Public folder
 cd public
+
+# 确保public目录指向正确的仓库
+git remote set-url origin git@github.com:HuizhiXu/huizhixu.github.io.git
 
 # Add changes to git.
 git add . -f
@@ -27,6 +30,7 @@ git push origin master
 # Come Back
 cd ..
 
+# 更新源代码仓库
 git add .
 git commit -m "$msg"
 git push origin master
