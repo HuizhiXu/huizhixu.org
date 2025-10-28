@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="chs" itemscope itemtype="http://schema.org/WebPage"><head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <link rel="icon" href="../../../favicon.svg">
-
-  <title>
-  Weaviate使用（二） 使用自定义模型 - 徐慧志的个人博客
-  </title>
-  <meta name="description" content="如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
+<!doctype html><html lang=chs itemscope itemtype=http://schema.org/WebPage><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=../../../favicon.svg><title>Weaviate使用（二） 使用自定义模型 - 徐慧志的个人博客
+</title><meta name=description content='如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
 把向量服务或者大模型封装成服务的好处是：
 
 功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码
@@ -47,577 +38,101 @@ def vectorize(texts: List[str]):
     from FlagEmbedding import BGEM3FlagModel
 
     model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;)
-    embeddings = model.encode(texts)[&#34;dense_vecs&#34;]
+    embeddings = model.encode(texts)["dense_vecs"]
     
 
     return embeddings
 通过API调用
 class CustomEmbedding(EmbedGen):
-    def generate_embeddings(self, texts: List[str]) -&gt; np.array:
+    def generate_embeddings(self, texts: List[str]) -> np.array:
         import requests
         import json
         payload = json.dumps(
             {
-                &#34;input&#34;: texts,
+                "input": texts,
             }
         )
-        headers = {&#34;Content-Type&#34;: &#34;application/json&#34;}
+        headers = {"Content-Type": "application/json"}
 
-        response = requests.request(&#34;POST&#34;, url=EMBED_URL, headers=headers, data=payload)
+        response = requests.request("POST", url=EMBED_URL, headers=headers, data=payload)
 
-        embeddings = [i[&#34;embedding&#34;] for i in response.json()[&#34;data&#34;]]
+        embeddings = [i["embedding"] for i in response.json()["data"]]
         embeddings = np.array(embeddings)
 
         return embeddings
  
-" /><meta name="generator" content="Hugo 0.135.0"><link
-    rel="stylesheet"
-    href="/css/styles.min.509c66a5b28498114476a8f54dca6727af1bc33036a37e617334b9733b436393.css"
-    integrity=""
-    crossorigin="anonymous"
-  />
-  
-  
-
-  
-  <meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20250614weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B/">
-  <meta property="og:site_name" content="徐慧志的个人博客">
-  <meta property="og:title" content="Weaviate使用（二） 使用自定义模型">
-  <meta property="og:description" content="如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
+'><meta name=generator content="Hugo 0.135.0"><link rel=stylesheet href="/css/styles.min.509c66a5b28498114476a8f54dca6727af1bc33036a37e617334b9733b436393.css" integrity crossorigin=anonymous><meta property="og:url" content="https://huizhixu.github.io/chs/know_how/20250614weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B/"><meta property="og:site_name" content="徐慧志的个人博客"><meta property="og:title" content="Weaviate使用（二） 使用自定义模型"><meta property="og:description" content='如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
 把向量服务或者大模型封装成服务的好处是：
 功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码 环境解耦：大模型服务通常需要更多的资源。 这时的docker compose file 非常简单，不再需要ENABLE_MODULES: ’text2vec-ollama,generative-ollama’ 这一行。
---- services: weaviate: command: - --host - 0.0.0.0 - --port - &#39;8080&#39; - --scheme - http image: cr.weaviate.io/semitechnologies/weaviate:1.30.6 ports: - 8080:8080 - 50051:50051 volumes: - weaviate_data:/var/lib/weaviate restart: on-failure:0 environment: QUERY_DEFAULTS_LIMIT: 25 AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: &#39;true&#39; PERSISTENCE_DATA_PATH: &#39;/var/lib/weaviate&#39; ENABLE_API_BASED_MODULES: &#39;true&#39; CLUSTER_HOSTNAME: &#39;node1&#39; volumes: weaviate_data: ... 通过hugging face导入 def vectorize(texts: List[str]): from FlagEmbedding import BGEM3FlagModel model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;) embeddings = model.encode(texts)[&#34;dense_vecs&#34;] return embeddings 通过API调用 class CustomEmbedding(EmbedGen): def generate_embeddings(self, texts: List[str]) -&gt; np.array: import requests import json payload = json.dumps( { &#34;input&#34;: texts, } ) headers = {&#34;Content-Type&#34;: &#34;application/json&#34;} response = requests.request(&#34;POST&#34;, url=EMBED_URL, headers=headers, data=payload) embeddings = [i[&#34;embedding&#34;] for i in response.json()[&#34;data&#34;]] embeddings = np.array(embeddings) return embeddings ">
-  <meta property="og:locale" content="chs">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="know_how">
-    <meta property="article:published_time" content="2025-06-14T13:45:40+00:00">
-    <meta property="article:modified_time" content="2025-06-14T13:45:40+00:00">
-    <meta property="article:tag" content="Tech">
-
-  
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Weaviate使用（二） 使用自定义模型">
-  <meta name="twitter:description" content="如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
+--- services: weaviate: command: - --host - 0.0.0.0 - --port - &#39;8080&#39; - --scheme - http image: cr.weaviate.io/semitechnologies/weaviate:1.30.6 ports: - 8080:8080 - 50051:50051 volumes: - weaviate_data:/var/lib/weaviate restart: on-failure:0 environment: QUERY_DEFAULTS_LIMIT: 25 AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: &#39;true&#39; PERSISTENCE_DATA_PATH: &#39;/var/lib/weaviate&#39; ENABLE_API_BASED_MODULES: &#39;true&#39; CLUSTER_HOSTNAME: &#39;node1&#39; volumes: weaviate_data: ... 通过hugging face导入 def vectorize(texts: List[str]): from FlagEmbedding import BGEM3FlagModel model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;) embeddings = model.encode(texts)["dense_vecs"] return embeddings 通过API调用 class CustomEmbedding(EmbedGen): def generate_embeddings(self, texts: List[str]) -> np.array: import requests import json payload = json.dumps( { "input": texts, } ) headers = {"Content-Type": "application/json"} response = requests.request("POST", url=EMBED_URL, headers=headers, data=payload) embeddings = [i["embedding"] for i in response.json()["data"]] embeddings = np.array(embeddings) return embeddings '><meta property="og:locale" content="chs"><meta property="og:type" content="article"><meta property="article:section" content="know_how"><meta property="article:published_time" content="2025-06-14T13:45:40+00:00"><meta property="article:modified_time" content="2025-06-14T13:45:40+00:00"><meta property="article:tag" content="Tech"><meta name=twitter:card content="summary"><meta name=twitter:title content="Weaviate使用（二） 使用自定义模型"><meta name=twitter:description content='如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
 把向量服务或者大模型封装成服务的好处是：
 功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码 环境解耦：大模型服务通常需要更多的资源。 这时的docker compose file 非常简单，不再需要ENABLE_MODULES: ’text2vec-ollama,generative-ollama’ 这一行。
---- services: weaviate: command: - --host - 0.0.0.0 - --port - &#39;8080&#39; - --scheme - http image: cr.weaviate.io/semitechnologies/weaviate:1.30.6 ports: - 8080:8080 - 50051:50051 volumes: - weaviate_data:/var/lib/weaviate restart: on-failure:0 environment: QUERY_DEFAULTS_LIMIT: 25 AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: &#39;true&#39; PERSISTENCE_DATA_PATH: &#39;/var/lib/weaviate&#39; ENABLE_API_BASED_MODULES: &#39;true&#39; CLUSTER_HOSTNAME: &#39;node1&#39; volumes: weaviate_data: ... 通过hugging face导入 def vectorize(texts: List[str]): from FlagEmbedding import BGEM3FlagModel model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;) embeddings = model.encode(texts)[&#34;dense_vecs&#34;] return embeddings 通过API调用 class CustomEmbedding(EmbedGen): def generate_embeddings(self, texts: List[str]) -&gt; np.array: import requests import json payload = json.dumps( { &#34;input&#34;: texts, } ) headers = {&#34;Content-Type&#34;: &#34;application/json&#34;} response = requests.request(&#34;POST&#34;, url=EMBED_URL, headers=headers, data=payload) embeddings = [i[&#34;embedding&#34;] for i in response.json()[&#34;data&#34;]] embeddings = np.array(embeddings) return embeddings ">
-
-  
-  <meta itemprop="name" content="Weaviate使用（二） 使用自定义模型">
-  <meta itemprop="description" content="如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
+--- services: weaviate: command: - --host - 0.0.0.0 - --port - &#39;8080&#39; - --scheme - http image: cr.weaviate.io/semitechnologies/weaviate:1.30.6 ports: - 8080:8080 - 50051:50051 volumes: - weaviate_data:/var/lib/weaviate restart: on-failure:0 environment: QUERY_DEFAULTS_LIMIT: 25 AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: &#39;true&#39; PERSISTENCE_DATA_PATH: &#39;/var/lib/weaviate&#39; ENABLE_API_BASED_MODULES: &#39;true&#39; CLUSTER_HOSTNAME: &#39;node1&#39; volumes: weaviate_data: ... 通过hugging face导入 def vectorize(texts: List[str]): from FlagEmbedding import BGEM3FlagModel model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;) embeddings = model.encode(texts)["dense_vecs"] return embeddings 通过API调用 class CustomEmbedding(EmbedGen): def generate_embeddings(self, texts: List[str]) -> np.array: import requests import json payload = json.dumps( { "input": texts, } ) headers = {"Content-Type": "application/json"} response = requests.request("POST", url=EMBED_URL, headers=headers, data=payload) embeddings = [i["embedding"] for i in response.json()["data"]] embeddings = np.array(embeddings) return embeddings '><meta itemprop=name content="Weaviate使用（二） 使用自定义模型"><meta itemprop=description content='如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。
 把向量服务或者大模型封装成服务的好处是：
 功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码 环境解耦：大模型服务通常需要更多的资源。 这时的docker compose file 非常简单，不再需要ENABLE_MODULES: ’text2vec-ollama,generative-ollama’ 这一行。
---- services: weaviate: command: - --host - 0.0.0.0 - --port - &#39;8080&#39; - --scheme - http image: cr.weaviate.io/semitechnologies/weaviate:1.30.6 ports: - 8080:8080 - 50051:50051 volumes: - weaviate_data:/var/lib/weaviate restart: on-failure:0 environment: QUERY_DEFAULTS_LIMIT: 25 AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: &#39;true&#39; PERSISTENCE_DATA_PATH: &#39;/var/lib/weaviate&#39; ENABLE_API_BASED_MODULES: &#39;true&#39; CLUSTER_HOSTNAME: &#39;node1&#39; volumes: weaviate_data: ... 通过hugging face导入 def vectorize(texts: List[str]): from FlagEmbedding import BGEM3FlagModel model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;) embeddings = model.encode(texts)[&#34;dense_vecs&#34;] return embeddings 通过API调用 class CustomEmbedding(EmbedGen): def generate_embeddings(self, texts: List[str]) -&gt; np.array: import requests import json payload = json.dumps( { &#34;input&#34;: texts, } ) headers = {&#34;Content-Type&#34;: &#34;application/json&#34;} response = requests.request(&#34;POST&#34;, url=EMBED_URL, headers=headers, data=payload) embeddings = [i[&#34;embedding&#34;] for i in response.json()[&#34;data&#34;]] embeddings = np.array(embeddings) return embeddings ">
-  <meta itemprop="datePublished" content="2025-06-14T13:45:40+00:00">
-  <meta itemprop="dateModified" content="2025-06-14T13:45:40+00:00">
-  <meta itemprop="wordCount" content="112">
-  <meta itemprop="keywords" content="Tech">
-
-  
-  <meta name="lang" content="chs" />
-  
-
-  
-</head>
-<body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative">
-  <a href="https://huizhixu.github.io/chs/" class="capitalize font-extrabold text-2xl">
-    
-    <img src="../../../blist-logo.png" alt="徐慧志的个人博客" class="h-8 max-w-full" />
-    
-  </a>
-  <button class="mobile-menu-button md:hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <line x1="4" y1="8" x2="20" y2="8" />
-      <line x1="4" y1="16" x2="20" y2="16" />
-    </svg>
-  </button>
-  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
-
-    
-    <li><a href="../../../chs/know_how/">技术</a></li>
-    
-    <li><a href="../../../chs/life/">生活见闻</a></li>
-    
-    <li><a href="../../../chs/page/about/">关于</a></li>
-    
-    <li><a href="../../../chs/link/">宝藏集结</a></li>
-    
-    <li><a href="../../../chs/tags/">分类</a></li>
-    
-
-    
-    
-    <li class="relative cursor-pointer">
-      <span class="language-switcher flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="12" cy="12" r="9" />
-          <line x1="3.6" y1="9" x2="20.4" y2="9" />
-          <line x1="3.6" y1="15" x2="20.4" y2="15" />
-          <path d="M11.5 3a17 17 0 0 0 0 18" />
-          <path d="M12.5 3a17 17 0 0 1 0 18" />
-        </svg>
-        <a>语言</a>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
-        </svg>
-      </span>
-      <div
-        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
-        
-        
-        
-        
-        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../en/" lang="en">English</a>
-        
-        
-        
-        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="../../../de/" lang="de">Deutsch</a>
-        
-        
-      </div>
-    </li>
-    
-    
-
-    
-    <li class="grid place-items-center">
-      <span class="open-search inline-block cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="10" cy="10" r="7" />
-          <line x1="21" y1="21" x2="15" y2="15" />
-        </svg>
-      </span>
-    </li>
-    
-
-    
-    <li class="grid place-items-center">
-      <span class="toggle-dark-mode inline-block cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="12" cy="12" r="3" />
-          <line x1="12" y1="5" x2="12" y2="5.01" />
-          <line x1="17" y1="7" x2="17" y2="7.01" />
-          <line x1="19" y1="12" x2="19" y2="12.01" />
-          <line x1="17" y1="17" x2="17" y2="17.01" />
-          <line x1="12" y1="19" x2="12" y2="19.01" />
-          <line x1="7" y1="17" x2="7" y2="17.01" />
-          <line x1="5" y1="12" x2="5" y2="12.01" />
-          <line x1="7" y1="7" x2="7" y2="7.01" />
-        </svg>
-      </span>
-    </li>
-    
-  </ul>
-</header>
-<main class="flex-1">
-  
-  
-
-  
-
-  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
-
-    <h1 class="text-2xl font-bold mb-2">Weaviate使用（二） 使用自定义模型</h1>
-    
-    <h5 class="text-sm flex items-center flex-wrap">
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <rect x="4" y="5" width="16" height="16" rx="2" />
-        <line x1="16" y1="3" x2="16" y2="7" />
-        <line x1="8" y1="3" x2="8" y2="7" />
-        <line x1="4" y1="11" x2="20" y2="11" />
-        <rect x="8" y="15" width="2" height="2" />
-      </svg>
-      发布于 
-  
-    2025年06月14日
-  
-
-      
-        &nbsp;&bull;&nbsp;
-      
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <circle cx="12" cy="12" r="9" />
-        <polyline points="12 7 12 12 15 15" />
-      </svg>
-     1&nbsp;分钟
-     
-      &nbsp;&bull;
-      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <line x1="3" y1="6" x2="3" y2="19" />
-        <line x1="12" y1="6" x2="12" y2="19" />
-        <line x1="21" y1="6" x2="21" y2="19" />
-      </svg>
-      112&nbsp;字
-
-    </h5>
-    
-
-    <details id="TableOfContents" class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc">
-    <summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white">
-      <span>Table of contents</span>
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <polyline points="6 9 12 15 18 9"></polyline>
-     </svg>
-    </summary>
-
-    <ul class="mt-2 pb-4">
-        
-
-        
-        <li>
-        <a href="#%e9%80%9a%e8%bf%87hugging-face%e5%af%bc%e5%85%a5">通过hugging face导入</a>
-        
-
-        
-        </li><li>
-        <a href="#%e9%80%9a%e8%bf%87api%e8%b0%83%e7%94%a8">通过API调用</a>
-        </li></ul>
-  </details>
-
-    <p>如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。</p>
-<p>把向量服务或者大模型封装成服务的好处是：</p>
-<ol>
-<li>功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码</li>
-<li>环境解耦：大模型服务通常需要更多的资源。</li>
-</ol>
-<p>这时的docker compose file 非常简单，不再需要ENABLE_MODULES: &rsquo;text2vec-ollama,generative-ollama&rsquo; 这一行。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ff79c6">---</span>
-</span></span><span style="display:flex;"><span>services<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>  weaviate<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>    command<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">--</span>host
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">0.0</span>.<span style="color:#bd93f9">0.0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">--</span>port
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#f1fa8c">&#39;8080&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">--</span>scheme
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> http
-</span></span><span style="display:flex;"><span>    image<span style="color:#ff79c6">:</span> cr.weaviate.io<span style="color:#ff79c6">/</span>semitechnologies<span style="color:#ff79c6">/</span>weaviate<span style="color:#ff79c6">:</span><span style="color:#bd93f9">1.30</span>.<span style="color:#bd93f9">6</span>
-</span></span><span style="display:flex;"><span>    ports<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">8080</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">8080</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">50051</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">50051</span>
-</span></span><span style="display:flex;"><span>    volumes<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-</span> weaviate_data<span style="color:#ff79c6">:</span>/var/lib/weaviate
-</span></span><span style="display:flex;"><span>    restart<span style="color:#ff79c6">:</span> on<span style="color:#ff79c6">-</span>failure<span style="color:#ff79c6">:</span><span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>    environment<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>      QUERY_DEFAULTS_LIMIT<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">25</span>
-</span></span><span style="display:flex;"><span>      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;true&#39;</span>
-</span></span><span style="display:flex;"><span>      PERSISTENCE_DATA_PATH<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;/var/lib/weaviate&#39;</span>
-</span></span><span style="display:flex;"><span>      ENABLE_API_BASED_MODULES<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;true&#39;</span>
-</span></span><span style="display:flex;"><span>      CLUSTER_HOSTNAME<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;node1&#39;</span>
-</span></span><span style="display:flex;"><span>volumes<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>  weaviate_data<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>...
-</span></span></code></pre></div><h3 id="通过hugging-face导入">通过hugging face导入</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>def vectorize(texts<span style="color:#ff79c6">:</span> List[str])<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>   
-</span></span><span style="display:flex;"><span>    from FlagEmbedding <span style="color:#ff79c6">import</span> BGEM3FlagModel
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    model <span style="color:#ff79c6">=</span> BGEM3FlagModel(<span style="color:#f1fa8c">&#39;BAAI/bge-m3&#39;</span>)
-</span></span><span style="display:flex;"><span>    embeddings <span style="color:#ff79c6">=</span> model.encode(texts)[<span style="color:#f1fa8c">&#34;dense_vecs&#34;</span>]
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> embeddings
-</span></span></code></pre></div><h3 id="通过api调用">通过API调用</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> CustomEmbedding(EmbedGen)<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>    def generate_embeddings(self, texts<span style="color:#ff79c6">:</span> List[str]) <span style="color:#ff79c6">-&gt;</span> np.array<span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">import</span> requests
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">import</span> json
-</span></span><span style="display:flex;"><span>        payload <span style="color:#ff79c6">=</span> json.dumps(
-</span></span><span style="display:flex;"><span>            {
-</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;input&#34;</span><span style="color:#ff79c6">:</span> texts,
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        )
-</span></span><span style="display:flex;"><span>        headers <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#34;Content-Type&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;application/json&#34;</span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        response <span style="color:#ff79c6">=</span> requests.request(<span style="color:#f1fa8c">&#34;POST&#34;</span>, url<span style="color:#ff79c6">=</span>EMBED_URL, headers<span style="color:#ff79c6">=</span>headers, data<span style="color:#ff79c6">=</span>payload)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        embeddings <span style="color:#ff79c6">=</span> [i[<span style="color:#f1fa8c">&#34;embedding&#34;</span>] <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">in</span> response.json()[<span style="color:#f1fa8c">&#34;data&#34;</span>]]
-</span></span><span style="display:flex;"><span>        embeddings <span style="color:#ff79c6">=</span> np.array(embeddings)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> embeddings
-</span></span><span style="display:flex;"><span> 
-</span></span></code></pre></div>
-  </article>
-<div class="px-2 mb-2">
-  
-  <script src="https://utteranc.es/client.js"
-    repo="HuizhiXu/huizhixu.github.io"
-    issue-term="pathname"
-    theme="github-light"
-    crossorigin="anonymous"
-    async>
-  </script>
-  
-</div>
-<div class="bg-blue-100 dark:bg-gray-900">
-  <div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-    <div>
-      <div class="text-2xl font-bold mb-2">Sein heißt werden, leben heißt lernen.</div>
-      <p class="opacity-60">Der einfache Weg is immer verkehrt.</p>
-    </div>
-
-    <ul class="flex justify-center gap-x-3 flex-wrap gap-y-2">
-      
-
-      
-      <li>
-        <a
-          href="https://twitter.com/"
-          target="_blank"
-          rel="noopener"
-          aria-label="Twitter"
-          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"
-            />
-          </svg>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-      <li>
-        <a
-          href="https://github.com/"
-          target="_blank"
-          rel="noopener"
-          aria-label="GitHub"
-          class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
-            />
-          </svg>
-        </a>
-      </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-    </ul>
-  </div>
-</div>
-
-    </main><footer class="container p-6 mx-auto flex justify-between items-center">
-  <span class="text-sm font-light">
-    
-    Copyright © 2012 - Huizhi Xu · All rights reserved
-    
-  </span>
-  <span onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="p-1 cursor-pointer">
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5"
-      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M18 15l-6 -6l-6 6h12" />
-    </svg>
-  </span>
-</footer>
-
-<div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden">
-  <div class="container max-w-3xl mx-auto p-12">
-    <div class="relative">
-      <div class="my-4 text-center text-2xl font-bold">Search</div>
-
-      <span class="p-2 absolute right-0 top-0 cursor-pointer close-search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </span>
-    </div>
-
-    <input type="search" class="py-2 px-3 w-full dark:text-black border dark:border-transparent"
-      placeholder="Enter search query" />
-
-    <div class="search-results text-lg font-medium my-4 hidden">Results</div>
-    <ul class="search-list my-2">
-
-    </ul>
-
-    <div class="no-results text-center my-8 hidden">
-      <div class="text-xl font-semibold mb-2">No results found</div>
-      <p class="font-light text-sm">Try adjusting your search query</p>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<script src="https://huizhixu.github.io/js/scripts.min.js"></script>
-
-
-
-
-<script>
-  const languageMenuButton = document.querySelector('.language-switcher');
-  const languageDropdown = document.querySelector('.language-dropdown');
-  languageMenuButton.addEventListener('click', (evt) => {
-    evt.preventDefault()
-    if (languageDropdown.classList.contains('hidden')) {
-      languageDropdown.classList.remove('hidden')
-      languageDropdown.classList.add('flex')
-    } else {
-      languageDropdown.classList.add('hidden');
-      languageDropdown.classList.remove('flex');
-    }
-  })
-</script>
-
-
-
-<script>
-  
-  const darkmode = document.querySelector('.toggle-dark-mode');
-  function toggleDarkMode() {
-    if (document.documentElement.classList.contains('dark')) {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('darkmode', 'light')
-    } else {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('darkmode', 'dark')
-    }
-  }
-  if (darkmode) {
-    darkmode.addEventListener('click', toggleDarkMode);
-  }
-
-  const darkStorage = localStorage.getItem('darkmode');
-  const isBrowserDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  if (!darkStorage && isBrowserDark) {
-    document.documentElement.classList.add('dark');
-  }
-
-  if (darkStorage && darkStorage === 'dark') {
-    toggleDarkMode();
-  }
-</script>
-
-
-<script>
-  const mobileMenuButton = document.querySelector('.mobile-menu-button')
-  const mobileMenu = document.querySelector('.mobile-menu')
-  function toggleMenu() {
-    mobileMenu.classList.toggle('hidden');
-    mobileMenu.classList.toggle('flex');
-  }
-  if(mobileMenu && mobileMenuButton){
-    mobileMenuButton.addEventListener('click', toggleMenu)
-  }
-</script>
-</body>
-</html>
+--- services: weaviate: command: - --host - 0.0.0.0 - --port - &#39;8080&#39; - --scheme - http image: cr.weaviate.io/semitechnologies/weaviate:1.30.6 ports: - 8080:8080 - 50051:50051 volumes: - weaviate_data:/var/lib/weaviate restart: on-failure:0 environment: QUERY_DEFAULTS_LIMIT: 25 AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: &#39;true&#39; PERSISTENCE_DATA_PATH: &#39;/var/lib/weaviate&#39; ENABLE_API_BASED_MODULES: &#39;true&#39; CLUSTER_HOSTNAME: &#39;node1&#39; volumes: weaviate_data: ... 通过hugging face导入 def vectorize(texts: List[str]): from FlagEmbedding import BGEM3FlagModel model = BGEM3FlagModel(&#39;BAAI/bge-m3&#39;) embeddings = model.encode(texts)["dense_vecs"] return embeddings 通过API调用 class CustomEmbedding(EmbedGen): def generate_embeddings(self, texts: List[str]) -> np.array: import requests import json payload = json.dumps( { "input": texts, } ) headers = {"Content-Type": "application/json"} response = requests.request("POST", url=EMBED_URL, headers=headers, data=payload) embeddings = [i["embedding"] for i in response.json()["data"]] embeddings = np.array(embeddings) return embeddings '><meta itemprop=datePublished content="2025-06-14T13:45:40+00:00"><meta itemprop=dateModified content="2025-06-14T13:45:40+00:00"><meta itemprop=wordCount content="112"><meta itemprop=keywords content="Tech"><meta name=lang content="chs"></head><body class="dark:bg-gray-800 dark:text-white relative flex flex-col min-h-screen"><header class="container flex justify-between md:justify-between gap-4 flex-wrap p-6 mx-auto relative"><a href=https://huizhixu.github.io/chs/ class="capitalize font-extrabold text-2xl"><img src=../../../blist-logo.png alt=徐慧志的个人博客 class="h-8 max-w-full">
+</a><button class="mobile-menu-button md:hidden"><svg width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg></button><ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800"><li><a href=../../../chs/know_how/>技术</a></li><li><a href=../../../chs/life/>生活见闻</a></li><li><a href=../../../chs/page/about/>关于</a></li><li><a href=../../../chs/link/>宝藏集结</a></li><li><a href=../../../chs/tags/>分类</a></li><li class="relative cursor-pointer"><span class="language-switcher flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><line x1="3.6" y1="9" x2="20.4" y2="9"/><line x1="3.6" y1="15" x2="20.4" y2="15"/><path d="M11.5 3a17 17 0 000 18"/><path d="M12.5 3a17 17 0 010 18"/></svg>
+<a>语言</a><svg width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 15l-6-6-6 6h12" transform="rotate(180 12 12)"/></svg></span><div class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden"><a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href=../../../en/ lang=en>English</a>
+<a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href=../../../de/ lang=de>Deutsch</a></div></li><li class="grid place-items-center"><span class="open-search inline-block cursor-pointer"><svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg></span></li><li class="grid place-items-center"><span class="toggle-dark-mode inline-block cursor-pointer"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="5" x2="12" y2="5.01"/><line x1="17" y1="7" x2="17" y2="7.01"/><line x1="19" y1="12" x2="19" y2="12.01"/><line x1="17" y1="17" x2="17" y2="17.01"/><line x1="12" y1="19" x2="12" y2="19.01"/><line x1="7" y1="17" x2="7" y2="17.01"/><line x1="5" y1="12" x2="5" y2="12.01"/><line x1="7" y1="7" x2="7" y2="7.01"/></svg></span></li></ul></header><main class=flex-1><article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4"><h1 class="text-2xl font-bold mb-2">Weaviate使用（二） 使用自定义模型</h1><h5 class="text-sm flex items-center flex-wrap"><svg class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="4" y1="11" x2="20" y2="11"/><rect x="8" y="15" width="2" height="2"/></svg>
+发布于
+2025年06月14日
+&nbsp;&bull;&nbsp;
+<svg class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+1&nbsp;分钟
+&nbsp;&bull;
+<svg class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 019 0 9 9 0 019 0"/><path d="M3 6a9 9 0 019 0 9 9 0 019 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+112&nbsp;字</h5><details id=TableOfContents class="px-4 mt-4 bg-gray-100 dark:bg-gray-700 rounded toc"><summary class="flex items-center font-bold py-2 px-4 cursor-pointer justify-between select-none text-black dark:text-white"><span>Table of contents</span><svg class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="6 9 12 15 18 9"/></svg></summary><ul class="mt-2 pb-4"><li><a href=#%e9%80%9a%e8%bf%87hugging-face%e5%af%bc%e5%85%a5>通过hugging face导入</a></li><li><a href=#%e9%80%9a%e8%bf%87api%e8%b0%83%e7%94%a8>通过API调用</a></li></ul></details><p>如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。</p><p>把向量服务或者大模型封装成服务的好处是：</p><ol><li>功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码</li><li>环境解耦：大模型服务通常需要更多的资源。</li></ol><p>这时的docker compose file 非常简单，不再需要ENABLE_MODULES: &rsquo;text2vec-ollama,generative-ollama&rsquo; 这一行。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>---</span>
+</span></span><span style=display:flex><span>services<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>  weaviate<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>    command<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#ff79c6>--</span>host
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>0.0</span>.<span style=color:#bd93f9>0.0</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#ff79c6>--</span>port
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#f1fa8c>&#39;8080&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#ff79c6>--</span>scheme
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> http
+</span></span><span style=display:flex><span>    image<span style=color:#ff79c6>:</span> cr.weaviate.io<span style=color:#ff79c6>/</span>semitechnologies<span style=color:#ff79c6>/</span>weaviate<span style=color:#ff79c6>:</span><span style=color:#bd93f9>1.30</span>.<span style=color:#bd93f9>6</span>
+</span></span><span style=display:flex><span>    ports<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>8080</span><span style=color:#ff79c6>:</span><span style=color:#bd93f9>8080</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>50051</span><span style=color:#ff79c6>:</span><span style=color:#bd93f9>50051</span>
+</span></span><span style=display:flex><span>    volumes<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>-</span> weaviate_data<span style=color:#ff79c6>:</span>/var/lib/weaviate
+</span></span><span style=display:flex><span>    restart<span style=color:#ff79c6>:</span> on<span style=color:#ff79c6>-</span>failure<span style=color:#ff79c6>:</span><span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>    environment<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>      QUERY_DEFAULTS_LIMIT<span style=color:#ff79c6>:</span> <span style=color:#bd93f9>25</span>
+</span></span><span style=display:flex><span>      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;true&#39;</span>
+</span></span><span style=display:flex><span>      PERSISTENCE_DATA_PATH<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;/var/lib/weaviate&#39;</span>
+</span></span><span style=display:flex><span>      ENABLE_API_BASED_MODULES<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;true&#39;</span>
+</span></span><span style=display:flex><span>      CLUSTER_HOSTNAME<span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#39;node1&#39;</span>
+</span></span><span style=display:flex><span>volumes<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>  weaviate_data<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>...
+</span></span></code></pre></div><h3 id=通过hugging-face导入>通过hugging face导入</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span>def vectorize(texts<span style=color:#ff79c6>:</span> List[str])<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>   
+</span></span><span style=display:flex><span>    from FlagEmbedding <span style=color:#ff79c6>import</span> BGEM3FlagModel
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    model <span style=color:#ff79c6>=</span> BGEM3FlagModel(<span style=color:#f1fa8c>&#39;BAAI/bge-m3&#39;</span>)
+</span></span><span style=display:flex><span>    embeddings <span style=color:#ff79c6>=</span> model.encode(texts)[<span style=color:#f1fa8c>&#34;dense_vecs&#34;</span>]
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> embeddings
+</span></span></code></pre></div><h3 id=通过api调用>通过API调用</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#ff79c6>class</span> CustomEmbedding(EmbedGen)<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>    def generate_embeddings(self, texts<span style=color:#ff79c6>:</span> List[str]) <span style=color:#ff79c6>-&gt;</span> np.array<span style=color:#ff79c6>:</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>import</span> requests
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>import</span> json
+</span></span><span style=display:flex><span>        payload <span style=color:#ff79c6>=</span> json.dumps(
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#f1fa8c>&#34;input&#34;</span><span style=color:#ff79c6>:</span> texts,
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        headers <span style=color:#ff79c6>=</span> {<span style=color:#f1fa8c>&#34;Content-Type&#34;</span><span style=color:#ff79c6>:</span> <span style=color:#f1fa8c>&#34;application/json&#34;</span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        response <span style=color:#ff79c6>=</span> requests.request(<span style=color:#f1fa8c>&#34;POST&#34;</span>, url<span style=color:#ff79c6>=</span>EMBED_URL, headers<span style=color:#ff79c6>=</span>headers, data<span style=color:#ff79c6>=</span>payload)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        embeddings <span style=color:#ff79c6>=</span> [i[<span style=color:#f1fa8c>&#34;embedding&#34;</span>] <span style=color:#ff79c6>for</span> i <span style=color:#ff79c6>in</span> response.json()[<span style=color:#f1fa8c>&#34;data&#34;</span>]]
+</span></span><span style=display:flex><span>        embeddings <span style=color:#ff79c6>=</span> np.array(embeddings)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>return</span> embeddings
+</span></span><span style=display:flex><span> 
+</span></span></code></pre></div></article><div class="px-2 mb-2"><script src=https://utteranc.es/client.js repo=HuizhiXu/huizhixu.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script></div><div class="bg-blue-100 dark:bg-gray-900"><div class="container px-4 py-12 mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 items-center"><div><div class="text-2xl font-bold mb-2">Sein heißt werden, leben heißt lernen.</div><p class=opacity-60>Der einfache Weg is immer verkehrt.</p></div><ul class="flex justify-center gap-x-3 flex-wrap gap-y-2"><li><a href=https://twitter.com/ target=_blank rel=noopener aria-label=Twitter class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li><li><a href=https://github.com/ target=_blank rel=noopener aria-label=GitHub class="p-1 inline-block rounded-full border border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-800 cursor-pointer transition-colors dark:text-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-300"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ul></div></div></main><footer class="container p-6 mx-auto flex justify-between items-center"><span class="text-sm font-light">Copyright © 2012 - Huizhi Xu · All rights reserved
+</span><span onclick='window.scrollTo({top:0,behavior:"smooth"})' class="p-1 cursor-pointer"><svg width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 15l-6-6-6 6h12"/></svg></span></footer><div class="search-ui absolute top-0 left-0 w-full h-full bg-white dark:bg-gray-800 hidden"><div class="container max-w-3xl mx-auto p-12"><div class=relative><div class="my-4 text-center text-2xl font-bold">Search</div><span class="p-2 absolute right-0 top-0 cursor-pointer close-search"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div><input type=search class="py-2 px-3 w-full dark:text-black border dark:border-transparent" placeholder="Enter search query"><div class="search-results text-lg font-medium my-4 hidden">Results</div><ul class="search-list my-2"></ul><div class="no-results text-center my-8 hidden"><div class="text-xl font-semibold mb-2">No results found</div><p class="font-light text-sm">Try adjusting your search query</p></div></div></div><script src=https://huizhixu.github.io/js/scripts.min.js></script><script>const languageMenuButton=document.querySelector(".language-switcher"),languageDropdown=document.querySelector(".language-dropdown");languageMenuButton.addEventListener("click",e=>{e.preventDefault(),languageDropdown.classList.contains("hidden")?(languageDropdown.classList.remove("hidden"),languageDropdown.classList.add("flex")):(languageDropdown.classList.add("hidden"),languageDropdown.classList.remove("flex"))})</script><script>const darkmode=document.querySelector(".toggle-dark-mode");function toggleDarkMode(){document.documentElement.classList.contains("dark")?(document.documentElement.classList.remove("dark"),localStorage.setItem("darkmode","light")):(document.documentElement.classList.add("dark"),localStorage.setItem("darkmode","dark"))}darkmode&&darkmode.addEventListener("click",toggleDarkMode);const darkStorage=localStorage.getItem("darkmode"),isBrowserDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;!darkStorage&&isBrowserDark&&document.documentElement.classList.add("dark"),darkStorage&&darkStorage==="dark"&&toggleDarkMode()</script><script>const mobileMenuButton=document.querySelector(".mobile-menu-button"),mobileMenu=document.querySelector(".mobile-menu");function toggleMenu(){mobileMenu.classList.toggle("hidden"),mobileMenu.classList.toggle("flex")}mobileMenu&&mobileMenuButton&&mobileMenuButton.addEventListener("click",toggleMenu)</script></body></html>
