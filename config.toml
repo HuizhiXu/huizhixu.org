@@ -1,4 +1,4 @@
-baseURL = "https://www.huizhixu.org"
+baseURL = "https://huizhixu.github.io"
 metaDataFormat = "yaml"
 title = "HuizhiXu 的个人博客"
 theme = "blist"
