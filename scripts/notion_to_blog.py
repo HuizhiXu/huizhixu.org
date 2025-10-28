@@ -3,6 +3,7 @@ import re
 import base64
 import hashlib
 import time
+import urllib.parse
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
@@ -14,10 +15,45 @@ import json
 CHECKOUT_TOKEN = os.getenv('CHECKOUT_TOKEN')
 NOTION_TOKEN = os.getenv('NOTION_TOKEN')
 DATABASE_ID = os.getenv('NOTION_DATABASE_ID')
-POST_DIR = os.getenv('POST_DIR', 'content/chs/know_how')
+
+# 语言配置
+LANGUAGES = {
+    'Chinese': 'chs',
+    'German': 'de',
+    'English': 'en'
+}
+DEFAULT_LANGUAGE = 'Chinese'
+
+# 每种语言支持的分类
+LANGUAGE_CATEGORIES = {
+    'chs': {
+        'KnowHow': 'know_how',
+        'Life': 'life',
+        'Link': 'link',
+        'Page': 'page'
+    },
+    'de': {
+        'Life': 'life',
+        'Page': 'page'
+    },
+    'en': {
+        'Life': 'life',
+        'Page': 'page'
+    }
+}
+
+# 默认分类（针对每种语言）
+DEFAULT_CATEGORIES = {
+    'chs': 'KnowHow',
+    'de': 'Life',
+    'en': 'Life'
+}
+
 GITHUB_REPO = os.getenv('GITHUB_REPO', 'HuizhiXu/pictures')
 GITHUB_BRANCH = os.getenv('GITHUB_BRANCH', 'master')
 GITHUB_API_BASE = 'https://api.github.com'
+NOTION_API_BASE = 'https://api.notion.com/v1'
+NOTION_VERSION = '2022-06-28'
 
 # 全局变量，用于存储当前处理的文章的日期（从MDFilename中提取）
 CURRENT_IMAGE_FOLDER_DATE = None
@@ -35,27 +71,70 @@ for var_name, var_value in required_env_vars.items():
 
 
 
-# 初始化 Notion 客户端
+# 初始化 Notion 客户端（保留但我们使用 HTTP 请求以兼容不同版本）
 client = Client(auth=NOTION_TOKEN)
 
+
+def notion_request(method: str, path: str, params: dict = None, json_data: dict = None):
+    """向 Notion API 发送请求，封装请求头和错误处理
+
+    Args:
+        method: 'get'|'post'|'patch'|'put' 等
+        path: API 路径，例如 '/databases/{id}/query' 或 '/blocks/{id}/children'
+        params: URL 参数
+        json_data: JSON body
+    Returns:
+        解析后的 JSON 响应
+    """
+    url = NOTION_API_BASE + path
+    headers = {
+        'Authorization': f'Bearer {NOTION_TOKEN}',
+        'Notion-Version': NOTION_VERSION,
+        'Content-Type': 'application/json'
+    }
+    try:
+        resp = requests.request(method, url, headers=headers, params=params, json=json_data, timeout=30)
+        resp.raise_for_status()
+        if resp.text:
+            return resp.json()
+        return {}
+    except requests.exceptions.RequestException as e:
+        print(f"[ERR] Notion request failed {method} {url}: {e}")
+        if e.response is not None:
+            try:
+                print(f"[ERR] Response: {e.response.status_code} {e.response.text}")
+            except Exception:
+                pass
+        raise
+
 def get_notion_pages() -> List[Dict[str, Any]]:
-    """从Notion数据库获取所有文章页面
+    """从Notion数据库获取需要发布的文章页面
     
     Returns:
-        页面列表
+        需要发布的页面列表
     """
     pages = []
     has_more = True
     next_cursor = None
     
+    # 使用 Notion HTTP API 查询数据库，按分页处理
     while has_more:
-        response = client.databases.query(
-            database_id=DATABASE_ID,
-            start_cursor=next_cursor
-        )
-        pages.extend(response['results'])
-        has_more = response['has_more']
-        next_cursor = response['next_cursor']
+        body = {
+            "filter": {
+                "or": [
+                    {"property": "PublishStatus", "select": {"equals": "Publish"}},
+                    {"property": "PublishStatus", "select": {"equals": "Update"}}
+                ]
+            }
+        }
+        if next_cursor:
+            body['start_cursor'] = next_cursor
+
+        response = notion_request('post', f'/databases/{DATABASE_ID}/query', json_data=body)
+        # response should contain 'results' and pagination fields
+        pages.extend(response.get('results', []))
+        has_more = response.get('has_more', False)
+        next_cursor = response.get('next_cursor')
     
     return pages
 
@@ -225,15 +304,15 @@ def convert_notion_blocks_to_markdown(page_id: str) -> str:
     has_more = True
     next_cursor = None
     
-    # 获取所有blocks
+    # 获取所有blocks（使用 Notion HTTP API）
     while has_more:
-        response = client.blocks.children.list(
-            block_id=page_id,
-            start_cursor=next_cursor
-        )
-        blocks.extend(response['results'])
-        has_more = response['has_more']
-        next_cursor = response['next_cursor']
+        params = {'page_size': 100}
+        if next_cursor:
+            params['start_cursor'] = next_cursor
+        response = notion_request('get', f'/blocks/{page_id}/children', params=params)
+        blocks.extend(response.get('results', []))
+        has_more = response.get('has_more', False)
+        next_cursor = response.get('next_cursor')
     
     # 转换为Markdown
     markdown_content = []
@@ -320,6 +399,28 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     original_date = properties['Date']['date']['start'] if 'Date' in properties else datetime.now().isoformat()
     tags = [item['name'] for item in properties['Tags']['multi_select']] if 'Tags' in properties else []
     
+    # 获取语言
+    language = DEFAULT_LANGUAGE
+    if 'Language' in properties and properties['Language']['select']:
+        language = properties['Language']['select']['name']
+    
+    # 获取语言代码
+    lang_code = LANGUAGES.get(language, LANGUAGES[DEFAULT_LANGUAGE])
+    
+    # 获取分类
+    category = DEFAULT_CATEGORIES[lang_code]
+    if 'Category' in properties and properties['Category']['select']:
+        category = properties['Category']['select']['name']
+        
+    # 确保分类在该语言中可用
+    if category not in LANGUAGE_CATEGORIES[lang_code]:
+        print(f'[WARN] 分类 {category} 在语言 {language} 中不可用，使用默认分类 {DEFAULT_CATEGORIES[lang_code]}')
+        category = DEFAULT_CATEGORIES[lang_code]
+    
+    # 确定保存目录
+    post_dir = os.path.join('content', lang_code, LANGUAGE_CATEGORIES[lang_code][category])
+    print(f'[INF] 语言: {language}, 分类: {category}, 保存目录: {post_dir}')
+    
     # 检查是否有MDFilename属性
     md_filename = None
     date = original_date  # 默认使用原始日期
@@ -377,15 +478,15 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     frontmatter = f"---\ntitle: \"{title}\"\ndate: {date}\ntags: {tags}\ndescription: \"{description}\"\n---\n\n{article_content}"
     
     # 确保目录存在
-    os.makedirs(POST_DIR, exist_ok=True)
+    os.makedirs(post_dir, exist_ok=True)
     
     # 确定文件名
     if md_filename:
         # 使用MDFilename属性作为文件名
-        file_path = os.path.join(POST_DIR, md_filename)
+        file_path = os.path.join(post_dir, md_filename)
     else:
         # 使用slug作为文件名
-        file_path = os.path.join(POST_DIR, f"{slug}.md")
+        file_path = os.path.join(post_dir, f"{slug}.md")
     
     # 检查文件是否已存在
     if os.path.exists(file_path):
@@ -502,19 +603,22 @@ def create_notion_page(page_info: Dict[str, Any]) -> dict:
         "Tags": {"multi_select": [{"name": tag} for tag in page_info.get('tags', [])]},
         "Status": {"select": {"name": "Draft"}},
         "Type": {"select": {"name": "Post"}},
-        "Category": {"select": {"name": "技术分享"}}
+        "Category": {"select": {"name": "技术分享"}},
+        "PublishStatus": {"select": {"name": "Draft"}}
     }
 
     # 将Markdown内容转换为Notion blocks
-    children = convert_markdown_to_blocks(markdown_info.content)
+    content = page_info.get('content', '')
+    children = convert_markdown_to_blocks(content)
 
-    # 创建页面
+    # 创建页面（使用 Notion HTTP API）
     try:
-        return client.pages.create(
-            parent={"database_id": DATABASE_ID},
-            properties=properties,
-            children=children
-        )
+        body = {
+            'parent': {'database_id': DATABASE_ID},
+            'properties': properties,
+            'children': children
+        }
+        return notion_request('post', '/pages', json_data=body)
     except Exception as e:
         print(f'[ERR] 创建页面失败: {str(e)}')
         raise
@@ -589,16 +693,14 @@ def process_notion_page(page: Dict[str, Any]) -> None:
             if publish_status in ['Publish', 'Update']:
                 # 检查 PublishStatus 属性是否存在且是 select 类型
                 if 'PublishStatus' in properties and ('select' in properties['PublishStatus'] or properties['PublishStatus'].get('type') == 'select'):
-                    client.pages.update(
-                        page_id=page_id,
-                        properties={
+                    update_body = {
+                        'properties': {
                             'PublishStatus': {
-                                'select': {
-                                    'name': 'Published'
-                                }
+                                'select': {'name': 'Published'}
                             }
                         }
-                    )
+                    }
+                    notion_request('patch', f'/pages/{page_id}', json_data=update_body)
                     print(f'[INF] 已更新页面状态为Published: {page_id}')
                 else:
                     print(f'[WARN] 无法更新页面状态：PublishStatus 属性不存在或不是 select 类型: {page_id}')
