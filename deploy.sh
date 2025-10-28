@@ -15,22 +15,32 @@ hugo --buildDrafts=false -t blist --minify --baseURL="https://huizhixu.github.io
 # Go To Public folder
 cd public
 
-# 确保public目录指向正确的仓库
-git remote set-url origin git@github.com:HuizhiXu/huizhixu.github.io.git
+# 如果 public 不是 git 仓库则初始化
+if [ ! -d .git ]; then
+    git init
+    git remote add origin git@github.com:HuizhiXu/huizhixu.github.io.git
+fi
+
+git checkout master || git checkout -b master
 
 # Add changes to git.
 git add . -f
 
 # Commit changes.
-git commit -m "$msg"
+git commit -m "$msg" || echo "Nothing to commit"
 
 # Push source and build repos.
-git push origin master
+git push origin master --force
 
 # Come Back
 cd ..
 
-# 更新源代码仓库
+# 更新源代码仓库到 huizhixu.org
+if [ ! -d .git ]; then
+    git init
+    git remote add origin git@github.com:HuizhiXu/huizhixu.org.git
+fi
+
 git add .
-git commit -m "$msg"
+git commit -m "$msg" || echo "Nothing to commit"
 git push origin master
