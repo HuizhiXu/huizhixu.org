@@ -10,7 +10,7 @@ if [ $# -eq 1  ]
 fi
 
 # Build the project.
-hugo --buildDrafts=false -t blist
+hugo --buildDrafts=false -t blist --minify --baseURL="https://huizhixu.github.io"
 
 # Go To Public folder
 cd public
