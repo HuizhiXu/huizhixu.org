@@ -1,38 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LINK on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/link/</link><description>Recent content in LINK on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Mon, 31 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/link/index.xml" rel="self" type="application/rss+xml"/><item><title>2023-07-31 NLP资源</title><link>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</link><pubDate>Mon, 31 Jul 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</guid><description>&lt;p>以下链接方便日常工作。&lt;/p>
-&lt;h2 id="经典文章">经典文章&lt;/h2>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="noopener">The Unreasonable Effectiveness of Recurrent Neural Networks&lt;/a>
-&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Understanding-LSTMs&lt;/a>
-&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="课程">课程&lt;/h2>
-&lt;ol>
-&lt;li>&lt;a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOFZnDyrlW3-nI7tMLtmiJZ" target="_blank" rel="noopener">Natural Language Processing with Dan Jurafsky and Chris Manning&lt;/a>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="tools">Tools&lt;/h2>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;a href="https://chunkviz.up.railway.app/" target="_blank" rel="noopener">Visual representation of chunk splitting methods&lt;/a>
-&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="https://promptperfect.jina.ai/" target="_blank" rel="noopener">promptperfect&lt;/a>
-&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="blog">Blog&lt;/h2>
-&lt;ol>
-&lt;li>&lt;a href="https://luxiangdong.com/" target="_blank" rel="noopener">RAG-luxiangdong&lt;/a>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="实践">实践&lt;/h2>
-&lt;ol>
-&lt;li>&lt;a href="https://blog.csdn.net/v_JULY_v/article/details/131552592" target="_blank" rel="noopener">基于LangChain+LLM的本地知识库问答：从企业单文档问答到批量文档问答&lt;/a>
-&lt;/li>
-&lt;/ol></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LINK on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/link/</link><description>Recent content in LINK on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Mon, 31 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/link/index.xml" rel="self" type="application/rss+xml"/><item><title>2023-07-31 NLP资源</title><link>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</link><pubDate>Mon, 31 Jul 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/link/20210731nlp%E8%B5%84%E6%BA%90/</guid><description>&lt;p&gt;以下链接方便日常工作。&lt;/p&gt;
+&lt;h2 id="经典文章"&gt;经典文章&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="noopener"&gt;The Unreasonable Effectiveness of Recurrent Neural Networks&lt;/a&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener"&gt;Understanding-LSTMs&lt;/a&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="课程"&gt;课程&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOFZnDyrlW3-nI7tMLtmiJZ" target="_blank" rel="noopener"&gt;Natural Language Processing with Dan Jurafsky and Chris Manning&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="tools"&gt;Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://chunkviz.up.railway.app/" target="_blank" rel="noopener"&gt;Visual representation of chunk splitting methods&lt;/a&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://promptperfect.jina.ai/" target="_blank" rel="noopener"&gt;promptperfect&lt;/a&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="blog"&gt;Blog&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://luxiangdong.com/" target="_blank" rel="noopener"&gt;RAG-luxiangdong&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="实践"&gt;实践&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://blog.csdn.net/v_JULY_v/article/details/131552592" target="_blank" rel="noopener"&gt;基于LangChain+LLM的本地知识库问答：从企业单文档问答到批量文档问答&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description></item></channel></rss>

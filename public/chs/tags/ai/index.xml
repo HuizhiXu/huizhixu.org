@@ -1,52 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/tags/ai/</link><description>Recent content in Ai on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title><link>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link><pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid><description>&lt;p>在GPU上运行中文LLaMa模型，主要是按照 &lt;a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca" target="_blank" rel="noopener">https://github.com/ymcui/Chinese-LLaMA-Alpaca&lt;/a>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ai on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/tags/ai/</link><description>Recent content in Ai on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>2023-04-27GPU运行LLaMa模型——用HF的方式推理</title><link>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</link><pubDate>Thu, 27 Apr 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230427gpu%E8%BF%90%E8%A1%8Cllama%E6%A8%A1%E5%9E%8Bhf%E6%96%B9%E5%BC%8F/</guid><description>&lt;p&gt;在GPU上运行中文LLaMa模型，主要是按照 &lt;a href="https://github.com/ymcui/Chinese-LLaMA-Alpaca" target="_blank" rel="noopener"&gt;https://github.com/ymcui/Chinese-LLaMA-Alpaca&lt;/a&gt;
  这个仓库的方法。
-中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。&lt;/p></description></item><item><title>2023-03-05用随机梯度下降来优化人生【转载】</title><link>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link><pubDate>Sun, 05 Mar 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid><description>&lt;h2 id="要有目标">要有目标。&lt;/h2>
-&lt;p>你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。&lt;/p>
-&lt;h2 id="目标要大">目标要大。&lt;/h2>
-&lt;p>不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。&lt;/p></description></item><item><title>2023-02-16 如何理解Seq2seq</title><link>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link><pubDate>Thu, 16 Feb 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid><description>&lt;p>先搞清楚几个基本概念：&lt;/p>
-&lt;p>Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。&lt;/p></description></item><item><title>2023-02-13 chatGPT 在攻陷所有人</title><link>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link><pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid><description>&lt;p>承认吧，现在全世界最火就是chatGPT。&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>去参加了王建硕老师那边组织的关于chatGPT的讨论。&lt;/p>
-&lt;ol>
-&lt;li>会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。&lt;/li>
-&lt;li>从心理学和教育学来看，也开拓了我的眼界。&lt;/li>
-&lt;li>从高效使用和商业化来看，它无疑会改变很多人的生活。&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>
-&lt;p>chatGPT的使用感受很不错。&lt;/p></description></item><item><title>2023-02-09 如何理解自注意力机制</title><link>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link><pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid><description>&lt;h2 id="理解输入与输出">理解输入与输出&lt;/h2>
-&lt;ul>
-&lt;li>输入有可能是一个 vector，有可能是多个 vector&lt;/li>
-&lt;li>输出：
-&lt;ul>
-&lt;li>一个序列对应一个 label。the whole sequence has a label
-&lt;ul>
-&lt;li>例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>一个 vector 对应一个 label。一个序列对应多个 label。
-&lt;ul>
-&lt;li>例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>模型决定 label 的个数。seq2seq 任务
-&lt;ul>
-&lt;li>例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="一个vector对应一个label的情况即输入和输出一样多也叫做sequence-labeling">一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling&lt;/h2>
-&lt;ul>
-&lt;li>例子： I saw a saw&lt;/li>
-&lt;li>如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用&lt;/li>
-&lt;li>弊端：
-&lt;ul>
-&lt;li>用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。&lt;/li>
-&lt;/ul>
-&lt;p>我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。&lt;/p></description></item></channel></rss>
+中文LLaMa模型和中文Alpaca的区别是：中文LLaMa在英文llama的基础上扩充了中文词表并且使用了中文数据进行二次训练。中文LLaMa只能进行单轮问答。中文Alpaca经过instruct-tuning 生成，可以进行多轮问答。本次实验主要是针对中文LLaMa模型。&lt;/p&gt;</description></item><item><title>2023-03-05用随机梯度下降来优化人生【转载】</title><link>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</link><pubDate>Sun, 05 Mar 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230305%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%9D%A5%E4%BC%98%E5%8C%96%E4%BA%BA%E7%94%9F/</guid><description>&lt;h2 id="要有目标"&gt;要有目标。&lt;/h2&gt;
+&lt;p&gt;你需要有目标。短的也好，长的也好。认真定下的也好，别人那里捡的也好。就跟随机梯度下降需要有个目标函数一样。&lt;/p&gt;
+&lt;h2 id="目标要大"&gt;目标要大。&lt;/h2&gt;
+&lt;p&gt;不管是人生目标还是目标函数，你最好不要知道最后可以走到哪里。如果你知道，那么你的目标就太简单了，可能是个凸函数。你可以在一开始的时候给自己一些小目标，例如期末考个80分，训练一个线性模型。但接下来得有更大的目标，财富自由也好，100亿参数的变形金刚也好，得足够一颗赛艇。&lt;/p&gt;</description></item><item><title>2023-02-16 如何理解Seq2seq</title><link>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</link><pubDate>Thu, 16 Feb 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230216%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3seq2seq/</guid><description>&lt;p&gt;先搞清楚几个基本概念：&lt;/p&gt;
+&lt;p&gt;Seq2seq是一个概念，它的表现形式就是有encoder和decoder的一个结构。换言之，有encoder和decoder就可以说这是一个Seq2seq模型。编码器或者解码器具体可以用CNN、RNN、LSTM或者attention来构建。&lt;/p&gt;</description></item><item><title>2023-02-13 chatGPT 在攻陷所有人</title><link>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</link><pubDate>Mon, 13 Feb 2023 20:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230213chatgpt%E5%9C%A8%E6%94%BB%E9%99%B7%E6%89%80%E6%9C%89%E4%BA%BA/</guid><description>&lt;p&gt;承认吧，现在全世界最火就是chatGPT。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;去参加了王建硕老师那边组织的关于chatGPT的讨论。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;会上的讨论：对新技术进行哲学思考无疑是最让我震撼的。正因为他们进行深度思考，才能真正看到事物的本质，才能正确判断事物的走向。&lt;/li&gt;
+&lt;li&gt;从心理学和教育学来看，也开拓了我的眼界。&lt;/li&gt;
+&lt;li&gt;从高效使用和商业化来看，它无疑会改变很多人的生活。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;chatGPT的使用感受很不错。&lt;/p&gt;</description></item><item><title>2023-02-09 如何理解自注意力机制</title><link>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</link><pubDate>Thu, 09 Feb 2023 08:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20230209%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/</guid><description>&lt;h2 id="理解输入与输出"&gt;理解输入与输出&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;输入有可能是一个 vector，有可能是多个 vector&lt;/li&gt;
+&lt;li&gt;输出：
+&lt;ul&gt;
+&lt;li&gt;一个序列对应一个 label。the whole sequence has a label
+&lt;ul&gt;
+&lt;li&gt;例子：在情感分析里面，This is good 对应的输入是多个 vector，输出为 positive，是一个vector。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;一个 vector 对应一个 label。一个序列对应多个 label。
+&lt;ul&gt;
+&lt;li&gt;例子：在词性标注里面，This is good 对应的输入是多个 vector，输出为 代词，动词，形容词。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;模型决定 label 的个数。seq2seq 任务
+&lt;ul&gt;
+&lt;li&gt;例子：在机器翻译里面，This is good 对应的输入是3个 vector，中文翻译是”不错“，输出为2个 vector。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="一个vector对应一个label的情况即输入和输出一样多也叫做sequence-labeling"&gt;一个vector对应一个label的情况，即输入和输出一样多，也叫做sequence labeling&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;例子： I saw a saw&lt;/li&gt;
+&lt;li&gt;如何解决 sequence labeling 的问题：用 fully connected network 对每一个 input vector 进行作用&lt;/li&gt;
+&lt;li&gt;弊端：
+&lt;ul&gt;
+&lt;li&gt;用 fully connected network 来输出，假设对 I saw a saw 做词性标注。对于 FC 层来说，两个 saw没有什么不同，但是他们实际上一个是动词，一个是名词。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;解决思路：考虑更多的上下文。每一个 fc 层，都对所有的输入作用。或者给他一个 window，作用于相邻的几个 input vector。但是作用还是有限，计算也很复杂。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们想考虑整个 sequence，但是不想把 sequence 所有的数据都包括在里面，就有了 self-attention。&lt;/p&gt;</description></item></channel></rss>
