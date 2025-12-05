@@ -61,6 +61,10 @@ jobs:
     - name: Build Hugo site
       run: hugo --buildDrafts=false -t blist
 
+    - name: Ensure .nojekyll in publish
+      run: |
+        touch public/.nojekyll
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -70,3 +74,4 @@ jobs:
         publish_branch: master
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
+        enable_jekyll: false
