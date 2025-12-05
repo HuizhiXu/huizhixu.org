@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container px-6 pt-6 mx-auto">
+  <h1 class="text-3xl font-bold">{{ .Title }}</h1>
+
+  {{ $p := .Paginate .Pages.ByDate.Reverse 20 }}
+  <div class="mt-6 space-y-2">
+    {{ $.Scratch.Set "currentYear" "" }}
+    {{ range $p.Pages }}
+      {{ $year := .Date.Format "2006" }}
+      {{ if ne ($.Scratch.Get "currentYear") $year }}
+        <h2 class="mt-8 mb-2 text-2xl font-semibold">{{ $year }}</h2>
+        {{ $.Scratch.Set "currentYear" $year }}
+      {{ end }}
+      <div class="py-2 border-b border-gray-200 dark:border-gray-700">
+        <a href="{{ .RelPermalink }}" class="text-lg hover:underline">{{ .Title }}</a>
+        <span class="text-sm text-gray-500 ml-2">{{ .Date.Format "2006-01-02" }}</span>
+      </div>
+    {{ end }}
+  </div>
+
+  {{- partial "pagination.html" . -}}
+</div>
+{{ end }}
