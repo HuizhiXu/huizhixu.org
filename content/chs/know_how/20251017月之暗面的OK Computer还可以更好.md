@@ -1,6 +1,6 @@
 ---
-title: "月之暗面的OK Computer还可以更好"
-date: 2025-10-17T15:28:15.717054
+title: "2025-10-17 月之暗面的OK Computer还可以更好"
+date: 2025-10-17T12:50:41.103208
 tags: ['tech']
 description: ""
 ---

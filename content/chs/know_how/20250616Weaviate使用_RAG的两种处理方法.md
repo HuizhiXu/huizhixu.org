@@ -1,6 +1,6 @@
 ---
-title: "Weaviate使用（四） RAG的两种处理方法"
-date: 2025-06-16T13:45:38.710211
+title: "2025-06-16 Weaviate使用（四） RAG的两种处理方法"
+date: 2025-06-16T12:50:37.525837
 tags: ['tech']
 description: "Single Prompt 和 Grouped Tasks"
 ---
@@ -39,7 +39,7 @@ The word "Looper" translates to "Loupé" in French.
 
 ```
 
-看结果，找出来两个数据”I, Robot”和”Looper”，并且分别翻译成法语。
+从结果可以看出，找出来两个数据”I, Robot”和”Looper”，并且分别翻译成法语。
 
 
 
@@ -85,6 +85,6 @@ These commonalities demonstrate that while the specific plots may differ, both f
 
 
 
-看结果，同样找出来两个数据”I, Robot”和”Looper”，并且总结了它们的共同点。
+从结果可以看出，同样找出来两个数据”I, Robot”和”Looper”，并且总结了它们的共同点。
 
  

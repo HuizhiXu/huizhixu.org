@@ -1,6 +1,6 @@
 ---
-title: "Weaviate使用（一） 使用ollama启用大模型和向量模型"
-date: 2025-06-12T13:45:42.726594
+title: "2025-06-12 Weaviate使用（一） 使用ollama启用大模型和向量模型"
+date: 2025-06-12T12:50:29.150669
 tags: ['tech']
 description: ""
 ---
