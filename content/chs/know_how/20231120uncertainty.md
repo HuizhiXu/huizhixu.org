@@ -1,5 +1,5 @@
 ---
-title:  "论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics"
+title:  "2023-11-20 论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics"
 date: 2023-11-20T18:31:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md

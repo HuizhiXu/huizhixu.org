@@ -1,5 +1,5 @@
 ---
-title: "Gaussian Process in Practice 高斯过程实践"
+title: "2023-12-10 Gaussian Process in Practice 高斯过程实践"
 date: 2023-12-10T18:01:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md

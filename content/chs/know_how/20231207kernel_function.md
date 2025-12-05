@@ -1,5 +1,5 @@
 ---
-title: "Kernel Function 核函数"
+title: "2023-12-07 Kernel Function 核函数"
 date: 2023-12-07T18:01:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md

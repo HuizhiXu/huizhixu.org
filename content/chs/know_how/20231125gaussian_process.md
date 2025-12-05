@@ -1,5 +1,5 @@
 ---
-title: "书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process"
+title: "2023-11-25 书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process"
 date: 2023-11-25T18:01:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md

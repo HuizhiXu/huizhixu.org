@@ -1,5 +1,5 @@
 ---
-title: "Gaussian Process Regression with GPyTorch"
+title: "2023-12-17 Gaussian Process Regression with GPyTorch"
 date: 2023-12-17T17:01:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md

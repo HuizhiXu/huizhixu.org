@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/tags/tech/</link><description>Recent content in Tech on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Fri, 17 Oct 2025 15:28:15 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>月之暗面的OK Computer还可以更好</title><link>https://huizhixu.github.io/chs/know_how/20251017%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2%E7%9A%84ok-computer%E8%BF%98%E5%8F%AF%E4%BB%A5%E6%9B%B4%E5%A5%BD/</link><pubDate>Fri, 17 Oct 2025 15:28:15 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20251017%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2%E7%9A%84ok-computer%E8%BF%98%E5%8F%AF%E4%BB%A5%E6%9B%B4%E5%A5%BD/</guid><description>&lt;p&gt;体验了一下Moonshot新推出的OK computer，这个产品最大的特点是端到端训练，model as agent，在训练时就已经把agent的能力融入到模型里面了。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/tags/tech/</link><description>Recent content in Tech on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Fri, 17 Oct 2025 12:50:41 +0000</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>2025-10-17 月之暗面的OK Computer还可以更好</title><link>https://huizhixu.github.io/chs/know_how/20251017%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2%E7%9A%84ok-computer%E8%BF%98%E5%8F%AF%E4%BB%A5%E6%9B%B4%E5%A5%BD/</link><pubDate>Fri, 17 Oct 2025 12:50:41 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20251017%E6%9C%88%E4%B9%8B%E6%9A%97%E9%9D%A2%E7%9A%84ok-computer%E8%BF%98%E5%8F%AF%E4%BB%A5%E6%9B%B4%E5%A5%BD/</guid><description>&lt;p&gt;体验了一下Moonshot新推出的OK computer，这个产品最大的特点是端到端训练，model as agent，在训练时就已经把agent的能力融入到模型里面了。&lt;/p&gt;
 &lt;p&gt;OK Computer说自己能够独立完成网站开发、数据分析、图像视频生成及高质量PPT制作。它的定位为“你专属的AI产品与工程团队“，但是交付的形式是产品本身，而不是像TRAE一样交付的是代码。&lt;/p&gt;
 &lt;p&gt;我给它的第一个任务是做一个PPT，因为8月份我用过kimi里面的PPT助手，想对比看一下这次的提升。&lt;/p&gt;
 &lt;p&gt;8月份那次制作PPT，要自己选择模版、上传文档，而kimi只能大概做一个基础性的框架，内容很少，图片和表格都需要手动补充。&lt;/p&gt;
@@ -21,7 +21,7 @@
 &lt;p&gt;但是接着问题就出现了，点击“下一幕”后，URL显示已进入第二个页面，但画面仍停留在第一个。反馈修复了之后也依然不行。并且发现额度已经用完了。&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://raw.githubusercontent.com/HuizhiXu/pictures/master/20251017/1785576d.png" alt=""&gt;&lt;/p&gt;
 &lt;p&gt;OK Computer展现的能力是强大的。生成了详细的任务清单，并逐步执行，最终输出了包括13张插图、13段音效及完整网页代码在内的成品，中间的步骤我看了，它生成的交互文档和专业设计文档都十分全面，任务执行也精准到位。&lt;/p&gt;
-&lt;p&gt;唯一遗憾的是，即便遵循了官方优秀案例，最终成品仍存在影响使用的前端Bug，距离完美仅一步之遥。这一步之遥让我纠结这会员到底开还是不开啊。&lt;/p&gt;</description></item><item><title>算法工程师为什么一直对自己不满意</title><link>https://huizhixu.github.io/chs/life/20251010%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E7%9B%B4%E5%AF%B9%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%BB%A1%E6%84%8F/</link><pubDate>Fri, 10 Oct 2025 15:28:14 +0000</pubDate><guid>https://huizhixu.github.io/chs/life/20251010%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E7%9B%B4%E5%AF%B9%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%BB%A1%E6%84%8F/</guid><description>&lt;p&gt;我注意到我身边的算法朋友和同事，包括我自己，我们这一个群体，普遍容易对自己不满意，时常陷入焦虑。
+&lt;p&gt;唯一遗憾的是，即便遵循了官方优秀案例，最终成品仍存在影响使用的前端Bug，距离完美仅一步之遥。这一步之遥让我纠结这会员到底开还是不开啊。&lt;/p&gt;</description></item><item><title>2025-10-10 算法工程师为什么一直对自己不满意</title><link>https://huizhixu.github.io/chs/life/20251010%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E7%9B%B4%E5%AF%B9%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%BB%A1%E6%84%8F/</link><pubDate>Fri, 10 Oct 2025 12:50:39 +0000</pubDate><guid>https://huizhixu.github.io/chs/life/20251010%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E7%9B%B4%E5%AF%B9%E8%87%AA%E5%B7%B1%E4%B8%8D%E6%BB%A1%E6%84%8F/</guid><description>&lt;p&gt;我注意到我身边的算法朋友和同事，包括我自己，我们这一个群体，普遍容易对自己不满意，时常陷入焦虑。
 这真的不完全是个人性格的问题，而是一种结构性焦虑。&lt;/p&gt;
 &lt;p&gt;为什么做算法的人特别容易焦虑？&lt;/p&gt;
 &lt;p&gt;首先，这个岗位的评价标准很单一。&lt;/p&gt;
@@ -33,7 +33,86 @@
 &lt;p&gt;算法圈有很多大佬和青年才俊，看到新闻报道，看到别人更年轻，有更好的学历，更多的paper，更大的影响力，更好的位置，无形之中就会产生压力，觉得自己太菜。但是媒体所呈现的，往往只是那顶尖的 5%，背后常伴随着特定目的或传播策略。新闻需要造势，资金需要流向热点，公司也需要宣传——这些因素共同塑造了很多的精英叙事，如果你了解它背后的运行原理，你看到这些新闻就不会有那么大的压力。&lt;/p&gt;
 &lt;p&gt;我写这些，并不是为了让大家垂头丧气。恰恰相反，尽管这个领域从业者众多，但是机会依然存在。我不知道这个领域什么时候会迎来寒冬，但是目前来看，未解决的问题还有很多，估计接下来的几年会慢慢给出答案。作为工程师，能够探索这些问题本身就很有意思；如果能伴随一个新兴行业共同成长，更是一种幸运。前几天 Kaparthy 也提到，AI Agent 的发展至少还需要十年。&lt;/p&gt;
 &lt;p&gt;很多人一生都在追求更好，包括我，但是从来没有停下来问，对谁更好？按谁的标准？&lt;/p&gt;
-&lt;p&gt;不必过度焦虑，我们不一定非要成为前5%，但可以成为那个真正理解问题、踏实解决问题的工程师——这本身，就是一件非常有价值的事。&lt;/p&gt;</description></item><item><title>Anthropic 做 Multi Agent系统的工程经验</title><link>https://huizhixu.github.io/chs/know_how/20250910anthropic-%E5%81%9A-multi-agent%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%8F%E9%AA%8C/</link><pubDate>Wed, 10 Sep 2025 15:28:24 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250910anthropic-%E5%81%9A-multi-agent%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%8F%E9%AA%8C/</guid><description>&lt;p&gt;从ChatGPT时代到现在，大家逐渐达成共识：大模型的应用核心不是算法问题，而是工程问题。大模型本身作为基础设施已经就位，关键在于如何通过工程手段解决记忆存储、上下文管理、工具调用和提示词优化等实际问题。&lt;/p&gt;
+&lt;p&gt;不必过度焦虑，我们不一定非要成为前5%，但可以成为那个真正理解问题、踏实解决问题的工程师——这本身，就是一件非常有价值的事。&lt;/p&gt;</description></item><item><title>2025-09-11 Anthropic 做 Multi Agent 系统的工程经验（下）</title><link>https://huizhixu.github.io/chs/know_how/20250911anthropic-%E5%81%9A-multi-agent-%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%8F%E9%AA%8C%E4%B8%8B/</link><pubDate>Thu, 11 Sep 2025 12:50:53 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250911anthropic-%E5%81%9A-multi-agent-%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%8F%E9%AA%8C%E4%B8%8B/</guid><description>&lt;p&gt;这一篇写Anthropic的智能体评估、生产可靠性和工程挑战。&lt;/p&gt;
+&lt;h1 id="智能体评估"&gt;智能体评估&lt;/h1&gt;
+&lt;p&gt;如何做智能体评估呢？传统的做法是“给定输入 X，必须走步骤 Y，才能得到正确输出 Z”。但是多智能体不能这样做，因为它没有固定唯一的、可预先写死的解题路径。&lt;/p&gt;
+&lt;h2 id="评估什么"&gt;评估什么&lt;/h2&gt;
+&lt;p&gt;不要去检查是否走了预设的路径，而要判断是否有合理的过程和正确的结果。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;结果导向：最终答案是否正确、是否满足用户需求。&lt;/li&gt;
+&lt;li&gt;过程合理性：虽然允许路径变化，但要确保路径在逻辑、效率、成本、可靠性上“说得通”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="从小样本集上就开始做评估"&gt;从小样本集上就开始做评估&lt;/h2&gt;
+&lt;p&gt;不要等数据量大时才开始做评估，在小样本的时候就开始做评估&lt;/p&gt;
+&lt;h2 id="llm-as-judge"&gt;LLM AS JUDGE&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;研究输出的评估难题：研究输出通常是自由形式的文本，很难通过程序化的方法进行评估，因为它们很少有唯一正确的答案。&lt;/li&gt;
+&lt;li&gt;LLM作为评判工具的适用性：LLM 由于其强大的语言理解和生成能力，非常适合用于评估这种复杂的研究输出。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="打分规则"&gt;打分规则&lt;/h3&gt;
+&lt;p&gt;Anthropic 制定了一些打分规则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事实准确性（说法是否与来源一致？）&lt;/li&gt;
+&lt;li&gt;引用准确性（引用来源是否真的支撑该说法？）&lt;/li&gt;
+&lt;li&gt;完整性（是否涵盖了所有要求的内容？）&lt;/li&gt;
+&lt;li&gt;来源质量（是否优先使用了高质量的一手资料，而不是低质量的二手资料？）&lt;/li&gt;
+&lt;li&gt;工具效率（是否用了恰当的工具、调用次数是否合理？）
+评分方式：LLM评判工具会根据上述标准对每个输出进行评分，评分范围为0.0到1.0，并给出通过或不通过的等级。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;实验与优化&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多评委实验：最初尝试使用多个LLM评判工具来评估每个标准，但发现这种方法不够一致，与人类评判结果的对齐度也不够高。&lt;/li&gt;
+&lt;li&gt;单评委优化：最终发现，使用单个LLM评判工具，通过一个单一的提示（prompt）来输出评分和通过/不通过的等级，是最一致且与人类评判结果最接近的方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="人工评估的重要性"&gt;人工评估的重要性&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;自动化评估的局限性：
+自动化评估工具（如LLM评判工具）虽然高效，但可能会遗漏一些边缘情况（edge cases）。这些情况包括：&lt;/li&gt;
+&lt;li&gt;人工评估的优势：&lt;/li&gt;
+&lt;li&gt;多智能体系统的复杂性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="生产可靠性和工程挑战"&gt;生产可靠性和工程挑战&lt;/h1&gt;
+&lt;p&gt;在传统软件里，一个小 bug 可能仅仅让功能崩溃、性能下降或触发一次故障。&lt;/p&gt;
+&lt;p&gt;而在agentic 系统里，微小的改动会像滚雪球一样放大，引发巨大的行为漂移——这使得为那些需要在长时间运行中保持状态的复杂智能体编写可靠代码变得异常困难。&lt;/p&gt;
+&lt;h2 id="1-增加故障点原地恢复的功能"&gt;1. 增加故障点原地恢复的功能&lt;/h2&gt;
+&lt;p&gt;智能体可能长时间运行，在多次工具调用之间持续保持状态。这意味者必须保证代码的持久执行，并在每一步都能妥善处理错误。&lt;/p&gt;
+&lt;p&gt;出错时，不能简单地“重启”：重启太昂贵了。所以Anthropic 构建了一套可从故障点原地恢复的系统，并加上了重试逻辑和定期快照来保证断点恢复的功能。&lt;/p&gt;
+&lt;h2 id="2-开发全链路追踪"&gt;2. 开发全链路追踪&lt;/h2&gt;
+&lt;p&gt;在传统软件里，同样的输入基本会得到同样的输出，可 AI 智能体是“动态、非确定性”的——同一套提示词跑两次，内部决策路径都可能不同，于是调试难度成倍上升。 举个例子：用户投诉“智能体连显而易见的资料都找不到”。光凭日志根本看不出问题出在哪——是它生成了糟糕的搜索关键词？还是选到了垃圾网页？还是工具本身调用失败？&lt;/p&gt;
+&lt;p&gt;Anthropic 引入了一套“全链路追踪（full production tracing）”，记录每一次调用、每一个决策节点（关键词→结果→评分→下一步动作），但不记录对话正文，保证用户隐私。&lt;/p&gt;
+&lt;p&gt;好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;能一眼看出“哦，原来失败都是因为它把 PDF 当网页解析导致失败”之类的根本原因；&lt;/li&gt;
+&lt;li&gt;能发现“两个子智能体反复互相踢皮球”这种事先没想到的异常协作；&lt;/li&gt;
+&lt;li&gt;把常见失败归纳成模式后，就可以系统性地修 bug、改提示、补工具，而不是靠猜。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="3-部署的时候要考虑用户正在使用"&gt;3. 部署的时候要考虑用户正在使用&lt;/h2&gt;
+&lt;p&gt;考虑到无论什么时候发布更新都有可能有用户在使用智能体，Anthropic 采用“彩虹部署（rainbow deployments）”：旧版本和新版本同时在线，逐步将流量从旧实例切到新实例，从而避免打断正在运行的智能体。&lt;/p&gt;
+&lt;h2 id="4-同步执行与异步执行"&gt;4. 同步执行与异步执行&lt;/h2&gt;
+&lt;h3 id="同步执行优点"&gt;同步执行优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;流程简洁：主智能体按固定顺序等待全部子智能体返回即可，调度与调试成本较低。&lt;/li&gt;
+&lt;li&gt;状态一致：所有子任务一次性完成，输出天然对齐，无需额外的合并步骤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="同步执行挑战"&gt;同步执行挑战&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;吞吐受限：任一子智能体延迟即拖慢全局，系统整体并行度受限。&lt;/li&gt;
+&lt;li&gt;缺乏弹性：主智能体无法在运行过程中动态修正子智能体的目标；子智能体之间亦无法实时共享信息或协同。&lt;/li&gt;
+&lt;li&gt;资源闲置：当大部分子智能体已结束而少数仍在执行时，算力与带宽均被阻塞，利用率下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="异步执行优点"&gt;异步执行优点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;并行度显著提升，各子智能体可独立推进并按需衍生新任务；&lt;/li&gt;
+&lt;li&gt;主智能体可实时接收中间结果，及时重定向或终止子任务，实现精细化控制；&lt;/li&gt;
+&lt;li&gt;子智能体之间可通过消息机制即时协作，提高整体效率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="异步执行挑战"&gt;异步执行挑战&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;结果汇总：需额外机制对无序到达的结果进行排序、去重与聚合；&lt;/li&gt;
+&lt;li&gt;状态一致：分布式快照或事务协议保障全局视图同步，增加系统复杂度；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="5-上下文管理"&gt;5. 上下文管理&lt;/h2&gt;
+&lt;p&gt;当 AI 代理需要与用户进行几百轮对话时，如何让它“记住”前面发生的事，又不会因为上下文窗口塞不下而失效呢？&lt;/p&gt;</description></item><item><title>2025-09-10 Anthropic 做 Multi Agent系统的工程经验（上）</title><link>https://huizhixu.github.io/chs/know_how/20250910anthropic-%E5%81%9A-multi-agent%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%8F%E9%AA%8C%E4%B8%8A/</link><pubDate>Wed, 10 Sep 2025 12:50:47 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250910anthropic-%E5%81%9A-multi-agent%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%BB%8F%E9%AA%8C%E4%B8%8A/</guid><description>&lt;p&gt;从ChatGPT时代到现在，大家逐渐达成共识：大模型的应用核心不是算法问题，而是工程问题。大模型本身作为基础设施已经就位，关键在于如何通过工程手段解决记忆存储、上下文管理、工具调用和提示词优化等实际问题。&lt;/p&gt;
 &lt;p&gt;最近读了Anthropic关于多智能体系统的工程实践， 感觉很有意思，所以分享出来。这一篇将解析：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Multi Agent的架构设计（Orchestrator-Worker模式）&lt;/li&gt;
@@ -77,7 +156,7 @@
 &lt;p&gt;整个“思考—调用工具—再思考—再调用……”的流程像齿轮交错一样穿插进行，而不是传统的“先一口气想好所有步骤，再连续执行”。&lt;/p&gt;
 &lt;h1 id="multi-agent的优劣势"&gt;Multi Agent的优劣势&lt;/h1&gt;
 &lt;h3 id="为什么研究性的工作适合用multi-agent-来做"&gt;为什么研究性的工作适合用Multi Agent 来做？&lt;/h3&gt;
-&lt;p&gt;因为研究工作主要涉及开放性的问题，研究者会根据在研究过程中出现的线索，持续更新自己的研究方法。&lt;/p&gt;</description></item><item><title>Weaviate使用（四） RAG的两种处理方法</title><link>https://huizhixu.github.io/chs/know_how/20250616weaviate%E4%BD%BF%E7%94%A8_rag%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link><pubDate>Mon, 16 Jun 2025 13:45:38 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250616weaviate%E4%BD%BF%E7%94%A8_rag%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;执行RAG操作过程中，对检索到的条目有两种处理方法：一种是single_prompt，另一种是grouped_tasks。&lt;/p&gt;
+&lt;p&gt;因为研究工作主要涉及开放性的问题，研究者会根据在研究过程中出现的线索，持续更新自己的研究方法。&lt;/p&gt;</description></item><item><title>2025-06-16 Weaviate使用（四） RAG的两种处理方法</title><link>https://huizhixu.github.io/chs/know_how/20250616weaviate%E4%BD%BF%E7%94%A8_rag%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</link><pubDate>Mon, 16 Jun 2025 12:50:37 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250616weaviate%E4%BD%BF%E7%94%A8_rag%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;执行RAG操作过程中，对检索到的条目有两种处理方法：一种是single_prompt，另一种是grouped_tasks。&lt;/p&gt;
 &lt;p&gt;grouped_task是对所有检索到的条目做一个整体的处理，例如&amp;quot;write a tweet about these facts&amp;quot;， &amp;ldquo;what do these movies have in common?&amp;quot;。&lt;/p&gt;
 &lt;p&gt;single_prompt是对每一个检索到的object应用prompt。例如&amp;quot;translate this into French:{title}&amp;quot;。&lt;/p&gt;
 &lt;h2 id="single-prompt"&gt;Single prompt&lt;/h2&gt;
@@ -98,7 +177,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Looper
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;The word &lt;span style="color:#f1fa8c"&gt;&amp;#34;Looper&amp;#34;&lt;/span&gt; translates to &lt;span style="color:#f1fa8c"&gt;&amp;#34;Loupé&amp;#34;&lt;/span&gt; &lt;span style="color:#ff79c6"&gt;in&lt;/span&gt; French&lt;span style="color:#ff79c6"&gt;.&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看结果，找出来两个数据”I, Robot”和”Looper”，并且分别翻译成法语。&lt;/p&gt;</description></item><item><title>Weaviate使用（三） 两种导入数据的方法</title><link>https://huizhixu.github.io/chs/know_how/20250615weaviate%E4%BD%BF%E7%94%A8_%E4%B8%A4%E7%A7%8D%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 15 Jun 2025 13:45:39 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250615weaviate%E4%BD%BF%E7%94%A8_%E4%B8%A4%E7%A7%8D%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;在导入的时候，可以先生成embedding，写入csv，然后在add_batch的时候添加。另外一种方法是在导入的时候直接embedding。&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从结果可以看出，找出来两个数据”I, Robot”和”Looper”，并且分别翻译成法语。&lt;/p&gt;</description></item><item><title>2025-06-15 Weaviate使用（三） 两种导入数据的方法</title><link>https://huizhixu.github.io/chs/know_how/20250615weaviate%E4%BD%BF%E7%94%A8_%E4%B8%A4%E7%A7%8D%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 15 Jun 2025 12:50:36 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250615weaviate%E4%BD%BF%E7%94%A8_%E4%B8%A4%E7%A7%8D%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95/</guid><description>&lt;p&gt;在导入的时候，可以先生成embedding，写入csv，然后在add_batch的时候添加。另外一种方法是在导入的时候直接embedding。&lt;/p&gt;
 &lt;h2 id="第一种方法"&gt;第一种方法&lt;/h2&gt;
 &lt;h3 id="先创建集合create-collection"&gt;先创建集合：Create collection&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ff79c6"&gt;import&lt;/span&gt; weaviate
@@ -177,7 +256,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ff79c6"&gt;if&lt;/span&gt; &lt;span style="color:#8be9fd;font-style:italic"&gt;__name__&lt;/span&gt; &lt;span style="color:#ff79c6"&gt;==&lt;/span&gt; &lt;span style="color:#f1fa8c"&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; main()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="导入数据import-data"&gt;导入数据：Import data&lt;/h3&gt;
-&lt;p&gt;在导入数据(batch.add_object)的时候需要把 vector和property分别写入。另外uuid是数据库为每一条数据创建的不重复的id。&lt;/p&gt;</description></item><item><title>Weaviate使用（二） 使用自定义模型</title><link>https://huizhixu.github.io/chs/know_how/20250614weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link><pubDate>Sat, 14 Jun 2025 13:45:40 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250614weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B/</guid><description>&lt;p&gt;如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。&lt;/p&gt;
+&lt;p&gt;在导入数据(batch.add_object)的时候需要把 vector和property分别写入。另外uuid是数据库为每一条数据创建的不重复的id。&lt;/p&gt;</description></item><item><title>2025-06-14 Weaviate使用（二） 使用自定义模型</title><link>https://huizhixu.github.io/chs/know_how/20250614weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link><pubDate>Sat, 14 Jun 2025 12:50:33 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250614weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%A7%E6%A8%A1%E5%9E%8B/</guid><description>&lt;p&gt;如果不想用Ollama启用的向量模型，想用自定义的模型有多种方法，下面介绍两种：一种是通过huggingface或者其他的框架导入，另一种是直接调用已有的向量调用的服务（例如用FastAPI启动）。&lt;/p&gt;
 &lt;p&gt;把向量服务或者大模型封装成服务的好处是：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;功能解耦：大模型服务或者向量服务独立出来，在替换的时候无需更改代码&lt;/li&gt;
@@ -239,7 +318,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ff79c6"&gt;return&lt;/span&gt; embeddings
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>论文阅读BGE-M3</title><link>https://huizhixu.github.io/chs/know_how/20250613%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBbge-m3/</link><pubDate>Fri, 13 Jun 2025 13:45:40 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250613%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBbge-m3/</guid><description>&lt;p&gt;论文地址：https://arxiv.org/abs/2402.03216&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>2025-06-13 论文阅读BGE-M3</title><link>https://huizhixu.github.io/chs/know_how/20250613%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBbge-m3/</link><pubDate>Fri, 13 Jun 2025 12:50:30 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250613%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BBbge-m3/</guid><description>&lt;p&gt;论文地址：https://arxiv.org/abs/2402.03216&lt;/p&gt;
 &lt;p&gt;M3的意思是 Multi-Linguality, Multi-Functionality和Multi-Granularity&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;支持100种语言（multi-lingual, cross-lingual)&lt;/li&gt;
@@ -271,7 +350,7 @@
 &lt;p&gt;InfoNCE loss的计算&lt;/p&gt;
 &lt;p&gt;$$Loss= -log \frac{ \exp(sim(x_i,x_i^+)/\tau) }{\sum_{j=1}^K \exp(sim(x_i, x_i^{-j})/\tau) }$$&lt;/p&gt;
 &lt;p&gt;假设我们有一个数据集，其中每个样本 xi 有一个对应的正样本 $$x_i^+$$ 和多个负样本 $$x_i^{-1}, x_i^{-2}, &amp;hellip;, x_i^{-K} $$。&lt;/p&gt;
-&lt;p&gt;对于每个样本 $$x_i$$，我们希望其与正样本 $$x_i^+ $$的相似度尽可能高。&lt;/p&gt;</description></item><item><title>Weaviate使用（一） 使用ollama启用大模型和向量模型</title><link>https://huizhixu.github.io/chs/know_how/20250612weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8ollama%E5%90%AF%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B/</link><pubDate>Thu, 12 Jun 2025 13:45:42 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250612weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8ollama%E5%90%AF%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B/</guid><description>&lt;h2 id="先决条件"&gt;先决条件&lt;/h2&gt;
+&lt;p&gt;对于每个样本 $$x_i$$，我们希望其与正样本 $$x_i^+ $$的相似度尽可能高。&lt;/p&gt;</description></item><item><title>2025-06-12 Weaviate使用（一） 使用ollama启用大模型和向量模型</title><link>https://huizhixu.github.io/chs/know_how/20250612weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8ollama%E5%90%AF%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B/</link><pubDate>Thu, 12 Jun 2025 12:50:29 +0000</pubDate><guid>https://huizhixu.github.io/chs/know_how/20250612weaviate%E4%BD%BF%E7%94%A8_%E4%BD%BF%E7%94%A8ollama%E5%90%AF%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%92%8C%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B/</guid><description>&lt;h2 id="先决条件"&gt;先决条件&lt;/h2&gt;
 &lt;p&gt;在本地用docker-compose.yml部署Weaviate。因为使用Ollama来启动模型，所以在配置文件中要加上ENABLE_MODULES: &amp;rsquo;text2vec-ollama,generative-ollama'&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ff79c6"&gt;---&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;services&lt;span style="color:#ff79c6"&gt;:&lt;/span&gt;
@@ -325,31 +404,31 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="创建collection"&gt;创建collection&lt;/h2&gt;
-&lt;p&gt;Ollama启动服务，api_endpoint统一为http://host.docker.internal:11434，模型根据模型名填写。&lt;/p&gt;</description></item><item><title>用大模型理解爆火的KAN网络</title><link>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</link><pubDate>Sat, 25 May 2024 16:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</guid><description>&lt;p&gt;五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。&lt;/p&gt;
+&lt;p&gt;Ollama启动服务，api_endpoint统一为http://host.docker.internal:11434，模型根据模型名填写。&lt;/p&gt;</description></item><item><title>2024-05-25 用大模型理解爆火的KAN网络</title><link>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</link><pubDate>Sat, 25 May 2024 16:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240525kan_basic/</guid><description>&lt;p&gt;五一假期的时候，KAN突然成为了热门话题。虽然最初我并没有计划弄懂它，但在老板的要求下，我还是探索了一下。&lt;/p&gt;
 &lt;h2 id="一kan是什么"&gt;一、KAN是什么？&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Kolmogorov-Arnold 定理是数学领域的一个里程碑，它揭示了多元函数能够通过一组更简单的函数来近似表示的原理。&lt;/strong&gt; 在神经网络的研究领域，来自 MIT 的杰出研究者 Ziming Liu 将这一定理巧妙地融入，提出了创新的 KANs（&lt;strong&gt;Kolmogorov-Arnold Networks&lt;/strong&gt;）概念。（GitHub地址：https://github.com/KindXiaoming/pykan）。&lt;/p&gt;</description></item><item><title>大型语言模型在「想」什么呢？ — 浅谈大型语言模型的可解释性</title><link>https://huizhixu.github.io/chs/know_how/20240513explainable_llm/</link><pubDate>Mon, 13 May 2024 19:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240513explainable_llm/</guid><description>&lt;p&gt;Explainable 和 Interpretable的区别：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kolmogorov-Arnold 定理是数学领域的一个里程碑，它揭示了多元函数能够通过一组更简单的函数来近似表示的原理。&lt;/strong&gt; 在神经网络的研究领域，来自 MIT 的杰出研究者 Ziming Liu 将这一定理巧妙地融入，提出了创新的 KANs（&lt;strong&gt;Kolmogorov-Arnold Networks&lt;/strong&gt;）概念。（GitHub地址：https://github.com/KindXiaoming/pykan）。&lt;/p&gt;</description></item><item><title>2024-05-13 大型语言模型在「想」什么呢？ — 浅谈大型语言模型的可解释性</title><link>https://huizhixu.github.io/chs/know_how/20240513explainable_llm/</link><pubDate>Mon, 13 May 2024 19:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240513explainable_llm/</guid><description>&lt;p&gt;Explainable 和 Interpretable的区别：&lt;/p&gt;
 &lt;p&gt;Explainable： 事物本身是黑箱，我们尝试去解释它的行为或输出。&lt;/p&gt;
-&lt;p&gt;Interpretable： 事物本身不是黑箱，其工作原理是清晰和可以理解的。&lt;/p&gt;</description></item><item><title>用大语言模型打造AI Agent</title><link>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</link><pubDate>Mon, 22 Apr 2024 23:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</guid><description>&lt;p&gt;人类需要的不仅仅是大模型，而是能做复杂的多步骤的任务的大模型，Agent因此诞生了。&lt;/p&gt;
+&lt;p&gt;Interpretable： 事物本身不是黑箱，其工作原理是清晰和可以理解的。&lt;/p&gt;</description></item><item><title>2024-04-22 用大语言模型打造AI Agent</title><link>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</link><pubDate>Mon, 22 Apr 2024 23:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240421ai_agent/</guid><description>&lt;p&gt;人类需要的不仅仅是大模型，而是能做复杂的多步骤的任务的大模型，Agent因此诞生了。&lt;/p&gt;
 &lt;h1 id="知名的ai-agent"&gt;知名的AI Agent&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;1. AutoGPT: &lt;a href="https://github.com/Significant-Gravitas/AutoGPT" target="_blank" rel="noopener"&gt;https://github.com/Significant-Gravitas/AutoGPT&lt;/a&gt;
 &lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;AutoGPT是一个由Significant Gravitas开发的开源项目,旨在创建一个自主的AI代理,能够持续地学习、成长并完成各种任务。&lt;/p&gt;</description></item><item><title>让AI村民组成虚拟村庄会发生什么事</title><link>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</link><pubDate>Sun, 14 Apr 2024 19:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</guid><description>&lt;p&gt;去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？&lt;/p&gt;</description></item><item><title>大型语言模型修炼史(第三阶段)</title><link>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</link><pubDate>Sat, 13 Apr 2024 19:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</guid><description>&lt;h1 id="第三阶段参与实战打磨技巧"&gt;第三阶段：参与实战，打磨技巧&lt;/h1&gt;
+&lt;p&gt;AutoGPT是一个由Significant Gravitas开发的开源项目,旨在创建一个自主的AI代理,能够持续地学习、成长并完成各种任务。&lt;/p&gt;</description></item><item><title>2024-04-14 让AI村民组成虚拟村庄会发生什么事</title><link>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</link><pubDate>Sun, 14 Apr 2024 19:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240414ai_virtual_town/</guid><description>&lt;p&gt;去年Agent很火的时候，就知道有斯坦福出的这个虚拟小镇的论文了，当时大家都很好奇，怎么能够让大语言模型来操纵agent做出非常复杂的行为呢？&lt;/p&gt;</description></item><item><title>2024-04-13 大型语言模型修炼史（第三阶段）</title><link>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</link><pubDate>Sat, 13 Apr 2024 19:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240413the-history-of-cultivating-llm_second_part/</guid><description>&lt;h1 id="第三阶段参与实战打磨技巧"&gt;第三阶段：参与实战，打磨技巧&lt;/h1&gt;
 &lt;p&gt;如何克服第二阶段的局限性呢？&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;关键是用第一阶段的参数作为初始参数。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;（贝叶斯定理这不就来了嘛！）&lt;/p&gt;
 &lt;p&gt;所以第三阶段是由第一阶段和第二阶段组合而成的：&lt;/p&gt;
-&lt;p&gt;第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain&lt;/p&gt;</description></item><item><title>大型语言模型修炼史（第一、二阶段）</title><link>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</link><pubDate>Fri, 05 Apr 2024 20:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</guid><description>&lt;h1 id="背景知识"&gt;背景知识&lt;/h1&gt;
+&lt;p&gt;第一阶段：通过网络上任何语料学习而来的，叫做预训练Pretrain&lt;/p&gt;</description></item><item><title>2024-04-05 大型语言模型修炼史（第一、二阶段）</title><link>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</link><pubDate>Fri, 05 Apr 2024 20:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240405the-history-of-cultivating-llm/</guid><description>&lt;h1 id="背景知识"&gt;背景知识&lt;/h1&gt;
 &lt;p&gt;大模型的本质是文字接龙。输入一个未完成的句子，输出这个未完成的句子的下一个token。&lt;/p&gt;
-&lt;p&gt;大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。&lt;/p&gt;</description></item><item><title>改进量的期望 Expected Improvement</title><link>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</link><pubDate>Tue, 05 Mar 2024 20:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</guid><description>&lt;p&gt;在看正文之前，先复习一下期望（Expectation）：&lt;/p&gt;
+&lt;p&gt;大模型可以看成是一个函数。$$ f(未完成的句子)= 下一个token $$这个函数是一个有数十亿个未知参数的函数。&lt;/p&gt;</description></item><item><title>2024-03-05 改进量的期望 Expected Improvement</title><link>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</link><pubDate>Tue, 05 Mar 2024 20:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</guid><description>&lt;p&gt;在看正文之前，先复习一下期望（Expectation）：&lt;/p&gt;
 &lt;p&gt;在统计学和概率论中，期望是一个衡量随机变量取值的中心趋势的指标。&lt;/p&gt;
-&lt;p&gt;对于一个连续随机变量&lt;em&gt;X&lt;/em&gt;，其期望值可以通过以下公式计算：&lt;/p&gt;</description></item><item><title>Bayesian Optimization</title><link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link><pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</guid><description>&lt;p&gt;贝叶斯优化有重要的两步步：&lt;/p&gt;
+&lt;p&gt;对于一个连续随机变量&lt;em&gt;X&lt;/em&gt;，其期望值可以通过以下公式计算：&lt;/p&gt;</description></item><item><title>2024-02-03 Bayesian Optimization</title><link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link><pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</guid><description>&lt;p&gt;贝叶斯优化有重要的两步步：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;构造代理模型（surrogate model）&lt;/li&gt;
 &lt;li&gt;由获取函数（acquisition function）来生成采样建议&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。&lt;/p&gt;</description></item><item><title>grobid的使用</title><link>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;p&gt;最近被文本分块虐得不轻，看到有人介绍grobid，赶紧用上了。&lt;/p&gt;
+&lt;p&gt;贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。&lt;/p&gt;</description></item><item><title>2024-02-22 grobid的使用</title><link>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240222grobid%E7%9A%84%E4%BD%BF%E7%94%A8/</guid><description>&lt;p&gt;最近被文本分块虐得不轻，看到有人介绍grobid，赶紧用上了。&lt;/p&gt;
 &lt;h3 id="1-grobid-介绍"&gt;1. Grobid 介绍&lt;/h3&gt;
-&lt;p&gt;Grobid 的全称是Generation of Bibliographic Data。它用机器学习来解析、提取文档。&lt;/p&gt;</description></item><item><title>Gaussian Process Regression with GPyTorch</title><link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link><pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</guid><description>&lt;p&gt;这个例子主要是利用GPytorch，来实现高斯过程回归。&lt;/p&gt;
+&lt;p&gt;Grobid 的全称是Generation of Bibliographic Data。它用机器学习来解析、提取文档。&lt;/p&gt;</description></item><item><title>2023-12-17 Gaussian Process Regression with GPyTorch</title><link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link><pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</guid><description>&lt;p&gt;这个例子主要是利用GPytorch，来实现高斯过程回归。&lt;/p&gt;
 &lt;h1 id="计算mean"&gt;计算Mean&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;zero mean function &lt;code&gt;gpytorch.means.ZeroMean()&lt;/code&gt;&lt;/li&gt;
@@ -362,7 +441,7 @@
 &lt;li&gt;adding a scaling coefficient: &lt;code&gt;kernels.ScaleKernel(gpytorch.kernels.RBFKernel())&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;一般会在核函数的输出上添加缩放系数。&lt;/p&gt;
-&lt;p&gt;在核函数的输出上添加缩放系数是为了调整核函数的影响力。&lt;/p&gt;</description></item><item><title>Gaussian Process in Practice 高斯过程实践</title><link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link><pubDate>Sun, 10 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid><description>&lt;p&gt;这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。&lt;/p&gt;
+&lt;p&gt;在核函数的输出上添加缩放系数是为了调整核函数的影响力。&lt;/p&gt;</description></item><item><title>2023-12-10 Gaussian Process in Practice 高斯过程实践</title><link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link><pubDate>Sun, 10 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid><description>&lt;p&gt;这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。&lt;/p&gt;
 &lt;h2 id="1-先验分布"&gt;1. 先验分布&lt;/h2&gt;
 &lt;h4 id="11-多变量高斯分布"&gt;1.1 多变量高斯分布&lt;/h4&gt;
 &lt;ul&gt;
@@ -375,17 +454,17 @@
 &lt;li&gt;执行Cholesky分解K=LL T来获得L&lt;/li&gt;
 &lt;li&gt;通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。&lt;/p&gt;</description></item><item><title>Kernel Function 核函数</title><link>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</link><pubDate>Thu, 07 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid><description>&lt;p&gt;这篇文章主要解决三个问题：&lt;/p&gt;
+&lt;p&gt;multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。&lt;/p&gt;</description></item><item><title>2023-12-07 Kernel Function 核函数</title><link>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</link><pubDate>Thu, 07 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid><description>&lt;p&gt;这篇文章主要解决三个问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;正态分布的表示&lt;/li&gt;
 &lt;li&gt;核函数是什么，有什么类型&lt;/li&gt;
 &lt;li&gt;已知先验知识，如何计算后验分布&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id="1-正态分布的表示"&gt;1. 正态分布的表示&lt;/h2&gt;
-&lt;p&gt;正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。&lt;/p&gt;</description></item><item><title>书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title><link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link><pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid><description>&lt;h2 id="1-理解covariance-matrix"&gt;1. 理解covariance matrix&lt;/h2&gt;
+&lt;p&gt;正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。&lt;/p&gt;</description></item><item><title>2023-11-25 书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title><link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link><pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid><description>&lt;h2 id="1-理解covariance-matrix"&gt;1. 理解covariance matrix&lt;/h2&gt;
 &lt;p&gt;Gaussian Process is a stochastic process used to characterize the distribution over function.&lt;/p&gt;
 &lt;p&gt;GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。&lt;/p&gt;
-&lt;p&gt;假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。&lt;/p&gt;</description></item><item><title>论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics</title><link>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</link><pubDate>Mon, 20 Nov 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</guid><description>&lt;p&gt;Abstract&lt;/p&gt;
+&lt;p&gt;假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。&lt;/p&gt;</description></item><item><title>2023-11-20 论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics</title><link>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</link><pubDate>Mon, 20 Nov 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</guid><description>&lt;p&gt;Abstract&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;types
 &lt;ul&gt;

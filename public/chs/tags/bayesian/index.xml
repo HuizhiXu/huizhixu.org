@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bayesian on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/tags/bayesian/</link><description>Recent content in Bayesian on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Tue, 05 Mar 2024 20:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/bayesian/index.xml" rel="self" type="application/rss+xml"/><item><title>改进量的期望 Expected Improvement</title><link>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</link><pubDate>Tue, 05 Mar 2024 20:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</guid><description>&lt;p&gt;在看正文之前，先复习一下期望（Expectation）：&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bayesian on 徐慧志的个人博客</title><link>https://huizhixu.github.io/chs/tags/bayesian/</link><description>Recent content in Bayesian on 徐慧志的个人博客</description><generator>Hugo</generator><language>chs</language><lastBuildDate>Tue, 05 Mar 2024 20:01:50 +0800</lastBuildDate><atom:link href="https://huizhixu.github.io/chs/tags/bayesian/index.xml" rel="self" type="application/rss+xml"/><item><title>2024-03-05 改进量的期望 Expected Improvement</title><link>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</link><pubDate>Tue, 05 Mar 2024 20:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240305expected-improvement/</guid><description>&lt;p&gt;在看正文之前，先复习一下期望（Expectation）：&lt;/p&gt;
 &lt;p&gt;在统计学和概率论中，期望是一个衡量随机变量取值的中心趋势的指标。&lt;/p&gt;
-&lt;p&gt;对于一个连续随机变量&lt;em&gt;X&lt;/em&gt;，其期望值可以通过以下公式计算：&lt;/p&gt;</description></item><item><title>Bayesian Optimization</title><link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link><pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</guid><description>&lt;p&gt;贝叶斯优化有重要的两步步：&lt;/p&gt;
+&lt;p&gt;对于一个连续随机变量&lt;em&gt;X&lt;/em&gt;，其期望值可以通过以下公式计算：&lt;/p&gt;</description></item><item><title>2024-02-03 Bayesian Optimization</title><link>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</link><pubDate>Sat, 03 Feb 2024 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20240203%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%98%E5%8C%96/</guid><description>&lt;p&gt;贝叶斯优化有重要的两步步：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;构造代理模型（surrogate model）&lt;/li&gt;
 &lt;li&gt;由获取函数（acquisition function）来生成采样建议&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。&lt;/p&gt;</description></item><item><title>Gaussian Process Regression with GPyTorch</title><link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link><pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</guid><description>&lt;p&gt;这个例子主要是利用GPytorch，来实现高斯过程回归。&lt;/p&gt;
+&lt;p&gt;贝叶斯优化中，因为不知道目标函数的closed-form，所以需要构造一个代理模型（surrogate model）来近似目标函数。记住，代理模型对目标函数的潜在分布进行建模。通常用gaussian process来作为代理模型，也可以用random forest来作为代理模型。（任何模型，只要它为函数提供后验估计，可以用来作为surrogate model）。&lt;/p&gt;</description></item><item><title>2023-12-17 Gaussian Process Regression with GPyTorch</title><link>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</link><pubDate>Sun, 17 Dec 2023 17:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231217gaussian_process_regression_gpytorch/</guid><description>&lt;p&gt;这个例子主要是利用GPytorch，来实现高斯过程回归。&lt;/p&gt;
 &lt;h1 id="计算mean"&gt;计算Mean&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;zero mean function &lt;code&gt;gpytorch.means.ZeroMean()&lt;/code&gt;&lt;/li&gt;
@@ -18,7 +18,7 @@
 &lt;li&gt;adding a scaling coefficient: &lt;code&gt;kernels.ScaleKernel(gpytorch.kernels.RBFKernel())&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;一般会在核函数的输出上添加缩放系数。&lt;/p&gt;
-&lt;p&gt;在核函数的输出上添加缩放系数是为了调整核函数的影响力。&lt;/p&gt;</description></item><item><title>Gaussian Process in Practice 高斯过程实践</title><link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link><pubDate>Sun, 10 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid><description>&lt;p&gt;这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。&lt;/p&gt;
+&lt;p&gt;在核函数的输出上添加缩放系数是为了调整核函数的影响力。&lt;/p&gt;</description></item><item><title>2023-12-10 Gaussian Process in Practice 高斯过程实践</title><link>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</link><pubDate>Sun, 10 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231210gaussian_process_in_practice/</guid><description>&lt;p&gt;这个例子主要是利用高斯过程的先验分布，将样本绘制成曲线。然后更新参数，利用后验分布获得新的曲线。&lt;/p&gt;
 &lt;h2 id="1-先验分布"&gt;1. 先验分布&lt;/h2&gt;
 &lt;h4 id="11-多变量高斯分布"&gt;1.1 多变量高斯分布&lt;/h4&gt;
 &lt;ul&gt;
@@ -31,17 +31,17 @@
 &lt;li&gt;执行Cholesky分解K=LL T来获得L&lt;/li&gt;
 &lt;li&gt;通过LN（0,I）获得N（0,K）上的一个样本并存储在f_prior中&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。&lt;/p&gt;</description></item><item><title>Kernel Function 核函数</title><link>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</link><pubDate>Thu, 07 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid><description>&lt;p&gt;这篇文章主要解决三个问题：&lt;/p&gt;
+&lt;p&gt;multivariante_samples01 和multivariante_samples02 这两个function的作用是一样的，只不过有两种写法。&lt;/p&gt;</description></item><item><title>2023-12-07 Kernel Function 核函数</title><link>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</link><pubDate>Thu, 07 Dec 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231207kernel_function/</guid><description>&lt;p&gt;这篇文章主要解决三个问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;正态分布的表示&lt;/li&gt;
 &lt;li&gt;核函数是什么，有什么类型&lt;/li&gt;
 &lt;li&gt;已知先验知识，如何计算后验分布&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id="1-正态分布的表示"&gt;1. 正态分布的表示&lt;/h2&gt;
-&lt;p&gt;正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。&lt;/p&gt;</description></item><item><title>书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title><link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link><pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid><description>&lt;h2 id="1-理解covariance-matrix"&gt;1. 理解covariance matrix&lt;/h2&gt;
+&lt;p&gt;正态分布一般表示为$f \sim N(0,K)$，书上写作 $p(f|x) = N(f|0,K)$。&lt;/p&gt;</description></item><item><title>2023-11-25 书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process</title><link>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</link><pubDate>Sat, 25 Nov 2023 18:01:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231125gaussian_process/</guid><description>&lt;h2 id="1-理解covariance-matrix"&gt;1. 理解covariance matrix&lt;/h2&gt;
 &lt;p&gt;Gaussian Process is a stochastic process used to characterize the distribution over function.&lt;/p&gt;
 &lt;p&gt;GP将一组有限的参数theta从一个连空间拓展到一个连续无限空间的一个无限函数f。&lt;/p&gt;
-&lt;p&gt;假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。&lt;/p&gt;</description></item><item><title>论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics</title><link>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</link><pubDate>Mon, 20 Nov 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</guid><description>&lt;p&gt;Abstract&lt;/p&gt;
+&lt;p&gt;假设我们有两个变量，X1和X2，它俩符合multivariate Gaussian distribution。&lt;/p&gt;</description></item><item><title>2023-11-20 论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics</title><link>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</link><pubDate>Mon, 20 Nov 2023 18:31:50 +0800</pubDate><guid>https://huizhixu.github.io/chs/know_how/20231120uncertainty/</guid><description>&lt;p&gt;Abstract&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;types
 &lt;ul&gt;

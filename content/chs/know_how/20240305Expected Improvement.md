@@ -1,5 +1,5 @@
 ---
-title: "改进量的期望 Expected Improvement"
+title: "2024-03-05 改进量的期望 Expected Improvement"
 date: 2024-03-05T20:01:50+08:00  
 tags: ["tech","bayesian"]
 format: hugo-md
