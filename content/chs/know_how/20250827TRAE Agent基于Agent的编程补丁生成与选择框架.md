@@ -1,6 +1,6 @@
 ---
-title: "2025-08-27 TRAE Agent：基于Agent的编程补丁生成与选择框架"
-date: 2025-08-27T13:55:12.445872
+title: "2025-08-27 TRAE Agent 基于Agent的编程补丁生成与选择框架"
+date: 2025-08-27T14:11:46.516235
 tags: ['tech']
 description: ""
 ---

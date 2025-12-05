@@ -1,6 +1,6 @@
 ---
-title: "2025-10-01 姚顺雨博士答辩总结 Language Agents：Benchmarks, Methods and Frameworks"
-date: 2025-10-01T13:55:24.966322
+title: "2025-10-01 姚顺雨博士答辩总结 Language Agents_Benchmarks, Methods and Frameworks"
+date: 2025-10-01T14:11:50.876297
 tags: ['tech']
 description: ""
 ---
