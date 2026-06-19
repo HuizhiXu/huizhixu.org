@@ -1,6 +1,6 @@
 ---
-title: "从 Notion 到 Obsidian：构建以 PARA 为核心的专属知识库"
-date: 2026-04-29T09:36:00.125121
+title: "20260429-从 Notion 到 Obsidian：构建以 PARA 为核心的专属知识库"
+date: 2026-04-29T12:12:28.062255
 tags: ['ai']
 description: ""
 ---
