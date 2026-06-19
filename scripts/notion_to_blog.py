@@ -11,6 +11,28 @@ from notion_client import Client
 import requests
 import json
 
+
+def load_local_env(env_path: Path = Path(".env")) -> None:
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export ") :].strip()
+        if "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        os.environ.setdefault(key, value)
+
+
+load_local_env()
+
 # 从环境变量读取配置
 CHECKOUT_TOKEN = os.getenv('CHECKOUT_TOKEN')
 NOTION_TOKEN = os.getenv('NOTION_TOKEN')
@@ -455,9 +477,9 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
                 print(f"[WARN] 从MDFilename提取日期失败: {e}，使用原始日期: {original_date}")
                 date = original_date
     
-    # 从 Article 属性获取文章内容
+    # 从 Article 属性获取文章内容；如果 Article 为空，则使用页面正文内容
     article_content = ''
-    if 'Article' in properties:
+    if 'Article' in properties and properties['Article'].get('rich_text'):
         for text in properties['Article']['rich_text']:
             if text['type'] == 'mention' and 'page' in text['mention']:
                 # 获取被提及页面的内容
