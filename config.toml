@@ -20,13 +20,13 @@ DefaultContentLanguageInSubdir = true
     title = '徐慧志的个人博客'
     weight = 1
     [languages.chs.params]
-      introTitle = "Hallo! 我是慧志"
-      introSubtitle = "我是一名程序员，（长期）喜欢阅读、（短暂地喜欢过）摄影和Zumba"
+      introTitle = "你好，我是慧志"
+      introSubtitle = "一名工程师，喜欢技术，也爱读书和写字。这里散落着我的笔记和日常，欢迎随意逛逛。"
       introPhoto = "/picture.jpg"
       logo = "/blist-logo.png"
       reading_speed = 400
     [[languages.chs.menu.main]]
-      name = "生活见闻"
+      name = "生活"
       url = "/life/"
       weight = 2
     [[languages.chs.menu.main]]
@@ -37,10 +37,6 @@ DefaultContentLanguageInSubdir = true
       name = "技术"
       url = "/know_how/"
       weight = 1
-    [[languages.chs.menu.main]]
-      name = "宝藏集结"
-      url = "/link/"
-      weight = 4
     [[languages.chs.menu.main]]
       name = "分类"
       url = "/tags/"
@@ -126,6 +122,18 @@ DefaultContentLanguageInSubdir = true
   # The page bundle that is shown on the front page
   frontBundle = "know_how"
 
+  featuredTags = [
+    "ai",
+    "llm",
+    "agent",
+    "rag",
+    "comfyui",
+    "obsidian",
+    "bayesian",
+    "read",
+    "life",
+  ]
+
 
   # Used to hide the post metadata such as posted date, reading time and word count
   # Can be used at site level or page level
@@ -162,11 +170,8 @@ DefaultContentLanguageInSubdir = true
   description = "Der einfache Weg is immer verkehrt."
 
   [[params.homepage.social.icons]]
-    website = "twitter"
-    url = "https://twitter.com/"
-  [[params.homepage.social.icons]]
     website = "github"
-    url = "https://github.com/"
+    url = "https://github.com/HuizhiXu"
 
 
 [[menu.main]]

@@ -1,0 +1,20 @@
+{{ $related := slice }}
+{{ with .Params.tags }}
+  {{ $currentTags := . }}
+  {{ range $.Site.RegularPages.ByDate.Reverse }}
+    {{ if and (ne .RelPermalink $.RelPermalink) (eq .Lang $.Lang) (gt (len (intersect .Params.tags $currentTags)) 0) }}
+      {{ $related = $related | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $related) 0 }}
+  <section class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+    <h2>{{ i18n "relatedPosts" }}</h2>
+    <ul>
+      {{ range first 3 $related }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

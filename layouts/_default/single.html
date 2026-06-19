@@ -60,6 +60,9 @@
     {{ .Content }}
   </article>
 
+  {{- partial "series-nav.html" . -}}
+
+  {{- partial "related-posts.html" . -}}
 
   {{- partial "comments.html" . -}}
 

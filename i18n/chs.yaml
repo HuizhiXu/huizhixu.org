@@ -95,3 +95,23 @@
 # Related posts
 - id: seeAlso
   translation: "参考"
+- id: relatedPosts
+  translation: "相关文章"
+- id: seriesTitle
+  translation: "系列"
+- id: previousInSeries
+  translation: "系列上一篇"
+- id: nextInSeries
+  translation: "系列下一篇"
+- id: contentNavigation
+  translation: "分类"
+- id: contentNavigationDescription
+  translation: "按系列和主题浏览文章，比标签云更快找到内容主线。"
+- id: featuredTopics
+  translation: "主题"
+- id: allTags
+  translation: "全部标签"
+- id: postsCount
+  translation: "篇"
+- id: showAllSeriesPosts
+  translation: "查看全部"

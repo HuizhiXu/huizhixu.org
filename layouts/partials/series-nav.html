@@ -1,0 +1,41 @@
+{{ with .Params.series }}
+  {{ $series := . }}
+  {{ $pages := where (where $.Site.RegularPages "Params.series" $series) "Lang" $.Lang }}
+  {{ $pages = sort $pages "Date" "asc" }}
+  {{ if gt (len $pages) 1 }}
+    {{ $prev := false }}
+    {{ $next := false }}
+    {{ range $index, $page := $pages }}
+      {{ if eq $page.RelPermalink $.RelPermalink }}
+        {{ if gt $index 0 }}
+          {{ $prev = index $pages (sub $index 1) }}
+        {{ end }}
+        {{ if lt (add $index 1) (len $pages) }}
+          {{ $next = index $pages (add $index 1) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    <nav class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4" aria-label="{{ i18n "seriesTitle" }}">
+      <div class="border-t border-b border-gray-200 dark:border-gray-700 py-4">
+        <div class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">
+          {{ i18n "seriesTitle" }}: {{ $series }}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose">
+          {{ with $prev }}
+            <a class="block rounded border border-gray-200 dark:border-gray-700 p-4 hover:bg-gray-50 dark:hover:bg-gray-900" href="{{ .RelPermalink }}">
+              <div class="text-sm text-gray-500 dark:text-gray-400">{{ i18n "previousInSeries" }}</div>
+              <div class="mt-1 font-medium">{{ .Title }}</div>
+            </a>
+          {{ end }}
+          {{ with $next }}
+            <a class="block rounded border border-gray-200 dark:border-gray-700 p-4 hover:bg-gray-50 dark:hover:bg-gray-900 md:text-right" href="{{ .RelPermalink }}">
+              <div class="text-sm text-gray-500 dark:text-gray-400">{{ i18n "nextInSeries" }}</div>
+              <div class="mt-1 font-medium">{{ .Title }}</div>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    </nav>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{- $tag := lower (printf "%s" .) -}}
+{{- $labels := dict
+  "ai" "AI"
+  "llm" "LLM"
+  "rag" "RAG"
+  "comfyui" "ComfyUI"
+  "obsidian" "Obsidian"
+  "bayesian" "Bayesian"
+  "tech" "Tech"
+  "read" "Read"
+  "life" "Life"
+  "link" "Link"
+-}}
+{{- index $labels $tag | default (title $tag) -}}
