@@ -1,4 +1,4 @@
 ---
 author: Huizhi Xu
-title: LIFE
+title: 生活
 ---

@@ -1,7 +1,8 @@
 ---
 title: "2026-02-08 ComfyUI学习（Day 5）Flux 的使用"
 date: 2026-02-08T12:45:21.159394
-tags: ['tech', 'ai']
+tags: ['tech', 'ai', 'comfyui']
+series: "ComfyUI 学习"
 description: ""
 ---
 

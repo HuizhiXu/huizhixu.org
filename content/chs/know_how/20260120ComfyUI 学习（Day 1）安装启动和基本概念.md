@@ -1,7 +1,8 @@
 ---
 title: "2026-01-20 ComfyUI 学习（Day 1）安装启动和基本概念"
 date: 2026-01-20T12:45:31.917923
-tags: ['tech', 'ai']
+tags: ['tech', 'ai', 'comfyui']
+series: "ComfyUI 学习"
 description: ""
 ---
 

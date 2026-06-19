@@ -1,7 +1,8 @@
 ---
 title: "2026-03-04 ComfyUI学习（Day 6）抠图工作流"
 date: 2026-03-04T12:45:16.028393
-tags: ['tech', 'ai']
+tags: ['tech', 'ai', 'comfyui']
+series: "ComfyUI 学习"
 description: ""
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: "2026-04-29 从 Notion 到 Obsidian：构建以 PARA 为核心的专属知识库"
 date: 2026-04-29T12:45:34.138778
-tags: ['ai']
+tags: ['tech', 'ai', 'agent', 'obsidian']
+series: "Agent 知识库实践"
 description: ""
 ---
 

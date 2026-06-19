@@ -1,7 +1,8 @@
 ---
 title: "2026-05-28 Hermes Agent 在微信里面操作Obsidian"
 date: 2026-05-28T12:45:07.683273
-tags: ['tech', 'ai']
+tags: ['tech', 'ai', 'agent', 'obsidian']
+series: "Agent 知识库实践"
 description: ""
 ---
 

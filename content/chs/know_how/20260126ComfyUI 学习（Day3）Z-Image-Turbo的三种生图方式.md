@@ -1,7 +1,8 @@
 ---
 title: "2026-01-26 ComfyUI 学习（Day3）Z-Image-Turbo的三种生图方式"
 date: 2026-01-26T12:45:27.575250
-tags: ['tech', 'ai']
+tags: ['tech', 'ai', 'comfyui']
+series: "ComfyUI 学习"
 description: ""
 ---
 
