@@ -105,8 +105,6 @@
   translation: "系列下一篇"
 - id: contentNavigation
   translation: "分类"
-- id: contentNavigationDescription
-  translation: "按系列和主题浏览文章，比标签云更快找到内容主线。"
 - id: featuredTopics
   translation: "主题"
 - id: allTags
