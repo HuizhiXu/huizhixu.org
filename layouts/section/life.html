@@ -1,21 +1,14 @@
 {{ define "main" }}
-<div class="container px-6 pt-6 mx-auto">
-  <h1 class="text-3xl font-bold">{{ .Title }}</h1>
+<div class="container max-w-6xl mx-auto px-6 py-10">
+  <div class="section-page-header">
+    <span class="home-eyebrow">{{ i18n "homeLatestEyebrow" }}</span>
+    <h1 class="text-3xl font-bold mt-2">{{ .Title }}</h1>
+  </div>
 
-  {{ $p := .Paginate .Pages.ByDate.Reverse 20 }}
-  <div class="mt-6">
-    {{ $.Scratch.Set "currentYear" "" }}
+  {{ $p := .Paginate .Pages.ByDate.Reverse 12 }}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8">
     {{ range $p.Pages }}
-      {{ $year := .Date.Format "2006" }}
-      {{ if ne ($.Scratch.Get "currentYear") $year }}
-        <h2 class="mt-8 mb-2 text-2xl font-semibold">{{ $year }}</h2>
-        {{ $.Scratch.Set "currentYear" $year }}
-      {{ end }}
-      {{ $title := replaceRE "^\\d{4}[-/.]\\d{1,2}[-/.]\\d{1,2}\\s*" "" .Title }}
-      <div class="flex gap-3 py-2 border-b border-gray-200 dark:border-gray-700">
-        <time class="mt-1 shrink-0 text-sm text-gray-500 dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01-02" }}</time>
-        <a href="{{ .RelPermalink }}" class="text-lg font-medium hover:underline">{{ $title }}</a>
-      </div>
+      {{- partial "blog-card.html" . -}}
     {{ end }}
   </div>
 

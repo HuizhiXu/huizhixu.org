@@ -3,68 +3,88 @@
   {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
 
   {{ if (and .Params.thumbnail (not (or .Site.Params.hidePageThumbnail .Params.hidePageThumbnail)) ) }}
-  <div class="relative max-w-5xl mx-auto px-4">
-    <img src="{{ .Params.thumbnail }}" class="rounded-lg shadow-sm w-full object-contain" />
+  <div class="relative max-w-6xl mx-auto px-4 mt-6">
+    <img src="{{ .Params.thumbnail }}" class="rounded-xl shadow-md w-full object-contain" />
     {{ if not (or (or .Site.Params.hideMeta .Params.hideMeta) false) }}
-    <div class="absolute top-4 right-8 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white px-2 py-0.5">
+    <div class="absolute top-4 right-8 rounded-full shadow bg-white/90 text-gray-700 dark:bg-gray-900/90 dark:text-white px-3 py-0.5 text-sm">
       {{ $datestr }}
     </div>
     {{ end }}
   </div>
   {{ end }}
 
-  <article class="prose lg:prose-lg mx-auto my-8 dark:prose-dark px-4">
+  <div class="max-w-6xl mx-auto px-4 my-8">
+    <div class="lg:grid lg:gap-12 lg:items-start" style="grid-template-columns: minmax(0,1fr) 256px;">
 
-    <h1 class="text-2xl font-bold mb-2">{{ .Title }}</h1>
-    {{ if not (or (or .Site.Params.hideMeta .Params.hideMeta) false) }}
-    <h5 class="text-sm flex items-center flex-wrap">
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <rect x="4" y="5" width="16" height="16" rx="2" />
-        <line x1="16" y1="3" x2="16" y2="7" />
-        <line x1="8" y1="3" x2="8" y2="7" />
-        <line x1="4" y1="11" x2="20" y2="11" />
-        <rect x="8" y="15" width="2" height="2" />
-      </svg>
-      {{ $datestr | i18n "postedOnDate" }}
-      {{ if ne $datestr $lastmodstr }}
-        &nbsp{{ $lastmodstr | i18n "lastModified" }}</h5><h5 class="text-sm flex items-center flex-wrap">
-      {{ else }}
-        &nbsp;&bull;&nbsp;
+      <!-- Main article -->
+      <article class="prose prose-lg dark:prose-dark max-w-none article-content">
+
+        <h1 class="text-3xl font-bold mb-3 leading-tight">{{ .Title }}</h1>
+
+        {{ if not (or (or .Site.Params.hideMeta .Params.hideMeta) false) }}
+        <div class="flex items-center flex-wrap gap-x-3 gap-y-1 text-sm text-gray-400 dark:text-gray-500 mb-6 not-prose">
+          <span class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y="15" width="2" height="2" />
+            </svg>
+            {{ $datestr | i18n "postedOnDate" }}
+          </span>
+          <span class="text-gray-300 dark:text-gray-600">·</span>
+          <span class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" /><polyline points="12 7 12 12 15 15" />
+            </svg>
+            {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "readTime" }}
+          </span>
+          <span class="text-gray-300 dark:text-gray-600">·</span>
+          <span class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" />
+            </svg>
+            {{ .WordCount }}&nbsp;{{ i18n "words" }}
+          </span>
+          {{ if .Params.tags }}
+          <span class="text-gray-300 dark:text-gray-600">·</span>
+          <span class="flex flex-wrap gap-1 not-prose">
+            {{ range .Params.tags }}
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="text-xs bg-blue-50 text-blue-500 dark:bg-blue-900/30 dark:text-blue-400 rounded-full px-2 py-0.5 no-underline hover:bg-blue-100 transition-colors">{{ . }}</a>
+            {{ end }}
+          </span>
+          {{ end }}
+        </div>
+        {{ end }}
+
+        <!-- Inline TOC for mobile / tablet -->
+        {{ if (or .Site.Params.toc .Params.toc) }}
+        <div class="lg:hidden mb-6">
+          {{- partial "toc.html" . -}}
+        </div>
+        {{ end }}
+
+        {{ .Content }}
+      </article>
+
+      <!-- Sticky sidebar TOC — desktop only -->
+      {{ if (or .Site.Params.toc .Params.toc) }}
+      <aside class="hidden lg:block">
+        <div class="sticky top-8 sidebar-toc">
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 px-1">{{ i18n "tocTitle" }}</p>
+          {{- partial "toc.html" . -}}
+        </div>
+      </aside>
       {{ end }}
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <circle cx="12" cy="12" r="9" />
-        <polyline points="12 7 12 12 15 15" />
-      </svg>
-     {{ i18n "readingTime"}}{{ .ReadingTime }}&nbsp;{{ i18n "readTime" }}
-     
-      &nbsp;&bull;
-      <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-        <line x1="3" y1="6" x2="3" y2="19" />
-        <line x1="12" y1="6" x2="12" y2="19" />
-        <line x1="21" y1="6" x2="21" y2="19" />
-      </svg>
-      {{ .WordCount }}&nbsp;{{ i18n "words" }}
 
-    </h5>
-    {{ end }}
-
-    {{ if (or .Site.Params.toc .Params.toc) }}
-    {{- partial "toc.html" . -}}
-    {{ end }}
-
-    {{ .Content }}
-  </article>
+    </div>
+  </div>
 
   {{- partial "series-nav.html" . -}}
-
   {{- partial "related-posts.html" . -}}
-
   {{- partial "comments.html" . -}}
-
   {{- partial "social.html" . -}}
+
+  <!-- Auto-open sidebar TOC details element -->
+  <script>
+    const sidebarDetails = document.querySelector('.sidebar-toc details');
+    if (sidebarDetails) sidebarDetails.setAttribute('open', '');
+  </script>
 {{ end }}

@@ -1,21 +1,27 @@
-<div class="p-2">
-<a href="{{ .Permalink }}">
-  {{ if .Params.thumbnail }}
-  <div class="relative">
-    <img src="{{ .Params.thumbnail }}" alt="{{ .Params.title }}" class="rounded-lg shadow-sm w-full h-52 object-cover" />
+<div class="blog-card-wrap p-1 h-full">
+<a href="{{ .Permalink }}" class="blog-card block h-full rounded-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden hover:shadow-md transition-shadow duration-200">
+  <div class="px-5 pt-4 pb-5 flex flex-col h-full">
     {{ if not (or (or .Site.Params.hideMeta .Params.hideMeta) false) }}
-    <div class="absolute top-4 right-4 rounded shadow bg-white text-gray-900 dark:bg-gray-900 dark:text-white text-sm px-2 py-0.5">
+    <div class="text-xs text-gray-400 dark:text-gray-500 mb-1">
       {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
     </div>
     {{ end }}
+    <div class="text-lg font-semibold text-gray-900 dark:text-gray-100 leading-snug mb-2">{{ .Params.title }}</div>
+    {{ with .Params.description }}
+    <div class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed flex-1">{{ . }}</div>
+    {{ end }}
+    {{ if .Params.tags }}
+    <div class="flex flex-wrap gap-1 mt-auto pt-3">
+      {{ range first 3 .Params.tags }}
+      <span class="blog-card-tag">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
   </div>
-  {{ end }}
-  <div class="my-2 text-xl font-semibold">{{ .Params.title }}</div>
-  <div>{{ .Params.description }}</div>
 </a>
 {{ if not (or (or .Site.Params.hideOtherLanguages .Params.hideOtherLanguages) false) }}
   {{ if .IsTranslated -}}
-    <div style="font-style: italic;font-size: smaller;">
+    <div class="px-2 pb-1 text-xs italic text-gray-400">
       {{- $sortedTranslations := sort .Translations "Site.Language.Weight" -}}
       {{- $links := apply $sortedTranslations "partial" "translation_link.html" "." -}}
       {{- $cleanLinks := apply $links "chomp" "." -}}

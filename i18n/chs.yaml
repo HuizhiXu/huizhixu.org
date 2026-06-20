@@ -113,3 +113,33 @@
   translation: "篇"
 - id: showAllSeriesPosts
   translation: "查看全部"
+
+# Homepage
+- id: homeHeroEyebrow
+  translation: "个人知识花园"
+- id: homePillEngineering
+  translation: "工程"
+- id: homePillAI
+  translation: "AI 笔记"
+- id: homePillReading
+  translation: "阅读"
+- id: homePillLife
+  translation: "生活"
+- id: homeLatestEyebrow
+  translation: "最新写作"
+- id: homeLatestTitle
+  translation: "最近发布"
+- id: homeLatestDescription
+  translation: "一些关于技术、阅读和生活的近期记录。"
+- id: homeLatestEmpty
+  translation: "还没有文章，稍后再来看看。"
+- id: footerMotto
+  translation: "There's No Such Thing as a Free Lunch."
+- id: footerNavTitle
+  translation: "快速导航"
+- id: tocTitle
+  translation: "目录"
+- id: browseTags
+  translation: "浏览话题"
+- id: sectionKnowhowEyebrow
+  translation: "技术笔记"

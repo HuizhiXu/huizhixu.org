@@ -90,3 +90,33 @@
   translation: "posts"
 - id: showAllSeriesPosts
   translation: "Show all"
+
+# Homepage
+- id: homeHeroEyebrow
+  translation: "Personal Knowledge Garden"
+- id: homePillEngineering
+  translation: "Engineering"
+- id: homePillAI
+  translation: "AI Notes"
+- id: homePillReading
+  translation: "Reading"
+- id: homePillLife
+  translation: "Life"
+- id: homeLatestEyebrow
+  translation: "Latest Writing"
+- id: homeLatestTitle
+  translation: "Recent Posts"
+- id: homeLatestDescription
+  translation: "Recent notes on technology, reading, and everyday life."
+- id: homeLatestEmpty
+  translation: "No posts yet. Check back soon."
+- id: footerMotto
+  translation: "There's No Such Thing as a Free Lunch."
+- id: footerNavTitle
+  translation: "Quick Links"
+- id: tocTitle
+  translation: "Contents"
+- id: browseTags
+  translation: "Browse Topics"
+- id: sectionKnowhowEyebrow
+  translation: "Technical Notes"

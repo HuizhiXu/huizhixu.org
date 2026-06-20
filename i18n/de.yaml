@@ -115,3 +115,33 @@
   translation: "Beiträge"
 - id: showAllSeriesPosts
   translation: "Alle anzeigen"
+
+# Homepage
+- id: homeHeroEyebrow
+  translation: "Persönlicher Wissensgarten"
+- id: homePillEngineering
+  translation: "Technik"
+- id: homePillAI
+  translation: "KI-Notizen"
+- id: homePillReading
+  translation: "Lesen"
+- id: homePillLife
+  translation: "Leben"
+- id: homeLatestEyebrow
+  translation: "Neueste Texte"
+- id: homeLatestTitle
+  translation: "Aktuelle Beiträge"
+- id: homeLatestDescription
+  translation: "Aktuelle Notizen zu Technik, Lesen und Alltag."
+- id: homeLatestEmpty
+  translation: "Noch keine Beiträge. Schau später wieder vorbei."
+- id: footerMotto
+  translation: "Sein heißt werden, leben heißt lernen."
+- id: footerNavTitle
+  translation: "Schnellnavigation"
+- id: tocTitle
+  translation: "Inhalt"
+- id: browseTags
+  translation: "Themen durchsuchen"
+- id: sectionKnowhowEyebrow
+  translation: "Technische Notizen"

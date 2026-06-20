@@ -5,13 +5,12 @@ theme = "blist"
 relativeURLs = true
 canonifyURLs = true
 
-[author]
- name = "HuizhiXu"
-
-
 isCJKLanguage = true
 DefaultContentLanguage = "chs"
-DefaultContentLanguageInSubdir = true
+DefaultContentLanguageInSubdir = false
+
+[author]
+  name = "HuizhiXu"
 
 [languages]
   [languages.chs]
@@ -23,7 +22,7 @@ DefaultContentLanguageInSubdir = true
       introTitle = "你好，我是慧志"
       introSubtitle = "一名工程师，喜欢技术，也爱读书和写字。这里散落着我的笔记和日常，欢迎随意逛逛。"
       introPhoto = "/picture.jpg"
-      logo = "/blist-logo.png"
+      logo = "/huizhi-mark-logo.png"
       reading_speed = 400
     [[languages.chs.menu.main]]
       name = "生活"
@@ -51,8 +50,9 @@ DefaultContentLanguageInSubdir = true
       introTitle = "Hey! I'm Huizhi Xu"
       introSubtitle = "A senior developer who enjoys reading, blogging and dancing"
       introPhoto = "/picture.jpg"
-      logo = "/blist-logo.png"
+      logo = "/huizhi-mark-logo.png"
       reading_speed = 228
+      frontBundle = "life"
     [[languages.en.menu.main]]
       name = "Blog"
       url = "/life/"
@@ -75,8 +75,9 @@ DefaultContentLanguageInSubdir = true
       introTitle = "Hallo, ich bin Huizhi Xu"
       introSubtitle = "Eine Senior-Entwicklerin, die Spaß an Lesen, Bloggen und Zumba"
       introPhoto = "/picture.jpg"
-      logo = "/blist-logo-de.png"
+      logo = "/huizhi-mark-logo.png"
       reading_speed = 179
+      frontBundle = "life"
     [[languages.de.menu.main]]
       name = "Blog"
       url = "/life/"
@@ -112,7 +113,7 @@ DefaultContentLanguageInSubdir = true
   ]
   # Custom copyright - optional
   copyright = "Copyright © 2012 - Huizhi Xu · All rights reserved"
-  favicon = "/favicon.svg"
+  favicon = "/huizhi-mark-logo.png"
 
   # Color for the intro details and social links block, not applicable for dark mode
   # Supported values: Any color from TailwindCSS default colors
@@ -176,7 +177,7 @@ DefaultContentLanguageInSubdir = true
 
 [[menu.main]]
   name = "主页"
-  url = "/chs/"
+  url = "/"
   weight = 1
 
 [build]
@@ -244,5 +245,5 @@ DefaultContentLanguageInSubdir = true
     lineNumbersInTable = true
     noClasses = true
     noHl = false
-    style = 'dracula'
+    style = 'monokai'
     tabWidth = 4
