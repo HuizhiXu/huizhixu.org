@@ -3,6 +3,8 @@
 .DS_Store
 **/.DS_Store
 /public/
+/resources/_gen/
+hugo_stats.json
 node_modules/
 
 **/.env
