@@ -7,6 +7,7 @@ import urllib.parse
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
+import frontmatter
 from notion_client import Client
 import requests
 import json
@@ -51,7 +52,6 @@ LANGUAGE_CATEGORIES = {
     'chs': {
         'KnowHow': 'know_how',
         'Life': 'life',
-        'Link': 'link',
         'Page': 'page'
     },
     'de': {
@@ -69,6 +69,11 @@ DEFAULT_CATEGORIES = {
     'chs': 'KnowHow',
     'de': 'Life',
     'en': 'Life'
+}
+TAG_ALIASES = {
+    'comfy-ui': 'comfyui',
+    'paper': 'paper-review',
+    'paperreview': 'paper-review',
 }
 
 GITHUB_REPO = os.getenv('GITHUB_REPO', 'HuizhiXu/pictures')
@@ -95,6 +100,18 @@ for var_name, var_value in required_env_vars.items():
 
 # 初始化 Notion 客户端（保留但我们使用 HTTP 请求以兼容不同版本）
 client = Client(auth=NOTION_TOKEN)
+
+
+def normalize_tags(value):
+    if value is None:
+        return []
+    raw_tags = value if isinstance(value, list) else str(value).split(',')
+    tags = []
+    for item in raw_tags:
+        tag = str(item).strip().lower().replace('_', '-').replace(' ', '-')
+        if tag:
+            tags.append(TAG_ALIASES.get(tag, tag))
+    return tags
 
 
 def notion_request(method: str, path: str, params: dict = None, json_data: dict = None):
@@ -419,7 +436,7 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     title = ''.join(text['plain_text'] for text in properties['Title']['title'])
     slug = ''.join(text['plain_text'] for text in properties['Slug']['rich_text']) if 'Slug' in properties else title.lower().replace(' ', '-')
     original_date = properties['Date']['date']['start'] if 'Date' in properties else datetime.now().isoformat()
-    tags = [item['name'] for item in properties['Tags']['multi_select']] if 'Tags' in properties else []
+    tags = normalize_tags([item['name'] for item in properties['Tags']['multi_select']]) if 'Tags' in properties else []
     
     # 获取语言
     language = DEFAULT_LANGUAGE
@@ -495,9 +512,22 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     if 'Description' in properties and properties['Description']['rich_text']:
         description = ''.join(text['plain_text'] for text in properties['Description']['rich_text'])
         print(f"[INF] 从Notion获取到Description: {description}")
+
+    series = ""
+    if 'Series' in properties and properties['Series']['rich_text']:
+        series = ''.join(text['plain_text'] for text in properties['Series']['rich_text'])
     
-    # 创建frontmatter
-    frontmatter = f"---\ntitle: \"{title}\"\ndate: {date}\ntags: {tags}\ndescription: \"{description}\"\n---\n\n{article_content}"
+    # 使用结构化 frontmatter 生成 YAML，避免标题或摘要里的特殊字符破坏格式。
+    metadata = {
+        "title": title,
+        "date": date,
+        "tags": tags,
+        "description": description,
+    }
+    if series:
+        metadata["series"] = series
+    post = frontmatter.Post(article_content, **metadata)
+    markdown_text = frontmatter.dumps(post)
     
     # 确保目录存在
     os.makedirs(post_dir, exist_ok=True)
@@ -530,7 +560,7 @@ def save_markdown_file(page: Dict[str, Any], content: str) -> None:
     
     # 保存文件
     with open(file_path, 'w', encoding='utf-8') as f:
-        f.write(frontmatter)
+        f.write(markdown_text)
     
     print(f'[INF] 已保存文章: {file_path}')
     
