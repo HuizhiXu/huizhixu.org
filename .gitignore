@@ -5,6 +5,7 @@
 /public/
 /resources/_gen/
 hugo_stats.json
+.hugo_build.lock
 node_modules/
 
 **/.env
