@@ -1,8 +1,7 @@
 ---
 title: "2026-03-20 ComfyUI学习（Day7）For Loop 和批量生图"
-date: 2026-03-20T12:45:12.600681
+date: 2026-03-20T01:38:04.267582
 tags: ['tech', 'ai', 'comfyui']
-series: "ComfyUI 学习"
 description: ""
 ---
 
