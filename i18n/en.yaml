@@ -70,3 +70,23 @@
 # Related posts
 - id: seeAlso
   translation: "See also"
+- id: relatedPosts
+  translation: "Related posts"
+- id: seriesTitle
+  translation: "Series"
+- id: previousInSeries
+  translation: "Previous in series"
+- id: nextInSeries
+  translation: "Next in series"
+- id: contentNavigation
+  translation: "Categories"
+- id: contentNavigationDescription
+  translation: "Browse by series and topic to find the main threads faster than a tag cloud."
+- id: featuredTopics
+  translation: "Topics"
+- id: allTags
+  translation: "All tags"
+- id: postsCount
+  translation: "posts"
+- id: showAllSeriesPosts
+  translation: "Show all"

@@ -95,3 +95,23 @@
 # Related posts
 - id: seeAlso
   translation: "Siehe auch"
+- id: relatedPosts
+  translation: "Ähnliche Beiträge"
+- id: seriesTitle
+  translation: "Serie"
+- id: previousInSeries
+  translation: "Vorheriger Beitrag der Serie"
+- id: nextInSeries
+  translation: "Nächster Beitrag der Serie"
+- id: contentNavigation
+  translation: "Kategorien"
+- id: contentNavigationDescription
+  translation: "Nach Serien und Themen stöbern, um die wichtigsten Inhalte schneller zu finden."
+- id: featuredTopics
+  translation: "Themen"
+- id: allTags
+  translation: "Alle Tags"
+- id: postsCount
+  translation: "Beiträge"
+- id: showAllSeriesPosts
+  translation: "Alle anzeigen"
