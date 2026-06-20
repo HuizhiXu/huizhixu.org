@@ -1,8 +1,7 @@
 ---
 title: "2026-02-02 ComfyUI 学习（Day 4）图像反推和使用Group功能"
-date: 2026-02-02T12:45:23.709263
+date: 2026-02-02T01:38:26.248443
 tags: ['tech', 'ai', 'comfyui']
-series: "ComfyUI 学习"
 description: ""
 ---
 

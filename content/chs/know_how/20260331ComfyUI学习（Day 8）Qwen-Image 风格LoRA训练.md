@@ -1,8 +1,7 @@
 ---
 title: "2026-03-31 ComfyUI学习（Day 8）Qwen-Image 风格LoRA训练"
-date: 2026-03-31T12:45:10.321980
+date: 2026-03-31T01:38:00.684193
 tags: ['tech', 'ai', 'comfyui']
-series: "ComfyUI 学习"
 description: ""
 ---
 

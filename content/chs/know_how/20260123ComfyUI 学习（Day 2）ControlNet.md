@@ -1,8 +1,7 @@
 ---
 title: "2026-01-23 ComfyUI 学习（Day 2）ControlNet"
-date: 2026-01-23T12:45:29.791477
+date: 2026-01-23T01:38:37.928926
 tags: ['tech', 'ai', 'comfyui']
-series: "ComfyUI 学习"
 description: ""
 ---
 
