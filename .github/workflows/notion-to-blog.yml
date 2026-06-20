@@ -24,6 +24,15 @@ jobs:
         hugo-version: '0.135.0'
         extended: true
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install Node Dependencies
+      run: npm ci
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:

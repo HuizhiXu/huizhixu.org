@@ -28,6 +28,7 @@ GitHub Issue（标题含 notion-ci）
 ```bash
 cd ~/hugoblog
 cp .env.example .env        # 填入真实 token
+npm ci                      # Tailwind/PostCSS，Hugo 主题样式构建需要
 pip install -r scripts/requirements.txt
 # 或 uv sync
 ```
