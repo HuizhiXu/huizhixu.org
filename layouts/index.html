@@ -1,3 +1,47 @@
 {{ define "main" }}
   {{- partial "intro.html" . -}}
+
+  {{ $frontBundle := .Site.Params.frontBundle | default "know_how" }}
+  {{ $posts := where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle }}
+  <section class="home-writing reveal-section container max-w-5xl mx-auto px-6 py-12 lg:py-16">
+    <header class="home-section-heading">
+      <div>
+        <span class="home-eyebrow">{{ i18n "homeLatestEyebrow" }}</span>
+        <h2>{{ i18n "homeLatestTitle" }}</h2>
+      </div>
+      <p>{{ i18n "homeLatestDescription" }}</p>
+    </header>
+
+    {{ if $posts }}
+    <div class="home-article-list">
+      {{ range first 7 $posts }}
+      <article class="home-article-row">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
+        </time>
+        <div class="home-article-copy">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Description }}<p>{{ . }}</p>{{ end }}
+          {{ with .Params.tags }}
+          <div class="home-article-tags">
+            {{ range first 3 . }}<span>{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        <a class="home-article-arrow" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">&#8599;</a>
+      </article>
+      {{ end }}
+    </div>
+
+    {{ if gt (len $posts) 7 }}
+    <div class="home-writing-more">
+      <a href="{{ (index (.Site.Menus.main) 0).URL | relLangURL }}" class="home-more-link">
+        {{ i18n "morePosts" }} <span aria-hidden="true">&#8594;</span>
+      </a>
+    </div>
+    {{ end }}
+    {{ else }}
+      <div class="home-empty-note">{{ i18n "homeLatestEmpty" }}</div>
+    {{ end }}
+  </section>
 {{ end }}

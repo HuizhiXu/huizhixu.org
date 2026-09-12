@@ -19,10 +19,11 @@ DefaultContentLanguageInSubdir = false
     title = '徐慧志的个人博客'
     weight = 1
     [languages.chs.params]
-      introTitle = "你好，我是慧志"
-      introSubtitle = "一名工程师，喜欢技术，也爱读书和写字。这里散落着我的笔记和日常，欢迎随意逛逛。"
+      brandName = "Sophia"
+      introTitle = "沿着好奇心，去往更远的地方。"
+      introSubtitle = "写下遇见的问题、暂时的答案，以及一个又一个意外出现的兔子洞。"
       introPhoto = "/picture.jpg"
-      logo = "/huizhi-mark-logo.png"
+      logo = "/huizhi-mark-logo-garden.png"
       reading_speed = 400
     [[languages.chs.menu.main]]
       name = "生活"
@@ -47,10 +48,11 @@ DefaultContentLanguageInSubdir = false
     title = 'PoirotMore'
     weight = 2
     [languages.en.params]
-      introTitle = "Hey! I'm Huizhi Xu"
-      introSubtitle = "A senior developer who enjoys reading, blogging and dancing"
+      brandName = "Sophia"
+      introTitle = "Follow curiosity a little further."
+      introSubtitle = "Notes on the questions I meet, the answers I hold for now, and the rabbit holes that appear along the way."
       introPhoto = "/picture.jpg"
-      logo = "/huizhi-mark-logo.png"
+      logo = "/huizhi-mark-logo-garden.png"
       reading_speed = 228
       frontBundle = "life"
     [[languages.en.menu.main]]
@@ -72,10 +74,11 @@ DefaultContentLanguageInSubdir = false
     title = 'Blog von Huizhi XU'
     weight = 3
     [languages.de.params]
-      introTitle = "Hallo, ich bin Huizhi Xu"
-      introSubtitle = "Eine Senior-Entwicklerin, die Spaß an Lesen, Bloggen und Zumba"
+      brandName = "Sophia"
+      introTitle = "Der Neugier folgen, ein Stück weiter."
+      introSubtitle = "Notizen über Fragen, vorläufige Antworten und all die Kaninchenlöcher, die unterwegs auftauchen."
       introPhoto = "/picture.jpg"
-      logo = "/huizhi-mark-logo.png"
+      logo = "/huizhi-mark-logo-garden.png"
       reading_speed = 179
       frontBundle = "life"
     [[languages.de.menu.main]]
@@ -113,12 +116,12 @@ DefaultContentLanguageInSubdir = false
   ]
   # Custom copyright - optional
   copyright = "Copyright © 2012 - Huizhi Xu · All rights reserved"
-  favicon = "/huizhi-mark-logo.png"
+  favicon = "/huizhi-mark-logo-garden.png"
 
   # Color for the intro details and social links block, not applicable for dark mode
   # Supported values: Any color from TailwindCSS default colors
   # Reference: https://tailwindcss.com/docs/customizing-colors
-  ascentColor = "bg-blue-100"
+  ascentColor = "bg-green-50"
 
   # The page bundle that is shown on the front page
   frontBundle = "know_how"
@@ -162,7 +165,7 @@ DefaultContentLanguageInSubdir = false
   system = "utterances"
   repo = "HuizhiXu/huizhixu.github.io"
   issueterm = "pathname"
-  theme = "github-light"
+  theme = "preferred-color-scheme"
 
 
 [params.homepage.social]
@@ -199,6 +202,9 @@ DefaultContentLanguageInSubdir = false
       strikethrough = true
       table = true
       taskList = true
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.mark]
+          enable = true
       [markup.goldmark.extensions.cjk]
         eastAsianLineBreaks = false
         eastAsianLineBreaksStyle = 'simple'

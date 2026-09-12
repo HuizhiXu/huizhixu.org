@@ -118,7 +118,9 @@
 
 # Homepage
 - id: homeHeroEyebrow
-  translation: "Persönlicher Wissensgarten"
+  translation: "CURIOUSER AND CURIOUSER"
+- id: homePhotoCaption
+  translation: "Wohin geht es heute? ♡"
 - id: homePillEngineering
   translation: "Technik"
 - id: homePillAI
@@ -136,7 +138,7 @@
 - id: homeLatestEmpty
   translation: "Noch keine Beiträge. Schau später wieder vorbei."
 - id: footerMotto
-  translation: "Sein heißt werden, leben heißt lernen."
+  translation: "Wer immer strebend sich bemüht … · Werden kennt keine abgeschlossene Zeit."
 - id: footerNavTitle
   translation: "Schnellnavigation"
 - id: tocTitle

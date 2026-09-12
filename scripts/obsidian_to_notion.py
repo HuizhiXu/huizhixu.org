@@ -366,6 +366,130 @@ def paragraph_block(text: str) -> dict:
     }
 
 
+NOTION_CODE_LANGUAGES = {
+    "abap",
+    "abc",
+    "agda",
+    "arduino",
+    "ascii art",
+    "assembly",
+    "bash",
+    "basic",
+    "bnf",
+    "c",
+    "c#",
+    "c++",
+    "clojure",
+    "coffeescript",
+    "coq",
+    "css",
+    "dart",
+    "dhall",
+    "diff",
+    "docker",
+    "ebnf",
+    "elixir",
+    "elm",
+    "erlang",
+    "f#",
+    "flow",
+    "fortran",
+    "gherkin",
+    "glsl",
+    "go",
+    "graphql",
+    "groovy",
+    "haskell",
+    "hcl",
+    "html",
+    "idris",
+    "java",
+    "javascript",
+    "json",
+    "julia",
+    "kotlin",
+    "latex",
+    "less",
+    "lisp",
+    "livescript",
+    "llvm ir",
+    "lua",
+    "makefile",
+    "markdown",
+    "markup",
+    "matlab",
+    "mathematica",
+    "mermaid",
+    "nix",
+    "notion formula",
+    "objective-c",
+    "ocaml",
+    "pascal",
+    "perl",
+    "php",
+    "plain text",
+    "powershell",
+    "prolog",
+    "protobuf",
+    "purescript",
+    "python",
+    "r",
+    "racket",
+    "reason",
+    "ruby",
+    "rust",
+    "sass",
+    "scala",
+    "scheme",
+    "scss",
+    "shell",
+    "smalltalk",
+    "solidity",
+    "sql",
+    "swift",
+    "toml",
+    "typescript",
+    "vb.net",
+    "verilog",
+    "vhdl",
+    "visual basic",
+    "webassembly",
+    "xml",
+    "yaml",
+    "java/c/c++/c#",
+}
+
+NOTION_CODE_LANGUAGE_ALIASES = {
+    "": "plain text",
+    "text": "plain text",
+    "txt": "plain text",
+    "py": "python",
+    "js": "javascript",
+    "jsx": "javascript",
+    "ts": "typescript",
+    "tsx": "typescript",
+    "sh": "shell",
+    "zsh": "shell",
+    "yml": "yaml",
+    "md": "markdown",
+    "c sharp": "c#",
+    "cpp": "c++",
+    "cxx": "c++",
+    "objc": "objective-c",
+    "dockerfile": "docker",
+    "console": "plain text",
+    "output": "plain text",
+}
+
+
+def normalize_notion_code_language(raw_language: str) -> str:
+    language = (raw_language or "plain text").strip().lower()
+    language = NOTION_CODE_LANGUAGE_ALIASES.get(language, language)
+    if language in NOTION_CODE_LANGUAGES:
+        return language
+    return "plain text"
+
+
 def markdown_to_blocks(content: str) -> List[dict]:
     blocks: List[dict] = []
     paragraph_lines: List[str] = []
@@ -399,7 +523,9 @@ def markdown_to_blocks(content: str) -> List[dict]:
             else:
                 flush_paragraph()
                 in_code = True
-                code_language = stripped.strip("`").strip() or "plain text"
+                code_language = normalize_notion_code_language(
+                    stripped.strip("`").strip() or "plain text"
+                )
             continue
 
         if in_code:
@@ -732,7 +858,7 @@ def should_skip_path(md_path: Path) -> bool:
         return False
 
 
-def sync_markdown_file(md_path: Path, schema: Dict[str, str]) -> None:
+def sync_markdown_file(md_path: Path, schema: Dict[str, str]) -> bool:
     post = frontmatter.loads(md_path.read_text(encoding="utf-8"))
     page_info = build_page_info(md_path, post)
 
@@ -741,13 +867,18 @@ def sync_markdown_file(md_path: Path, schema: Dict[str, str]) -> None:
             print(f"[INF] 跳过已同步文章（未标记 sync_to_notion）: {md_path.name}")
         else:
             print(f"[INF] 跳过新文章（未标记 sync_to_notion）: {md_path.name}")
-        return
+        return True
 
-    print(f"[INF] 处理文章: {md_path}")
-    prepared_content = prepare_markdown_content(post.content, md_path, post.metadata)
-    blocks = markdown_to_blocks(prepared_content)
-    notion_id = create_or_update_page(page_info, blocks, schema)
-    write_sync_state(md_path, post, notion_id)
+    try:
+        print(f"[INF] 处理文章: {md_path}")
+        prepared_content = prepare_markdown_content(post.content, md_path, post.metadata)
+        blocks = markdown_to_blocks(prepared_content)
+        notion_id = create_or_update_page(page_info, blocks, schema)
+        write_sync_state(md_path, post, notion_id)
+        return True
+    except Exception as exc:
+        print(f"[ERR] 同步失败，已跳过: {md_path.name}: {exc}")
+        return False
 
 
 def main() -> None:
@@ -764,12 +895,19 @@ def main() -> None:
         markdown_files = sorted(OBSIDIAN_SOURCE_DIR.rglob("*.md"))
         print(f"[INF] 找到 {len(markdown_files)} 篇 Markdown")
 
+    success_count = 0
+    failure_count = 0
     for md_path in markdown_files:
         if should_skip_path(md_path):
             continue
-        sync_markdown_file(md_path, schema)
+        if sync_markdown_file(md_path, schema):
+            success_count += 1
+        else:
+            failure_count += 1
 
-    print("[INF] Obsidian 同步到 Notion 完成")
+    print(f"[INF] Obsidian 同步到 Notion 完成: 成功 {success_count}，失败 {failure_count}")
+    if failure_count:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

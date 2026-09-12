@@ -1,10 +1,20 @@
 <section class="home-hero">
-  <div class="home-hero-shell container max-w-6xl mx-auto px-6 py-8 lg:py-10">
-    <div class="home-hero-card grid md:grid-cols-[1fr_400px] gap-6 lg:gap-10 items-center">
-      <div>
+  <div class="hero-doodle hero-doodle-star" aria-hidden="true">✦</div>
+  <div class="hero-doodle hero-doodle-loop" aria-hidden="true"></div>
+  <div class="home-hero-shell container max-w-5xl mx-auto px-6 py-12 lg:py-20">
+    <div class="home-hero-card">
+      <div class="home-hero-copy">
         <div class="home-eyebrow">{{ i18n "homeHeroEyebrow" }}</div>
-        <h1 class="text-3xl lg:text-4xl font-bold mb-4 leading-tight">{{ .Site.Params.introTitle | safeHTML}}</h1>
-        <p class="text-gray-600 dark:text-gray-300 text-base lg:text-lg leading-relaxed max-w-2xl">{{ .Site.Params.introSubtitle | safeHTML}}</p>
+        <div class="home-title-line">
+          <h1 class="home-hero-title">{{ .Site.Params.introTitle | safeHTML}}</h1>
+          <div class="sprout-friend" aria-hidden="true">
+            <span class="sprout-leaf sprout-leaf-left"></span>
+            <span class="sprout-leaf sprout-leaf-right"></span>
+            <span class="sprout-head"><i></i><i></i><b></b></span>
+            <span class="sprout-pot"></span>
+          </div>
+        </div>
+        <p class="home-hero-description">{{ .Site.Params.introSubtitle | safeHTML}}</p>
         <div class="flex flex-wrap gap-2 mt-5">
           <span class="home-pill">{{ i18n "homePillEngineering" }}</span>
           <span class="home-pill">{{ i18n "homePillAI" }}</span>
@@ -12,8 +22,10 @@
           <span class="home-pill">{{ i18n "homePillLife" }}</span>
         </div>
       </div>
-      <div class="home-photo-frame">
+      <div class="home-photo-frame" aria-hidden="true">
         <img class="home-photo" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
+        <span class="photo-tape"></span>
+        <span class="photo-caption">{{ i18n "homePhotoCaption" }}</span>
       </div>
     </div>
   </div>

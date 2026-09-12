@@ -93,7 +93,9 @@
 
 # Homepage
 - id: homeHeroEyebrow
-  translation: "Personal Knowledge Garden"
+  translation: "CURIOUSER AND CURIOUSER"
+- id: homePhotoCaption
+  translation: "Where to today? ♡"
 - id: homePillEngineering
   translation: "Engineering"
 - id: homePillAI
@@ -111,7 +113,7 @@
 - id: homeLatestEmpty
   translation: "No posts yet. Check back soon."
 - id: footerMotto
-  translation: "There's No Such Thing as a Free Lunch."
+  translation: "Wer immer strebend sich bemüht … · Becoming has no finished tense."
 - id: footerNavTitle
   translation: "Quick Links"
 - id: tocTitle

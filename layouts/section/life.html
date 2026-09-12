@@ -1,14 +1,53 @@
 {{ define "main" }}
-<div class="container max-w-6xl mx-auto px-6 py-10">
-  <div class="section-page-header">
-    <span class="home-eyebrow">{{ i18n "homeLatestEyebrow" }}</span>
-    <h1 class="text-3xl font-bold mt-2">{{ .Title }}</h1>
+<section class="life-hero">
+  <span class="life-doodle life-doodle-star" aria-hidden="true">✦</span>
+  <span class="life-doodle life-doodle-loop" aria-hidden="true"></span>
+  <div class="container max-w-5xl mx-auto px-6 py-12 lg:py-16">
+    <div class="life-hero-grid">
+      <div class="life-hero-copy">
+        <span class="home-eyebrow">Personal notes</span>
+        <h1>{{ .Title }}</h1>
+        <p>日常、阅读、远行与心里的天气。把生活里那些细小却真实的时刻，慢慢写进这座花园。</p>
+      </div>
+      <div class="life-journal" aria-hidden="true">
+        <span class="life-journal-tape"></span>
+        <span class="life-journal-date">生活手记</span>
+        <span class="life-journal-line"></span>
+        <span class="life-journal-line life-journal-line-short"></span>
+        <span class="life-journal-sprig"><i></i><b></b><em></em></span>
+        <span class="life-journal-note">to notice · to remember</span>
+      </div>
+    </div>
   </div>
+</section>
 
+<div class="life-archive container max-w-5xl mx-auto px-6 py-12 lg:py-16">
+  <header class="life-archive-heading">
+    <div>
+      <span class="home-eyebrow">Along the way</span>
+      <h2>沿途记录</h2>
+    </div>
+    <p>从最近的日子往回走，偶尔也会遇见从前的自己。</p>
+  </header>
   {{ $p := .Paginate .Pages.ByDate.Reverse 12 }}
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8">
+  <div class="life-article-list">
     {{ range $p.Pages }}
-      {{- partial "blog-card.html" . -}}
+    <article class="life-article-row">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        <span>{{ .Date.Format "2006" }}</span>
+        {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
+      </time>
+      <div class="life-article-copy">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        {{ with .Description }}<p>{{ . }}</p>{{ end }}
+        {{ with .Params.tags }}
+        <div class="home-article-tags">
+          {{ range first 3 . }}<span>{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+      <a class="life-article-arrow" href="{{ .RelPermalink }}" aria-label="阅读：{{ .Title }}">&#8599;</a>
+    </article>
     {{ end }}
   </div>
 

@@ -67,6 +67,11 @@ def parse_args() -> argparse.Namespace:
         help="Sync changed/new tracked or untracked content Markdown files from git status.",
     )
     parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Sync all Hugo content Markdown files (excluding _index.md).",
+    )
+    parser.add_argument(
         "--notion",
         action="store_true",
         help="Run scripts/obsidian_to_notion.py after writing Obsidian files.",
@@ -125,6 +130,15 @@ def git_status_entries() -> List[tuple[str, str]]:
 
         entries.append((status, path))
     return entries
+
+
+def all_content_markdown_files() -> List[Path]:
+    paths: List[Path] = []
+    for md_path in sorted(CONTENT_ROOT.rglob("*.md")):
+        if md_path.name == "_index.md":
+            continue
+        paths.append(md_path)
+    return paths
 
 
 def changed_content_markdown_files() -> List[Path]:
@@ -223,17 +237,32 @@ def merge_existing_notion_id(destination: Path, post: frontmatter.Post) -> None:
         post.metadata["notion_id"] = notion_id
 
 
-def prepare_post(source_path: Path, post: frontmatter.Post) -> frontmatter.Post:
+def prepare_post(
+    source_path: Path,
+    post: frontmatter.Post,
+    *,
+    backfill_published: bool = False,
+) -> frontmatter.Post:
     language, category = infer_language_and_category(source_path)
     post.metadata["language"] = post.metadata.get("language") or language
     post.metadata["category"] = post.metadata.get("category") or category
     post.metadata["md_filename"] = post.metadata.get("md_filename") or source_path.name
-    post.metadata["publish_status"] = post.metadata.get("publish_status") or "Draft"
+    if not post.metadata.get("publish_status"):
+        if backfill_published and not post.metadata.get("draft"):
+            post.metadata["publish_status"] = "Published"
+        else:
+            post.metadata["publish_status"] = "Draft"
     post.metadata["sync_to_notion"] = True
     return post
 
 
-def sync_file(source_path: Path, index: Dict[str, Dict[str, Path]], dry_run: bool) -> Optional[Path]:
+def sync_file(
+    source_path: Path,
+    index: Dict[str, Dict[str, Path]],
+    dry_run: bool,
+    *,
+    backfill_published: bool = False,
+) -> Optional[Path]:
     if not source_path.exists():
         raise FileNotFoundError(f"找不到文件: {source_path}")
     if source_path.suffix.lower() != ".md":
@@ -242,7 +271,7 @@ def sync_file(source_path: Path, index: Dict[str, Dict[str, Path]], dry_run: boo
     post = read_post(source_path)
     destination = choose_destination(source_path, post, index)
     merge_existing_notion_id(destination, post)
-    post = prepare_post(source_path, post)
+    post = prepare_post(source_path, post, backfill_published=backfill_published)
 
     action = "更新" if destination.exists() else "创建"
     print(f"[INF] {action} Obsidian 文件: {destination}")
@@ -255,25 +284,44 @@ def sync_file(source_path: Path, index: Dict[str, Dict[str, Path]], dry_run: boo
     return destination
 
 
-def run_obsidian_to_notion(destinations: List[Path]) -> None:
-    command = [
-        sys.executable,
-        str(REPO_ROOT / "scripts" / "obsidian_to_notion.py"),
-        *[str(path) for path in destinations],
-    ]
-    print(f"[INF] 运行 Notion 同步: {' '.join(command)}")
-    subprocess.run(command, cwd=REPO_ROOT, check=True)
+def run_obsidian_to_notion(destinations: List[Path], batch_size: int = 20) -> None:
+    script = str(REPO_ROOT / "scripts" / "obsidian_to_notion.py")
+    total = len(destinations)
+    for start in range(0, total, batch_size):
+        batch = destinations[start : start + batch_size]
+        command = [sys.executable, script, *[str(path) for path in batch]]
+        batch_num = start // batch_size + 1
+        batch_total = (total + batch_size - 1) // batch_size
+        print(
+            f"[INF] 运行 Notion 同步 batch {batch_num}/{batch_total} "
+            f"({len(batch)} 篇): {batch[0].name} ..."
+        )
+        result = subprocess.run(command, cwd=REPO_ROOT)
+        if result.returncode != 0:
+            print(f"[WARN] Notion 同步 batch {batch_num}/{batch_total} 有失败项，继续下一批")
 
 
 def main() -> None:
     args = parse_args()
-    if not args.paths and not args.changed:
-        raise ValueError("请指定 Markdown 文件，或使用 --changed 同步 git 中已改动的 content Markdown")
+    if not args.paths and not args.changed and not args.all:
+        raise ValueError(
+            "请指定 Markdown 文件，或使用 --changed / --all 同步 content Markdown"
+        )
+    if args.changed and args.all:
+        raise ValueError("--changed 与 --all 不能同时使用")
     if not OBSIDIAN_SOURCE_DIR.exists():
         raise FileNotFoundError(f"找不到 Obsidian 目录: {OBSIDIAN_SOURCE_DIR}")
 
     source_paths = [normalize_path(path) for path in args.paths]
-    if args.changed:
+    if args.all:
+        all_paths = all_content_markdown_files()
+        print(f"[INF] 找到 {len(all_paths)} 篇 Hugo content Markdown（不含 _index.md）")
+        seen = set(source_paths)
+        for path in all_paths:
+            if path not in seen:
+                source_paths.append(path)
+                seen.add(path)
+    elif args.changed:
         changed_paths = changed_content_markdown_files()
         print(f"[INF] 从 git 状态找到 {len(changed_paths)} 篇已改动的 content Markdown")
         seen = set(source_paths)
@@ -285,7 +333,12 @@ def main() -> None:
     index = build_obsidian_index()
     destinations = []
     for source_path in source_paths:
-        destination = sync_file(source_path, index, args.dry_run)
+        destination = sync_file(
+            source_path,
+            index,
+            args.dry_run,
+            backfill_published=args.all,
+        )
         if destination:
             destinations.append(destination)
 

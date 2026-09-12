@@ -161,6 +161,13 @@ python scripts/blog_to_obsidian.py content/chs/page/about.md --notion
 python scripts/blog_to_obsidian.py --changed --notion
 ```
 
+把 Hugo 仓库里**全部**已发布文章一次性写回 Obsidian（并可选同步 Notion）：
+
+```bash
+python scripts/blog_to_obsidian.py --all --dry-run   # 先预览
+python scripts/blog_to_obsidian.py --all --notion    # 157 篇，Notion 状态设为 Published
+```
+
 脚本会：
 
 | 行为 | 说明 |

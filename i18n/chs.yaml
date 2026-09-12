@@ -116,7 +116,9 @@
 
 # Homepage
 - id: homeHeroEyebrow
-  translation: "个人知识花园"
+  translation: "CURIOUSER AND CURIOUSER"
+- id: homePhotoCaption
+  translation: "今天往哪里走？ ♡"
 - id: homePillEngineering
   translation: "工程"
 - id: homePillAI
@@ -134,7 +136,7 @@
 - id: homeLatestEmpty
   translation: "还没有文章，稍后再来看看。"
 - id: footerMotto
-  translation: "There's No Such Thing as a Free Lunch."
+  translation: "Wer immer strebend sich bemüht … · 成为，是一件没有完成时的事。"
 - id: footerNavTitle
   translation: "快速导航"
 - id: tocTitle

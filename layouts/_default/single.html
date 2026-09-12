@@ -2,7 +2,7 @@
   {{ $lastmodstr := (partial "date.html" (dict "date" .Lastmod "language" $.Page.Language "format" "long")) }}
   {{ $datestr := (partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "long")) }}
 
-  {{ if (and .Params.thumbnail (not (or .Site.Params.hidePageThumbnail .Params.hidePageThumbnail)) ) }}
+  {{ if (and (ne .Section "life") .Params.thumbnail (not (or .Site.Params.hidePageThumbnail .Params.hidePageThumbnail)) ) }}
   <div class="relative max-w-6xl mx-auto px-4 mt-6">
     <img src="{{ .Params.thumbnail }}" class="rounded-xl shadow-md w-full object-contain" />
     {{ if not (or (or .Site.Params.hideMeta .Params.hideMeta) false) }}
@@ -47,7 +47,7 @@
           <span class="text-gray-300 dark:text-gray-600">·</span>
           <span class="flex flex-wrap gap-1 not-prose">
             {{ range .Params.tags }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="text-xs bg-blue-50 text-blue-500 dark:bg-blue-900/30 dark:text-blue-400 rounded-full px-2 py-0.5 no-underline hover:bg-blue-100 transition-colors">{{ . }}</a>
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="blog-card-tag no-underline">{{ . }}</a>
             {{ end }}
           </span>
           {{ end }}
