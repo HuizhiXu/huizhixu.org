@@ -23,7 +23,16 @@
         </div>
       </div>
       <div class="home-photo-frame" aria-hidden="true">
-        <img class="home-photo" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" />
+        {{ $photo := resources.Get (printf "site-images/%s" (strings.TrimPrefix "/" .Site.Params.introPhoto)) }}
+        {{ with $photo }}
+          {{ $small := .Resize "360x webp q80" }}
+          {{ $large := .Resize "720x webp q80" }}
+          <img class="home-photo" src="{{ $small.RelPermalink }}"
+            srcset="{{ $small.RelPermalink }} 360w, {{ $large.RelPermalink }} 720w" sizes="(max-width: 767px) 1px, 288px"
+            width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $.Site.Title }}" decoding="async" />
+        {{ else }}
+          <img class="home-photo" src="{{ .Site.Params.introPhoto }}" alt="{{ .Site.Title }}" decoding="async" />
+        {{ end }}
         <span class="photo-tape"></span>
         <span class="photo-caption">{{ i18n "homePhotoCaption" }}</span>
       </div>

@@ -29,9 +29,11 @@ GitHub Issue（标题含 notion-ci）
 cd ~/hugoblog
 cp .env.example .env        # 填入真实 token
 npm ci                      # Tailwind/PostCSS，Hugo 主题样式构建需要
-pip install -r scripts/requirements.txt
-# 或 uv sync
+uv sync --frozen            # 使用 uv.lock 中的固定版本
+# 如不用 uv：pip install --require-hashes -r scripts/requirements.txt
 ```
+
+本项目固定使用 **Hugo 0.152.2 extended**（见 `.hugo-version`）、Python 3.12 和 Node.js 22。`npm run build` 会检查 Hugo 版本；更新版本时需要同步修改 `.hugo-version` 并通过测试。
 
 ### `.env` 必填项
 
@@ -200,7 +202,13 @@ python scripts/blog_to_obsidian.py --changed --dry-run
 
 在 [HuizhiXu/huizhixu.org](https://github.com/HuizhiXu/huizhixu.org/issues/new) 新建 Issue，**标题含 `notion-ci`**，必须本人创建。
 
-CI 会自动：拉取 Notion 文章 → 生成 Markdown → 上传图片 → Hugo 构建 → 部署到 `huizhixu.github.io`。
+也可以在 Actions 中手动运行 **Notion To Blog**。默认仅构建并发布仓库当前内容；勾选 `sync_notion` 才会同步 Notion 待发布文章。通过 `notion-ci` Issue 触发时仍会同步 Notion。本地 `bash deploy.sh` 会检查工作区及 `origin/master`，然后通过 GitHub CLI 触发同一个工作流（仅发布现有代码）；需要先提交、推送改动并完成 `gh auth login`。`deploy.ps1` 和旧的 `deploy copy.sh` 都委托给这个入口，不再直接操作 `public/.git` 或强制推送。
+
+CI 顺序：测试 → 导出文章和图片 → Hugo 构建及产物检查 → 提交并推送正文 → 发布到 `huizhixu.github.io` → 回写 `Published`。导出、提交、推送或构建失败均会停止发布。导出的文章若因 `draft`、未来日期或过期时间未进入构建结果，也会停止发布并提示检查。多个发布任务串行执行，普通 push / PR 只执行检查，不部署。
+
+导出脚本单独运行时只写本地 Markdown 和 `.sync-state/publish.json`，不会回写 `Published`。`--finalize` 专供部署成功后的步骤使用，禁止提前手动运行。回写会核对文件哈希与 Notion 页面修改时间；导出后又编辑的页面保留待发布状态。
+
+失败后修复原因，再重新运行完整发布工作流。已有文件记录 `notion_id`，同一页面可以安全重新导出；同名且属于另一个页面的文件会报错。工作流保留 `publish-manifest` artifact 供排查。
 
 ---
 
@@ -262,9 +270,50 @@ CI 会自动：拉取 Notion 文章 → 生成 Markdown → 上传图片 → Hug
 
 **CI 跑了但没更新**
 - `PublishStatus` 是否为 `Publish` / `Update`？
-- 同名文件已存在且状态是 `Publish`（非 `Update`）→ 会跳过
+- 同名旧文件没有 `notion_id` 且内容不同，会报错；确认确实需要覆盖后设为 `Update`。
+- 导出后编辑了 Notion 页面，回写会拒绝旧版本；重新执行完整工作流即可。
 
 ---
+
+## 八、开发与维护
+
+```bash
+npm ci
+uv sync --frozen
+npm test                         # Python 模拟请求测试 + Node 搜索交互测试
+npm run build                    # 生产构建
+uv run --frozen python scripts/check_site.py public
+npm start                        # 本地预览
+```
+
+测试使用假数据和临时目录，不读取本地 `.env`，不调用真实 Notion/GitHub API。`scripts/requirements.txt` 是兼容 pip 的锁文件导出，不要单独修改；依赖调整后使用：
+
+```bash
+uv lock
+uv export --frozen --format requirements-txt --no-dev --no-emit-project --output-file scripts/requirements.txt
+```
+
+目录职责：
+
+- `scripts/publishing/`：环境配置、标签规范化、API 请求、图片上传、Notion 转换及正文替换恢复。
+- `scripts/*_to_*.py`：同步入口和流程编排。
+- `assets/css/`：按原有级联顺序拆分的样式及本站 PostCSS/Tailwind 配置，构建时合并、压缩并添加指纹。
+- `assets/js/search.js`：本站搜索逻辑；索引包含纯文本正文、摘要和标签，首次打开搜索时加载。
+- `layouts/`：本站实际定制的模板；完全相同的模板和翻译使用主题回退。
+- `themes/blist/`：仓库内保留的 Blist 基础主题（包元数据版本 2.1.0，未记录精确上游提交）；后续更新需检查本地覆盖，不应直接覆盖本站 assets。
+- `static/`：保持现有原图 URL；通过资源挂载供 Hugo 生成优化图。首页使用 360/720 宽度 WebP，本地正文 JPEG/PNG/WebP 使用两档适配尺寸及懒加载。远程图片只增加懒加载，不在构建时下载。
+
+### 同步中断时如何恢复
+
+更新已有 Notion 页面会先完整写入新正文，再归档旧 blocks；普通失败尝试恢复旧正文并清理本次新增内容。写入请求超时不会盲目重试，因为服务端可能已经成功执行。
+
+若出现“需要核对中断的同步”，查看 `.sync-state/notion/<page-id>.json`：`old_ids` 是原 blocks，`new_ids` 是已确认新增的 blocks，`archive_attempts` 是尝试归档的原 blocks。`append_pending: true` 表示有一批请求结果未知，不能假定没有写入。
+
+在 Notion 中核对页面及历史记录，恢复旧正文、清理本次残留新增内容（也可从 Obsidian 原文重新确认目标内容）。确认后将该日志移到备份位置，再重试同步。未处理的日志会阻止继续替换该页面，避免反复覆盖。同步期间请避免另一进程或人工同时修改同一页面。
+
+转换器支持段落、标题、链接与常见富文本、嵌套列表、待办、引用、callout、toggle、表格、代码、公式和图片。遇到未支持的 block 会报出类型和 ID，并停止发布；不会静默跳过。图片下载或上传失败也会阻止发布，以免留下临时图片链接。
+
+实现参考：[Notion block 更新接口](https://developers.notion.com/reference/update-a-block)、[Hugo 图片处理](https://gohugo.io/content-management/image-processing/)、[uv 的 GitHub Actions 集成](https://docs.astral.sh/uv/guides/integration/github/)。
 
 ## 相关文件
 

@@ -1,46 +1,14 @@
-#! /bin/bash
-
-set -eux
-
-echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
-
-msg="rebuilding site `date`"
-if [ $# -eq 1  ]
-    then msg="$1"
+#!/usr/bin/env bash
+set -euo pipefail
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo '请先提交并推送本地改动；发布使用 GitHub 上的 master。' >&2
+  exit 1
 fi
-
-# Build the project.
-hugo --buildDrafts=false -t blist --minify --baseURL="https://huizhixu.github.io"
-
-# Go To Public folder
-cd public
-
-# 如果 public 不是 git 仓库则初始化
-if [ ! -d .git ]; then
-    git init
-    git remote add origin git@github.com:HuizhiXu/huizhixu.github.io.git
+git fetch origin master
+if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/master)" ]]; then
+  echo '当前提交与 origin/master 不一致，请先同步。' >&2
+  exit 1
 fi
-
-git checkout master || git checkout -b master
-
-# Add changes to git.
-git add . -f
-
-# Commit changes.
-git commit -m "$msg" || echo "Nothing to commit"
-
-# Push source and build repos.
-git push origin master --force
-
-# Come Back
-cd ..
-
-# 更新源代码仓库到 huizhixu.org
-if [ ! -d .git ]; then
-    git init
-    git remote add origin git@github.com:HuizhiXu/huizhixu.org.git
-fi
-
-git add .
-git commit -m "$msg" || echo "Nothing to commit"
-git push origin master
+gh workflow run notion-to-blog.yml --ref master -f sync_notion=false
+echo '已启动统一发布流程。可用 gh run list --workflow notion-to-blog.yml 查看结果。'

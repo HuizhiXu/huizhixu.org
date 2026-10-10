@@ -1,0 +1,122 @@
+/* ── 16. Life archive · a quiet field journal ──────────── */
+.life-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+}
+
+.life-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  gap: clamp(3rem, 9vw, 8rem);
+  align-items: center;
+}
+
+.life-hero-copy { animation: garden-rise 0.65s ease-out both; }
+.life-hero-copy h1 {
+  margin: 0 0 1rem;
+  color: #344b43;
+  font-family: var(--obs-font);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+.dark .life-hero-copy h1 { color: #d9e5df; }
+.life-hero-copy p {
+  max-width: 38rem;
+  color: var(--ink-muted);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.life-journal {
+  position: relative;
+  min-height: 15.5rem;
+  padding: 3rem 1.55rem 1.4rem;
+  border: 1px solid rgba(36, 48, 43, 0.1);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0, transparent 2.05rem, rgba(70, 110, 94, 0.12) 2.05rem, rgba(70, 110, 94, 0.12) 2.1rem),
+    #fffdfa;
+  box-shadow: 0.65rem 0.75rem 0 var(--leaf-soft), 0 1rem 2.6rem rgba(42, 73, 62, 0.1);
+  transform: rotate(1.8deg);
+  animation: photo-arrive 0.75s 0.12s ease-out both;
+}
+.dark .life-journal { background-color: #e9e2d7; color: #42534c; }
+.life-journal-tape {
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 4.8rem;
+  height: 1.35rem;
+  background: rgba(246, 218, 153, 0.75);
+  transform: translateX(-50%) rotate(-3deg);
+}
+.life-journal-date {
+  color: #566b62;
+  font-family: var(--title-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.life-journal-line { display: block; width: 78%; height: 1px; margin-top: 1.45rem; background: rgba(65, 91, 80, 0.32); }
+.life-journal-line-short { width: 48%; margin-top: 0.8rem; }
+.life-journal-note {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.8rem;
+  color: #78877f;
+  font-family: "Bradley Hand", "Comic Sans MS", cursive;
+  font-size: 0.73rem;
+  transform: rotate(-2deg);
+}
+.life-journal-sprig { position: absolute; right: 2rem; top: 5.8rem; width: 3.8rem; height: 6.4rem; transform: rotate(17deg); }
+.life-journal-sprig i { position: absolute; left: 1.8rem; top: 0; width: 2px; height: 6rem; border-radius: 2px; background: #71917b; }
+.life-journal-sprig b,
+.life-journal-sprig em { position: absolute; width: 1.55rem; height: 0.78rem; border: 1.5px solid #71917b; background: #dfead5; }
+.life-journal-sprig b { left: 0.45rem; top: 1.55rem; border-radius: 100% 10% 100% 10%; transform: rotate(21deg); }
+.life-journal-sprig em { left: 1.85rem; top: 3.05rem; border-radius: 10% 100% 10% 100%; transform: rotate(-17deg); }
+
+.life-doodle { position: absolute; z-index: -1; color: var(--leaf); opacity: 0.22; pointer-events: none; }
+.life-doodle-star { top: 22%; left: 5%; font-size: 1.7rem; animation: doodle-twinkle 3.5s ease-in-out infinite; }
+.life-doodle-loop { right: 4%; bottom: 12%; width: 4.5rem; height: 2.3rem; border: 2px dashed currentColor; border-left-color: transparent; border-radius: 50%; transform: rotate(-18deg); }
+
+.life-archive-heading { display: flex; justify-content: space-between; gap: 2rem; align-items: end; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+.life-archive-heading h2 { color: var(--ink); font-family: var(--obs-font); font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; }
+.life-archive-heading p { max-width: 21rem; color: var(--ink-muted); font-size: 0.9rem; line-height: 1.7; }
+.life-article-list { border-bottom: 1px solid var(--line); }
+.life-article-row {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr) 2rem;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--line);
+  transition: padding-left 0.22s ease, background 0.22s ease;
+}
+.life-article-row:first-child { border-top: 0; }
+.life-article-row:hover { padding-left: 0.7rem; background: linear-gradient(90deg, var(--leaf-soft), transparent 72%); }
+.life-article-row time { display: flex; flex-direction: column; gap: 0.2rem; padding-top: 0.25rem; color: var(--ink-muted); font-size: 0.78rem; letter-spacing: 0.035em; }
+.life-article-row time span { color: var(--leaf); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; }
+.life-article-copy h3 { font-family: var(--title-font); font-size: 1.22rem; font-weight: 700; line-height: 1.45; }
+.life-article-copy h3 a { color: var(--ink); text-decoration: none; }
+.life-article-copy h3 a:hover { color: var(--leaf); }
+.life-article-copy p { max-width: 42rem; margin-top: 0.4rem; color: var(--ink-muted); font-size: 0.9rem; line-height: 1.7; }
+.life-article-arrow { color: var(--ink-muted); font-size: 1.15rem; text-decoration: none; transition: transform 0.18s ease, color 0.18s ease; }
+.life-article-row:hover .life-article-arrow { color: var(--leaf); transform: translate(2px, -2px); }
+
+@media (max-width: 767px) {
+  .life-hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .life-journal { width: min(13rem, 72vw); min-height: 13.8rem; margin: 0 auto; }
+  .life-doodle-star { top: 8%; right: 8%; left: auto; }
+  .life-archive-heading { display: block; }
+  .life-archive-heading p { margin-top: 0.75rem; }
+  .life-article-row { grid-template-columns: 1fr 1.5rem; gap: 0.75rem; }
+  .life-article-row time { grid-column: 1 / -1; flex-direction: row; gap: 0.55rem; padding: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .life-hero-copy,
+  .life-journal,
+  .life-doodle-star { animation: none !important; }
+}

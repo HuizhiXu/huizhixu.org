@@ -8,23 +8,7 @@ from typing import Dict, Iterable, List, Optional
 import frontmatter
 
 
-def load_local_env(env_path: Path = Path(".env")) -> None:
-    if not env_path.exists():
-        return
-
-    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("export "):
-            line = line[len("export ") :].strip()
-        if "=" not in line:
-            continue
-
-        key, value = line.split("=", 1)
-        key = key.strip()
-        value = value.strip().strip('"').strip("'")
-        os.environ.setdefault(key, value)
+from publishing.config import load_local_env, atomic_write, REPO_ROOT
 
 
 load_local_env()
@@ -280,13 +264,14 @@ def sync_file(
         return destination
 
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(frontmatter.dumps(post), encoding="utf-8")
+    atomic_write(destination, frontmatter.dumps(post))
     return destination
 
 
 def run_obsidian_to_notion(destinations: List[Path], batch_size: int = 20) -> None:
     script = str(REPO_ROOT / "scripts" / "obsidian_to_notion.py")
     total = len(destinations)
+    failed_batches = 0
     for start in range(0, total, batch_size):
         batch = destinations[start : start + batch_size]
         command = [sys.executable, script, *[str(path) for path in batch]]
@@ -298,7 +283,10 @@ def run_obsidian_to_notion(destinations: List[Path], batch_size: int = 20) -> No
         )
         result = subprocess.run(command, cwd=REPO_ROOT)
         if result.returncode != 0:
+            failed_batches += 1
             print(f"[WARN] Notion 同步 batch {batch_num}/{batch_total} 有失败项，继续下一批")
+    if failed_batches:
+        raise RuntimeError(f"{failed_batches} 个 Notion 同步批次失败，请检查日志后重试")
 
 
 def main() -> None:

@@ -1,37 +1,16 @@
 import argparse
-import base64
-import hashlib
-import json
-import mimetypes
 import os
 import re
-import time
 import urllib.parse
 from datetime import date, datetime
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional
 
 import frontmatter
 import requests
 
 
-def load_local_env(env_path: Path = Path(".env")) -> None:
-    if not env_path.exists():
-        return
-
-    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("export "):
-            line = line[len("export ") :].strip()
-        if "=" not in line:
-            continue
-
-        key, value = line.split("=", 1)
-        key = key.strip()
-        value = value.strip().strip('"').strip("'")
-        os.environ.setdefault(key, value)
+from publishing.config import load_local_env, normalize_tags, atomic_write, REPO_ROOT
 
 
 load_local_env()
@@ -49,19 +28,11 @@ OBSIDIAN_SOURCE_DIR = Path(
 
 GITHUB_REPO = os.getenv("GITHUB_REPO", "HuizhiXu/pictures")
 GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "master")
-GITHUB_API_BASE = "https://api.github.com"
-NOTION_API_BASE = "https://api.notion.com/v1"
-NOTION_VERSION = "2022-06-28"
 
 DEFAULT_LANGUAGE = os.getenv("DEFAULT_NOTION_LANGUAGE", "Chinese")
 DEFAULT_CATEGORY = os.getenv("DEFAULT_NOTION_CATEGORY", "KnowHow")
 DEFAULT_PUBLISH_STATUS = os.getenv("DEFAULT_PUBLISH_STATUS", "Draft")
 PLACEHOLDER_TITLES = {"文章标题", "untitled", "title", "new note"}
-TAG_ALIASES = {
-    "comfy-ui": "comfyui",
-    "paper": "paper-review",
-    "paperreview": "paper-review",
-}
 
 OBSIDIAN_VAULT_ROOT = Path(
     os.getenv(
@@ -92,49 +63,9 @@ def require_env() -> None:
         raise ValueError(f"请设置环境变量: {', '.join(missing)}")
 
 
-def notion_request(
-    method: str,
-    path: str,
-    params: Optional[dict] = None,
-    json_data: Optional[dict] = None,
-) -> dict:
-    url = NOTION_API_BASE + path
-    headers = {
-        "Authorization": f"Bearer {NOTION_TOKEN}",
-        "Notion-Version": NOTION_VERSION,
-        "Content-Type": "application/json",
-    }
-    max_retries = 3
-    for attempt in range(1, max_retries + 1):
-        try:
-            response = requests.request(
-                method,
-                url,
-                headers=headers,
-                params=params,
-                json=json_data,
-                timeout=60,
-            )
-            response.raise_for_status()
-            return response.json() if response.text else {}
-        except requests.exceptions.RequestException as exc:
-            retryable = isinstance(
-                exc,
-                (
-                    requests.exceptions.SSLError,
-                    requests.exceptions.ConnectionError,
-                    requests.exceptions.Timeout,
-                ),
-            )
-            print(f"[ERR] Notion request failed {method} {url} ({attempt}/{max_retries}): {exc}")
-            if hasattr(exc, "response") and exc.response is not None:
-                print(f"[ERR] Response: {exc.response.status_code} {exc.response.text}")
-            if not retryable or attempt == max_retries:
-                raise
-            wait_time = 2 ** attempt
-            print(f"[INF] 等待 {wait_time} 秒后重试...")
-            time.sleep(wait_time)
-    return {}
+def notion_request(method, path, params=None, json_data=None):
+    from publishing.http import notion_request as request
+    return request(NOTION_TOKEN, method, path, params=params, json_data=json_data)
 
 
 def get_database_schema() -> Dict[str, str]:
@@ -159,22 +90,6 @@ def first_value(values: Iterable[Any], default: str = "") -> str:
         if value is not None and str(value).strip():
             return str(value).strip()
     return default
-
-
-def normalize_tags(value: Any) -> List[str]:
-    if value is None:
-        return []
-    if isinstance(value, list):
-        raw_tags = value
-    else:
-        raw_tags = str(value).split(",")
-
-    tags = []
-    for item in raw_tags:
-        tag = str(item).strip().lower().replace("_", "-").replace(" ", "-")
-        if tag:
-            tags.append(TAG_ALIASES.get(tag, tag))
-    return tags
 
 
 def derive_title(md_path: Path, metadata: dict) -> str:
@@ -211,55 +126,10 @@ def image_folder_date(metadata: dict, md_path: Path) -> Optional[str]:
     return None
 
 
-def github_headers() -> dict:
-    return {
-        "Authorization": f"Bearer {CHECKOUT_TOKEN}",
-        "Accept": "application/vnd.github.v3+json",
-    }
-
-
-def upload_to_github(image_data: bytes, image_name: str, folder_date: Optional[str]) -> str:
-    file_hash = hashlib.md5(image_data).hexdigest()[:8]
-    ext = Path(image_name).suffix
-    if not ext:
-        ext = mimetypes.guess_extension("image/png") or ".png"
-
-    file_name = f"{file_hash}{ext}"
-    file_path = f"{folder_date}/{file_name}" if folder_date else file_name
-    raw_url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/{GITHUB_BRANCH}/{file_path}"
-
-    headers = github_headers()
-    check_url = f"{GITHUB_API_BASE}/repos/{GITHUB_REPO}/contents/{file_path}"
-    for attempt in range(1, 4):
-        try:
-            check_response = requests.get(check_url, headers=headers, timeout=30)
-            if check_response.status_code == 200:
-                print(f"[INF] 图片已存在: {file_path}")
-                return raw_url
-            if check_response.status_code != 404:
-                check_response.raise_for_status()
-
-            data = {
-                "message": f"Upload {image_name}",
-                "content": base64.b64encode(image_data).decode(),
-                "branch": GITHUB_BRANCH,
-            }
-            create_response = requests.put(
-                check_url,
-                headers=headers,
-                data=json.dumps(data),
-                timeout=30,
-            )
-            create_response.raise_for_status()
-            print(f"[INF] 图片已上传: {file_path}")
-            return raw_url
-        except requests.exceptions.RequestException as exc:
-            print(f"[ERR] 上传图片失败 ({attempt}/3): {image_name}: {exc}")
-            if attempt == 3:
-                raise
-            time.sleep(2**attempt)
-
-    raise RuntimeError(f"上传图片失败: {image_name}")
+def upload_to_github(image_data, image_name, folder_date):
+    from publishing.images import upload_image
+    return upload_image(image_data, image_name, folder_date,
+                        token=CHECKOUT_TOKEN, repo=GITHUB_REPO, branch=GITHUB_BRANCH)
 
 
 def is_remote_url(value: str) -> bool:
@@ -662,20 +532,6 @@ def build_properties(page_info: Dict[str, Any], schema: Dict[str, str]) -> dict:
     return properties
 
 
-def batched(items: List[dict], size: int = 100) -> Iterable[List[dict]]:
-    for index in range(0, len(items), size):
-        yield items[index : index + size]
-
-
-def append_blocks(page_id: str, blocks: List[dict]) -> None:
-    for batch in batched(blocks):
-        notion_request(
-            "patch",
-            f"/blocks/{page_id}/children",
-            json_data={"children": batch},
-        )
-
-
 def list_child_blocks(page_id: str) -> List[dict]:
     children = []
     has_more = True
@@ -706,17 +562,10 @@ def ensure_page_active(page_id: str) -> bool:
     return True
 
 
-def archive_existing_blocks(page_id: str) -> None:
-    for child in list_child_blocks(page_id):
-        if child.get("archived"):
-            continue
-        try:
-            notion_request("patch", f"/blocks/{child['id']}", json_data={"archived": True})
-        except requests.exceptions.HTTPError as exc:
-            if exc.response is not None and exc.response.status_code == 400:
-                print(f"[WARN] 跳过无法归档的 block: {child['id']}")
-                continue
-            raise
+def replace_page_content(page_id, blocks, properties):
+    from publishing.replace import replace_blocks
+    replace_blocks(page_id, blocks, properties, notion_request, list_child_blocks,
+                   REPO_ROOT / '.sync-state' / 'notion')
 
 
 def query_database(filter_body: dict) -> List[dict]:
@@ -781,9 +630,7 @@ def create_or_update_page(page_info: Dict[str, Any], blocks: List[dict], schema:
     notion_id = page_info.get("notion_id")
     if notion_id and ensure_page_active(notion_id):
         print(f"[INF] 更新 Notion 页面: {page_info['title']} ({notion_id})")
-        archive_existing_blocks(notion_id)
-        notion_request("patch", f"/pages/{notion_id}", json_data={"properties": properties})
-        append_blocks(notion_id, blocks)
+        replace_page_content(notion_id, blocks, properties)
         return notion_id
 
     if notion_id:
@@ -792,9 +639,7 @@ def create_or_update_page(page_info: Dict[str, Any], blocks: List[dict], schema:
         notion_id = find_existing_page_id(page_info, schema)
         if notion_id and ensure_page_active(notion_id):
             print(f"[INF] 更新已有 Notion 页面: {page_info['title']} ({notion_id})")
-            archive_existing_blocks(notion_id)
-            notion_request("patch", f"/pages/{notion_id}", json_data={"properties": properties})
-            append_blocks(notion_id, blocks)
+            replace_page_content(notion_id, blocks, properties)
             return notion_id
 
     print(f"[INF] 创建 Notion 页面: {page_info['title']}")
@@ -807,7 +652,12 @@ def create_or_update_page(page_info: Dict[str, Any], blocks: List[dict], schema:
         },
     )
     page_id = page["id"]
-    append_blocks(page_id, blocks)
+    try:
+        replace_page_content(page_id, blocks, properties)
+    except Exception:
+        # A failed new page must not remain an apparently publishable draft.
+        notion_request("patch", f"/pages/{page_id}", json_data={"archived": True})
+        raise
     return page_id
 
 
@@ -831,7 +681,7 @@ def write_sync_state(md_path: Path, post: frontmatter.Post, notion_id: str) -> N
         post.metadata["sync_to_notion"] = False
         changed = True
     if changed:
-        md_path.write_text(frontmatter.dumps(post), encoding="utf-8")
+        atomic_write(md_path, frontmatter.dumps(post))
         print(f"[INF] 已写回 notion_id，并关闭 sync_to_notion: {md_path}")
 
 

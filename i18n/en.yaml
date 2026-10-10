@@ -122,3 +122,27 @@
   translation: "Browse Topics"
 - id: sectionKnowhowEyebrow
   translation: "Technical Notes"
+
+- id: searchTitle
+  translation: "Search"
+
+- id: searchClose
+  translation: "Close search"
+
+- id: searchPlaceholder
+  translation: "Search titles, tags, or article text"
+
+- id: searchLoading
+  translation: "Loading search index…"
+
+- id: searchError
+  translation: "Search could not load. Please retry."
+
+- id: searchEmpty
+  translation: "No results found"
+
+- id: searchResults
+  translation: "Search results"
+
+- id: searchRetry
+  translation: "Retry"

@@ -1,0 +1,13 @@
+{{- $image := .Page.Resources.Get .Destination -}}
+{{- if and (not $image) (not (urls.Parse .Destination).IsAbs) -}}
+  {{- $image = resources.Get (printf "site-images/%s" (strings.TrimPrefix "/" .Destination)) -}}
+{{- end -}}
+{{- if and $image (in (slice "image/jpeg" "image/png" "image/webp") $image.MediaType.Type) -}}
+  {{- $small := $image.Fit "700x700 webp q80" -}}
+  {{- $large := $image.Fit "1400x1400 webp q80" -}}
+  <img src="{{ $large.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w{{ if ne $small.Width $large.Width }}, {{ $large.RelPermalink }} {{ $large.Width }}w{{ end }}"
+    sizes="(max-width: 768px) 100vw, 768px" width="{{ $large.Width }}" height="{{ $large.Height }}"
+    alt="{{ .Text | plainify }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async" />
+{{- else -}}
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text | plainify }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async" />
+{{- end -}}

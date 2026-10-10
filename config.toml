@@ -102,18 +102,6 @@ DefaultContentLanguageInSubdir = false
   # Enable search in header
   enableSearch = true
 
-  # Option to customize the search parameters of a page
-  # Below are the supported options; Note that including entire content
-  # may slowdown the loading of search results
-  # Title of page is included by default
-  searchKeys = [
-    "tags",
-    "date",
-    "categories",
-    "summary",
-    "content",
-    "link",
-  ]
   # Custom copyright - optional
   copyright = "Copyright © 2012 - Huizhi Xu · All rights reserved"
   favicon = "/huizhi-mark-logo-garden.png"
@@ -253,3 +241,11 @@ DefaultContentLanguageInSubdir = false
     noHl = false
     style = 'monokai'
     tabWidth = 4
+
+# Expose local images to Hugo processing without changing their existing URLs.
+[[module.mounts]]
+  source = "assets"
+  target = "assets"
+[[module.mounts]]
+  source = "static"
+  target = "assets/site-images"

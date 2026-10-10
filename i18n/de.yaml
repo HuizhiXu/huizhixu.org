@@ -147,3 +147,27 @@
   translation: "Themen durchsuchen"
 - id: sectionKnowhowEyebrow
   translation: "Technische Notizen"
+
+- id: searchTitle
+  translation: "Suche"
+
+- id: searchClose
+  translation: "Suche schließen"
+
+- id: searchPlaceholder
+  translation: "Titel, Tags oder Artikel durchsuchen"
+
+- id: searchLoading
+  translation: "Suchindex wird geladen…"
+
+- id: searchError
+  translation: "Suche konnte nicht geladen werden. Bitte erneut versuchen."
+
+- id: searchEmpty
+  translation: "Keine Ergebnisse"
+
+- id: searchResults
+  translation: "Suchergebnisse"
+
+- id: searchRetry
+  translation: "Erneut versuchen"

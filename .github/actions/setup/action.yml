@@ -1,0 +1,24 @@
+name: Setup blog tools
+description: Install the same Hugo, Node, and locked Python dependencies for checks and publishing.
+runs:
+  using: composite
+  steps:
+    - id: hugo-version
+      shell: bash
+      run: echo "version=$(cat .hugo-version)" >> "$GITHUB_OUTPUT"
+    - uses: peaceiris/actions-hugo@v3
+      with:
+        hugo-version: ${{ steps.hugo-version.outputs.version }}
+        extended: true
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: npm
+    - uses: actions/setup-python@v5
+      with:
+        python-version-file: .python-version
+    - shell: bash
+      run: |
+        npm ci
+        python -m pip install uv==0.9.17
+        uv sync --frozen

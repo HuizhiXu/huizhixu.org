@@ -25,7 +25,7 @@
   <link
     rel="stylesheet"
     href="{{ $styles.RelPermalink }}"
-    integrity=""
+    integrity="{{ $styles.Data.Integrity }}"
     crossorigin="anonymous"
   />
   {{ end -}}
@@ -52,5 +52,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Custom overrides -->
-  <link rel="stylesheet" href="/custom.css" />
+  {{ $custom := slice (resources.Get "css/tokens.css") (resources.Get "css/base-home.css") (resources.Get "css/article-components.css") (resources.Get "css/editorial.css") (resources.Get "css/life.css") (resources.Get "css/garden.css") | resources.Concat "css/custom.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $custom.RelPermalink }}" integrity="{{ $custom.Data.Integrity }}" />
 </head>

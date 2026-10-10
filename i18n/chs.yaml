@@ -145,3 +145,27 @@
   translation: "浏览话题"
 - id: sectionKnowhowEyebrow
   translation: "技术笔记"
+
+- id: searchTitle
+  translation: "搜索"
+
+- id: searchClose
+  translation: "关闭搜索"
+
+- id: searchPlaceholder
+  translation: "输入标题、标签或正文关键词"
+
+- id: searchLoading
+  translation: "正在加载搜索索引…"
+
+- id: searchError
+  translation: "搜索加载失败，请重试。"
+
+- id: searchEmpty
+  translation: "没有找到结果"
+
+- id: searchResults
+  translation: "搜索结果"
+
+- id: searchRetry
+  translation: "重试"
