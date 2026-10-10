@@ -3,6 +3,14 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
 const Fuse = require('../themes/blist/assets/js/fuse.min.js');
+const { matchesVersion } = require('../scripts/check_hugo.cjs');
+
+test('Hugo version check accepts release commit suffixes but rejects wrong versions and editions', () => {
+  assert.equal(matchesVersion('hugo v0.152.2+extended+withdeploy darwin/arm64', '0.152.2'), true);
+  assert.equal(matchesVersion('hugo v0.152.2-6abdacad3f3fe944ea42177844469139e81feda6+extended linux/amd64', '0.152.2'), true);
+  assert.equal(matchesVersion('hugo v0.152.2-6abdacad linux/amd64', '0.152.2'), false);
+  assert.equal(matchesVersion('hugo v0.135.0+extended linux/amd64', '0.152.2'), false);
+});
 
 function setup(fetch) {
   let document;
