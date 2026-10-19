@@ -317,7 +317,8 @@ def process_notion_page(page):
     content = convert_notion_blocks_to_markdown(page['id'], folder_date)
     path = save_markdown_file(page, content, folder_date)
     return {'id': page['id'], 'last_edited_time': page['last_edited_time'],
-            'path': path, 'sha256': hashlib.sha256((REPO_ROOT / path).read_bytes()).hexdigest()}
+            'path': path, 'sha256': hashlib.sha256((REPO_ROOT / path).read_bytes()).hexdigest(),
+            'published_date': datetime.now().astimezone().date().isoformat()}
 
 
 def _page_mention_id(page, property_name):
@@ -406,8 +407,8 @@ def finalize(manifest):
     if not state.get('complete'):
         raise ValueError('导出未完成，不能回写发布状态')
     failures = []
-    published_date = datetime.now().astimezone().date().isoformat()
     for entry in state['pages']:
+        published_date = entry.get('published_date') or datetime.now().astimezone().date().isoformat()
         try:
             path = (REPO_ROOT / entry['path']).resolve()
             if not path.is_relative_to((REPO_ROOT / 'content').resolve()):
