@@ -346,6 +346,8 @@ class PipelineTests(unittest.TestCase):
                 (root / 'post').mkdir()
                 (root / 'post/index.html').write_text('post')
                 check_manifest(root, manifest)
+                updated = json.loads(manifest.read_text())
+                self.assertEqual(updated['pages'][0]['permalink'], 'https://example.com/post/')
 
 
 if __name__ == '__main__':
