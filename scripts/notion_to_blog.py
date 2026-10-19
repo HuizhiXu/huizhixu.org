@@ -65,12 +65,18 @@ def notion_request(method, path, params=None, json_data=None):
     from publishing.http import notion_request as request
     return request(NOTION_TOKEN, method, path, params=params, json_data=json_data)
 
-def get_notion_pages() -> List[Dict[str, Any]]:
-    """从Notion数据库获取需要发布的文章页面
-    
-    Returns:
-        需要发布的页面列表
-    """
+def get_notion_pages(page_id=None) -> List[Dict[str, Any]]:
+    """Fetch pending Garden articles, optionally scoped to exactly one page ID."""
+    if page_id:
+        page = notion_request('get', f'/pages/{page_id}')
+        parent = page.get('parent') or {}
+        if parent.get('database_id') != DATABASE_ID and parent.get('data_source_id') != DATABASE_ID:
+            raise ValueError('指定页面不属于 Garden 发布数据库，停止发布')
+        status = (page.get('properties', {}).get('PublishStatus', {}).get('select') or {}).get('name')
+        if status not in {'Publish', 'Update'}:
+            raise ValueError(f'指定页面状态必须是 Publish 或 Update，当前为 {status or "未设置"}')
+        return [page]
+
     pages = []
     has_more = True
     next_cursor = None
@@ -345,6 +351,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description='Export Notion pages; finalize only after deployment succeeds.')
     parser.add_argument('--manifest', type=Path, default=REPO_ROOT / '.sync-state/publish.json')
+    parser.add_argument('--page-id', help='Process exactly one Garden page; refuses pages not in Publish/Update state')
     parser.add_argument('--finalize', action='store_true', help='Mark the manifest pages Published after a successful deployment')
     args = parser.parse_args()
     require_env()
@@ -354,7 +361,7 @@ def main():
     # Invalidate an earlier manifest before doing any work.
     atomic_write(args.manifest, json.dumps({'pages': [], 'complete': False}))
     exported, failures = [], []
-    for page in get_notion_pages():
+    for page in get_notion_pages(args.page_id):
         try:
             entry = process_notion_page(page)
             if entry:
