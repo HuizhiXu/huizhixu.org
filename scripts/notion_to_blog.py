@@ -70,7 +70,8 @@ def get_notion_pages(page_id=None) -> List[Dict[str, Any]]:
     if page_id:
         page = notion_request('get', f'/pages/{page_id}')
         parent = page.get('parent') or {}
-        if parent.get('database_id') != DATABASE_ID and parent.get('data_source_id') != DATABASE_ID:
+        parent_id = parent.get('database_id') or parent.get('data_source_id')
+        if str(parent_id or '').replace('-', '').lower() != str(DATABASE_ID or '').replace('-', '').lower():
             raise ValueError('指定页面不属于 Garden 发布数据库，停止发布')
         status = (page.get('properties', {}).get('PublishStatus', {}).get('select') or {}).get('name')
         if status not in {'Publish', 'Update'}:
