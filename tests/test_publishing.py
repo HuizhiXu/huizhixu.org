@@ -247,7 +247,7 @@ class PublishTests(unittest.TestCase):
         path.write_text('article')
         manifest = self.root / 'publish.json'
         manifest.write_text(json.dumps({'complete': True, 'pages': [{'id': 'page', 'last_edited_time': 'v1',
-            'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}]}))
+            'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'permalink': 'https://example.com/article/'}]}))
         return manifest
 
     def test_export_does_not_mark_published(self):
