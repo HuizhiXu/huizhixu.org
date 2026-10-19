@@ -112,6 +112,14 @@ class BridgeTests(unittest.TestCase):
             bridge.stage_one(call, SOURCE, WORKS, GARDEN)
         self.assertEqual(writes, [])
 
+    def test_reject_missing_platform(self):
+        src = source()
+        src["properties"]["发布平台"] = {"select": None}
+        call, writes = self.request([], source_page=src)
+        with self.assertRaisesRegex(ValueError, "explicitly labeled blog draft"):
+            bridge.stage_one(call, SOURCE, WORKS, GARDEN)
+        self.assertEqual(writes, [])
+
     def test_paginated_lookup(self):
         call, writes = self.request([garden(linked=SOURCE), garden(linked=SOURCE)],
                                     paginated=True)
