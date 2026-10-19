@@ -156,23 +156,28 @@ class PublishScopeTests(unittest.TestCase):
                 "properties": {"PublishStatus": {"select": {"name": status}}}}
 
     def test_page_id_fetches_only_that_page(self):
-        with patch.object(blog, "DATABASE_ID", "garden-db"), \\
-             patch.object(blog, "notion_request", return_value=self.page()) as request:
+        with (
+            patch.object(blog, "DATABASE_ID", "garden-db"),
+            patch.object(blog, "notion_request", return_value=self.page()) as request,
+        ):
             self.assertEqual(blog.get_notion_pages("only-page"), [self.page()])
         request.assert_called_once_with("get", "/pages/only-page")
 
     def test_page_id_rejects_non_publish_status(self):
-        with patch.object(blog, "DATABASE_ID", "garden-db"), \\
-             patch.object(blog, "notion_request", return_value=self.page(status="Draft")):
+        with (
+            patch.object(blog, "DATABASE_ID", "garden-db"),
+            patch.object(blog, "notion_request", return_value=self.page(status="Draft")),
+        ):
             with self.assertRaisesRegex(ValueError, "Publish 或 Update"):
                 blog.get_notion_pages("only-page")
 
     def test_page_id_rejects_page_outside_garden(self):
-        with patch.object(blog, "DATABASE_ID", "garden-db"), \\
-             patch.object(blog, "notion_request", return_value=self.page(parent={"database_id": "other-db"})):
+        with (
+            patch.object(blog, "DATABASE_ID", "garden-db"),
+            patch.object(blog, "notion_request", return_value=self.page(parent={"database_id": "other-db"})),
+        ):
             with self.assertRaisesRegex(ValueError, "不属于 Garden"):
                 blog.get_notion_pages("only-page")
-
 
 class PublishTests(unittest.TestCase):
     def setUp(self):
