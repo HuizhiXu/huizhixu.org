@@ -7,8 +7,6 @@ on:
         description: 'Export pending Notion articles before deploying'
         type: boolean
         default: false
-  issues:
-    types: [opened]
 
 permissions:
   contents: read
@@ -19,9 +17,7 @@ concurrency:
 
 jobs:
   notion-to-blog:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.issue.user.login == github.repository_owner && contains(github.event.issue.title, 'notion-ci'))
+    if: github.event_name == 'workflow_dispatch' && inputs.sync_notion && github.ref == 'refs/heads/publish/long-goodbye-v1-20261019'
     runs-on: ubuntu-latest
     env:
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -40,7 +36,28 @@ jobs:
         run: npm test
       - name: Export Notion pages
         if: github.event_name == 'issues' || inputs.sync_notion
-        run: uv run --frozen python scripts/notion_to_blog.py
+        run: |
+          uv run --frozen python - <<'PY'
+          import sys, json
+          sys.path.insert(0, 'scripts')
+          import notion_to_blog as n
+          n.require_env()
+          target = '3fea221e-f6ab-814b-9675-d0524232839c'
+          pending = n.get_notion_pages()
+          if len(pending) != 1 or pending[0]['id'] != target:
+              raise RuntimeError('Pending list changed; refusing any batch publication')
+          page = pending[0]
+          filename = ''.join(t['plain_text'] for t in page['properties']['MDFilename']['rich_text'])
+          if filename != 'the-long-goodbye-v1.md':
+              raise RuntimeError('Unexpected filename')
+          # Garden body was verified identical to Creation V1. Do not change the stored relation.
+          page['properties']['Article'] = {'rich_text': []}
+          entry = n.process_notion_page(page)
+          if entry['path'] != 'content/chs/life/the-long-goodbye-v1.md':
+              raise RuntimeError('Unexpected content path')
+          n.atomic_write(n.REPO_ROOT / '.sync-state/publish.json', json.dumps({'pages': [entry], 'complete': True}, ensure_ascii=False, indent=2))
+          print('Exported exactly one V1 article; Notion callback intentionally deferred until live verification.')
+          PY
       - name: Build and validate site
         run: |
           npm run build
@@ -53,7 +70,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add content/
+          git add content/chs/life/the-long-goodbye-v1.md
           if ! git diff --cached --quiet; then
             git commit -m "Publish blog content from Notion"
           fi
@@ -70,9 +87,6 @@ jobs:
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
           enable_jekyll: false
-      - name: Mark deployed pages Published
-        if: github.event_name == 'issues' || inputs.sync_notion
-        run: uv run --frozen python scripts/notion_to_blog.py --finalize
       - name: Preserve publishing manifest
         if: always()
         uses: actions/upload-artifact@v4
