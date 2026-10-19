@@ -320,11 +320,87 @@ def process_notion_page(page):
             'path': path, 'sha256': hashlib.sha256((REPO_ROOT / path).read_bytes()).hexdigest()}
 
 
+def _page_mention_id(page, property_name):
+    for item in page.get('properties', {}).get(property_name, {}).get('rich_text', []):
+        mention = item.get('mention') or {}
+        if item.get('type') == 'mention' and mention.get('type') == 'page':
+            return mention.get('page', {}).get('id')
+    return None
+
+
+def _notion_title(value):
+    return {'title': [{'type': 'text', 'text': {'content': value}}]}
+
+
+def _sync_creation_publication(source_id, permalink, published_date):
+    """Idempotently update the Creation blog row and its Publishing record."""
+    creation_database_id = os.getenv('CREATION_DATABASE_ID')
+    publishing_database_id = os.getenv('PUBLISHING_DATABASE_ID')
+    if not creation_database_id or not publishing_database_id:
+        raise ValueError('Creation callback requires CREATION_DATABASE_ID and PUBLISHING_DATABASE_ID')
+
+    source = notion_request('get', f'/pages/{source_id}')
+    parent = source.get('parent') or {}
+    source_parent = parent.get('database_id') or parent.get('data_source_id')
+    if str(source_parent).replace('-', '').lower() != str(creation_database_id).replace('-', '').lower():
+        raise ValueError('Garden Article mention points outside the configured Creation database')
+    props = source.get('properties', {})
+    platform = (props.get('发布平台', {}).get('select') or {}).get('name')
+    if platform != '个人博客':
+        raise ValueError('Refusing to write blog publication results to a non-blog Creation row')
+
+    notion_request('patch', f'/pages/{source_id}', json_data={'properties': {
+        '进度': {'select': {'name': '已发布'}},
+        '发布日期': {'date': {'start': published_date}},
+        '发布链接': {'url': permalink},
+    }})
+
+    # Find an existing Publishing record by the linked Works page, creating one
+    # only if none exists. This keeps callbacks safe to retry after partial errors.
+    records, cursor = [], None
+    while True:
+        payload = {'page_size': 100}
+        if cursor:
+            payload['start_cursor'] = cursor
+        response = notion_request('post', f'/databases/{publishing_database_id}/query', json_data=payload)
+        records.extend(response.get('results', []))
+        if not response.get('has_more'):
+            break
+        cursor = response.get('next_cursor')
+        if not cursor:
+            raise RuntimeError('Publishing pagination is incomplete; refusing to create a duplicate')
+    linked = []
+    for record in records:
+        relations = record.get('properties', {}).get('对应稿件', {}).get('relation', [])
+        if any(str(item.get('id', '')).replace('-', '').lower() == str(source_id).replace('-', '').lower()
+               for item in relations):
+            linked.append(record)
+    if len(linked) > 1:
+        raise ValueError('Multiple Publishing records link to this Creation row; fix duplicates first')
+
+    record_props = {
+        '记录': _notion_title(property_text(source, '作品') + '｜博客发布'),
+        '对应稿件': {'relation': [{'id': source_id}]},
+        '平台': {'select': {'name': '个人博客'}},
+        '状态': {'select': {'name': '已发布'}},
+        '发布日期': {'date': {'start': published_date}},
+        '发布链接': {'url': permalink},
+    }
+    if linked:
+        notion_request('patch', f"/pages/{linked[0]['id']}", json_data={'properties': record_props})
+    else:
+        notion_request('post', '/pages', json_data={
+            'parent': {'database_id': publishing_database_id},
+            'properties': record_props,
+        })
+
+
 def finalize(manifest):
     state = json.loads(manifest.read_text(encoding='utf-8'))
     if not state.get('complete'):
         raise ValueError('导出未完成，不能回写发布状态')
     failures = []
+    published_date = datetime.now().astimezone().date().isoformat()
     for entry in state['pages']:
         try:
             path = (REPO_ROOT / entry['path']).resolve()
@@ -332,19 +408,28 @@ def finalize(manifest):
                 raise ValueError('Invalid manifest content path')
             if hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
                 raise ValueError('导出的文件已变化，不能标记发布成功')
+            permalink = entry.get('permalink')
+            if not permalink:
+                raise ValueError('Manifest lacks a verified permalink; rebuild and validate before callback')
             page = notion_request('get', f"/pages/{entry['id']}")
             status = (page['properties'].get('PublishStatus', {}).get('select') or {}).get('name')
-            if status == 'Published':
-                continue
-            if page['last_edited_time'] != entry['last_edited_time'] or status not in {'Publish', 'Update'}:
-                raise ValueError('导出后 Notion 页面发生变化，保留当前状态等待下次发布')
-            notion_request('patch', f"/pages/{entry['id']}", json_data={
-                'properties': {'PublishStatus': {'select': {'name': 'Published'}}}})
+            if status != 'Published':
+                if page['last_edited_time'] != entry['last_edited_time'] or status not in {'Publish', 'Update'}:
+                    raise ValueError('导出后 Notion 页面发生变化，保留当前状态等待下次发布')
+
+            source_id = _page_mention_id(page, 'Article')
+            if source_id:
+                _sync_creation_publication(source_id, permalink, published_date)
+
+            # Mark Garden Published last, so a failed callback remains retryable.
+            if status != 'Published':
+                notion_request('patch', f"/pages/{entry['id']}", json_data={
+                    'properties': {'PublishStatus': {'select': {'name': 'Published'}}}})
         except Exception as exc:
             failures.append(entry['id'])
             print(f"[ERR] 回写失败 {entry['id']}: {exc}")
     if failures:
-        raise RuntimeError(f'{len(failures)} 个页面未回写，请重新运行发布流程')
+        raise RuntimeError(f'{len(failures)} 个页面未完成发布结果回写，请重新运行发布流程')
 
 
 def main():
