@@ -213,6 +213,16 @@ class CreationCallbackTests(unittest.TestCase):
         self.assertEqual(props["状态"]["select"]["name"], "已发布")
         self.assertEqual(props["对应稿件"]["relation"][0]["id"], "source-page")
 
+    def test_callback_ignores_legacy_source_outside_creation(self):
+        legacy = {"id": "old-page", "parent": {"database_id": "obsidian-import-db"},
+                  "properties": {}}
+        with (
+            patch.dict("os.environ", {"CREATION_DATABASE_ID": "works-db"}, clear=True),
+            patch.object(blog, "notion_request", return_value=legacy) as request,
+        ):
+            self.assertFalse(blog._sync_creation_publication("old-page", "https://example.test/", "2026-10-19"))
+        request.assert_called_once_with("get", "/pages/old-page")
+
     def test_callback_rejects_non_blog_creation_page(self):
         source = {"id": "source-page", "parent": {"database_id": "works-db"},
                   "properties": {"作品": {"title": [{"plain_text": "X"}]},
