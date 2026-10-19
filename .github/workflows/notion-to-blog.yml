@@ -44,7 +44,7 @@ jobs:
       - name: Test publishing tools
         run: npm test
       - name: Export Notion pages
-        if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != '' || inputs.source_page_id != ''
+        if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != ''
         env:
           SOURCE_PAGE_ID: ${{ inputs.source_page_id }}
         run: |
@@ -62,7 +62,7 @@ jobs:
           npm run build
           uv run --frozen python scripts/check_site.py public
       - name: Validate exported articles
-        if: github.event_name == 'issues' || inputs.sync_notion
+        if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != ''
         run: uv run --frozen python scripts/check_site.py public --manifest .sync-state/publish.json
       - name: Commit exported content
         if: github.event_name == 'issues' || inputs.sync_notion
