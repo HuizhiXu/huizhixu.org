@@ -31,6 +31,8 @@ jobs:
     env:
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
       NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      CREATION_DATABASE_ID: 7bd26a58-a03a-4e30-9d58-ef975846c6b3
+      PUBLISHING_DATABASE_ID: 0528ce53-d504-4cf3-b27f-c9dd06597397
       CHECKOUT_TOKEN: ${{ secrets.CHECKOUT_TOKEN }}
       GITHUB_REPO: HuizhiXu/pictures
       GITHUB_BRANCH: master
