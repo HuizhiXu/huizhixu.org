@@ -179,6 +179,51 @@ class PublishScopeTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "不属于 Garden"):
                 blog.get_notion_pages("only-page")
 
+class CreationCallbackTests(unittest.TestCase):
+    def test_callback_updates_creation_and_creates_publishing_record(self):
+        source = {
+            "id": "source-page",
+            "parent": {"database_id": "works-db"},
+            "properties": {
+                "作品": {"title": [{"plain_text": "Test Blog"}]},
+                "发布平台": {"select": {"name": "个人博客"}},
+            },
+        }
+        calls = []
+        def request(method, path, **kwargs):
+            calls.append((method, path, kwargs.get("json_data")))
+            if method == "get" and path == "/pages/source-page":
+                return source
+            if method == "post" and path == "/databases/publishing-db/query":
+                return {"results": [], "has_more": False}
+            if method == "post" and path == "/pages":
+                return {"id": "publishing-record"}
+            if method == "patch" and path == "/pages/source-page":
+                return {"id": "source-page"}
+            raise AssertionError((method, path, kwargs))
+        with patch.dict("os.environ", {
+            "CREATION_DATABASE_ID": "works-db",
+            "PUBLISHING_DATABASE_ID": "publishing-db",
+        }), patch.object(blog, "notion_request", side_effect=request):
+            blog._sync_creation_publication("source-page", "https://example.test/blog/", "2026-10-19")
+        self.assertIn(("patch", "/pages/source-page", unittest.mock.ANY), calls)
+        created = next(item for item in calls if item[0] == "post" and item[1] == "/pages")
+        props = created[2]["properties"]
+        self.assertEqual(props["发布链接"]["url"], "https://example.test/blog/")
+        self.assertEqual(props["状态"]["select"]["name"], "已发布")
+        self.assertEqual(props["对应稿件"]["relation"][0]["id"], "source-page")
+
+    def test_callback_rejects_non_blog_creation_page(self):
+        source = {"id": "source-page", "parent": {"database_id": "works-db"},
+                  "properties": {"作品": {"title": [{"plain_text": "X"}]},
+                                 "发布平台": {"select": {"name": "小红书"}}}}
+        with patch.dict("os.environ", {"CREATION_DATABASE_ID": "works-db",
+                                      "PUBLISHING_DATABASE_ID": "publishing-db"}), \\
+             patch.object(blog, "notion_request", return_value=source):
+            with self.assertRaisesRegex(ValueError, "non-blog"):
+                blog._sync_creation_publication("source-page", "https://example.test/", "2026-10-19")
+
+
 class PublishTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
