@@ -379,7 +379,7 @@ def _sync_creation_publication(source_id, permalink, published_date):
         raise ValueError('Multiple Publishing records link to this Creation row; fix duplicates first')
 
     record_props = {
-        '记录': _notion_title(property_text(source, '作品') + '｜博客发布'),
+        '记录': _notion_title(''.join(part.get('plain_text', '') for part in source.get('properties', {}).get('作品', {}).get('title', [])) + '｜博客发布'),
         '对应稿件': {'relation': [{'id': source_id}]},
         '平台': {'select': {'name': '个人博客'}},
         '状态': {'select': {'name': '已发布'}},
