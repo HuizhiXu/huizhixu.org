@@ -150,6 +150,92 @@ class ReplacementTests(unittest.TestCase):
         self.assertTrue((Path(self.temp.name) / 'page.json').exists())
 
 
+class PublishScopeTests(unittest.TestCase):
+    def page(self, status="Publish", parent=None):
+        return {"id": "only-page", "parent": parent or {"database_id": "garden-db"},
+                "properties": {"PublishStatus": {"select": {"name": status}}}}
+
+    def test_page_id_fetches_only_that_page(self):
+        with (
+            patch.object(blog, "DATABASE_ID", "garden-db"),
+            patch.object(blog, "notion_request", return_value=self.page()) as request,
+        ):
+            self.assertEqual(blog.get_notion_pages("only-page"), [self.page()])
+        request.assert_called_once_with("get", "/pages/only-page")
+
+    def test_page_id_rejects_non_publish_status(self):
+        with (
+            patch.object(blog, "DATABASE_ID", "garden-db"),
+            patch.object(blog, "notion_request", return_value=self.page(status="Draft")),
+        ):
+            with self.assertRaisesRegex(ValueError, "Publish 或 Update"):
+                blog.get_notion_pages("only-page")
+
+    def test_page_id_rejects_page_outside_garden(self):
+        with (
+            patch.object(blog, "DATABASE_ID", "garden-db"),
+            patch.object(blog, "notion_request", return_value=self.page(parent={"database_id": "other-db"})),
+        ):
+            with self.assertRaisesRegex(ValueError, "不属于 Garden"):
+                blog.get_notion_pages("only-page")
+
+class CreationCallbackTests(unittest.TestCase):
+    def test_callback_updates_creation_and_creates_publishing_record(self):
+        source = {
+            "id": "source-page",
+            "parent": {"database_id": "works-db"},
+            "properties": {
+                "作品": {"title": [{"plain_text": "Test Blog"}]},
+                "发布平台": {"select": {"name": "个人博客"}},
+            },
+        }
+        calls = []
+        def request(method, path, **kwargs):
+            calls.append((method, path, kwargs.get("json_data")))
+            if method == "get" and path == "/pages/source-page":
+                return source
+            if method == "post" and path == "/databases/publishing-db/query":
+                return {"results": [], "has_more": False}
+            if method == "post" and path == "/pages":
+                return {"id": "publishing-record"}
+            if method == "patch" and path == "/pages/source-page":
+                return {"id": "source-page"}
+            raise AssertionError((method, path, kwargs))
+        with patch.dict("os.environ", {
+            "CREATION_DATABASE_ID": "works-db",
+            "PUBLISHING_DATABASE_ID": "publishing-db",
+        }), patch.object(blog, "notion_request", side_effect=request):
+            blog._sync_creation_publication("source-page", "https://example.test/blog/", "2026-10-19")
+        self.assertIn(("patch", "/pages/source-page", unittest.mock.ANY), calls)
+        created = next(item for item in calls if item[0] == "post" and item[1] == "/pages")
+        props = created[2]["properties"]
+        self.assertEqual(props["发布链接"]["url"], "https://example.test/blog/")
+        self.assertEqual(props["状态"]["select"]["name"], "已发布")
+        self.assertEqual(props["对应稿件"]["relation"][0]["id"], "source-page")
+
+    def test_callback_ignores_legacy_source_outside_creation(self):
+        legacy = {"id": "old-page", "parent": {"database_id": "obsidian-import-db"},
+                  "properties": {}}
+        with (
+            patch.dict("os.environ", {"CREATION_DATABASE_ID": "works-db"}, clear=True),
+            patch.object(blog, "notion_request", return_value=legacy) as request,
+        ):
+            self.assertFalse(blog._sync_creation_publication("old-page", "https://example.test/", "2026-10-19"))
+        request.assert_called_once_with("get", "/pages/old-page")
+
+    def test_callback_rejects_non_blog_creation_page(self):
+        source = {"id": "source-page", "parent": {"database_id": "works-db"},
+                  "properties": {"作品": {"title": [{"plain_text": "X"}]},
+                                 "发布平台": {"select": {"name": "小红书"}}}}
+        with (
+            patch.dict("os.environ", {"CREATION_DATABASE_ID": "works-db",
+                      "PUBLISHING_DATABASE_ID": "publishing-db"}),
+            patch.object(blog, "notion_request", return_value=source),
+        ):
+            with self.assertRaisesRegex(ValueError, "non-blog"):
+                blog._sync_creation_publication("source-page", "https://example.test/", "2026-10-19")
+
+
 class PublishTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -171,7 +257,7 @@ class PublishTests(unittest.TestCase):
         path.write_text('article')
         manifest = self.root / 'publish.json'
         manifest.write_text(json.dumps({'complete': True, 'pages': [{'id': 'page', 'last_edited_time': 'v1',
-            'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}]}))
+            'path': str(path.relative_to(self.root)), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'permalink': 'https://example.com/article/'}]}))
         return manifest
 
     def test_export_does_not_mark_published(self):
@@ -270,6 +356,8 @@ class PipelineTests(unittest.TestCase):
                 (root / 'post').mkdir()
                 (root / 'post/index.html').write_text('post')
                 check_manifest(root, manifest)
+                updated = json.loads(manifest.read_text())
+                self.assertEqual(updated['pages'][0]['permalink'], 'https://example.com/post/')
 
 
 if __name__ == '__main__':
