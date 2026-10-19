@@ -48,8 +48,8 @@ def check_source(source, expected_database_id):
     if not title:
         raise ValueError("Creation page must have a 作品 title")
     platform = property_select(source, "发布平台")
-    if platform not in (None, "个人博客"):
-        raise ValueError("This bridge accepts only a blog draft, not a social-media version")
+    if platform != "个人博客":
+        raise ValueError("This bridge accepts only an explicitly labeled blog draft")
     language = {"中文": "Chinese", "英文": "English", "德文": "German"}.get(
         property_select(source, "语言"), "Chinese"
     )
@@ -82,14 +82,18 @@ def resolve_garden_page(garden_pages, source_id, title):
                if canonical_id(source_id) in source_mentions(page)]
     if len(matches) > 1:
         raise ValueError("Multiple Garden pages reference this Creation page; fix duplicates first")
+    # The source can already be linked, but its title may now collide with
+    # another Garden post. Never overwrite the other post's output path.
+    candidates = [page for page in garden_pages if property_text(page, "Title") == title]
     if matches:
         page = matches[0]
+        if any(other["id"] != page["id"] for other in candidates):
+            raise ValueError("A different Garden page already uses this title")
         if property_select(page, "PublishStatus") != "Draft":
             raise ValueError("Refusing to edit a non-Draft Garden page")
         return page
     # Old Garden posts have no Creation link; never silently duplicate one.
-    same_title = [page for page in garden_pages if property_text(page, "Title") == title]
-    if same_title:
+    if candidates:
         raise ValueError("A Garden article with the same title already exists; link it manually")
     return None
 
