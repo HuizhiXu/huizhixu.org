@@ -44,7 +44,7 @@ def check_manifest(root, manifest):
         entry["permalink"] = pages[entry["path"]]
     # Persist the verified permalink so post-deploy callbacks can write the
     # exact public URL back to Notion rather than reconstructing it from a slug.
-    Path(manifest).write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    Path(manifest).write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def check(root):
