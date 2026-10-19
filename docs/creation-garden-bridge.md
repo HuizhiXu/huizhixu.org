@@ -50,11 +50,24 @@ dereference this kind of Article mention.
 Garden blog exporter would read. The existing Garden status must stay Draft
 until the later publishing integration is built and verified.
 
+## Single-article deploy path (experimental)
+
+The existing `.github/workflows/notion-to-blog.yml` now accepts a
+`source_page_id` input in manual workflow dispatch. When supplied, the exporter
+fetches exactly that Garden page and refuses to proceed unless it belongs to
+Garden and its status is `Publish` or `Update`. The export manifest then
+contains only that page, so validation and finalization are scoped to it.
+The legacy bulk mode remains unchanged when `source_page_id` is empty.
+
+This is still a **manual GitHub Actions control**, not a Notion button. Do not
+enter a Creation Works page ID here: first stage the Creation page as a Garden
+Draft, review it, and only then set that Garden page to `Publish` or `Update`.
+Never use the bulk `sync_notion` option for this single-page test.
+
 ## Not included yet
 
-- A Creation publish button/approval mechanism
-- A single-article scoped GitHub Actions deployment
-- Automatic publishing status/result/URL callbacks to Publishing
+- A Creation publish button/approval mechanism that safely triggers the workflow
+- Automatic Publishing / Works status, URL and date callbacks after deployment
 - Production validation of image uploads, markdown formatting and rollback
 
 Do **not** use the normal `notion-ci` issue trigger as a test of this bridge.
