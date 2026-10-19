@@ -41,6 +41,10 @@ def check_manifest(root, manifest):
         path = Path(root) / unquote(urlparse(pages[entry['path']]).path.lstrip('/'))
         if not ((path / 'index.html').is_file() or path.is_file()):
             raise ValueError(f"导出文章缺少构建产物: {path}")
+        entry["permalink"] = pages[entry["path"]]
+    # Persist the verified permalink so post-deploy callbacks can write the
+    # exact public URL back to Notion rather than reconstructing it from a slug.
+    Path(manifest).write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
 
 
 def check(root):
