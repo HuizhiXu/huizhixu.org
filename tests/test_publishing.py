@@ -217,9 +217,11 @@ class CreationCallbackTests(unittest.TestCase):
         source = {"id": "source-page", "parent": {"database_id": "works-db"},
                   "properties": {"作品": {"title": [{"plain_text": "X"}]},
                                  "发布平台": {"select": {"name": "小红书"}}}}
-        with patch.dict("os.environ", {"CREATION_DATABASE_ID": "works-db",
-                                      "PUBLISHING_DATABASE_ID": "publishing-db"}), \\
-             patch.object(blog, "notion_request", return_value=source):
+        with (
+            patch.dict("os.environ", {"CREATION_DATABASE_ID": "works-db",
+                      "PUBLISHING_DATABASE_ID": "publishing-db"}),
+            patch.object(blog, "notion_request", return_value=source),
+        ):
             with self.assertRaisesRegex(ValueError, "non-blog"):
                 blog._sync_creation_publication("source-page", "https://example.test/", "2026-10-19")
 
