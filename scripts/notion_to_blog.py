@@ -333,17 +333,22 @@ def _notion_title(value):
 
 
 def _sync_creation_publication(source_id, permalink, published_date):
-    """Idempotently update the Creation blog row and its Publishing record."""
+    """Idempotently update a Creation blog row; ignore legacy non-Creation mentions."""
     creation_database_id = os.getenv('CREATION_DATABASE_ID')
-    publishing_database_id = os.getenv('PUBLISHING_DATABASE_ID')
-    if not creation_database_id or not publishing_database_id:
-        raise ValueError('Creation callback requires CREATION_DATABASE_ID and PUBLISHING_DATABASE_ID')
+    if not creation_database_id:
+        raise ValueError('Creation callback requires CREATION_DATABASE_ID')
 
     source = notion_request('get', f'/pages/{source_id}')
     parent = source.get('parent') or {}
     source_parent = parent.get('database_id') or parent.get('data_source_id')
     if str(source_parent).replace('-', '').lower() != str(creation_database_id).replace('-', '').lower():
-        raise ValueError('Garden Article mention points outside the configured Creation database')
+        # Older Garden pages may point at Obsidian/source pages. Preserve the
+        # legacy publishing flow; only Works pages get Creation callbacks.
+        return False
+
+    publishing_database_id = os.getenv('PUBLISHING_DATABASE_ID')
+    if not publishing_database_id:
+        raise ValueError('Creation callback requires PUBLISHING_DATABASE_ID')
     props = source.get('properties', {})
     platform = (props.get('发布平台', {}).get('select') or {}).get('name')
     if platform != '个人博客':
@@ -393,6 +398,7 @@ def _sync_creation_publication(source_id, permalink, published_date):
             'parent': {'database_id': publishing_database_id},
             'properties': record_props,
         })
+    return True
 
 
 def finalize(manifest):
