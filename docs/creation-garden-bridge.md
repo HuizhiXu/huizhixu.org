@@ -11,9 +11,10 @@ dry-run.
 ## Prerequisites
 
 Existing local blog Python environment and `.env` credentials:
-- `NOTION_TOKEN`: integration with access to both databases and both source pages
+- `NOTION_TOKEN`: a Notion integration shared with **Garden, Works and Publishing** (it needs read/write access to all three databases and the article pages)
 - `NOTION_DATABASE_ID`: existing Garden publication database ID
-- `CREATION_DATABASE_ID`: **Works data source/database ID** (single-source Works DB)
+- `CREATION_DATABASE_ID`: Works database ID
+- `PUBLISHING_DATABASE_ID`: Publishing database ID
 
 In this workspace the Works database ID is
 `7bd26a58-a03a-4e30-9d58-ef975846c6b3`.
