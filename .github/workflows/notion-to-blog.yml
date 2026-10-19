@@ -65,7 +65,7 @@ jobs:
         if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != ''
         run: uv run --frozen python scripts/check_site.py public --manifest .sync-state/publish.json
       - name: Commit exported content
-        if: github.event_name == 'issues' || inputs.sync_notion
+        if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != ''
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -87,7 +87,7 @@ jobs:
           user_email: github-actions[bot]@users.noreply.github.com
           enable_jekyll: false
       - name: Mark deployed pages Published
-        if: github.event_name == 'issues' || inputs.sync_notion
+        if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != ''
         run: uv run --frozen python scripts/notion_to_blog.py --finalize
       - name: Preserve publishing manifest
         if: always()
