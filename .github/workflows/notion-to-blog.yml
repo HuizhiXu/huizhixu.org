@@ -4,9 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       sync_notion:
-        description: 'Export pending Notion articles before deploying'
+        description: 'Export all pending Garden articles before deploying (legacy mode)'
         type: boolean
         default: false
+      source_page_id:
+        description: 'Publish exactly one Garden page UUID (must be in Publish or Update state)'
+        type: string
+        required: false
+        default: ''
   issues:
     types: [opened]
 
@@ -39,8 +44,19 @@ jobs:
       - name: Test publishing tools
         run: npm test
       - name: Export Notion pages
-        if: github.event_name == 'issues' || inputs.sync_notion
-        run: uv run --frozen python scripts/notion_to_blog.py
+        if: github.event_name == 'issues' || inputs.sync_notion || inputs.source_page_id != '' || inputs.source_page_id != ''
+        env:
+          SOURCE_PAGE_ID: ${{ inputs.source_page_id }}
+        run: |
+          if [ -n "$SOURCE_PAGE_ID" ]; then
+            if ! [[ "$SOURCE_PAGE_ID" =~ ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$ ]]; then
+              echo 'source_page_id must be a UUID' >&2
+              exit 1
+            fi
+            uv run --frozen python scripts/notion_to_blog.py --page-id "$SOURCE_PAGE_ID"
+          else
+            uv run --frozen python scripts/notion_to_blog.py
+          fi
       - name: Build and validate site
         run: |
           npm run build
