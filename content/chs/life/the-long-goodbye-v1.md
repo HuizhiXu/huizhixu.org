@@ -1,5 +1,5 @@
 ---
-date: '2026-10-19T10:03:17.388134'
+date: '2026-10-19'
 description: ''
 notion_id: 3fea221e-f6ab-814b-9675-d0524232839c
 tags: []
