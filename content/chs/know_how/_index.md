@@ -1,4 +1,4 @@
 ---
 author: Huizhi Xu
-title: KNOW HOW
+title: 技术笔记
 ---

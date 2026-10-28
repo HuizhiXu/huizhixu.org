@@ -1,47 +1,23 @@
 {{ define "main" }}
-  {{- partial "intro.html" . -}}
-
-  {{ $frontBundle := .Site.Params.frontBundle | default "know_how" }}
-  {{ $posts := where .Site.RegularPages.ByDate.Reverse "Type" $frontBundle }}
-  <section class="home-writing reveal-section container max-w-5xl mx-auto px-6 py-12 lg:py-16">
-    <header class="home-section-heading">
-      <div>
-        <span class="home-eyebrow">{{ i18n "homeLatestEyebrow" }}</span>
-        <h2>{{ i18n "homeLatestTitle" }}</h2>
-      </div>
-      <p>{{ i18n "homeLatestDescription" }}</p>
-    </header>
-
-    {{ if $posts }}
-    <div class="home-article-list">
-      {{ range first 7 $posts }}
-      <article class="home-article-row">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ partial "date.html" (dict "date" .Date "language" $.Page.Language "format" "short") }}
-        </time>
-        <div class="home-article-copy">
-          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-          {{ with .Description }}<p>{{ . }}</p>{{ end }}
-          {{ with .Params.tags }}
-          <div class="home-article-tags">
-            {{ range first 3 . }}<span>{{ . }}</span>{{ end }}
-          </div>
-          {{ end }}
-        </div>
-        <a class="home-article-arrow" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">&#8599;</a>
-      </article>
-      {{ end }}
-    </div>
-
-    {{ if gt (len $posts) 7 }}
-    <div class="home-writing-more">
-      <a href="{{ (index (.Site.Menus.main) 0).URL | relLangURL }}" class="home-more-link">
-        {{ i18n "morePosts" }} <span aria-hidden="true">&#8594;</span>
-      </a>
-    </div>
-    {{ end }}
-    {{ else }}
-      <div class="home-empty-note">{{ i18n "homeLatestEmpty" }}</div>
-    {{ end }}
+  {{ $posts := where .Site.RegularPages "Section" "in" (slice "know_how" "life") }}
+  {{ $lead := false }}{{ $entry := index .Site.Data.journal.lead .Lang }}
+  {{ with $entry }}{{ $lead = $.Site.GetPage .path }}{{ end }}
+  {{ if not $lead }}{{ with first 1 $posts.ByDate.Reverse }}{{ $lead = index . 0 }}{{ end }}{{ end }}
+  {{ with $lead }}
+  <article class="journal-feature">
+    <p class="eyebrow">{{ with $entry }}{{ .eyebrow }}{{ else }}{{ i18n "journalLatestEyebrow" }}{{ end }} / {{ partial "post-category.html" . }}</p>
+    <h2 class="journal-entry-title"><a href="{{ .RelPermalink }}">{{ with $entry.title_lines }}{{ range $index, $line := . }}{{ if $index }}<br>{{ end }}<span class="title-mark">{{ $line }}</span>{{ end }}{{ else }}<span class="title-mark">{{ partial "display-title.html" . }}</span>{{ end }}</a></h2>
+    {{ partial "journal-meta.html" . }}
+    <div class="journal-introduction">{{ with $entry.excerpts }}{{ range . }}<p>{{ . }}</p>{{ end }}{{ else }}<p>{{ $lead.Summary | plainify | htmlUnescape | truncate 300 }}</p>{{ end }}</div>
+    {{ with $entry.image }}{{ with resources.Get (printf "site-images/%s" (strings.TrimPrefix "/" .)) }}{{ $image := .Resize "590x webp q85" }}
+    <figure class="journal-feature-panel"><a class="journal-book-cover" href="{{ $lead.RelPermalink }}"><img class="journal-feature-image" src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ $entry.image_alt }}" decoding="async" fetchpriority="high" /></a><figcaption><p class="eyebrow">IN THE MARGINS / {{ i18n "journalMarginNote" }}</p><blockquote>{{ $entry.quote }}</blockquote><p class="journal-note-source">{{ i18n "journalAuthorName" }} · {{ i18n "journalReadingNotes" }}</p></figcaption></figure>
+    {{ end }}{{ end }}
+    <a class="continue-reading" href="{{ .RelPermalink }}">{{ i18n "journalContinue" }} ↗</a>
+  </article>
+  {{ end }}
+  {{ with index .Site.Data.journal.related .Lang }}<section class="journal-related" aria-label="{{ i18n "relatedPosts" }}">{{ range . }}{{ with $.Site.GetPage . }}<article><h3><a href="{{ .RelPermalink }}">{{ partial "display-title.html" . }} ↗</a></h3><p>{{ partial "post-category.html" . }} / {{ .Date.Format "2006.01.02" }}</p></article>{{ end }}{{ end }}</section>{{ end }}
+  <section class="journal-recent" aria-labelledby="recent-heading"><header class="section-heading"><h2 id="recent-heading"><span class="title-mark">{{ i18n "journalRecentTitle" }}</span></h2>{{ with .Site.GetPage "/writing" }}<a class="text-link" href="{{ .RelPermalink }}">{{ i18n "gardenAllWriting" }} ↗</a>{{ end }}</header>
+    {{ $recent := union (first 4 (where $posts.ByDate.Reverse "Section" "know_how")) (first 3 (where $posts.ByDate.Reverse "Section" "life")) }}
+    <div class="writing-list">{{ range sort $recent "Date" "desc" }}{{ partial "writing-row.html" . }}{{ else }}<p>{{ i18n "homeLatestEmpty" }}</p>{{ end }}</div>
   </section>
 {{ end }}

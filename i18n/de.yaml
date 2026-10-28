@@ -171,3 +171,101 @@
 
 - id: searchRetry
   translation: "Erneut versuchen"
+
+# Personal garden
+- id: gardenPagination
+  translation: "Seitennavigation"
+- id: gardenWelcome
+  translation: "EIN PERSÖNLICHER GARTEN"
+- id: gardenIntroduction
+  translation: "Technik, Lesen und Leben."
+- id: gardenAbout
+  translation: "Mehr über mich"
+- id: gardenPhotoAlt
+  translation: "Der Huangpu-Fluss und die Skyline von Shanghai"
+- id: gardenPhotoCaption
+  translation: "Shanghai · Ein Stück Alltag"
+- id: gardenStartEyebrow
+  translation: "EIN PAAR EINSTIEGE"
+- id: gardenStartTitle
+  translation: "Hier anfangen"
+- id: gardenStartDescription
+  translation: "Texte über Technik, Lesen und Leben."
+- id: gardenTechnology
+  translation: "Technik"
+- id: gardenReading
+  translation: "Lesen"
+- id: gardenLife
+  translation: "Leben"
+- id: gardenRecentEyebrow
+  translation: "NOTIZEN UNTERWEGS"
+- id: gardenRecentTitle
+  translation: "Zuletzt geschrieben"
+- id: gardenAllWriting
+  translation: "Alle Beiträge"
+- id: gardenExploreEyebrow
+  translation: "EINEM FADEN FOLGEN"
+- id: gardenExploreTitle
+  translation: "Der Neugier folgen"
+- id: gardenExploreDescription
+  translation: "Fragen zum Weiterdenken, Tage zum Erinnern."
+- id: gardenColophonTitle
+  translation: "Ein Garten, der weiterwächst."
+- id: gardenColophonDescription
+  translation: "Manche Texte sind ausgearbeitete Gedanken, andere ein vorläufiges Verständnis. Hier ist Platz für beides. Schau gerne wieder vorbei."
+- id: gardenSubscribe
+  translation: "Per RSS abonnieren"
+- id: gardenNavigation
+  translation: "Hauptnavigation"
+- id: gardenBrand
+  translation: "persönlicher Garten"
+- id: gardenToggleTheme
+  translation: "Dunkelmodus umschalten"
+- id: gardenBackToTop
+  translation: "Nach oben"
+- id: gardenArchiveEyebrow
+  translation: "DAS TEXTARCHIV"
+- id: gardenCollectionLabel
+  translation: "Eine Textsammlung"
+- id: gardenOldestFirst
+  translation: "Von Anfang an lesen"
+- id: skipToContent
+  translation: "Zum Inhalt springen"
+
+# Book pages and marginal notes
+- id: journalSince
+  translation: "Notizen seit 2011"
+- id: journalMastheadNote
+  translation: "Zwischen den Seiten\nliegt eine weite Welt."
+- id: journalHome
+  translation: "Startseite"
+- id: journalAboutLink
+  translation: "Über mich"
+- id: journalMarginLabel
+  translation: "Autorin und Randnotizen"
+- id: journalAuthorName
+  translation: "Sophia"
+- id: journalPaths
+  translation: "Ein paar Lesepfade"
+- id: journalAllPaths
+  translation: "Alle Sammlungen"
+- id: journalQuote
+  translation: "„Ein paar Etiketten\nkönnen einen Menschen\nkaum beschreiben.“"
+- id: journalSubscribeTitle
+  translation: "Unregelmäßig, aber immer weiter."
+- id: journalSubscribeDescription
+  translation: "Wenn dich diese Themen auch interessieren, abonniere gerne per RSS."
+- id: journalSubscribeLink
+  translation: "Bis zum nächsten Beitrag"
+- id: journalRoute
+  translation: "Von Dalian über Deutschland nach Shanghai."
+- id: journalLatestEyebrow
+  translation: "AUS DEM JOURNAL"
+- id: journalMarginNote
+  translation: "Am Seitenrand"
+- id: journalReadingNotes
+  translation: "Persönliche Notizen"
+- id: journalContinue
+  translation: "Den Beitrag weiterlesen"
+- id: journalRecentTitle
+  translation: "Zuletzt geschrieben"

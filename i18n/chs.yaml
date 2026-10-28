@@ -169,3 +169,101 @@
 
 - id: searchRetry
   translation: "重试"
+
+# Personal garden
+- id: gardenPagination
+  translation: "文章分页"
+- id: gardenWelcome
+  translation: "Sophia的小天地"
+- id: gardenIntroduction
+  translation: "技术、阅读与生活。"
+- id: gardenAbout
+  translation: "更多关于我"
+- id: gardenPhotoAlt
+  translation: "黄浦江与上海的城市天际线"
+- id: gardenPhotoCaption
+  translation: "上海 · 日常的一角"
+- id: gardenStartEyebrow
+  translation: "A FEW PLACES TO BEGIN"
+- id: gardenStartTitle
+  translation: "不妨从这里开始"
+- id: gardenStartDescription
+  translation: "关于技术、阅读和生活，各挑一篇，认识一下。"
+- id: gardenTechnology
+  translation: "技术"
+- id: gardenReading
+  translation: "阅读"
+- id: gardenLife
+  translation: "生活"
+- id: gardenRecentEyebrow
+  translation: "NOTES ALONG THE WAY"
+- id: gardenRecentTitle
+  translation: "最近在写"
+- id: gardenAllWriting
+  translation: "全部文章"
+- id: gardenExploreEyebrow
+  translation: "FOLLOW A THREAD"
+- id: gardenExploreTitle
+  translation: "沿着兴趣探索"
+- id: gardenExploreDescription
+  translation: "有些问题值得多追问几步，有些日子值得回头看看。"
+- id: gardenColophonTitle
+  translation: "这座花园，还在慢慢生长。"
+- id: gardenColophonDescription
+  translation: "有些是完整的梳理，有些只是暂时的理解。新写下的和旧日留下的，都在这里。欢迎随时回来逛逛。"
+- id: gardenSubscribe
+  translation: "通过 RSS 订阅"
+- id: gardenNavigation
+  translation: "主导航"
+- id: gardenBrand
+  translation: "个人花园"
+- id: gardenToggleTheme
+  translation: "切换深色模式"
+- id: gardenBackToTop
+  translation: "回到顶部"
+- id: gardenArchiveEyebrow
+  translation: "THE WRITING ARCHIVE"
+- id: gardenCollectionLabel
+  translation: "专题阅读"
+- id: gardenOldestFirst
+  translation: "从第一篇开始读"
+- id: skipToContent
+  translation: "跳到正文"
+
+# Book pages and marginal notes
+- id: journalSince
+  translation: "记录始于 2011"
+- id: journalMastheadNote
+  translation: "书页之间，\n世界很大。"
+- id: journalHome
+  translation: "首页"
+- id: journalAboutLink
+  translation: "关于我"
+- id: journalMarginLabel
+  translation: "作者与页边旁注"
+- id: journalAuthorName
+  translation: "Sophia"
+- id: journalPaths
+  translation: "几条阅读路径"
+- id: journalAllPaths
+  translation: "全部专题与路径"
+- id: journalQuote
+  translation: "“千里之行始于足下”"
+- id: journalSubscribeTitle
+  translation: "偶尔更新，一直在写。"
+- id: journalSubscribeDescription
+  translation: "如果你也喜欢这些话题，欢迎通过 RSS 订阅。"
+- id: journalSubscribeLink
+  translation: "下一篇见"
+- id: journalRoute
+  translation: "从大连，到德国，再到上海。"
+- id: journalLatestEyebrow
+  translation: "FROM THE JOURNAL"
+- id: journalMarginNote
+  translation: "写在页边"
+- id: journalReadingNotes
+  translation: "个人笔记"
+- id: journalContinue
+  translation: "继续读这篇笔记"
+- id: journalRecentTitle
+  translation: "最近写下的"

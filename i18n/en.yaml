@@ -146,3 +146,101 @@
 
 - id: searchRetry
   translation: "Retry"
+
+# Personal garden
+- id: gardenPagination
+  translation: "Page navigation"
+- id: gardenWelcome
+  translation: "A PERSONAL GARDEN"
+- id: gardenIntroduction
+  translation: "Technology, reading, and life."
+- id: gardenAbout
+  translation: "A little more about me"
+- id: gardenPhotoAlt
+  translation: "The Huangpu River and Shanghai skyline"
+- id: gardenPhotoCaption
+  translation: "Shanghai · A corner of everyday life"
+- id: gardenStartEyebrow
+  translation: "A FEW PLACES TO BEGIN"
+- id: gardenStartTitle
+  translation: "Start here"
+- id: gardenStartDescription
+  translation: "A few pieces on technology, reading, and life."
+- id: gardenTechnology
+  translation: "Technology"
+- id: gardenReading
+  translation: "Reading"
+- id: gardenLife
+  translation: "Life"
+- id: gardenRecentEyebrow
+  translation: "NOTES ALONG THE WAY"
+- id: gardenRecentTitle
+  translation: "Recently written"
+- id: gardenAllWriting
+  translation: "All writing"
+- id: gardenExploreEyebrow
+  translation: "FOLLOW A THREAD"
+- id: gardenExploreTitle
+  translation: "Follow a curiosity"
+- id: gardenExploreDescription
+  translation: "Questions worth following, days worth remembering."
+- id: gardenColophonTitle
+  translation: "A garden, still growing."
+- id: gardenColophonDescription
+  translation: "Some pieces are carefully worked out; others are understandings for now. There is room for both. Come back whenever you like."
+- id: gardenSubscribe
+  translation: "Subscribe via RSS"
+- id: gardenNavigation
+  translation: "Main navigation"
+- id: gardenBrand
+  translation: "personal garden"
+- id: gardenToggleTheme
+  translation: "Toggle dark mode"
+- id: gardenBackToTop
+  translation: "Back to top"
+- id: gardenArchiveEyebrow
+  translation: "THE WRITING ARCHIVE"
+- id: gardenCollectionLabel
+  translation: "A reading collection"
+- id: gardenOldestFirst
+  translation: "Read from the beginning"
+- id: skipToContent
+  translation: "Skip to content"
+
+# Book pages and marginal notes
+- id: journalSince
+  translation: "Writing since 2011"
+- id: journalMastheadNote
+  translation: "Between the pages,\na wider world."
+- id: journalHome
+  translation: "Home"
+- id: journalAboutLink
+  translation: "About me"
+- id: journalMarginLabel
+  translation: "Author and marginal notes"
+- id: journalAuthorName
+  translation: "Sophia"
+- id: journalPaths
+  translation: "A few reading paths"
+- id: journalAllPaths
+  translation: "All collections"
+- id: journalQuote
+  translation: "“I don’t quite believe\na few labels can\nsum up a person.”"
+- id: journalSubscribeTitle
+  translation: "Occasionally updated. Always writing."
+- id: journalSubscribeDescription
+  translation: "If these are your kind of questions, subscribe via RSS."
+- id: journalSubscribeLink
+  translation: "See you in the next one"
+- id: journalRoute
+  translation: "From Dalian to Germany to Shanghai."
+- id: journalLatestEyebrow
+  translation: "FROM THE JOURNAL"
+- id: journalMarginNote
+  translation: "In the margins"
+- id: journalReadingNotes
+  translation: "Personal notes"
+- id: journalContinue
+  translation: "Continue reading"
+- id: journalRecentTitle
+  translation: "Recently written"

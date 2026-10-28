@@ -1,5 +1,18 @@
 {{- $pag := $.Paginator -}}
 {{- if gt $pag.TotalPages 1 -}}
+<nav class="mobile-pagination" aria-label="{{ i18n "gardenPagination" }}">
+    {{- if $pag.HasPrev -}}
+    <a href="{{ $pag.Prev.URL }}">← {{ i18n "newerPosts" }}</a>
+    {{- else -}}
+    <span aria-disabled="true">← {{ i18n "newerPosts" }}</span>
+    {{- end -}}
+    <span class="pagination-position">{{ $pag.PageNumber }} / {{ $pag.TotalPages }}</span>
+    {{- if $pag.HasNext -}}
+    <a href="{{ $pag.Next.URL }}">{{ i18n "olderPosts" }} →</a>
+    {{- else -}}
+    <span aria-disabled="true">{{ i18n "olderPosts" }} →</span>
+    {{- end -}}
+</nav>
 <ul class="pagination">
     {{- with $pag.First -}}
     <li class="page-item">

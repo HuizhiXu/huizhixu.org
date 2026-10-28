@@ -73,7 +73,13 @@
   function close() {
     ui.classList.add('hidden');
     trigger?.setAttribute('aria-expanded', 'false');
-    previousFocus?.focus();
+    const menu = document.querySelector('.primary-menu');
+    const menuButton = document.querySelector('.mobile-menu-button');
+    if (menu && previousFocus && menu.contains(previousFocus) && !menu.classList.contains('is-open') && menuButton?.offsetParent) {
+      menuButton.focus();
+    } else {
+      previousFocus?.focus();
+    }
   }
 
   trigger?.addEventListener('click', open);

@@ -1,0 +1,16 @@
+{{- $collection := . -}}
+{{- $pages := slice -}}
+{{- range where .Site.RegularPages "Section" "in" (slice "know_how" "life") -}}
+  {{- $post := . -}}
+  {{- $include := false -}}
+  {{- with $collection.Params.topic_pattern -}}
+    {{- $include = gt (len (findRE . $post.Title)) 0 -}}
+  {{- end -}}
+  {{- if $collection.Params.topic_tag -}}
+    {{- $include = or $include (in (apply (.Params.tags | default slice) "lower" ".") (lower $collection.Params.topic_tag)) -}}
+  {{- end -}}
+  {{- if in ($collection.Params.topic_paths | default slice) .File.ContentBaseName -}}{{- $include = true -}}{{- end -}}
+  {{- if $include -}}{{- $pages = $pages | append . -}}{{- end -}}
+{{- end -}}
+{{- if eq $collection.Params.order "oldest" -}}{{- $pages = sort $pages "Date" "asc" -}}{{- else -}}{{- $pages = sort $pages "Date" "desc" -}}{{- end -}}
+{{- return $pages -}}

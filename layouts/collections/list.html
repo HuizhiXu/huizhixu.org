@@ -1,0 +1,10 @@
+{{ define "main" }}
+{{ if or .Params.topic_pattern .Params.topic_tag .Params.topic_paths }}
+{{ partial "collection.html" . }}
+{{ else }}
+<div class="garden-shell archive-page">
+  <header class="archive-heading"><p class="eyebrow">{{ i18n "gardenExploreEyebrow" }}</p><h1>{{ .Title }}</h1><p>{{ .Description }}</p></header>
+  <div class="collection-grid">{{ range .Sections.ByWeight }}{{ partial "collection-card.html" . }}{{ end }}</div>
+</div>
+{{ end }}
+{{ end }}

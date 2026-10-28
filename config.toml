@@ -1,6 +1,6 @@
 baseURL = "https://huizhixu.github.io"
 metaDataFormat = "yaml"
-title = "HuizhiXu 的个人博客"
+title = "Sophia的小天地"
 theme = "blist"
 relativeURLs = true
 canonifyURLs = true
@@ -10,54 +10,52 @@ DefaultContentLanguage = "chs"
 DefaultContentLanguageInSubdir = false
 
 [author]
-  name = "HuizhiXu"
+  name = "Sophia"
 
 [languages]
   [languages.chs]
     contentDir = 'content/chs'
     languageName = '中文 (简体)'
-    title = '徐慧志的个人博客'
+    title = 'Sophia的小天地'
     weight = 1
     [languages.chs.params]
+      journalTitle = "Sophia的小天地"
       brandName = "Sophia"
       introTitle = "沿着好奇心，去往更远的地方。"
       introSubtitle = "写下遇见的问题、暂时的答案，以及一个又一个意外出现的兔子洞。"
       introPhoto = "/picture.jpg"
-      logo = "/huizhi-mark-logo-garden.png"
+      logo = "/journal-mark.svg"
       reading_speed = 400
     [[languages.chs.menu.main]]
-      name = "生活"
-      url = "/life/"
-      weight = 2
-    [[languages.chs.menu.main]]
-      name = "关于"
-      url = "/page/about/"
-      weight = 3
-    [[languages.chs.menu.main]]
-      name = "技术"
+      name = "技术笔记"
       url = "/know_how/"
       weight = 1
     [[languages.chs.menu.main]]
-      name = "分类"
-      url = "/tags/"
-      weight = 5
+      name = "生活随记"
+      url = "/life/"
+      weight = 2
+    [[languages.chs.menu.main]]
+      name = "全部文章"
+      url = "/writing/"
+      weight = 3
 
   [languages.en]
     contentDir = 'content/en'
     languageName = 'English'
-    title = 'PoirotMore'
+    title = 'Sophia的小天地'
     weight = 2
     [languages.en.params]
+      journalTitle = "Sophia的小天地"
       brandName = "Sophia"
       introTitle = "Follow curiosity a little further."
       introSubtitle = "Notes on the questions I meet, the answers I hold for now, and the rabbit holes that appear along the way."
       introPhoto = "/picture.jpg"
-      logo = "/huizhi-mark-logo-garden.png"
+      logo = "/journal-mark.svg"
       reading_speed = 228
       frontBundle = "life"
     [[languages.en.menu.main]]
-      name = "Blog"
-      url = "/life/"
+      name = "Writing"
+      url = "/writing/"
       weight = 1
     [[languages.en.menu.main]]
       name = "About"
@@ -71,19 +69,20 @@ DefaultContentLanguageInSubdir = false
   [languages.de]
     contentDir = 'content/de'
     languageName = 'Deutsch'
-    title = 'Blog von Huizhi XU'
+    title = 'Sophia的小天地'
     weight = 3
     [languages.de.params]
+      journalTitle = "Sophia的小天地"
       brandName = "Sophia"
       introTitle = "Der Neugier folgen, ein Stück weiter."
       introSubtitle = "Notizen über Fragen, vorläufige Antworten und all die Kaninchenlöcher, die unterwegs auftauchen."
       introPhoto = "/picture.jpg"
-      logo = "/huizhi-mark-logo-garden.png"
+      logo = "/journal-mark.svg"
       reading_speed = 179
       frontBundle = "life"
     [[languages.de.menu.main]]
-      name = "Blog"
-      url = "/life/"
+      name = "Beiträge"
+      url = "/writing/"
       weight = 1
     [[languages.de.menu.main]]
       name = "Über mich"
@@ -103,8 +102,8 @@ DefaultContentLanguageInSubdir = false
   enableSearch = true
 
   # Custom copyright - optional
-  copyright = "Copyright © 2012 - Huizhi Xu · All rights reserved"
-  favicon = "/huizhi-mark-logo-garden.png"
+  copyright = "Copyright © 2012 - Sophia · All rights reserved"
+  favicon = "/journal-mark.svg"
 
   # Color for the intro details and social links block, not applicable for dark mode
   # Supported values: Any color from TailwindCSS default colors
@@ -160,11 +159,6 @@ DefaultContentLanguageInSubdir = false
   # Global params common for both languages
   title = "Sein heißt werden, leben heißt lernen."
   description = "Der einfache Weg is immer verkehrt."
-
-  [[params.homepage.social.icons]]
-    website = "github"
-    url = "https://github.com/HuizhiXu"
-
 
 [[menu.main]]
   name = "主页"

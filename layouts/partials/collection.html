@@ -1,0 +1,7 @@
+<div class="garden-shell archive-page">
+  <a class="back-link" href="{{ with .Site.GetPage "/collections" }}{{ .RelPermalink }}{{ end }}">← {{ i18n "gardenExploreTitle" }}</a>
+  <header class="archive-heading"><p class="eyebrow">{{ i18n "gardenCollectionLabel" }}</p><h1>{{ .Title }}</h1><p>{{ .Description }}</p></header>
+  {{ $pages := partial "collection-pages.html" . }}
+  <p class="archive-count">{{ len $pages }} {{ i18n "postsCount" }}{{ if eq .Params.order "oldest" }} · {{ i18n "gardenOldestFirst" }}{{ end }}</p>
+  <div class="writing-list">{{ range $pages }}{{ partial "writing-row.html" . }}{{ else }}<p class="empty-note">{{ i18n "homeLatestEmpty" }}</p>{{ end }}</div>
+</div>

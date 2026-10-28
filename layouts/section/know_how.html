@@ -1,17 +1,1 @@
-{{ define "main" }}
-<div class="container max-w-6xl mx-auto px-6 py-10">
-  <div class="section-page-header">
-    <span class="home-eyebrow">{{ i18n "sectionKnowhowEyebrow" }}</span>
-    <h1 class="text-3xl font-bold mt-2">{{ .Title }}</h1>
-  </div>
-
-  {{ $p := .Paginate .Pages.ByDate.Reverse 12 }}
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-8">
-    {{ range $p.Pages }}
-      {{- partial "blog-card.html" . -}}
-    {{ end }}
-  </div>
-
-  {{- partial "pagination.html" . -}}
-</div>
-{{ end }}
+{{ define "main" }}{{ partial "archive.html" . }}{{ end }}

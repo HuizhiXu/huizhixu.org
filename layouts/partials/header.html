@@ -1,112 +1,20 @@
-<header class="site-header container flex justify-between md:justify-between gap-4 flex-wrap px-6 py-4 mx-auto relative">
-  <a href="{{ .Site.Home.Permalink }}" class="site-brand">
-    {{ if .Site.Params.logo }}
-    <img src="{{ .Site.Params.logo }}" alt="" class="site-brand-logo" />
-    <span class="site-brand-name">{{ .Site.Params.brandName | default .Site.Title }}</span>
-    {{ else }}
-    {{ .Site.Title }}
-    {{ end }}
-  </a>
-  <button class="mobile-menu-button md:hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <line x1="4" y1="8" x2="20" y2="8" />
-      <line x1="4" y1="16" x2="20" y2="16" />
-    </svg>
-  </button>
-  <ul class="mobile-menu absolute z-10 px-6 pb-6 md:p-0 top-full left-0 w-full md:w-auto md:relative hidden md:flex flex-col md:flex-row items-end md:items-center gap-4 lg:gap-6 bg-white dark:bg-gray-800">
-
-    {{ range .Site.Menus.main }}
-    {{ $isActive := hasPrefix $.RelPermalink (.URL | relLangURL) }}
-    <li>
-      <a href="{{ .URL | relLangURL }}"
-         class="{{ if $isActive }}font-semibold border-b-2 border-blue-500 pb-0.5{{ else }}text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white{{ end }} transition-colors duration-150">
-        {{ .Name }}
-      </a>
-    </li>
-    {{ end }}
-
-    {{ if hugo.IsMultilingual }}
-    {{ if ge (len .Site.Languages) 3 }}
-    <li class="relative cursor-pointer">
-      <span class="language-switcher flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-          stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="12" cy="12" r="9" />
-          <line x1="3.6" y1="9" x2="20.4" y2="9" />
-          <line x1="3.6" y1="15" x2="20.4" y2="15" />
-          <path d="M11.5 3a17 17 0 0 0 0 18" />
-          <path d="M12.5 3a17 17 0 0 1 0 18" />
-        </svg>
-        <a>{{ i18n "languageSwitcherLabel" }}</a>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M18 15l-6 -6l-6 6h12" transform="rotate(180 12 12)" />
-        </svg>
-      </span>
-      <div
-        class="language-dropdown absolute top-full mt-2 left-0 flex-col gap-2 bg-gray-100 dark:bg-gray-900 dark:text-white z-10 hidden">
-        {{ range site.Sites }}
-        {{ if not (eq .Language.Lang $.Site.Language.Lang) }}
-        <a class="px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-700" href="{{ .Home.RelPermalink }}" lang="{{ .Language.Lang }}">{{ default .Language.Lang .Language.LanguageName }}</a>
-        {{ end }}
-        {{ end }}
-      </div>
-    </li>
-    {{ else }}
-    <li class="flex items-center">
-      {{ range site.Sites }}
-      {{ if not (eq .Language.Lang $.Site.Language.Lang) }}
-      <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5"
-        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <circle cx="12" cy="12" r="9" />
-        <line x1="3.6" y1="9" x2="20.4" y2="9" />
-        <line x1="3.6" y1="15" x2="20.4" y2="15" />
-        <path d="M11.5 3a17 17 0 0 0 0 18" />
-        <path d="M12.5 3a17 17 0 0 1 0 18" />
-      </svg>
-      <a href="{{ .Home.RelPermalink }}" lang="{{ .Language.Lang }}">{{ default .Language.Lang .Language.LanguageName }}</a>
-      {{ end }}
-      {{ end }}
-    </li>
-    {{ end }}
-    {{ end }}
-
-    {{ if .Site.Params.enableSearch }}
-    <li class="grid place-items-center">
-      <button type="button" class="open-search inline-block cursor-pointer" aria-label="{{ i18n "searchTitle" }}" aria-controls="site-search" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="10" cy="10" r="7" />
-          <line x1="21" y1="21" x2="15" y2="15" />
-        </svg>
-      </button>
-    </li>
-    {{ end }}
-
-    {{ if .Site.Params.darkModeToggle }}
-    <li class="grid place-items-center">
-      <span class="toggle-dark-mode inline-block cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
-          stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="12" cy="12" r="3" />
-          <line x1="12" y1="5" x2="12" y2="5.01" />
-          <line x1="17" y1="7" x2="17" y2="7.01" />
-          <line x1="19" y1="12" x2="19" y2="12.01" />
-          <line x1="17" y1="17" x2="17" y2="17.01" />
-          <line x1="12" y1="19" x2="12" y2="19.01" />
-          <line x1="7" y1="17" x2="7" y2="17.01" />
-          <line x1="5" y1="12" x2="5" y2="12.01" />
-          <line x1="7" y1="7" x2="7" y2="7.01" />
-        </svg>
-      </span>
-    </li>
-    {{ end }}
-  </ul>
+<header class="site-header">
+  <div class="journal-preline"><span>A PERSONAL JOURNAL</span><div class="journal-preline-tools"><span>{{ i18n "journalSince" }}</span>
+    {{ if hugo.IsMultilingual }}<details class="language-menu"><summary>{{ index (dict "chs" "中文" "en" "EN" "de" "DE") .Lang }}</summary><div class="language-options">{{ range site.Sites }}{{ if ne .Language.Lang $.Lang }}<a href="{{ .Home.RelPermalink }}" lang="{{ .Language.Lang }}">{{ .Language.LanguageName }}</a>{{ end }}{{ end }}</div></details>{{ end }}
+  </div></div>
+  <div class="journal-masthead">
+    <a class="journal-brand" href="{{ .Site.Home.RelPermalink }}"><span class="journal-seal" aria-hidden="true">S</span><span class="journal-wordmark">{{ if .IsHome }}<h1 class="journal-name">{{ .Site.Params.journalTitle }}</h1>{{ else }}<span class="journal-name">{{ .Site.Params.journalTitle }}</span>{{ end }}</span></a>
+  </div>
+  <nav class="journal-nav" aria-label="{{ i18n "gardenNavigation" }}">
+    <button type="button" class="mobile-menu-button" aria-label="{{ i18n "toggleNavigation" }}" aria-controls="primary-menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><span>{{ i18n "toggleNavigation" }}</span></button>
+    <div id="primary-menu" class="primary-menu"><ul class="site-nav-links">
+      <li><a href="{{ .Site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>{{ i18n "journalHome" }}</a></li>
+      {{ range .Site.Menus.main }}{{ if ne .URL "/page/about/" }}{{ $url := .URL | relLangURL }}<li><a href="{{ $url }}"{{ if hasPrefix $.RelPermalink $url }} aria-current="page"{{ end }}>{{ .Name }}</a></li>{{ end }}{{ end }}
+    </ul></div>
+    <div class="site-tools">
+      {{ with .Site.GetPage "/page/about" }}<a class="nav-about" href="{{ .RelPermalink }}">{{ i18n "journalAboutLink" }} ↗</a>{{ end }}<a href="{{ (.Site.Home.OutputFormats.Get "RSS").RelPermalink }}">RSS</a>
+      {{ if .Site.Params.enableSearch }}<button type="button" class="open-search icon-button" aria-label="{{ i18n "searchTitle" }}" aria-controls="site-search" aria-expanded="false"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button>{{ end }}
+      {{ if .Site.Params.darkModeToggle }}<button type="button" class="toggle-dark-mode icon-button" aria-label="{{ i18n "gardenToggleTheme" }}" aria-pressed="false"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg></button>{{ end }}
+    </div>
+  </nav>
 </header>

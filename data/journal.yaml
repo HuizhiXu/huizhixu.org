@@ -1,0 +1,27 @@
+lead:
+  chs:
+    path: /life/20250314_from_the_wizarding_archive.md
+    eyebrow: READING NOTES
+    title_lines:
+      - 读《来自巫师档案》
+      - 《哈利·波特》的 B 面故事
+    excerpts:
+      - 微信读书上去年上了 J.K. 罗琳的新书——《来自巫师档案》，一直想看来着，最近终于把第一卷看完啦。
+      - 读完这本书，我对《哈利·波特》魔法世界的幕后故事有了更深的了解。书中不仅揭示了波特家族和马尔福家族的历史，还让我对德拉科·马尔福、佩妮阿姨和洛哈特教授有了全新的认识。
+    image: /img/20250314/1.png
+    image_alt: 《来自巫师档案》第一卷的阅读记录与书籍封面
+    quote: 一个可以按照自己意愿活着的结局。
+paths:
+  chs:
+    - path: /collections/building-llms
+      label: 从零构建大模型
+    - path: /collections/germany
+      label: 在德国的日子
+    - path: /collections/reading
+      label: 那些读过的书
+    - path: /collections/shanghai
+      label: 关于上海的生活
+related:
+  chs:
+    - /life/20250713读项飙新书《你好，陌生人》.md
+    - /know_how/20251127 人脑的记忆和Agent的记忆是完全不同的.md

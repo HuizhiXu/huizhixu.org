@@ -1,0 +1,7 @@
+{{ $pages := partial "collection-pages.html" . }}
+<article class="collection-card">
+  <div class="collection-top"><span>{{ printf "%02d" .Weight }}</span><span>{{ len $pages }} {{ i18n "postsCount" }}</span></div>
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  <p>{{ .Description }}</p>
+  <span class="collection-arrow" aria-hidden="true">↗</span>
+</article>

@@ -1,0 +1,9 @@
+<article class="writing-row">
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+  <div class="writing-copy">
+    <div class="writing-heading"><span class="entry-category">{{ partial "post-category.html" . }}</span><h3><a href="{{ .RelPermalink }}">{{ partial "display-title.html" . }}</a></h3></div>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    {{ with .Params.tags }}<div class="writing-tags">{{ range first 3 . }}<span>{{ partial "tag-label.html" . }}</span>{{ end }}</div>{{ end }}
+  </div>
+  <span class="writing-arrow" aria-hidden="true">↗</span>
+</article>

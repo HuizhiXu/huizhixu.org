@@ -6,6 +6,14 @@
 - 线上站点：`https://huizhixu.github.io`
 - 图片仓库：`HuizhiXu/pictures`
 
+## 页面与外观
+
+- 首页主文与侧栏：编辑 `data/journal.yaml`，配置主文路径、标题分行、正文摘录、配图、页边引用、阅读路径和延伸阅读。主文未单独配置的语言会显示该语言的最新文章。
+- 专题入口：编辑 `content/chs/collections/` 下各专题的 `_index.md`。支持按标题正则、标签或文章文件名汇集现有文章；学习专题可设置 `order: oldest`。
+- 写作归档：`/writing/` 汇集技术和生活文章，原有栏目地址继续可用。
+- 样式：`assets/css/tokens.css` 管理明暗配色，`editorial.css` 管理页面布局，`article-components.css` 管理正文、代码和目录。
+- 本地预览：运行 `npm start`。刊物文案在 `i18n/` 中维护，刊名 `journalTitle` 和导航在 `config.toml` 中维护。
+
 ## 发布流程总览
 
 ```

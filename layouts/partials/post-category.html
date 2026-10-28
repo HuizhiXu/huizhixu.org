@@ -1,0 +1,5 @@
+{{- $label := i18n "gardenLife" -}}
+{{- if eq .Section "know_how" -}}
+  {{- $label = i18n "gardenTechnology" -}}
+{{- end -}}
+{{- return $label -}}

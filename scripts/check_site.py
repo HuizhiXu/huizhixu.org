@@ -14,7 +14,9 @@ class Page(HTMLParser):
         super().__init__()
         self.index = None
         self.styles = []
-        self.photo = None
+        self.feature_images = []
+        self.masthead = False
+        self.feature_articles = 0
         self.scripts = []
 
     def handle_starttag(self, tag, attrs):
@@ -23,8 +25,13 @@ class Page(HTMLParser):
             self.index = attrs['data-index-url']
         if tag == 'link' and attrs.get('rel') == 'stylesheet':
             self.styles.append(attrs['href'])
-        if tag == 'img' and attrs.get('class') == 'home-photo':
-            self.photo = attrs
+        classes = attrs.get('class', '').split()
+        if 'journal-masthead' in classes:
+            self.masthead = True
+        if tag == 'article' and 'journal-feature' in classes:
+            self.feature_articles += 1
+        if tag == 'img' and 'journal-feature-image' in classes:
+            self.feature_images.append(attrs)
         if tag == 'script' and 'search-bundle' in attrs.get('src', ''):
             self.scripts.append(attrs['src'])
 
@@ -61,14 +68,19 @@ def check(root):
             assert (path / 'index.html').exists() or path.is_file(), path
         assert any('/custom.' in url for url in page.styles), 'Custom CSS needs a fingerprint'
         assert page.scripts, 'Missing search bundle'
-        assert page.photo and 'width' in page.photo and 'height' in page.photo, 'Photo needs dimensions'
-        photo = local(page.photo['src'])
-        assert photo.exists() and photo.stat().st_size < 200_000, photo
-        print(f'{language or "chs"}: search {len(data)} pages, photo {photo.stat().st_size:,} bytes; OK')
+        assert page.masthead, f'Missing journal masthead: {language}'
+        assert page.feature_articles == 1, f'Expected one lead article: {language}'
+        for attrs in page.feature_images:
+            assert 'width' in attrs and 'height' in attrs, 'Feature image needs dimensions'
+            assert attrs.get('alt'), 'Feature image needs alt text'
+            image = local(attrs['src'])
+            assert image.exists() and image.stat().st_size < 200_000, image
+        print(f'{language or "chs"}: search {len(data)} pages, {len(page.feature_images)} optimized feature images; OK')
     for path in root.rglob('*.html'):
         page = Page()
         page.feed(path.read_text())
         if page.index:
+            assert page.masthead, f'Missing journal masthead: {path}'
             url = urljoin('/' + str(path.relative_to(root)), page.index)
             target = root / unquote(urlparse(url).path.lstrip('/'))
             assert target.is_file(), (path, page.index)

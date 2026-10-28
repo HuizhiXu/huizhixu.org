@@ -1,0 +1,9 @@
+<div class="garden-shell archive-page">
+  <header class="archive-heading"><p class="eyebrow">{{ i18n "gardenArchiveEyebrow" }}</p><h1>{{ .Title }}</h1>{{ with .Description }}<p>{{ . }}</p>{{ end }}</header>
+  {{ $posts := .RegularPages }}
+  {{ if eq .Section "writing" }}{{ $posts = where .Site.RegularPages "Section" "in" (slice "know_how" "life") }}{{ end }}
+  <p class="archive-count">{{ len $posts }} {{ i18n "postsCount" }}</p>
+  {{ $p := .Paginate $posts.ByDate.Reverse 12 }}
+  <div class="writing-list">{{ range $p.Pages }}{{ partial "writing-row.html" . }}{{ else }}<p class="empty-note">{{ i18n "homeLatestEmpty" }}</p>{{ end }}</div>
+  {{ partial "pagination.html" . }}
+</div>

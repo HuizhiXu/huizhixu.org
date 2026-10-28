@@ -1,54 +1,43 @@
-/* ============================================================
-   Custom styles — Obsidian-inspired theme on blist/Tailwind
-   ============================================================ */
-
+/* The selected book-and-marginalia identity, shared by all pages. */
 :root {
-  --obs-bg: #fafafa;
-  --obs-bg-soft: #f3f3f3;
-  --obs-surface: #ffffff;
-  --obs-text: #2e3338;
-  --obs-text-muted: #5c6370;
-  --obs-border: #e3e3e3;
-  --obs-pink: #e84694;
-  --obs-pink-strong: #d33682;
-  --obs-pink-soft: rgba(232, 70, 148, 0.14);
-  --obs-pink-softer: rgba(232, 70, 148, 0.08);
-  --obs-accent: #e84694;
-  --obs-accent-hover: #c0267a;
-  --obs-h2-bg: rgba(136, 179, 224, 0.18);
-  --obs-h3-bg: rgba(159, 197, 232, 0.15);
-  --obs-code-bg: #f5f5f5;
-  --obs-code-border: #e8e8e8;
-  --obs-quote-bg: rgba(232, 70, 148, 0.06);
-  --obs-quote-border: #e84694;
-  --obs-selection-bg: rgba(232, 70, 148, 0.22);
-  --obs-selection-text: #2e3338;
-  --obs-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    sans-serif;
-  --obs-mono: "JetBrains Mono", "SF Mono", "Fira Code", "Cascadia Code",
-    ui-monospace, monospace;
+  color-scheme: light;
+  --paper: #fffdf8;
+  --paper-soft: #f3eee0;
+  --canvas: #f2f0e9;
+  --ink: #282522;
+  --ink-muted: #8a7963;
+  --line: #d6cdbd;
+  --rule: #beb3a1;
+  --yellow: #ffde17;
+  --highlight: #ffde17;
+  --accent: #9d5c2d;
+  --accent-hover: #75401d;
+  --leaf: var(--accent);
+  --leaf-dark: var(--accent-hover);
+  --leaf-soft: var(--paper-soft);
+  --title-font: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", STSong, Georgia, serif;
+  --reading-font: "Songti SC", "Noto Serif CJK SC", STSong, Georgia, serif;
+  --obs-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --obs-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+  --obs-text: var(--ink);
+  --obs-text-muted: var(--ink-muted);
+  --obs-accent: var(--accent);
+  --obs-accent-hover: var(--accent-hover);
+  --obs-selection-bg: #ffe875;
+  --obs-selection-text: #282522;
 }
-
 .dark {
-  --obs-bg: #1e1e1e;
-  --obs-bg-soft: #252525;
-  --obs-surface: #2b2b2b;
-  --obs-text: #dcddde;
-  --obs-text-muted: #a0a0a0;
-  --obs-border: #3f3f3f;
-  --obs-pink: #ff79c6;
-  --obs-pink-strong: #ff92d0;
-  --obs-pink-soft: rgba(255, 121, 198, 0.18);
-  --obs-pink-softer: rgba(255, 121, 198, 0.1);
-  --obs-accent: #ff79c6;
-  --obs-accent-hover: #ffb3e0;
-  --obs-h2-bg: rgba(136, 179, 224, 0.12);
-  --obs-h3-bg: rgba(159, 197, 232, 0.1);
-  --obs-code-bg: #2d2d2d;
-  --obs-code-border: #444444;
-  --obs-quote-bg: rgba(255, 121, 198, 0.08);
-  --obs-quote-border: #ff79c6;
-  --obs-selection-bg: rgba(255, 121, 198, 0.28);
-  --obs-selection-text: #ffffff;
+  color-scheme: dark;
+  --paper: #28241f;
+  --paper-soft: #363025;
+  --canvas: #1e1b17;
+  --ink: #efe8db;
+  --ink-muted: #b5a58e;
+  --line: #514839;
+  --rule: #73634e;
+  --highlight: #88751470;
+  --accent: #e2b36d;
+  --accent-hover: #f2cf99;
+  --obs-selection-bg: #7a6525;
+  --obs-selection-text: #fff9ed;
 }
