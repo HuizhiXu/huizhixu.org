@@ -7,6 +7,6 @@
     <nav class="margin-section margin-paths" aria-label="{{ i18n "journalPaths" }}"><h2>{{ i18n "journalPaths" }}</h2><ol>{{ range $index, $entry := . }}{{ with $.Site.GetPage $entry.path }}<li><span>{{ printf "%02d" (add $index 1) }}</span><a href="{{ .RelPermalink }}">{{ $entry.label }} ↗</a></li>{{ end }}{{ end }}</ol>{{ with $.Site.GetPage "/collections" }}<a class="margin-more" href="{{ .RelPermalink }}">{{ i18n "journalAllPaths" }} ↗</a>{{ end }}</nav>
     {{ else }}<nav class="margin-section margin-paths" aria-label="{{ i18n "journalPaths" }}"><h2>{{ i18n "journalPaths" }}</h2><ol>{{ range slice "/writing" "/life" "/tags" }}{{ with $.Site.GetPage . }}<li><a href="{{ .RelPermalink }}">{{ .Title }} ↗</a></li>{{ end }}{{ end }}</ol></nav>{{ end }}
     <blockquote class="margin-quote">{{ i18n "journalQuote" }}</blockquote>
-    <section class="margin-section margin-subscribe"><h2>{{ i18n "journalSubscribeTitle" }}</h2><p>{{ i18n "journalSubscribeDescription" }}</p><a href="{{ (.Site.Home.OutputFormats.Get "RSS").RelPermalink }}">{{ i18n "journalSubscribeLink" }} ↗</a></section>
+    <section class="margin-section margin-subscribe"><h2>{{ i18n "journalSubscribeTitle" }}</h2><a href="{{ (.Site.Home.OutputFormats.Get "RSS").RelPermalink }}">{{ i18n "journalSubscribeLink" }} ↗</a></section>
   </div>
 </aside>

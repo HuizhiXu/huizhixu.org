@@ -1,4 +1,4 @@
-<footer class="site-footer"><p>© {{ now.Year }} {{ i18n "journalAuthorName" }}<span> · {{ i18n "journalRoute" }}</span></p><div class="footer-links"><a href="{{ (.Site.Home.OutputFormats.Get "RSS").RelPermalink }}">RSS ↗</a><button type="button" class="back-to-top" aria-label="{{ i18n "gardenBackToTop" }}">↑</button></div></footer>
+<footer class="site-footer"><p>© {{ now.Year }} {{ i18n "journalAuthorName" }}</p><div class="footer-links"><a href="{{ (.Site.Home.OutputFormats.Get "RSS").RelPermalink }}">RSS ↗</a><button type="button" class="back-to-top" aria-label="{{ i18n "gardenBackToTop" }}">↑</button></div></footer>
 {{ if .Site.Params.enableSearch }}{{ partial "search-ui.html" . }}{{ end }}
 {{ $js := resources.Get "js/site.js" | minify | fingerprint }}<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 {{ template "_internal/google_analytics.html" . }}

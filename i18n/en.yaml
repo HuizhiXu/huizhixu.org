@@ -228,12 +228,8 @@
   translation: "“I don’t quite believe\na few labels can\nsum up a person.”"
 - id: journalSubscribeTitle
   translation: "Occasionally updated. Always writing."
-- id: journalSubscribeDescription
-  translation: "If these are your kind of questions, subscribe via RSS."
 - id: journalSubscribeLink
   translation: "See you in the next one"
-- id: journalRoute
-  translation: "From Dalian to Germany to Shanghai."
 - id: journalLatestEyebrow
   translation: "FROM THE JOURNAL"
 - id: journalMarginNote

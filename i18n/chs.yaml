@@ -251,12 +251,8 @@
   translation: "“千里之行始于足下”"
 - id: journalSubscribeTitle
   translation: "偶尔更新，一直在写。"
-- id: journalSubscribeDescription
-  translation: "如果你也喜欢这些话题，欢迎通过 RSS 订阅。"
 - id: journalSubscribeLink
   translation: "下一篇见"
-- id: journalRoute
-  translation: "从大连，到德国，再到上海。"
 - id: journalLatestEyebrow
   translation: "FROM THE JOURNAL"
 - id: journalMarginNote

@@ -253,12 +253,8 @@
   translation: "„Ein paar Etiketten\nkönnen einen Menschen\nkaum beschreiben.“"
 - id: journalSubscribeTitle
   translation: "Unregelmäßig, aber immer weiter."
-- id: journalSubscribeDescription
-  translation: "Wenn dich diese Themen auch interessieren, abonniere gerne per RSS."
 - id: journalSubscribeLink
   translation: "Bis zum nächsten Beitrag"
-- id: journalRoute
-  translation: "Von Dalian über Deutschland nach Shanghai."
 - id: journalLatestEyebrow
   translation: "AUS DEM JOURNAL"
 - id: journalMarginNote
