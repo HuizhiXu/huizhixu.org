@@ -1,6 +1,8 @@
 import hashlib
 import importlib
 import json
+import re
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -41,7 +43,7 @@ class ConversionTests(unittest.TestCase):
         paragraph = block('paragraph')
         paragraph['paragraph']['rich_text'] = [text('Example', href='https://example.com', annotations={'bold': True})]
         result = self.convert([paragraph, block('quote', 'A quotation')])
-        self.assertIn('[**Example**](<https://example.com>)', result)
+        self.assertIn('[<strong>Example</strong>](<https://example.com>)', result)
         self.assertIn('> A quotation', result)
 
     def test_nested_list(self):
@@ -66,6 +68,53 @@ class ConversionTests(unittest.TestCase):
         code = block('code', '```example```')
         code['code']['language'] = 'plain text'
         self.assertIn('````text\n```example```\n````', self.convert([code]))
+
+    def test_notion_line_breaks_survive_hugo_rendering(self):
+        paragraph = block('paragraph')
+        paragraph['paragraph']['rich_text'] = [text('\nFirst line\nSecond line\n', annotations={'bold': True})]
+        code = block('code', 'first()\nsecond()')
+        code['code']['language'] = 'plain text'
+        markdown = self.convert([paragraph, block('paragraph', 'A separate paragraph'), code])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'hugo.toml').write_text('disableKinds = ["home", "section", "taxonomy", "term", "rss", "sitemap"]\n[markup.goldmark.renderer]\nunsafe = true\n')
+            (root / 'layouts/_default').mkdir(parents=True)
+            (root / 'layouts/_default/single.html').write_text('<main>{{ .Content }}</main>')
+            (root / 'content').mkdir()
+            (root / 'content/article.md').write_text('---\ntitle: Line breaks\n---\n' + markdown)
+            subprocess.run(['hugo', '--source', str(root), '--quiet'], check=True, capture_output=True)
+            html = (root / 'public/article/index.html').read_text()
+        self.assertIn('<strong>First line<br>\nSecond line</strong>', html)
+        self.assertIn('<p>A separate paragraph</p>', html)
+        self.assertIn('first()\nsecond()', re.sub(r'<[^>]+>', '', html))
+        self.assertNotIn('first()\\', html)
+
+    def test_notion_emphasis_survives_cjk_and_adjacent_runs(self):
+        paragraph = block('paragraph')
+        paragraph['paragraph']['rich_text'] = [
+            text('第一位是'),
+            text('维林杰医生（Dr. Verringer）。', annotations={'bold': True}),
+            text('他接着说：'),
+            text('“It’s not your fault,', annotations={'bold': True, 'italic': True}),
+            text(' but it’s your responsibility”', annotations={'bold': True, 'italic': True}),
+            text('. “They jumped on this wagon only later on.”', annotations={'bold': True}),
+            text(' 结束。'),
+        ]
+        markdown = self.convert([paragraph])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'hugo.toml').write_text('disableKinds = ["home", "section", "taxonomy", "term", "rss", "sitemap"]\n[markup.goldmark.renderer]\nunsafe = true\n')
+            (root / 'layouts/_default').mkdir(parents=True)
+            (root / 'layouts/_default/single.html').write_text('<main>{{ .Content }}</main>')
+            (root / 'content').mkdir()
+            (root / 'content/article.md').write_text('---\ntitle: Emphasis\n---\n' + markdown)
+            subprocess.run(['hugo', '--source', str(root), '--quiet'], check=True, capture_output=True)
+            html = (root / 'public/article/index.html').read_text()
+        self.assertIn('第一位是<strong>维林杰医生（Dr. Verringer）。</strong>他接着说：', html)
+        self.assertEqual(html.count('<em><strong>'), 2)
+        self.assertIn('<strong>. “They jumped on this wagon only later on.”</strong>', html)
+        self.assertNotIn('**', html)
+        self.assertEqual(re.sub(r'<[^>]+>', '', html).strip(), ''.join(t['plain_text'] for t in paragraph['paragraph']['rich_text']))
 
     def test_unknown_block_stops_export(self):
         with self.assertRaisesRegex(ValueError, '不支持'):

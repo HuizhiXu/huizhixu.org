@@ -13,11 +13,13 @@ def rich_text(items):
         if annotations.get("code"):
             ticks = "`" * (max([len(s) for s in re.findall(r"`+", text)] or [0]) + 1)
             text = ticks + " " + text + " " + ticks
-        for name, delimiter in (("bold", "**"), ("italic", "*"), ("strikethrough", "~~")):
+        # Markdown emphasis depends on adjacent punctuation and whitespace.
+        # Native Notion formatting must also survive CJK text and adjacent runs.
+        for name, tag in (("bold", "strong"), ("italic", "em"), ("strikethrough", "del")):
             if annotations.get(name) and text.strip():
                 leading = text[:len(text) - len(text.lstrip())]
                 trailing = text[len(text.rstrip()):]
-                text = leading + delimiter + text.strip() + delimiter + trailing
+                text = leading + f"<{tag}>" + text.strip() + f"</{tag}>" + trailing
         if annotations.get("underline"):
             text = "<u>" + text + "</u>"
         href = item.get("href") or (item.get("text", {}).get("link") or {}).get("url")
@@ -67,6 +69,9 @@ def convert_page(page_id, request, image_url):
             return "\n".join(rows)
         child_text = "\n\n".join(render(child) for child in nested)
         if kind == "paragraph":
+            # A Notion line break is visible in the editor. A bare Markdown
+            # newline is only a soft wrap, so preserve explicit breaks here.
+            text = re.sub(r"(?<!\n)\n(?!\n)", lambda _: "\\\n", text.strip("\n"))
             return text + ("\n\n" + child_text if child_text else "")
         if kind.startswith("heading_"):
             return "#" * int(kind[-1]) + " " + text + ("\n\n" + child_text if child_text else "")
