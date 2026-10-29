@@ -6,7 +6,7 @@ tags:
 - tech
 - ai
 - agent
-description: 从循环工程、文件系统与子智能体出发，理解 Harness 与 Agent 的区别，以及上下文和工作流的优化方向。
+description: ''
 draft: false
 isCJKLanguage: true
 series: Harness 与 RSI

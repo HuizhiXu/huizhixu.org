@@ -4,7 +4,7 @@
 <article class="reading-page{{ if eq .Section "know_how" }} technical-article{{ else }} literary-article{{ end }}">
   <header class="reading-header"><p class="eyebrow">{{ if $isPost }}{{ partial "post-category.html" . }} / {{ i18n "journalReadingNotes" }}{{ else }}{{ i18n "journalAboutLink" }} / {{ i18n "journalAuthorName" }}{{ end }}</p><h1 class="journal-entry-title"><span class="title-mark">{{ partial "display-title.html" . }}</span></h1>
     {{ if and $isPost (not (or .Site.Params.hideMeta .Params.hideMeta)) }}{{ partial "journal-meta.html" . }}{{ end }}
-    {{ with .Description }}<p class="reading-lead">{{ . }}</p>{{ end }}
+    {{ if not $isPost }}{{ with .Description }}<p class="reading-lead">{{ . }}</p>{{ end }}{{ end }}
     {{ if and $isPost .Params.tags }}<div class="reading-tags">{{ range .Params.tags }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">{{ partial "tag-label.html" . }}</a>{{ end }}</div>{{ end }}
   </header>
   <div class="article-content prose prose-lg max-w-none">{{ if $showToc }}<div class="mobile-toc">{{ partial "toc.html" . }}</div>{{ end }}{{ .Content }}</div>
